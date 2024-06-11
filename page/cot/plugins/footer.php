@@ -1,5 +1,5 @@
  <footer class="main-footer">
-    <strong>Copyright &copy; 2023. Developed by: Vince Dale Alcantara</strong>
+    <strong>Copyright &copy; 2024. Developed by: Marc Neilsen Omabtang</strong>
     All rights reserved.
     <div class="float-right d-none d-sm-inline-block">
       <b>Version</b> 1.0.2
@@ -12,6 +12,8 @@ include '../../modals/new_account.php';
 include '../../modals/update_account.php';
 include '../../modals/import_accounts.php';
 include '../../modals/confirm_delete_account_selected.php';
+include '../../modals/cstart_point_modal.php';
+
 ?>
 <!-- jQuery -->
 <script src="../../plugins/jquery/dist/jquery.min.js"></script>
