@@ -40,7 +40,7 @@
                                 <div class="col-sm-4">
                                     <label>&nbsp;</label>
                                     <!-- Button to trigger modal -->
-                                    <button class="btn btn-block btn-success" id="openModalBtn" data-toggle="modal" data-target="#addRecordModal">
+                                    <button class="btn btn-block btn-success" style="background-color: #20c997; border-color: #20c997;color:white;"id="openModalBtn" data-toggle="modal" data-target="#addRecordModal">
     <i class="fas fa-plus mr-2"></i>Add Record
 </button>
 
@@ -109,10 +109,5 @@
 </div>
 
 <?php include 'plugins/footer.php';?>
+<?php include 'plugins/js/cot_script.php';?>
 <?php include 'plugins/js/load_more_script.php';?>
-
-<script>
-    document.getElementById("openModalBtn").addEventListener("click", function() {
-     
-    });
-</script>
