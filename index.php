@@ -31,8 +31,8 @@ if (isset($_SESSION['username'])) {
   body {
     background: url('dist/img/tubebg.jpg') no-repeat center center fixed;
     background-size: cover;
-  }
 
+    
   .form-box {
 
 
