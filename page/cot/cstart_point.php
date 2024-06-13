@@ -70,26 +70,62 @@
                                     </button>
                                 </div>
                             </div>
-                            <div class="horizontal-rule" style="width: 100%; height: 1px; background-color: #000; margin: 20px 0;"></div>
-                            <div id="accounts_table_res" class="table-responsive" style="height: 200px; overflow: auto; display: inline-block; margin-top: 50px; border-top: 1px solid gray;">
-                                <table id="accounts_table" class="table table-sm table-head-fixed text-nowrap table-hover">
+                            <div id="accounts_table_res" class="table-responsive" style="height: 415px; overflow: auto; display: inline-block; margin-top: 50px; border-top: 1px solid gray;">
+                                <table id="sp_cotdb" class="table table-sm table-head-fixed text-nowrap table-hover">
                                     <thead style="text-align: center;">
                                         <tr>
-                                            <th>#</th>
-                                            <th>Employee No.</th>
-                                            <th>Username</th><!DOCTYPE html>
-                                            <th>Full Name</th>
-                                            <th>Section</th>
-                                            <th>User Type</th>
+                                             <th>#</th>
+                <th>Part Name</th>
+                <th>Quantity</th>
+                <th>Time Start</th>
+                <th>Time End</th>
+                <th>Inspected By</th>
+                <th>Shift</th>
+                <th>Inspection Date</th>
+                <th>Total Minutes</th>
+                <th>Outside Appearance</th>
+                <th>Slit Condition</th>
+                <th>Inside Appearance</th>
+                <th>Color</th>
+                <th>I Tolerance +</th>
+                <th>I Tolerance -</th>
+                <th>I Diameter Start</th>
+                <th>I Diameter End</th>
+                <th>O Tolerance +</th>
+                <th>O Tolerance -</th>
+                <th>O Diameter Start</th>
+                <th>O Diameter End</th>
+                <th>W Tolerance +</th>
+                <th>W Tolerance -</th>
+                <th>Q1 Start</th>
+                <th>Q2 Start</th>
+                <th>Q3 Start</th>
+                <th>Q4 Start</th>
+                <th>Q1 Middle</th>
+                <th>Q2 Middle</th>
+                <th>Q3 Middle</th>
+                <th>Q4 Middle</th>
+                <th>Q1 End</th>
+                <th>Q2 End</th>
+                <th>Q3 End</th>
+                <th>Q4 End</th>
+                <th>Using Round Bar</th>
+                <th>Using Bare Hands</th>
+                <th>Appearance Judgement</th>
+                <th>Dimension Judgement</th>
+                <th>NG Quantity</th>
+                <th>Defect Type</th>
+                <th>Confirm By</th>
+                <th>Remarks</th>
                                         </tr>
                                     </thead>
-                                    <tbody id="list_of_accounts" style="text-align: center;">
-                                        <tr>
-                                            <td colspan="6" style="text-align:center;">
+                                    <tbody id="sp_cotdb_body" style="text-align: center;">
+        <tr>
+                                            <!-- <td colspan="6" style="text-align:center;">
                                                 <div class="spinner-border text-dark" role="status">
                                                     <span class="sr-only">Loading...</span>
                                                 </div>
-                                            </td>
+                                            </td> -->
                                         </tr>
                                     </tbody>
                                 </table>
@@ -107,6 +143,80 @@
         </div><!-- /.container-fluid -->
     </section><!-- /.content -->
 </div>
+<?php
+
+try {
+    $stmt = $conn->prepare("SELECT * FROM sp_cotdb"); // Replace 'sp_cotdb' with your actual table name
+    $stmt->execute();
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+} catch (PDOException $e) {
+    echo 'Error: ' . $e->getMessage();
+}
+?>
+
+<script>
+    // Function to populate the table with data
+    function populateTable() {
+        var tbody = document.getElementById('sp_cotdb_body'); // ID of your <tbody> element
+
+        <?php foreach ($result as $row): ?>
+            tbody.innerHTML += `
+                <tr>
+                    <td><?php echo $row['id']; ?></td>
+                    <td><?php echo $row['part_name']; ?></td>
+                    <td><?php echo $row['quantity']; ?></td>
+                    <td><?php echo $row['time_start']; ?></td>
+                    <td><?php echo $row['time_end']; ?></td>
+                    <td><?php echo $row['inspected_by']; ?></td>
+                    <td><?php echo $row['shift']; ?></td>
+                    <td><?php echo $row['inspection_date']; ?></td>
+                    <td><?php echo $row['total_mins']; ?></td>
+                    <td><?php echo $row['outside_appearance']; ?></td>
+                    <td><?php echo $row['slit_condition']; ?></td>
+                    <td><?php echo $row['inside_appearance']; ?></td>
+                    <td><?php echo $row['color']; ?></td>
+                    <td><?php echo $row['i_tolerance_plus']; ?></td>
+                    <td><?php echo $row['i_tolerance_minus']; ?></td>
+                    <td><?php echo $row['i_diameter_start']; ?></td>
+                    <td><?php echo $row['i_diameter_end']; ?></td>
+                    <td><?php echo $row['o_tolerance_plus']; ?></td>
+                    <td><?php echo $row['o_tolerance_minus']; ?></td>
+                    <td><?php echo $row['o_diameter_start']; ?></td>
+                    <td><?php echo $row['o_diameter_end']; ?></td>
+                    <td><?php echo $row['w_tolerance_plus']; ?></td>
+                    <td><?php echo $row['w_tolerance_minus']; ?></td>
+                    <td><?php echo $row['q1_start']; ?></td>
+                    <td><?php echo $row['q2_start']; ?></td>
+                    <td><?php echo $row['q3_start']; ?></td>
+                    <td><?php echo $row['q4_start']; ?></td>
+                    <td><?php echo $row['q1_middle']; ?></td>
+                    <td><?php echo $row['q2_middle']; ?></td>
+                    <td><?php echo $row['q3_middle']; ?></td>
+                    <td><?php echo $row['q4_middle']; ?></td>
+                    <td><?php echo $row['q1_end']; ?></td>
+                    <td><?php echo $row['q2_end']; ?></td>
+                    <td><?php echo $row['q3_end']; ?></td>
+                    <td><?php echo $row['q4_end']; ?></td>
+                    <td><?php echo $row['using_round_bar']; ?></td>
+                    <td><?php echo $row['using_bare_hands']; ?></td>
+                    <td><?php echo $row['appearance_judgement']; ?></td>
+                    <td><?php echo $row['dimension_judgement']; ?></td>
+                    <td><?php echo $row['ng_quantity']; ?></td>
+                    <td><?php echo $row['defect_type']; ?></td>
+                    <td><?php echo $row['confirm_by']; ?></td>
+                    <td><?php echo $row['remarks']; ?></td>
+                </tr>
+            `;
+        <?php endforeach; ?>
+    }
+
+    // Call the function to populate the table when the page loads
+    window.onload = function() {
+        populateTable();
+    };
+</script>
+
+
 
 
 <?php include 'plugins/footer.php';?>

@@ -1,20 +1,4 @@
-<?php
-session_name("tube_inspection");
-session_start();
 
-include 'conn.php';
-
-// Check if user is logged in and set the username in JavaScript
-if (isset($_SESSION['username'])) {
-    $loggedInUser = $_SESSION['username'];
-    echo '<script>';
-    echo 'document.addEventListener("DOMContentLoaded", function() {';
-    echo '    var inspectedByInput = document.getElementById("inspected_by");';
-    echo '    inspectedByInput.value = "' . $loggedInUser . '";';
-    echo '});';
-    echo '</script>';
-}
-?>
 
 
 <div class="modal fade" id="addRecordModal" tabindex="-1" role="dialog" aria-labelledby="addRecordModalLabel" aria-hidden="true">
@@ -104,7 +88,7 @@ if (isset($_SESSION['username'])) {
                 <div class="row mb-4">
                     <div class="col-sm-3">
                         <label>Outside Appearance</label>
-                        <select id="outside_appearance" class="form-control" style="margin-bottom:30px">
+                        <select id="outside_appearance" class="form-control" name="outside_appearance" style="margin-bottom:30px">
                             <option value="" selected disabled>Choose...</option>
                             <option value="OK">OK</option>
                             <option value="NG">NG</option>
@@ -112,7 +96,7 @@ if (isset($_SESSION['username'])) {
                     </div>
                     <div class="col-sm-3">
                         <label>Slit Condition</label>
-                        <select id="slit_condition" class="form-control" style="margin-bottom:30px">
+                        <select id="slit_condition" class="form-control" name="slit_condition" style="margin-bottom:30px">
                             <option value="" selected disabled>Choose...</option>
                             <option value="OK">OK</option>
                             <option value="NG">NG</option>
@@ -120,7 +104,7 @@ if (isset($_SESSION['username'])) {
                     </div>
                     <div class="col-sm-3">
                         <label>Inside Appearance</label>
-                        <select id="inside_appearance" class="form-control" style="margin-bottom:30px">
+                        <select id="inside_appearance" class="form-control" name="inside_appearance" style="margin-bottom:30px">
                             <option value="" selected disabled>Choose...</option>
                             <option value="OK">OK</option>
                             <option value="NG">NG</option>
@@ -128,7 +112,7 @@ if (isset($_SESSION['username'])) {
                     </div>
                     <div class="col-sm-3">
                         <label>Color</label>
-                        <select id="color_select" class="form-control" style="margin-bottom:30px">
+                        <select id="color_select" class="form-control" name="color" style="margin-bottom:30px">
                             <option value="" selected disabled>Choose...</option>
                             <option value="OK">OK</option>
                             <option value="NG">NG</option>
@@ -142,24 +126,25 @@ if (isset($_SESSION['username'])) {
                 <div class="container">
     <div class="row">
         <!-- Inside Diameter Section -->
+        
         <div class="col-6 form-section">
             <h5 class="modal-title" style="margin-bottom:20px;"><strong>Inside Diameter</strong></h5>
             <div class="form-group">
                 <label for="tolerance">Tolerance</label>
                 <div class="d-flex align-items-center">
-                    <label for="tolerance-plus" class="mr-2">+</label>
-                    <input type="text" id="tolerance-plus" class="form-control" style="width: 70px; margin-right: 10px;" autocomplete="off" readonly>
+                    <label for="tolerance-plus" class="mr-2" >+</label>
+                    <input type="text" id="tolerance-plus" class="form-control" style="width: 70px; margin-right: 10px;" autocomplete="off" readonly name="i_tolerance_plus">
                     <label for="tolerance-minus" class="mr-2">-</label>
-                    <input type="text" id="tolerance-minus" class="form-control" style="width: 70px;" autocomplete="off" readonly>
+                    <input type="text" id="tolerance-minus" class="form-control" style="width: 70px;" autocomplete="off" readonly name="i_tolerance_minus">
                 </div>
             </div>
             <div class="form-group">
                 <label for="inside-start">Start</label>
-                <input type="text" id="inside-start" class="form-control" autocomplete="off">
+                <input type="text" id="inside-start" class="form-control" name="i_diameter_start" autocomplete="off">
             </div>
             <div class="form-group">
                 <label for="inside-end">End</label>
-                <input type="text" id="inside-end" class="form-control" autocomplete="off">
+                <input type="text" id="inside-end" class="form-control" name="i_diameter_end" autocomplete="off" >
             </div>
         </div>
         
@@ -170,45 +155,52 @@ if (isset($_SESSION['username'])) {
                 <label for="tolerance">Tolerance</label>
                 <div class="d-flex align-items-center">
                     <label for="o-tolerance-plus" class="mr-2">+</label>
-                    <input type="text" id="o-tolerance-plus" class="form-control" style="width: 70px; margin-right: 10px;" autocomplete="off" readonly>
+                    <input type="text" id="o-tolerance-plus" class="form-control" style="width: 70px; margin-right: 10px;" autocomplete="off" readonly name="o_tolerance_plus">
                     <label for="o-tolerance-minus" class="mr-2">-</label>
-                    <input type="text" id="o-tolerance-minus" class="form-control" style="width: 70px;" autocomplete="off" readonly>
+                    <input type="text" id="o-tolerance-minus" class="form-control" style="width: 70px;" autocomplete="off" readonly name="o_tolerance_minus">
                 </div>
             </div>
             <div class="form-group">
                 <label for="outside-start">Start</label>
-                <input type="text" id="outside-start" class="form-control" autocomplete="off">
+                <input type="text" id="outside-start" class="form-control" name="o_diameter_start" autocomplete="off">
             </div>
             <div class="form-group">
                 <label for="outside-end">End</label>
-                <input type="text" id="outside-end" class="form-control" autocomplete="off">
+                <input type="text" id="outside-end" class="form-control" name="o_diameter_end" autocomplete="off">
             </div>
         </div>
     </div>
+
+    
     
     <div class="horizontal-rule" style="width: 100%; height: 1px; background-color: #20c997; margin: 20px 0;"></div>
 </div>
 
-                <!-- Wall Thickness -->
+       
+
+
+
+
+
+
+
+
+
+ <!-- ----------------------------------------- Wall Thickness Questions ----------------------------------------------->
                 <h5 class="modal-title" style="color:black; margin-bottom:30px;"><strong>Wall Thickness</strong></h5>
                 <div class="container">
                 <div class="row mb-4">
             <div class="col-12 d-flex align-items-center">
                 <label for="w-tolerance-plus" class="mr-2">Tolerance +</label>
-                <input type="text" id="w-tolerance-plus" class="form-control" style="width: 70px; margin-right: 10px;" autocomplete="off" readonly>
+                <input type="text" id="w-tolerance-plus" class="form-control" style="width: 70px; margin-right: 10px;" autocomplete="off" readonly name="w_tolerance_plus">
                 <label for="w-tolerance-minus" class="mr-2">-</label>
-                <input type="text" id="w-tolerance-minus" class="form-control" style="width: 70px;" autocomplete="off" readonly>
+                <input type="text" id="w-tolerance-minus" class="form-control" style="width: 70px;" autocomplete="off" readonly name="w_tolerance_minus">
             </div>
         </div>
 
 
 
-
-
-
-
-
-                    <!-- ----------------------------------------- Wall Thickness Questions ----------------------------------------------->
+                   
                     <div class="row">
                         <div class="col-4 form-section text-center">
                             <h6>Start</h6>
@@ -217,7 +209,7 @@ if (isset($_SESSION['username'])) {
                                     <div class="input-group-prepend">
                                         <span class="input-group-text bg-light">Q1</span>
                                     </div>
-                                    <input type="text" id="q1_start" class="form-control" autocomplete="off">
+                                    <input type="text" id="q1_start" class="form-control" autocomplete="off" name="q1_start" >
                                 </div>
                             </div>
                             <div class="form-group">
@@ -225,7 +217,7 @@ if (isset($_SESSION['username'])) {
                                     <div class="input-group-prepend">
                                         <span class="input-group-text bg-light">Q2</span>
                                     </div>
-                                    <input type="text" id="q2_start" class="form-control" autocomplete="off">
+                                    <input type="text" id="q2_start" class="form-control" autocomplete="off" name="q2_start">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -233,7 +225,7 @@ if (isset($_SESSION['username'])) {
                                     <div class="input-group-prepend">
                                         <span class="input-group-text bg-light">Q3</span>
                                     </div>
-                                    <input type="text" id="q3_start" class="form-control" autocomplete="off">
+                                    <input type="text" id="q3_start" class="form-control" autocomplete="off" name="q3_start" >
                                 </div>
                             </div>
                             <div class="form-group">
@@ -241,7 +233,7 @@ if (isset($_SESSION['username'])) {
                                     <div class="input-group-prepend">
                                         <span class="input-group-text bg-light">Q4</span>
                                     </div>
-                                    <input type="text" id="q4_start" class="form-control" autocomplete="off">
+                                    <input type="text" id="q4_start" class="form-control" autocomplete="off"name="q4_start">
                                 </div>
                             </div>
                         </div>
@@ -253,7 +245,7 @@ if (isset($_SESSION['username'])) {
                                     <div class="input-group-prepend">
                                         <span class="input-group-text bg-light">Q1</span>
                                     </div>
-                                    <input type="text" id="q1_middle" class="form-control" autocomplete="off">
+                                    <input type="text" id="q1_middle" class="form-control" autocomplete="off"name="q1_middle">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -261,7 +253,7 @@ if (isset($_SESSION['username'])) {
                                     <div class="input-group-prepend">
                                         <span class="input-group-text bg-light">Q2</span>
                                     </div>
-                                    <input type="text" id="q2_middle" class="form-control" autocomplete="off">
+                                    <input type="text" id="q2_middle" class="form-control" autocomplete="off"name="q2_middle">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -269,7 +261,7 @@ if (isset($_SESSION['username'])) {
                                     <div class="input-group-prepend">
                                         <span class="input-group-text bg-light">Q3</span>
                                     </div>
-                                    <input type="text" id="q3_middle" class="form-control" autocomplete="off">
+                                    <input type="text" id="q3_middle" class="form-control" autocomplete="off"name="q3_middle">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -277,7 +269,7 @@ if (isset($_SESSION['username'])) {
                                     <div class="input-group-prepend">
                                         <span class="input-group-text bg-light">Q4</span>
                                     </div>
-                                    <input type="text" id="q4_middle" class="form-control" autocomplete="off">
+                                    <input type="text" id="q4_middle" class="form-control" autocomplete="off"name="q4_middle">
                                 </div>
                             </div>
                         </div>
@@ -289,7 +281,7 @@ if (isset($_SESSION['username'])) {
                                     <div class="input-group-prepend">
                                         <span class="input-group-text bg-light">Q1</span>
                                     </div>
-                                    <input type="text" id="q1_end" class="form-control" autocomplete="off">
+                                    <input type="text" id="q1_end" class="form-control" autocomplete="off"name="q1_end">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -297,7 +289,7 @@ if (isset($_SESSION['username'])) {
                                     <div class="input-group-prepend">
                                         <span class="input-group-text bg-light">Q2</span>
                                     </div>
-                                    <input type="text" id="q2_end" class="form-control" autocomplete="off">
+                                    <input type="text" id="q2_end" class="form-control" autocomplete="off"name="q2_end">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -305,7 +297,7 @@ if (isset($_SESSION['username'])) {
                                     <div class="input-group-prepend">
                                         <span class="input-group-text bg-light">Q3</span>
                                     </div>
-                                    <input type="text" id="q3_end" class="form-control" autocomplete="off">
+                                    <input type="text" id="q3_end" class="form-control" autocomplete="off"name="q3_end">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -313,7 +305,7 @@ if (isset($_SESSION['username'])) {
                                     <div class="input-group-prepend">
                                         <span class="input-group-text bg-light">Q4</span>
                                     </div>
-                                    <input type="text" id="q4_end" class="form-control" autocomplete="off">
+                                    <input type="text" id="q4_end" class="form-control" autocomplete="off"name="q4_end">
                                 </div>
                             </div>
                         </div>
@@ -336,7 +328,7 @@ if (isset($_SESSION['username'])) {
                         <div class="col-6 form-section">
                             <div class="col-sm-6">
                                 <label>Using Round Bar</label>
-                                <select id="using_round_bar" class="form-control" style="margin-bottom:30px">
+                                <select id="using_round_bar" class="form-control" name="using_round_bar" style="margin-bottom:30px">
                                     <option value="" selected disabled>Choose...</option>
                                     <option value="OK">OK</option>
                                     <option value="NG">NG</option>
@@ -344,7 +336,7 @@ if (isset($_SESSION['username'])) {
                             </div>
                             <div class="col-sm-12">
                                 <label>Appearance Judgment</label>
-                                <select id="appearance_judgment" class="form-control" style="margin-bottom:20px">
+                                <select id="appearance_judgment" class="form-control" name="appearance_judgement" style="margin-bottom:20px">
                                     <option value="" selected disabled>Choose...</option>
                                     <option value="OK">OK</option>
                                     <option value="NG">NG</option>
@@ -352,7 +344,7 @@ if (isset($_SESSION['username'])) {
                             </div>
                             <div class="col-sm-12">
                                 <label>Dimension Judgment</label>
-                                <select id="dimension_judgment" class="form-control" style="margin-bottom:10px">
+                                <select id="dimension_judgment" class="form-control" name="dimension_judgement" style="margin-bottom:10px">
                                     <option value="" selected disabled>Choose...</option>
                                     <option value="OK">OK</option>
                                     <option value="NG">NG</option>
@@ -360,14 +352,14 @@ if (isset($_SESSION['username'])) {
                             </div>
                             <div class="form-group">
                                 <label for="ng_quantity">NG Quantity</label>
-                                <input type="text" id="ng_quantity" class="form-control" autocomplete="off">
+                                <input type="text" id="ng_quantity" class="form-control" name="ng_quantity" autocomplete="off">
                             </div>
                         </div>
 
                         <div class="col-6 form-section">
                             <div class="col-sm-6">
                                 <label>Using Bare Hands</label>
-                                <select id="using_bare_hands" class="form-control" style="margin-bottom:30px">
+                                <select id="using_bare_hands" class="form-control" name="using_bare_hands" style="margin-bottom:30px">
                                     <option value="" selected disabled>Choose...</option>
                                     <option value="OK">OK</option>
                                     <option value="NG">NG</option>
@@ -375,15 +367,15 @@ if (isset($_SESSION['username'])) {
                             </div>
                             <div class="form-group">
                                 <label for="defect_type">Defect Type</label>
-                                <input type="text" id="defect_type" class="form-control" autocomplete="off">
+                                <input type="text" id="defect_type" class="form-control" name="defect_type" autocomplete="off">
                             </div>
                             <div class="form-group">
                                 <label for="confirm_by">Confirm By</label>
-                                <input type="text" id="confirm_by" class="form-control" autocomplete="off">
+                                <input type="text" id="confirm_by" class="form-control" name="confirm_by" autocomplete="off">
                             </div>
                             <div class="form-group">
                                 <label for="remarks">Remarks</label>
-                                <input type="text" id="remarks" class="form-control" autocomplete="off">
+                                <input type="text" id="remarks" class="form-control" name="remarks" autocomplete="off">
                             </div>
                         </div>
                     </div>

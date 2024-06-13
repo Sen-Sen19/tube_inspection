@@ -1,5 +1,26 @@
+
+
+<?php
+
+
+
+
+// Check if user is logged in and set the username in JavaScript
+if (isset($_SESSION['username'])) {
+    $loggedInUser = $_SESSION['username'];
+    echo '<script>';
+    echo 'document.addEventListener("DOMContentLoaded", function() {';
+    echo '    var inspectedByInput = document.getElementById("inspected_by");';
+    echo '    inspectedByInput.value = "' . $loggedInUser . '";';
+    echo '});';
+    echo '</script>';
+}
+?>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script>
+
+
+
+<script>
 
 // --------------------------------modal open------------------------
 document.getElementById("openModalBtn").addEventListener("click", function() {
@@ -90,8 +111,7 @@ document.getElementById('inspection_date').value = formattedDate;
 
 
 
-
-    document.addEventListener('DOMContentLoaded', function() {
+  document.addEventListener('DOMContentLoaded', function() {
     var startTimeInput = document.getElementById('start_time');
     var endTimeInput = document.getElementById('end_time');
     var totalMinsInput = document.getElementById('total_mins');
@@ -112,10 +132,9 @@ document.getElementById('inspection_date').value = formattedDate;
         var endTimestamp = new Date(endTimeInput.value);
         var timeDifference = endTimestamp - startTimestamp;
 
-        // Convert time difference to minutes and seconds
-        var totalMins = Math.floor(timeDifference / (1000 * 60));
-        var totalSeconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
-        totalMinsInput.value = totalMins + '.' + totalSeconds ;
+        // Convert time difference to minutes
+        var totalMinutes = timeDifference / (1000 * 60); // Total time in minutes as a float
+        totalMinsInput.value = totalMinutes.toFixed(2); // Set value with 2 decimal places
     });
 
     function formatDateTime(dateTime) {
@@ -128,6 +147,7 @@ document.getElementById('inspection_date').value = formattedDate;
         return year + '-' + month + '-' + day + ' ' + hours + ':' + minutes + ':' + seconds;
     }
 });
+
 
 
 
@@ -160,14 +180,23 @@ document.addEventListener("DOMContentLoaded", function() {
         textareas.forEach(textarea => {
             textarea.value = '';
         });
+
+        // Display warning notice using SweetAlert
+        Swal.fire({
+            icon: 'warning',
+            title: 'Form Cleared',
+            text: 'All fields have been cleared.',
+            showConfirmButton: false,
+            timer: 1500
+        });
     });
 });
+
 
 // -------------------------------save-------------------------------
 function saveData() {
     var form = document.getElementById('myForm'); // Replace 'myForm' with your actual form ID
     var formData = new FormData(form);
-    var notice = document.getElementById('notice');
 
     // AJAX request to send formData to server
     fetch('../../process/save_sp_cot.php', {
@@ -183,18 +212,27 @@ function saveData() {
     .then(data => {
         console.log(data); // Log server response
         
-        // Display success notice
-        notice.style.display = 'block';
-        notice.innerHTML = 'Data has been successfully saved!';
-        notice.style.color = 'green';
+        // Display success message using SweetAlert
+        Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Your work has been saved',
+            showConfirmButton: false,
+            timer: 1500
+        });
     })
     .catch(error => {
         console.error('Error:', error); // Log any errors
         
-        // Display error notice
-        notice.style.display = 'block';
-        notice.innerHTML = 'There was an error saving the data.';
-        notice.style.color = 'red';
+        // Display error notice using SweetAlert
+        Swal.fire({
+            position: 'center',
+            icon: 'error',
+            title: 'Oops...',
+            text: 'There was an error saving the data.',
+            timer: 1500
+
+        });
     });
 }
 

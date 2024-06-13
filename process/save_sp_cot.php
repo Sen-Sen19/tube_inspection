@@ -13,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $inspectedBy = $_POST['inspected_by'];
     $shift = $_POST['shift'];
     $inspectionDate = $_POST['inspection_date'];
-    $totalMins = $_POST['total_mins'];
+    $totalMins = $_POST['total_mins']; // Ensure the database column can handle float values
     $outsideAppearance = $_POST['outside_appearance'];
     $slitCondition = $_POST['slit_condition'];
     $insideAppearance = $_POST['inside_appearance'];
