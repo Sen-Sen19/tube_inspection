@@ -108,6 +108,7 @@
     </section><!-- /.content -->
 </div>
 
+
 <?php include 'plugins/footer.php';?>
 <?php include 'plugins/js/cot_script.php';?>
 <?php include 'plugins/js/load_more_script.php';?>

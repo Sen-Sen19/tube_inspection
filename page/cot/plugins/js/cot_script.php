@@ -11,46 +11,70 @@ document.getElementById("openModalBtn").addEventListener("click", function() {
 
 
 // ------------------------------Get PartName-------------------------
+$(document).ready(function() {
+    $.ajax({
+        url: '../../process/get_part_names.php',
+        method: 'GET',
+        success: function(data) {
+            var parts = JSON.parse(data);
+            var dropdown = $('#part_name_dropdown');
+            dropdown.empty();
+            dropdown.append('<option selected="true" disabled>Choose Part</option>');
+            dropdown.prop('selectedIndex', 0);
 
-        $(document).ready(function() {
-            $.ajax({
-                url: '../../process/get_part_names.php',
-                method: 'GET',
-                success: function(data) {
-                    var parts = JSON.parse(data);
-                    var dropdown = $('#part_name_dropdown');
-                    dropdown.empty();
-                    dropdown.append('<option selected="true" disabled>Choose Part</option>');
-                    dropdown.prop('selectedIndex', 0);
-                    
-                    $.each(parts, function (key, entry) {
-                        dropdown.append($('<option></option>').attr('value', entry.part_name).text(entry.part_name));
-                    });
-                },
-                error: function() {
-                    alert('Failed to retrieve data.');
-                }
+            $.each(parts, function (key, entry) {
+                dropdown.append($('<option></option>').attr('value', entry.part_name)
+                    .data('iDiaMin', entry.i_dia_tol_min)
+                    .data('iDiaMax', entry.i_dia_tol_add)
+                    .data('oDiaMin', entry.o_dia_tol_min)
+                    .data('oDiaMax', entry.o_dia_tol_add)
+                    .data('wMin', entry.w_min)
+                    .data('wMax', entry.w_max)
+                    .text(entry.part_name));
             });
-        });
-      
+        },
+        error: function() {
+            alert('Failed to retrieve data.');
+        }
+    });
 
+    $('#part_name_dropdown').change(function() {
+        var selectedOption = $(this).find(':selected');
+        
+        // Retrieve the tolerance values from the selected option
+        var iDiaMin = selectedOption.data('iDiaMin');
+        var iDiaMax = selectedOption.data('iDiaMax');
+        var oDiaMin = selectedOption.data('oDiaMin');
+        var oDiaMax = selectedOption.data('oDiaMax');
+        var wMin = selectedOption.data('wMin');
+        var wMax = selectedOption.data('wMax');
+        
+        // Populate the form fields for inside diameter
+        $('#tolerance-plus').val(iDiaMin);
+        $('#tolerance-minus').val(iDiaMax);
+        
+        // Populate the form fields for outside diameter
+        $('#o-tolerance-plus').val(oDiaMin);
+        $('#o-tolerance-minus').val(oDiaMax);
 
-
+        // Populate the form fields for new tolerance
+        $('#w-tolerance-plus').val(wMin);
+        $('#w-tolerance-minus').val(wMax);
+    });
+});
 
         // -----------------------Inspection Date --------------------------
-            // Get today's date
-    var today = new Date();
-    var dd = String(today.getDate()).padStart(2, '0');
-    var mm = String(today.getMonth() + 1).padStart(2, '0'); // January is 0!
-    var yyyy = today.getFullYear();
+  // Get today's date
+var today = new Date();
+var dd = String(today.getDate()).padStart(2, '0');
+var mm = String(today.getMonth() + 1).padStart(2, '0'); // January is 0!
+var yyyy = today.getFullYear();
 
-    today = mm + '/' + dd + '/' + yyyy;
+// Format the date as yyyy-mm-dd
+var formattedDate = yyyy + '-' + mm + '-' + dd;
 
-    // Set today's date as the value of the input field and disable it
-    document.getElementById('inspection_date').value = today;
-    document.getElementById('inspection_date').disabled = true;
-
-
+// Set formatted date as the value of the input field and disable it
+document.getElementById('inspection_date').value = formattedDate;
 
 
 
@@ -91,7 +115,7 @@ document.getElementById("openModalBtn").addEventListener("click", function() {
         // Convert time difference to minutes and seconds
         var totalMins = Math.floor(timeDifference / (1000 * 60));
         var totalSeconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
-        totalMinsInput.value = totalMins + ' mins ' + totalSeconds + ' secs';
+        totalMinsInput.value = totalMins + '.' + totalSeconds ;
     });
 
     function formatDateTime(dateTime) {
@@ -138,4 +162,42 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
 });
+
+// -------------------------------save-------------------------------
+function saveData() {
+    var form = document.getElementById('myForm'); // Replace 'myForm' with your actual form ID
+    var formData = new FormData(form);
+    var notice = document.getElementById('notice');
+
+    // AJAX request to send formData to server
+    fetch('../../process/save_sp_cot.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.text();
+    })
+    .then(data => {
+        console.log(data); // Log server response
+        
+        // Display success notice
+        notice.style.display = 'block';
+        notice.innerHTML = 'Data has been successfully saved!';
+        notice.style.color = 'green';
+    })
+    .catch(error => {
+        console.error('Error:', error); // Log any errors
+        
+        // Display error notice
+        notice.style.display = 'block';
+        notice.innerHTML = 'There was an error saving the data.';
+        notice.style.color = 'red';
+    });
+}
+
+
+
     </script>
