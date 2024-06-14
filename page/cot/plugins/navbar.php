@@ -9,7 +9,16 @@ if (!isset($_SESSION['username'])) {
   header('location: ../../page/user/pvc.php');
   exit;
 }
-?>  
+
+try {
+    $stmt = $conn->prepare("SELECT * FROM sp_cotdb");
+    $stmt->execute();
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+} catch (PDOException $e) {
+    echo 'Error: ' . $e->getMessage();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

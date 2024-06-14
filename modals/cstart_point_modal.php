@@ -15,6 +15,11 @@
             <form id="myForm">
 
 
+
+
+
+
+            
                 <!----------------------------------------------------------- Start Point ----------------------------------------->
                 <h5 class="modal-title" style="color: black; margin-bottom: 30px;"><strong>Start Point</strong></h5>
                 <div class="row mb-4">
@@ -133,9 +138,9 @@
                 <label for="tolerance">Tolerance</label>
                 <div class="d-flex align-items-center">
                     <label for="tolerance-plus" class="mr-2" >+</label>
-                    <input type="text" id="tolerance-plus" class="form-control" style="width: 70px; margin-right: 10px;" autocomplete="off" readonly name="i_tolerance_plus">
+                    <input type="text" id="tolerance-minus" class="form-control" style="width: 70px; margin-right: 10px;" autocomplete="off" readonly name="i_tolerance_minus">
                     <label for="tolerance-minus" class="mr-2">-</label>
-                    <input type="text" id="tolerance-minus" class="form-control" style="width: 70px;" autocomplete="off" readonly name="i_tolerance_minus">
+                    <input type="text" id="tolerance-plus" class="form-control" style="width: 70px;" autocomplete="off" readonly name="i_tolerance_plus">
                 </div>
             </div>
             <div class="form-group">
@@ -155,9 +160,9 @@
                 <label for="tolerance">Tolerance</label>
                 <div class="d-flex align-items-center">
                     <label for="o-tolerance-plus" class="mr-2">+</label>
-                    <input type="text" id="o-tolerance-plus" class="form-control" style="width: 70px; margin-right: 10px;" autocomplete="off" readonly name="o_tolerance_plus">
+                    <input type="text" id="o-tolerance-minus" class="form-control" style="width: 70px; margin-right: 10px;" autocomplete="off" readonly name="o_tolerance_minus">
                     <label for="o-tolerance-minus" class="mr-2">-</label>
-                    <input type="text" id="o-tolerance-minus" class="form-control" style="width: 70px;" autocomplete="off" readonly name="o_tolerance_minus">
+                    <input type="text" id="o-tolerance-plus" class="form-control" style="width: 70px;" autocomplete="off" readonly name="o_tolerance_plus">
                 </div>
             </div>
             <div class="form-group">
@@ -192,9 +197,9 @@
                 <div class="row mb-4">
             <div class="col-12 d-flex align-items-center">
                 <label for="w-tolerance-plus" class="mr-2">Tolerance +</label>
-                <input type="text" id="w-tolerance-plus" class="form-control" style="width: 70px; margin-right: 10px;" autocomplete="off" readonly name="w_tolerance_plus">
+                <input type="text" id="w-tolerance-minus" class="form-control" style="width: 70px; margin-right: 10px;" autocomplete="off" readonly name="w_tolerance_minus">
                 <label for="w-tolerance-minus" class="mr-2">-</label>
-                <input type="text" id="w-tolerance-minus" class="form-control" style="width: 70px;" autocomplete="off" readonly name="w_tolerance_minus">
+                <input type="text" id="w-tolerance-plus" class="form-control" style="width: 70px;" autocomplete="off" readonly name="w_tolerance_plus">
             </div>
         </div>
 

@@ -49,8 +49,8 @@ $(document).ready(function() {
                     .data('iDiaMax', entry.i_dia_tol_add)
                     .data('oDiaMin', entry.o_dia_tol_min)
                     .data('oDiaMax', entry.o_dia_tol_add)
-                    .data('wMin', entry.w_min)
-                    .data('wMax', entry.w_max)
+                    .data('wMin', entry.w_tol_min)
+                    .data('wMax', entry.w_tol_add)
                     .text(entry.part_name));
             });
         },
@@ -183,7 +183,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
         // Display warning notice using SweetAlert
         Swal.fire({
-            icon: 'warning',
+            icon: 'success',
             title: 'Form Cleared',
             text: 'All fields have been cleared.',
             showConfirmButton: false,
@@ -220,6 +220,11 @@ function saveData() {
             showConfirmButton: false,
             timer: 1500
         });
+
+        // Refresh the page after the SweetAlert is closed
+        setTimeout(function() {
+            window.location.reload();
+        }, 1600); // Delay slightly longer than SweetAlert's timer to ensure it shows completely
     })
     .catch(error => {
         console.error('Error:', error); // Log any errors
@@ -231,10 +236,73 @@ function saveData() {
             title: 'Oops...',
             text: 'There was an error saving the data.',
             timer: 1500
-
         });
     });
 }
+
+
+
+// ---------------------------------------------------Populate the table---------------------------------------------------
+
+    
+function populateTable() {
+        var tbody = document.getElementById('sp_cotdb_body');
+
+        <?php foreach ($result as $row): ?>
+            tbody.innerHTML += `
+                <tr>
+                    <td><?php echo $row['id']; ?></td>
+                    <td><?php echo $row['part_name']; ?></td>
+                    <td><?php echo $row['quantity']; ?></td>
+                    <td><?php echo $row['time_start']; ?></td>
+                    <td><?php echo $row['time_end']; ?></td>
+                    <td><?php echo $row['inspected_by']; ?></td>
+                    <td><?php echo $row['shift']; ?></td>
+                    <td><?php echo $row['inspection_date']; ?></td>
+                    <td><?php echo $row['total_mins']; ?></td>
+                    <td><?php echo $row['outside_appearance']; ?></td>
+                    <td><?php echo $row['slit_condition']; ?></td>
+                    <td><?php echo $row['inside_appearance']; ?></td>
+                    <td><?php echo $row['color']; ?></td>
+                    <td><?php echo $row['i_tolerance_plus']; ?></td>
+                    <td><?php echo $row['i_tolerance_minus']; ?></td>
+                    <td><?php echo $row['i_diameter_start']; ?></td>
+                    <td><?php echo $row['i_diameter_end']; ?></td>
+                    <td><?php echo $row['o_tolerance_plus']; ?></td>
+                    <td><?php echo $row['o_tolerance_minus']; ?></td>
+                    <td><?php echo $row['o_diameter_start']; ?></td>
+                    <td><?php echo $row['o_diameter_end']; ?></td>
+                    <td><?php echo $row['w_tolerance_plus']; ?></td>
+                    <td><?php echo $row['w_tolerance_minus']; ?></td>
+                    <td><?php echo $row['q1_start']; ?></td>
+                    <td><?php echo $row['q2_start']; ?></td>
+                    <td><?php echo $row['q3_start']; ?></td>
+                    <td><?php echo $row['q4_start']; ?></td>
+                    <td><?php echo $row['q1_middle']; ?></td>
+                    <td><?php echo $row['q2_middle']; ?></td>
+                    <td><?php echo $row['q3_middle']; ?></td>
+                    <td><?php echo $row['q4_middle']; ?></td>
+                    <td><?php echo $row['q1_end']; ?></td>
+                    <td><?php echo $row['q2_end']; ?></td>
+                    <td><?php echo $row['q3_end']; ?></td>
+                    <td><?php echo $row['q4_end']; ?></td>
+                    <td><?php echo $row['using_round_bar']; ?></td>
+                    <td><?php echo $row['using_bare_hands']; ?></td>
+                    <td><?php echo $row['appearance_judgement']; ?></td>
+                    <td><?php echo $row['dimension_judgement']; ?></td>
+                    <td><?php echo $row['ng_quantity']; ?></td>
+                    <td><?php echo $row['defect_type']; ?></td>
+                    <td><?php echo $row['confirm_by']; ?></td>
+                    <td><?php echo $row['remarks']; ?></td>
+                </tr>
+            `;
+        <?php endforeach; ?>
+    }
+
+    
+    window.onload = function() {
+        populateTable();
+    };
 
 
 

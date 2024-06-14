@@ -14,7 +14,7 @@
         <img src="../../dist/img/user.png" class="img-circle elevation-2" alt="User Image">
       </div>
       <div class="info">
-        <a href="cstart_point.php" class="d-block"><?=htmlspecialchars($_SESSION['type']);?></a>
+      <a href="cstart_point.php" class="d-block"><?=htmlspecialchars(strtoupper($_SESSION['username']));?></a>
       </div>
     </div>
 

@@ -38,9 +38,9 @@
     }
 
     const count_accounts = () => {
-        var employee_no = sessionStorage.getItem('employee_no_search');
-        var full_name = sessionStorage.getItem('full_name_search');
-        var user_type = sessionStorage.getItem('user_type_search');
+        // var employee_no = sessionStorage.getItem('employee_no_search');
+        // var full_name = sessionStorage.getItem('full_name_search');
+        // var user_type = sessionStorage.getItem('user_type_search');
         $.ajax({
             url: '../../process/user/pagination/load_more_p.php',
             type: 'POST',
@@ -69,9 +69,9 @@
     }
 
     const load_accounts_last_page = () => {
-        var employee_no = sessionStorage.getItem('employee_no_search');
-        var full_name = sessionStorage.getItem('full_name_search');
-        var user_type = sessionStorage.getItem('user_type_search');
+        // var employee_no = sessionStorage.getItem('employee_no_search');
+        // var full_name = sessionStorage.getItem('full_name_search');
+        // var user_type = sessionStorage.getItem('user_type_search');
         var current_page = parseInt(sessionStorage.getItem('accounts_table_pagination'));
         $.ajax({
             url: '../../process/user/pagination/load_more_p.php',
@@ -102,15 +102,15 @@
         // If an AJAX call is already in progress, return immediately
         if (search_accounts_ajax_in_progress) {
             return;
-        }
+      
 
-        var employee_no = document.getElementById('employee_no_search').value;
-        var full_name = document.getElementById('full_name_search').value;
-        var user_type = document.getElementById('user_type_search').value;
+        // var employee_no = document.getElementById('employee_no_search').value;
+        // var full_name = document.getElementById('full_name_search').value;
+        // var user_type = document.getElementById('user_type_search').value;
 
-        var employee_no_1 = sessionStorage.getItem('employee_no_search');
-        var full_name_1 = sessionStorage.getItem('full_name_search');
-        var user_type_1 = sessionStorage.getItem('user_type_search');
+        // var employee_no_1 = sessionStorage.getItem('employee_no_search');
+        // var full_name_1 = sessionStorage.getItem('full_name_search');
+        // var user_type_1 = sessionStorage.getItem('user_type_search');
         if (current_page > 1) {
             switch (true) {
                 case employee_no !== employee_no_1:
@@ -127,11 +127,12 @@
                 full_name = full_name_1;
                 user_type = user_type_1;
             }*/
-        } else {
-            sessionStorage.setItem('employee_no_search', employee_no);
-            sessionStorage.setItem('full_name_search', full_name);
-            sessionStorage.setItem('user_type_search', user_type);
         }
+        //  else {
+        //     sessionStorage.setItem('employee_no_search', employee_no);
+        //     sessionStorage.setItem('full_name_search', full_name);
+        //     sessionStorage.setItem('user_type_search', user_type);
+        // }
 
         // Set the flag to true as we're starting an AJAX call
         search_accounts_ajax_in_progress = true;
@@ -180,4 +181,5 @@
             search_accounts_ajax_in_progress = false;
         });
     }
+}
 </script>
