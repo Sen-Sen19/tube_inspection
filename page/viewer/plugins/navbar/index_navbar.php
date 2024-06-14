@@ -1,7 +1,7 @@
 <!-- Navbar -->
 <nav class="main-header navbar navbar-expand-md navbar-dark bg-gray-dark text-light border-bottom-0">
   <a href="" class="navbar-brand ml-2">
-    <img src="../../dist/img/logo.png" alt="Web Template Logo" class="brand-image elevation-3 bg-light p-1" style="opacity: .8">
+    <img src="../../dist/img/tir-logo.png" alt="Web Template Logo" class="brand-image elevation-3 bg-light p-1" style="opacity: .8">
     <span class="brand-text font-weight-light text-light"><b>WEB</b> Template</span>
   </a>
 

@@ -49,17 +49,17 @@
 
                             <div class="row mt-5">
                                
-                                <div class="col-md-4 d-flex align-items-center">
-                                    <label for="searchBox" class="sr-only">Search</label>
-                                    <div class="input-group">
-                                        <input type="text" id="searchBox" class="form-control" placeholder="Search">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-primary" id="searchReqBtn" onclick="search_accounts(1)">
-                                                <i class="fas fa-search mr-2"></i>Search
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
+                            <div class="col-md-4 d-flex align-items-center">
+    <label for="searchBox" class="sr-only">Search</label>
+    <div class="input-group">
+        <input type="text" id="searchBox" class="form-control" placeholder="Search by Part Name">
+        <div class="input-group-append">
+            <button class="btn btn-primary" id="searchReqBtn" onclick="searchAccounts()">
+                <i class="fas fa-search mr-2"></i>Search
+            </button>
+        </div>
+    </div>
+</div>
                               
                                 <div class="col-md-8 d-flex justify-content-end align-items-center">
                                     <button class="btn btn-danger mr-2" id="deleteReqBtn" onclick="delete_accounts()" style="width: 20%;">

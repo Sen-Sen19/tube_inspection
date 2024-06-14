@@ -61,7 +61,7 @@
         <label>Shift</label>
         <select id="shift_select" name="shift" class="form-control" style="margin-bottom: 30px;">
             <option value="" selected disabled>Choose...</option>
-            <option value="Dayshift">Dayshift</option>
+            <option value="Dayshift">Day shift</option>
             <option value="Night Shift">Night Shift</option>
         </select>
     </div>

@@ -17,7 +17,7 @@ if (!isset($_SESSION['username'])) {
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Web Template - User</title>
 
-  <link rel="icon" href="../../dist/img/logo.png" type="image/x-icon" />
+  <link rel="icon" href="../../dist/img/tir-logo.png" type="image/x-icon" />
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="../../dist/css/font.min.css">
   <!-- Font Awesome -->
