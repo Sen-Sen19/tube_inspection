@@ -1,11 +1,10 @@
 
 
-
 <div class="modal fade" id="addRecordModal" tabindex="-1" role="dialog" aria-labelledby="addRecordModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
         <div class="modal-content" style="border-color: #20c997;"> <!-- Apply the stroke color here -->
             <div class="modal-header" style="background-color:#20c997">
-                <h5 class="modal-title" id="addRecordModalLabel" style="color:white">ADD RECORD</h5>
+                <h5 class="fas fa-plus mr-2" id="addRecordModalLabel" style="color:white"> ADD RECORD</h5>
                 <button type="button" class="close" data-dismiss="modal" style="color:white" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>

@@ -1,8 +1,8 @@
- <footer class="main-footer">
+ <footer class="main-footer" style="background-color:#2a273c; color:#889196;padding:10px;">
     <strong>Copyright &copy; 2024. Developed by: Marc Neilsen Omabtang</strong>
     All rights reserved.
     <div class="float-right d-none d-sm-inline-block">
-      <b>Version</b> 1.0.2
+      <b>Version</b> 1.0.0
     </div>
   </footer>
 <?php

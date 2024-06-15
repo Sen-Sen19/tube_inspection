@@ -147,35 +147,32 @@ document.getElementById('inspection_date').value = formattedDate;
 
 // -------------------------Clear Button----------------------------------
 document.addEventListener("DOMContentLoaded", function() {
- 
     const clearButton = document.querySelector("#addRecordModal .btn-danger");
 
-   
     clearButton.addEventListener("click", function() {
-   
         const inputs = document.querySelectorAll("#addRecordModal input");
         const selects = document.querySelectorAll("#addRecordModal select");
         const textareas = document.querySelectorAll("#addRecordModal textarea");
+        const excludedIds = ['inspected_by', 'inspection_date'];
 
-     
         inputs.forEach(input => {
-         
-            if (input.type !== 'button' && input.type !== 'submit') {
+            if (!excludedIds.includes(input.id) && input.type !== 'button' && input.type !== 'submit') {
                 input.value = '';
             }
         });
 
-  
         selects.forEach(select => {
-            select.selectedIndex = 0;
+            if (!excludedIds.includes(select.id)) {
+                select.selectedIndex = 0;
+            }
         });
 
-        
         textareas.forEach(textarea => {
-            textarea.value = '';
+            if (!excludedIds.includes(textarea.id)) {
+                textarea.value = '';
+            }
         });
 
-        
         Swal.fire({
             icon: 'success',
             title: 'Form Cleared',
@@ -185,6 +182,7 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
 });
+
 
 
 // -------------------------------save-------------------------------
@@ -263,69 +261,63 @@ function saveData() {
 
 
 
-// ---------------------------------------------------Populate the table---------------------------------------------------
-
-    
-function populateTable() {
+// ---------------------------------------------------Populate the table COT Start Point---------------------------------------------------
+   function populateTable() {
         var tbody = document.getElementById('sp_cotdb_body');
-
         <?php foreach ($result as $row): ?>
-            tbody.innerHTML += `
-                <tr>
-                    <td><?php echo $row['id']; ?></td>
-                    <td><?php echo $row['part_name']; ?></td>
-                    <td><?php echo $row['quantity']; ?></td>
-                    <td><?php echo $row['time_start']; ?></td>
-                    <td><?php echo $row['time_end']; ?></td>
-                    <td><?php echo $row['inspected_by']; ?></td>
-                    <td><?php echo $row['shift']; ?></td>
-                    <td><?php echo $row['inspection_date']; ?></td>
-                    <td><?php echo $row['total_mins']; ?></td>
-                    <td><?php echo $row['outside_appearance']; ?></td>
-                    <td><?php echo $row['slit_condition']; ?></td>
-                    <td><?php echo $row['inside_appearance']; ?></td>
-                    <td><?php echo $row['color']; ?></td>
-                    <td><?php echo $row['i_tolerance_plus']; ?></td>
-                    <td><?php echo $row['i_tolerance_minus']; ?></td>
-                    <td><?php echo $row['i_diameter_start']; ?></td>
-                    <td><?php echo $row['i_diameter_end']; ?></td>
-                    <td><?php echo $row['o_tolerance_plus']; ?></td>
-                    <td><?php echo $row['o_tolerance_minus']; ?></td>
-                    <td><?php echo $row['o_diameter_start']; ?></td>
-                    <td><?php echo $row['o_diameter_end']; ?></td>
-                    <td><?php echo $row['w_tolerance_plus']; ?></td>
-                    <td><?php echo $row['w_tolerance_minus']; ?></td>
-                    <td><?php echo $row['q1_start']; ?></td>
-                    <td><?php echo $row['q2_start']; ?></td>
-                    <td><?php echo $row['q3_start']; ?></td>
-                    <td><?php echo $row['q4_start']; ?></td>
-                    <td><?php echo $row['q1_middle']; ?></td>
-                    <td><?php echo $row['q2_middle']; ?></td>
-                    <td><?php echo $row['q3_middle']; ?></td>
-                    <td><?php echo $row['q4_middle']; ?></td>
-                    <td><?php echo $row['q1_end']; ?></td>
-                    <td><?php echo $row['q2_end']; ?></td>
-                    <td><?php echo $row['q3_end']; ?></td>
-                    <td><?php echo $row['q4_end']; ?></td>
-                    <td><?php echo $row['using_round_bar']; ?></td>
-                    <td><?php echo $row['using_bare_hands']; ?></td>
-                    <td><?php echo $row['appearance_judgement']; ?></td>
-                    <td><?php echo $row['dimension_judgement']; ?></td>
-                    <td><?php echo $row['ng_quantity']; ?></td>
-                    <td><?php echo $row['defect_type']; ?></td>
-                    <td><?php echo $row['confirm_by']; ?></td>
-                    <td><?php echo $row['remarks']; ?></td>
-                </tr>
+            var newRow = tbody.insertRow(0); // Insert at index 0, which is the top
+
+            newRow.innerHTML = `
+                <td><?php echo $row['id']; ?></td>
+                <td><?php echo $row['part_name']; ?></td>
+                <td><?php echo $row['quantity']; ?></td>
+                <td><?php echo $row['time_start']; ?></td>
+                <td><?php echo $row['time_end']; ?></td>
+                <td><?php echo $row['inspected_by']; ?></td>
+                <td><?php echo $row['shift']; ?></td>
+                <td><?php echo $row['inspection_date']; ?></td>
+                <td><?php echo $row['total_mins']; ?></td>
+                <td><?php echo $row['outside_appearance']; ?></td>
+                <td><?php echo $row['slit_condition']; ?></td>
+                <td><?php echo $row['inside_appearance']; ?></td>
+                <td><?php echo $row['color']; ?></td>
+                <td><?php echo $row['i_tolerance_plus']; ?></td>
+                <td><?php echo $row['i_tolerance_minus']; ?></td>
+                <td><?php echo $row['i_diameter_start']; ?></td>
+                <td><?php echo $row['i_diameter_end']; ?></td>
+                <td><?php echo $row['o_tolerance_plus']; ?></td>
+                <td><?php echo $row['o_tolerance_minus']; ?></td>
+                <td><?php echo $row['o_diameter_start']; ?></td>
+                <td><?php echo $row['o_diameter_end']; ?></td>
+                <td><?php echo $row['w_tolerance_plus']; ?></td>
+                <td><?php echo $row['w_tolerance_minus']; ?></td>
+                <td><?php echo $row['q1_start']; ?></td>
+                <td><?php echo $row['q2_start']; ?></td>
+                <td><?php echo $row['q3_start']; ?></td>
+                <td><?php echo $row['q4_start']; ?></td>
+                <td><?php echo $row['q1_middle']; ?></td>
+                <td><?php echo $row['q2_middle']; ?></td>
+                <td><?php echo $row['q3_middle']; ?></td>
+                <td><?php echo $row['q4_middle']; ?></td>
+                <td><?php echo $row['q1_end']; ?></td>
+                <td><?php echo $row['q2_end']; ?></td>
+                <td><?php echo $row['q3_end']; ?></td>
+                <td><?php echo $row['q4_end']; ?></td>
+                <td><?php echo $row['using_round_bar']; ?></td>
+                <td><?php echo $row['using_bare_hands']; ?></td>
+                <td><?php echo $row['appearance_judgement']; ?></td>
+                <td><?php echo $row['dimension_judgement']; ?></td>
+                <td><?php echo $row['ng_quantity']; ?></td>
+                <td><?php echo $row['defect_type']; ?></td>
+                <td><?php echo $row['confirm_by']; ?></td>
+                <td><?php echo $row['remarks']; ?></td>
             `;
         <?php endforeach; ?>
     }
 
-    
     window.onload = function() {
         populateTable();
     };
-
-
     // -----------------------------------search------------------------------------
 
 

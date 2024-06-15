@@ -66,6 +66,13 @@ try {
       cursor: inherit;
       display: block;
     }
+    .table th, .table td {
+        padding: 15px !important;
+        vertical-align: middle;
+    }
+    .table tbody tr td {
+        padding: 8px 15px;
+    }
 
     @keyframes spin {
       0% { transform: rotate(0deg); }

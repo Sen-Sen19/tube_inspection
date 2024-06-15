@@ -1,8 +1,7 @@
-<?php include 'plugins/navbar.php';?>
-<?php include 'plugins/sidebar/cot_bar.php';?>
+<?php include 'plugins/navbar.php'; ?>
+<?php include 'plugins/sidebar/cot_bar.php'; ?>
 
 <div class="content-wrapper">
-   
     <div class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
@@ -17,7 +16,6 @@
         </div>
     </div>
 
- 
     <section class="content">
         <div class="container-fluid">
             <div class="row">
@@ -40,7 +38,6 @@
                             <div class="row mb-4">
                                 <div class="col-sm-4">
                                     <label>&nbsp;</label>
-                              
                                     <button class="btn btn-block btn-success" style="background-color: #20c997; border-color: #20c997; color:white;" id="openModalBtn" data-toggle="modal" data-target="#addRecordModal">
                                         <i class="fas fa-plus mr-2"></i>Add Record
                                     </button>
@@ -48,19 +45,17 @@
                             </div>
 
                             <div class="row mt-5">
-                               
-                            <div class="col-md-4 d-flex align-items-center">
-    <label for="searchBox" class="sr-only">Search</label>
-    <div class="input-group">
-        <input type="text" id="searchBox" class="form-control" placeholder="Search by Part Name">
-        <div class="input-group-append">
-            <button class="btn btn-primary" id="searchReqBtn" onclick="searchAccounts()">
-                <i class="fas fa-search mr-2"></i>Search
-            </button>
-        </div>
-    </div>
-</div>
-                              
+                                <div class="col-md-4 d-flex align-items-center">
+                                    <label for="searchBox" class="sr-only">Search</label>
+                                    <div class="input-group">
+                                        <input type="text" id="searchBox" class="form-control" placeholder="Search by Part Name">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary" id="searchReqBtn" onclick="searchAccounts()">
+                                                <i class="fas fa-search mr-2"></i>Search
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="col-md-8 d-flex justify-content-end align-items-center">
                                     <button class="btn btn-danger mr-2" id="deleteReqBtn" onclick="delete_accounts()" style="width: 20%;">
                                         <i class="fas fa-sync-alt mr-2"></i>Refresh
@@ -119,9 +114,9 @@
                                             <th>Remarks</th>
                                         </tr>
                                     </thead>
-                                    <tbody id="sp_cotdb_body" style="text-align: center;">
+                                    <tbody id="sp_cotdb_body" style="text-align: center; padding:20px;">
                                         <tr>
-                                         
+                                            <!-- Data will be inserted here -->
                                         </tr>
                                     </tbody>
                                 </table>
@@ -142,7 +137,6 @@
 
 
 
-
-<?php include 'plugins/footer.php';?>
-<?php include 'plugins/js/cot_script.php';?>
-<?php include 'plugins/js/load_more_script.php';?>
+<?php include 'plugins/footer.php'; ?>
+<?php include 'plugins/js/cot_script.php'; ?>
+<?php include 'plugins/js/load_more_script.php'; ?>
