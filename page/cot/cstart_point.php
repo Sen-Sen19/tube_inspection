@@ -57,12 +57,14 @@
                                     </div>
                                 </div>
                                 <div class="col-md-8 d-flex justify-content-end align-items-center">
-                                    <button class="btn btn-danger mr-2" id="deleteReqBtn" onclick="delete_accounts()" style="width: 20%;">
-                                        <i class="fas fa-sync-alt mr-2"></i>Refresh
-                                    </button>
-                                    <button class="btn btn-warning" id="exportReqBtn" onclick="export_accounts()" style="width: 20%;">
-                                        <i class="fas fa-file-export mr-2"></i>Export
-                                    </button>
+                                <button class="btn btn-danger mr-2" id="refreshPageBtn" onclick="refreshPage()" style="width: 20%;">
+    <i class="fas fa-sync-alt mr-2"></i>Refresh
+</button>
+
+<button class="btn btn-warning" id="exportReqBtn" onclick="export_accounts()" style="width: 20%;">
+    <i class="fas fa-file-export mr-2"></i>Export
+</button>
+
                                 </div>
                             </div>
                             <div id="accounts_table_res" class="table-responsive" style="height: 415px; overflow: auto; display: inline-block; margin-top: 50px; border-top: 1px solid gray;">

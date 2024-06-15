@@ -44,12 +44,19 @@ $(document).ready(function() {
 
             $.each(parts, function (key, entry) {
                 dropdown.append($('<option></option>').attr('value', entry.part_name)
-                    .data('iDiaMin', entry.i_dia_tol_min)
-                    .data('iDiaMax', entry.i_dia_tol_add)
-                    .data('oDiaMin', entry.o_dia_tol_min)
-                    .data('oDiaMax', entry.o_dia_tol_add)
-                    .data('wMin', entry.w_tol_min)
-                    .data('wMax', entry.w_tol_add)
+                    .data('iDiaMin', entry.i_dia_min)
+                    .data('iDiaMax', entry.i_dia_max)
+                    .data('oDiaMin', entry.o_dia_min)
+                    .data('oDiaMax', entry.o_dia_max)
+                    .data('wMin', entry.w_min)
+                    .data('wValue', entry.w_value)
+                    .data('wMax', entry.w_max)
+                    .data('iDiaTolMin', entry.i_dia_tol_min)
+                    .data('iDiaTolMax', entry.i_dia_tol_add)
+                    .data('oDiaTolMin', entry.o_dia_tol_min)
+                    .data('oDiaTolMax', entry.o_dia_tol_add)
+                    .data('wTolMin', entry.w_tol_min)
+                    .data('wTolMax', entry.w_tol_add)
                     .text(entry.part_name));
             });
         },
@@ -60,24 +67,150 @@ $(document).ready(function() {
 
     $('#part_name_dropdown').change(function() {
         var selectedOption = $(this).find(':selected');
-        
-        var iDiaMin = selectedOption.data('iDiaMin');
-        var iDiaMax = selectedOption.data('iDiaMax');
-        var oDiaMin = selectedOption.data('oDiaMin');
-        var oDiaMax = selectedOption.data('oDiaMax');
-        var wMin = selectedOption.data('wMin');
-        var wMax = selectedOption.data('wMax');
-        
-        $('#tolerance-plus').val(iDiaMin);
-        $('#tolerance-minus').val(iDiaMax);
-        
-        $('#o-tolerance-plus').val(oDiaMin);
-        $('#o-tolerance-minus').val(oDiaMax);
 
-        $('#w-tolerance-plus').val(wMin);
-        $('#w-tolerance-minus').val(wMax);
+        // Set tolerance values for inside diameter
+        $('#tolerance-plus').val(selectedOption.data('iDiaTolMin'));
+        $('#tolerance-minus').val(selectedOption.data('iDiaTolMax'));
+
+        // Set tolerance values for outside diameter
+        $('#o-tolerance-plus').val(selectedOption.data('oDiaTolMin'));
+        $('#o-tolerance-minus').val(selectedOption.data('oDiaTolMax'));
+
+        // Set tolerance values for wall thickness
+        $('#w-tolerance-plus').val(selectedOption.data('wTolMin'));
+        $('#w-tolerance-minus').val(selectedOption.data('wTolMax'));
+
+        // Clear and set data attributes for inside diameter fields
+        $('#inside-start').val('').removeClass('is-invalid');
+        $('#inside-end').val('').removeClass('is-invalid');
+        $('#inside-start').data('iDiaMin', selectedOption.data('iDiaMin'));
+        $('#inside-end').data('iDiaMax', selectedOption.data('iDiaMax'));
+
+        // Clear and set data attributes for outside diameter fields
+        $('#outside-start').val('').removeClass('is-invalid');
+        $('#outside-end').val('').removeClass('is-invalid');
+        $('#outside-start').data('oDiaMin', selectedOption.data('oDiaMin'));
+        $('#outside-end').data('oDiaMax', selectedOption.data('oDiaMax'));
+
+        // Clear and set data attributes for wall thickness (Q1) fields
+        $('#q1_start').val('').removeClass('is-invalid');
+        $('#q1_middle').val('').removeClass('is-invalid');
+        $('#q1_end').val('').removeClass('is-invalid');
+        $('#q1_start').data('wMin', selectedOption.data('wMin'));
+        $('#q1_middle').data('wValue', selectedOption.data('wValue'));
+        $('#q1_end').data('wMax', selectedOption.data('wMax'));
+
+        // Clear and set data attributes for Q2 measurements fields
+        $('#q2_start').val('').removeClass('is-invalid');
+        $('#q2_middle').val('').removeClass('is-invalid');
+        $('#q2_end').val('').removeClass('is-invalid');
+        $('#q2_start').data('wMin', selectedOption.data('wMin'));
+        $('#q2_middle').data('wValue', selectedOption.data('wValue'));
+        $('#q2_end').data('wMax', selectedOption.data('wMax'));
+
+        // Clear and set data attributes for Q3 measurements fields
+        $('#q3_start').val('').removeClass('is-invalid');
+        $('#q3_middle').val('').removeClass('is-invalid');
+        $('#q3_end').val('').removeClass('is-invalid');
+        $('#q3_start').data('wMin', selectedOption.data('wMin'));
+        $('#q3_middle').data('wValue', selectedOption.data('wValue'));
+        $('#q3_end').data('wMax', selectedOption.data('wMax'));
+
+        // Clear and set data attributes for Q4 measurements fields
+        $('#q4_start').val('').removeClass('is-invalid');
+        $('#q4_middle').val('').removeClass('is-invalid');
+        $('#q4_end').val('').removeClass('is-invalid');
+        $('#q4_start').data('wMin', selectedOption.data('wMin'));
+        $('#q4_middle').data('wValue', selectedOption.data('wValue'));
+        $('#q4_end').data('wMax', selectedOption.data('wMax'));
+    });
+
+    $('#inside-start').on('input', function() {
+        var startVal = $(this).val();
+        var iDiaMin = $(this).data('iDiaMin');
+
+        // Validate against i_dia_min
+        if (startVal !== '' && parseFloat(startVal) < parseFloat(iDiaMin)) {
+            $(this).addClass('is-invalid');
+        } else {
+            $(this).removeClass('is-invalid');
+        }
+    });
+
+    $('#inside-end').on('input', function() {
+        var endVal = $(this).val();
+        var iDiaMax = $(this).data('iDiaMax');
+
+        // Validate against i_dia_max
+        if (endVal !== '' && parseFloat(endVal) > parseFloat(iDiaMax)) {
+            $(this).addClass('is-invalid');
+        } else {
+            $(this).removeClass('is-invalid');
+        }
+    });
+
+    $('#outside-start').on('input', function() {
+        var startVal = $(this).val();
+        var oDiaMin = $(this).data('oDiaMin');
+
+        // Validate against o_dia_min
+        if (startVal !== '' && parseFloat(startVal) < parseFloat(oDiaMin)) {
+            $(this).addClass('is-invalid');
+        } else {
+            $(this).removeClass('is-invalid');
+        }
+    });
+
+    $('#outside-end').on('input', function() {
+        var endVal = $(this).val();
+        var oDiaMax = $(this).data('oDiaMax');
+
+        // Validate against o_dia_max
+        if (endVal !== '' && parseFloat(endVal) > parseFloat(oDiaMax)) {
+            $(this).addClass('is-invalid');
+        } else {
+            $(this).removeClass('is-invalid');
+        }
+    });
+
+    $('#q1_start, #q2_start, #q3_start, #q4_start').on('input', function() {
+        var startVal = $(this).val();
+        var wMin = $(this).data('wMin');
+
+        // Validate against w_min
+        if (startVal !== '' && parseFloat(startVal) < parseFloat(wMin)) {
+            $(this).addClass('is-invalid');
+        } else {
+            $(this).removeClass('is-invalid');
+        }
+    });
+
+    $('#q1_middle, #q2_middle, #q3_middle, #q4_middle').on('input', function() {
+        var middleVal = $(this).val();
+        var wValue = $(this).data('wValue');
+
+        // Validate if w_value is exactly equal to the input
+        if (middleVal !== '' && parseFloat(middleVal) !== parseFloat(wValue)) {
+            $(this).addClass('is-invalid');
+        } else {
+            $(this).removeClass('is-invalid');
+        }
+    });
+
+    $('#q1_end, #q2_end, #q3_end, #q4_end').on('input', function() {
+        var endVal = $(this).val();
+        var wMax = $(this).data('wMax');
+
+        // Validate against w_max
+        if (endVal !== '' && parseFloat(endVal) > parseFloat(wMax)) {
+            $(this).addClass('is-invalid');
+        } else {
+            $(this).removeClass('is-invalid');
+        }
     });
 });
+
+
 
         // -----------------------Inspection Date --------------------------
 var today = new Date();
@@ -189,25 +322,40 @@ document.addEventListener("DOMContentLoaded", function() {
 function saveData() {
     var form = document.getElementById('myForm');
     var formData = new FormData(form);
-    var isEmpty = false; 
+    var isEmpty = false;
 
     // Function to reset the border on input event
     function resetBorder(event) {
         event.target.style.border = ''; // Reset border to default
     }
 
+    // Reset borders and remove input event listeners for text inputs
     form.querySelectorAll('input[type="text"]').forEach(input => {
         input.style.border = ''; // Reset border to default
         input.removeEventListener('input', resetBorder); // Remove any previous listeners to avoid duplication
     });
 
+    // Reset borders for select elements
+    form.querySelectorAll('select').forEach(select => {
+        select.style.border = ''; // Reset border to default
+    });
+
+    // Check text inputs for empty values
     form.querySelectorAll('input[type="text"]').forEach(input => {
         if (input.value.trim() === "") {
             isEmpty = true;
-            input.style.border = '.5px solid red'; 
+            input.style.border = '1px solid red'; // Highlight empty field
 
             // Add event listener to reset border when user starts typing
             input.addEventListener('input', resetBorder);
+        }
+    });
+
+    // Check select elements for not being picked
+    form.querySelectorAll('select').forEach(select => {
+        if (select.value.trim() === "") {
+            isEmpty = true;
+            select.style.border = '1px solid red'; // Highlight empty field
         }
     });
 
@@ -218,7 +366,7 @@ function saveData() {
             title: 'Please fill out all required fields!',
             showConfirmButton: true
         });
-        return; 
+        return;
     }
 
     fetch('../../process/save_sp_cot.php', {
@@ -258,7 +406,6 @@ function saveData() {
         });
     });
 }
-
 
 
 // ---------------------------------------------------Populate the table COT Start Point---------------------------------------------------
@@ -339,7 +486,70 @@ function saveData() {
     }
 }
 
-// --------------------------------------------
+// --------------------------------------------refresh button -----------------------------------------------------
+function refreshPage() {
+        window.location.reload(); 
+    }
 
+//------------------------------------------------export--------------------------------------------------------
+function export_accounts() {
+    // Select the table
+    var table = document.getElementById("sp_cotdb");
+
+    // Create an empty array to store the rows (including headers)
+    var rows = [];
+
+    // Get the header row and extract header text
+    var headerRow = table.rows[0];
+    var headers = [];
+    for (var h = 0; h < headerRow.cells.length; h++) {
+        headers.push(" " + headerRow.cells[h].textContent.trim()); // Add space before each header
+    }
+    rows.push(headers.join(","));
+
+    // Create an array to store the rows of data
+    var dataRows = [];
+
+    // Iterate through each row in the table (skip the header row)
+    for (var i = 1; i < table.rows.length; i++) {
+        var row = [], cells = table.rows[i].cells;
+
+        // Iterate through each cell in the row
+        for (var j = 0; j < cells.length; j++) {
+            // Push the cell's text content into the row array
+            row.push(" " + cells[j].textContent.trim()); // Add space before each cell content
+        }
+
+        // Push the row to the data rows array
+        dataRows.push(row);
+    }
+
+    // Sort data rows by the first column (assuming the first column is the ID)
+    dataRows.sort(function(a, b) {
+        return parseInt(a[0]) - parseInt(b[0]); // Assuming ID is a numeric value
+    });
+
+    // Concatenate the header row and sorted data rows into the final rows array
+    rows = rows.concat(dataRows.map(row => row.join(",")));
+
+    // Join all rows into a CSV string with new line characters
+    var csv = rows.join("\n");
+
+    // Create a Blob object for the CSV file
+    var blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+
+    // Create a temporary anchor element and trigger a click to download the CSV file
+    var link = document.createElement("a");
+    if (link.download !== undefined) {
+        var url = URL.createObjectURL(blob);
+        link.setAttribute("href", url);
+        link.setAttribute("download", "export.csv");
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    } else {
+        alert("Exporting CSV is not supported in this browser.");
+    }
+}
 
     </script>

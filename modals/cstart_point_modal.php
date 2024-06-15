@@ -1,5 +1,10 @@
 
+<style>
+    .is-invalid {
+    border-color: #dc3545; /* Red color for invalid input */
+}
 
+</style>
 <div class="modal fade" id="addRecordModal" tabindex="-1" role="dialog" aria-labelledby="addRecordModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
         <div class="modal-content" style="border-color: #20c997;"> <!-- Apply the stroke color here -->
@@ -123,6 +128,12 @@
                         </select>
                     </div>
                 </div>
+<!-- ------------------------------------------------------------Inside and Outside Diameter---------------------------------------------------------------------------- -->
+
+
+
+
+
 
                 <div class="horizontal-rule" style="width: 100%; height: 1px; background-color: #20c997; margin: 20px 0;"></div>
 

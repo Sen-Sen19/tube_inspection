@@ -73,7 +73,7 @@ try {
     .table tbody tr td {
         padding: 8px 15px;
     }
-
+ 
     @keyframes spin {
       0% { transform: rotate(0deg); }
       100% { transform: rotate(1080deg); }
