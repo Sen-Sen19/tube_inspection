@@ -2,7 +2,7 @@
 // export_data.php
 
 header('Content-Type: text/csv');
-header('Content-Disposition: attachment; filename="COT_Mass_Production.csv"');
+header('Content-Disposition: attachment; filename="COT_End_Point.csv"');
 header('Pragma: no-cache');
 header('Expires: 0');
 
@@ -20,14 +20,14 @@ if ($conn->connect_error) {
 
 $search = isset($_GET['search']) ? $_GET['search'] : '';
 
-$sql = "SELECT * FROM sp_cotdb";
+$sql = "SELECT * FROM ep_cotdb";
 
 if (!empty($search)) {
-    $stmt = $conn->prepare("SELECT * FROM mp_cotdb WHERE part_name LIKE ?");
+    $stmt = $conn->prepare("SELECT * FROM ep_cotdb WHERE part_name LIKE ?");
     $searchTerm = "%$search%";
     $stmt->bind_param("s", $searchTerm);
 } else {
-    $stmt = $conn->prepare("SELECT * FROM mp_cotdb");
+    $stmt = $conn->prepare("SELECT * FROM ep_cotdb");
 }
 
 $stmt->execute();

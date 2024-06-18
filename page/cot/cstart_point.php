@@ -138,6 +138,6 @@
 
     </script>
 
-<?php include 'plugins/footer.php'; ?>
+<?php include 'plugins/sp_footer.php'; ?>
 <?php include 'plugins/js/cot_sp_script.php'; ?>
 <?php include 'plugins/js/load_more_script.php'; ?>
