@@ -33,7 +33,7 @@ document.getElementById("openModalBtn").addEventListener("click", function() {
 // ------------------------------Get PartName-------------------------
 $(document).ready(function() {
     $.ajax({
-        url: '../../process/cot_sp_get_part_names.php',
+        url: '../../process/cot_get_part_names.php',
         method: 'GET',
         success: function(data) {
             var parts = JSON.parse(data);
@@ -369,7 +369,7 @@ function saveData() {
         return;
     }
 
-    fetch('../../process/sp_cot_save.php', {
+    fetch('../../process/mp_cot_save.php', {
         method: 'POST',
         body: formData
     })
@@ -390,9 +390,9 @@ function saveData() {
             timer: 1500
         });
 
-        setTimeout(function() {
-            window.location.reload();
-        }, 1600);
+        // setTimeout(function() {
+        //     window.location.reload();
+        // }, 1600);
     })
     .catch(error => {
         console.error('Error:', error);
@@ -442,12 +442,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
 document.getElementById('exportReqBtn').addEventListener('click', () => {
     const searchTerm = document.getElementById('searchBox').value.trim();
-    const url = `../../process/cot_sp_export_data.php${searchTerm ? '?search=' + encodeURIComponent(searchTerm) : ''}`;
+    const url = `../../process/cot_mp_export_data.php${searchTerm ? '?search=' + encodeURIComponent(searchTerm) : ''}`;
     window.location.href = url;
 });
 
 function loadTableData(offset, limit, search = '') {
-    fetch(`../../process/cot_sp_get_data.php?offset=${offset}&limit=${limit}&search=${encodeURIComponent(search)}`)
+    fetch(`../../process/cot_mp_get_data.php?offset=${offset}&limit=${limit}&search=${encodeURIComponent(search)}`)
         .then(response => {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
@@ -456,7 +456,7 @@ function loadTableData(offset, limit, search = '') {
         })
         .then(data => {
             if (offset === 0) {
-                document.getElementById('sp_cotdb_body').innerHTML = ''; // Clear table for new search results
+                document.getElementById('mp_cotdb_body').innerHTML = ''; // Clear table for new search results
             }
             populateTable(data);
 
@@ -471,7 +471,7 @@ function loadTableData(offset, limit, search = '') {
 }
 
 function populateTable(data) {
-    const tbody = document.getElementById('sp_cotdb_body');
+    const tbody = document.getElementById('mp_cotdb_body');
 
     data.forEach(row => {
         const newRow = tbody.insertRow();
@@ -503,10 +503,7 @@ function populateTable(data) {
             <td>${row.q2_start}</td>
             <td>${row.q3_start}</td>
             <td>${row.q4_start}</td>
-            <td>${row.q1_middle}</td>
-            <td>${row.q2_middle}</td>
-            <td>${row.q3_middle}</td>
-            <td>${row.q4_middle}</td>
+           
             <td>${row.q1_end}</td>
             <td>${row.q2_end}</td>
             <td>${row.q3_end}</td>
@@ -531,65 +528,7 @@ function refreshPage() {
         window.location.reload(); 
     }
 
-//------------------------------------------------export--------------------------------------------------------
-function export_accounts() {
-    // Select the table
-    var table = document.getElementById("sp_cotdb");
-
-    // Create an empty array to store the rows (including headers)
-    var rows = [];
-
-    // Get the header row and extract header text
-    var headerRow = table.rows[0];
-    var headers = [];
-    for (var h = 0; h < headerRow.cells.length; h++) {
-        headers.push(" " + headerRow.cells[h].textContent.trim()); // Add space before each header
-    }
-    rows.push(headers.join(","));
-
-    // Create an array to store the rows of data
-    var dataRows = [];
-
-    // Iterate through each row in the table (skip the header row)
-    for (var i = 1; i < table.rows.length; i++) {
-        var row = [], cells = table.rows[i].cells;
-
-        // Iterate through each cell in the row
-        for (var j = 0; j < cells.length; j++) {
-            // Push the cell's text content into the row array
-            row.push(" " + cells[j].textContent.trim()); // Add space before each cell content
-        }
-
-        // Push the row to the data rows array
-        dataRows.push(row);
-    }
-
-    // Sort data rows by the first column (assuming the first column is the ID)
-    dataRows.sort(function(a, b) {
-        return parseInt(a[0]) - parseInt(b[0]); // Assuming ID is a numeric value
-    });
-
-    // Concatenate the header row and sorted data rows into the final rows array
-    rows = rows.concat(dataRows.map(row => row.join(",")));
-
-    // Join all rows into a CSV string with new line characters
-    var csv = rows.join("\n");
-
-    // Create a Blob object for the CSV file
-    var blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
-
-    // Create a temporary anchor element and trigger a click to download the CSV file
-    var link = document.createElement("a");
-    if (link.download !== undefined) {
-        var url = URL.createObjectURL(blob);
-        link.setAttribute("href", url);
-        link.setAttribute("download", "export.csv");
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-    } else {
-        alert("Exporting CSV is not supported in this browser.");
-    }
-}
+//--------------------------------------------------------------------------------------------------------
+ 
 
     </script>
