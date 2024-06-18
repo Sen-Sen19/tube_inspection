@@ -74,6 +74,7 @@ try {
         padding: 8px 15px;
     }
  
+    
     @keyframes spin {
       0% { transform: rotate(0deg); }
       100% { transform: rotate(1080deg); }
@@ -107,6 +108,12 @@ try {
           <i class="fas fa-expand-arrows-alt"></i>
         </a>
       </li>
+      
+      <!-- <input type="" name="ip" id="ip" style="color:white; background-color:#20c997; border:1px;" value="<?= $_SERVER['REMOTE_ADDR']; ?>">
+<script>
+    const ip = $('#ip').val();
+
+</script> -->
     </ul>
   </nav>
 

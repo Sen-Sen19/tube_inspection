@@ -33,7 +33,7 @@ document.getElementById("openModalBtn").addEventListener("click", function() {
 // ------------------------------Get PartName-------------------------
 $(document).ready(function() {
     $.ajax({
-        url: '../../process/get_part_names.php',
+        url: '../../process/cot_sp_get_part_names.php',
         method: 'GET',
         success: function(data) {
             var parts = JSON.parse(data);
@@ -369,7 +369,7 @@ function saveData() {
         return;
     }
 
-    fetch('../../process/save_sp_cot.php', {
+    fetch('../../process/sp_cot_save.php', {
         method: 'POST',
         body: formData
     })
@@ -409,83 +409,123 @@ function saveData() {
 
 
 // ---------------------------------------------------Populate the table COT Start Point---------------------------------------------------
-   function populateTable() {
-        var tbody = document.getElementById('sp_cotdb_body');
-        <?php foreach ($result as $row): ?>
-            var newRow = tbody.insertRow(0); // Insert at index 0, which is the top
-
-            newRow.innerHTML = `
-                <td><?php echo $row['id']; ?></td>
-                <td><?php echo $row['part_name']; ?></td>
-                <td><?php echo $row['quantity']; ?></td>
-                <td><?php echo $row['time_start']; ?></td>
-                <td><?php echo $row['time_end']; ?></td>
-                <td><?php echo $row['inspected_by']; ?></td>
-                <td><?php echo $row['shift']; ?></td>
-                <td><?php echo $row['inspection_date']; ?></td>
-                <td><?php echo $row['total_mins']; ?></td>
-                <td><?php echo $row['outside_appearance']; ?></td>
-                <td><?php echo $row['slit_condition']; ?></td>
-                <td><?php echo $row['inside_appearance']; ?></td>
-                <td><?php echo $row['color']; ?></td>
-                <td><?php echo $row['i_tolerance_plus']; ?></td>
-                <td><?php echo $row['i_tolerance_minus']; ?></td>
-                <td><?php echo $row['i_diameter_start']; ?></td>
-                <td><?php echo $row['i_diameter_end']; ?></td>
-                <td><?php echo $row['o_tolerance_plus']; ?></td>
-                <td><?php echo $row['o_tolerance_minus']; ?></td>
-                <td><?php echo $row['o_diameter_start']; ?></td>
-                <td><?php echo $row['o_diameter_end']; ?></td>
-                <td><?php echo $row['w_tolerance_plus']; ?></td>
-                <td><?php echo $row['w_tolerance_minus']; ?></td>
-                <td><?php echo $row['q1_start']; ?></td>
-                <td><?php echo $row['q2_start']; ?></td>
-                <td><?php echo $row['q3_start']; ?></td>
-                <td><?php echo $row['q4_start']; ?></td>
-                <td><?php echo $row['q1_middle']; ?></td>
-                <td><?php echo $row['q2_middle']; ?></td>
-                <td><?php echo $row['q3_middle']; ?></td>
-                <td><?php echo $row['q4_middle']; ?></td>
-                <td><?php echo $row['q1_end']; ?></td>
-                <td><?php echo $row['q2_end']; ?></td>
-                <td><?php echo $row['q3_end']; ?></td>
-                <td><?php echo $row['q4_end']; ?></td>
-                <td><?php echo $row['using_round_bar']; ?></td>
-                <td><?php echo $row['using_bare_hands']; ?></td>
-                <td><?php echo $row['appearance_judgement']; ?></td>
-                <td><?php echo $row['dimension_judgement']; ?></td>
-                <td><?php echo $row['ng_quantity']; ?></td>
-                <td><?php echo $row['defect_type']; ?></td>
-                <td><?php echo $row['confirm_by']; ?></td>
-                <td><?php echo $row['remarks']; ?></td>
-            `;
-        <?php endforeach; ?>
-    }
-
-    window.onload = function() {
-        populateTable();
-    };
-    // -----------------------------------search------------------------------------
 
 
-    function searchAccounts() {
-    var input = document.getElementById("searchBox").value.toUpperCase();
-    var table = document.getElementById("sp_cotdb");
-    var rows = table.getElementsByTagName("tr");
+document.addEventListener('DOMContentLoaded', () => {
+    let offset = 0;
+    const limit = 10;
 
-    for (var i = 0; i < rows.length; i++) {
-        var partNameCol = rows[i].getElementsByTagName("td")[1]; 
-        if (partNameCol) {
-            var textValue = partNameCol.textContent || partNameCol.innerText;
-            if (textValue.toUpperCase().indexOf(input) > -1) {
-                rows[i].style.display = "";
-            } else {
-                rows[i].style.display = "none";
-            }
+    // Load initial table data
+    loadTableData(offset, limit);
+
+    // Load more button event
+    document.getElementById('btnLoadMore').addEventListener('click', () => {
+        offset += limit;
+        loadTableData(offset, limit);
+    });
+
+    // Infinite scroll event
+    document.getElementById('accounts_table_res').addEventListener('scroll', () => {
+        const container = document.getElementById('accounts_table_res');
+        if (container.scrollTop + container.clientHeight >= container.scrollHeight) {
+            offset += limit;
+            loadTableData(offset, limit, document.getElementById('searchBox').value.trim());
         }
-    }
+    });
+
+    // Search button event
+    document.getElementById('searchReqBtn').addEventListener('click', () => {
+        offset = 0; // Reset offset for new search
+        loadTableData(offset, limit, document.getElementById('searchBox').value.trim());
+    });
+});
+
+document.getElementById('exportReqBtn').addEventListener('click', () => {
+    const searchTerm = document.getElementById('searchBox').value.trim();
+    const url = `../../process/cot_sp_export_data.php${searchTerm ? '?search=' + encodeURIComponent(searchTerm) : ''}`;
+    window.location.href = url;
+});
+
+function loadTableData(offset, limit, search = '') {
+    fetch(`../../process/cot_sp_get_data.php?offset=${offset}&limit=${limit}&search=${encodeURIComponent(search)}`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (offset === 0) {
+                document.getElementById('sp_cotdb_body').innerHTML = ''; // Clear table for new search results
+            }
+            populateTable(data);
+
+            // Hide 'Load more' button if all data is loaded
+            if (data.length < limit) {
+                document.getElementById('btnLoadMore').style.display = 'none';
+            } else {
+                document.getElementById('btnLoadMore').style.display = 'block';
+            }
+        })
+        .catch(error => console.error('Error fetching data:', error));
 }
 
+function populateTable(data) {
+    const tbody = document.getElementById('sp_cotdb_body');
+
+    data.forEach(row => {
+        const newRow = tbody.insertRow();
+        newRow.innerHTML = `
+            <td>${row.id}</td>
+            <td>${row.part_name}</td>
+            <td>${row.quantity}</td>
+            <td>${row.time_start}</td>
+            <td>${row.time_end}</td>
+            <td>${row.inspected_by}</td>
+            <td>${row.shift}</td>
+            <td>${row.inspection_date}</td>
+            <td>${row.total_mins}</td>
+            <td>${row.outside_appearance}</td>
+            <td>${row.slit_condition}</td>
+            <td>${row.inside_appearance}</td>
+            <td>${row.color}</td>
+            <td>${row.i_tolerance_plus}</td>
+            <td>${row.i_tolerance_minus}</td>
+            <td>${row.i_diameter_start}</td>
+            <td>${row.i_diameter_end}</td>
+            <td>${row.o_tolerance_plus}</td>
+            <td>${row.o_tolerance_minus}</td>
+            <td>${row.o_diameter_start}</td>
+            <td>${row.o_diameter_end}</td>
+            <td>${row.w_tolerance_plus}</td>
+            <td>${row.w_tolerance_minus}</td>
+            <td>${row.q1_start}</td>
+            <td>${row.q2_start}</td>
+            <td>${row.q3_start}</td>
+            <td>${row.q4_start}</td>
+            <td>${row.q1_middle}</td>
+            <td>${row.q2_middle}</td>
+            <td>${row.q3_middle}</td>
+            <td>${row.q4_middle}</td>
+            <td>${row.q1_end}</td>
+            <td>${row.q2_end}</td>
+            <td>${row.q3_end}</td>
+            <td>${row.q4_end}</td>
+            <td>${row.using_round_bar}</td>
+            <td>${row.using_bare_hands}</td>
+            <td>${row.appearance_judgement}</td>
+            <td>${row.dimension_judgement}</td>
+            <td>${row.ng_quantity}</td>
+            <td>${row.defect_type}</td>
+            <td>${row.confirm_by}</td>
+            <td>${row.remarks}</td>
+        `;
+    });
+}
+
+
+
+   
 // --------------------------------------------refresh button -----------------------------------------------------
 function refreshPage() {
         window.location.reload(); 

@@ -1,4 +1,16 @@
 
+<!-- Including Bootstrap (or similar library) CSS first -->
+<link rel="stylesheet" href="path/to/bootstrap.css">
+
+<!-- Your custom styles -->
+<link rel="stylesheet" href="path/to/your-styles.css">
+<style>
+.nav-link.active {
+  background-color: #1aa179 !important; /* Ensuring no other rule overrides this */
+  color: white !important; /* Ensuring text color is white */
+}
+</style>
+
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
   <!-- Brand Logo -->
   <a href="cstart_point.php" class="brand-link">
@@ -14,124 +26,38 @@
         <img src="../../dist/img/user.png" class="img-circle elevation-2" alt="User Image">
       </div>
       <div class="info">
-      <a href="cstart_point.php" class="d-block"><?=htmlspecialchars(strtoupper($_SESSION['username']));?></a>
+        <a href="cstart_point.php" class="d-block"><?=htmlspecialchars(strtoupper($_SESSION['username']));?></a>
       </div>
     </div>
 
     <!-- Sidebar Menu -->
     <nav class="mt-2">
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-        <!-- Add icons to the links using the .nav-icon class
-             with font-awesome or any other icon font library -->
-        <!-- <li class="nav-item">
-          <?php if ($_SERVER['REQUEST_URI'] == "/web_template/page/admin/dashboard.php") {?>
-          <a href="dashboard.php" class="nav-link active">
-          <?php } else {?>
-          <a href="dashboard.php" class="nav-link">
-          <?php } ?>
-            <i class="nav-icon fas fa-bus"></i>
-            <p>
-              Dashboard
-            </p>
-          </a>
-        </li>
- -->
-
-
-
         <li class="nav-item">
-          <?php if ($_SERVER['REQUEST_URI'] == "/web_template/page/admin/accounts.php") {?>
-          <a href="start_point.php" class="nav-link active">
-          <?php } else {?>
-          <a href="cstart_point.php" class="nav-link">
-          <?php } ?>
+          <a href="cstart_point.php" class="nav-link <?= ($_SERVER['REQUEST_URI'] == "/tube_inspection/page/cot/cstart_point.php") ? 'active' : '' ?>">
             <i class="nav-icon fas fa-play-circle"></i>
-            <p>
-              Start Point
-            </p>
+            <p>Start Point</p>
           </a>
         </li>
 
-        
         <li class="nav-item">
-          <?php if ($_SERVER['REQUEST_URI'] == "/web_template/page/admin/accounts.php") {?>
-          <a href="mass_production.php" class="nav-link active">
-          <?php } else {?>
-          <a href="cmass_production.php" class="nav-link">
-          <?php } ?>
+          <a href="cmass_production.php" class="nav-link <?= ($_SERVER['REQUEST_URI'] == "/tube_inspection/page/cot/cmass_production.php") ? 'active' : '' ?>">
             <i class="nav-icon fas fa-chart-line"></i>
-            <p>
-              Mass Production
-            </p>
+            <p>Mass Production</p>
           </a>
         </li>
 
-        
         <li class="nav-item">
-          <?php if ($_SERVER['REQUEST_URI'] == "/web_template/page/admin/accounts.php") {?>
-          <a href="end_point.php" class="nav-link active">
-          <?php } else {?>
-          <a href="cend_point.php" class="nav-link">
-          <?php } ?>
+          <a href="cend_point.php" class="nav-link <?= ($_SERVER['REQUEST_URI'] == "/tube_inspection/page/cot/cend_point.php") ? 'active' : '' ?>">
             <i class="nav-icon fas fa-stop-circle"></i>
-            <p>
-            End Point
-            </p>
+            <p>End Point</p>
           </a>
         </li>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- 
-
-
-        <li class="nav-item">
-          <?php if ($_SERVER['REQUEST_URI'] == "/web_template/page/admin/accounts.php") {?>
-          <a href="accounts.php" class="nav-link active">
-          <?php } else {?>
-          <a href="accounts.php" class="nav-link">
-          <?php } ?>
-            <i class="nav-icon fas fa-user-cog"></i>
-            <p>
-              Account Management
-            </p>
-          </a>
-        </li>
-        <li class="nav-item">
-          <?php if ($_SERVER['REQUEST_URI'] == "/web_template/page/admin/sample1.php") {?>
-          <a href="sample1.php" class="nav-link active">
-          <?php } else {?>
-          <a href="sample1.php" class="nav-link">
-          <?php } ?>
-            <i class="nav-icon fas fa-user-cog"></i>
-            <p>
-              Sample 1
-            </p>
-          </a>
-        </li>-->
         <?php include 'logout.php';?>
       </ul>
     </nav>
     <!-- /.sidebar-menu -->
   </div>
   <!-- /.sidebar -->
-</aside> 
-
-
-
-
+</aside>
