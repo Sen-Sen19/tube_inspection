@@ -2,7 +2,7 @@
 
 if (isset($_SESSION['username'])) {
   if ($_SESSION['type'] == 'pvc') {
-     header('location: user/pvc/pvc.php');
+     header('location: page/pvc/pvc.php');
      exit;
  }elseif($_SESSION['type'] == 'cot'){
      header('location: page/cot/cot.php');

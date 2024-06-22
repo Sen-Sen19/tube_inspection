@@ -237,7 +237,6 @@ document.getElementById('inspection_date').value = formattedDate;
 
 
 
-
   document.addEventListener('DOMContentLoaded', function() {
     var startTimeInput = document.getElementById('start_time');
     var endTimeInput = document.getElementById('end_time');
@@ -254,11 +253,9 @@ document.getElementById('inspection_date').value = formattedDate;
         var endTime = new Date();
         endTimeInput.value = formatDateTime(endTime);
 
-
         var startTimestamp = new Date(startTimeInput.value);
         var endTimestamp = new Date(endTimeInput.value);
         var timeDifference = endTimestamp - startTimestamp;
-
 
         var totalMinutes = timeDifference / (1000 * 60); 
         totalMinsInput.value = totalMinutes.toFixed(2); 
@@ -369,6 +366,7 @@ function saveData() {
         return;
     }
 
+    // Adjusted fetch request to point to the correct PHP script for MS SQL Server
     fetch('../../process/sp_cot_save.php', {
         method: 'POST',
         body: formData
@@ -391,7 +389,7 @@ function saveData() {
         });
 
         setTimeout(function() {
-            window.location.reload();
+            // window.location.reload();
         }, 1600);
     })
     .catch(error => {
@@ -470,20 +468,28 @@ function loadTableData(offset, limit, search = '') {
         .catch(error => console.error('Error fetching data:', error));
 }
 
+
+// -----------------------------populate table-------------------
 function populateTable(data) {
     const tbody = document.getElementById('sp_cotdb_body');
 
     data.forEach(row => {
         const newRow = tbody.insertRow();
+
+        // Format date fields
+        const timeStart = formatDate(row.time_start);
+        const timeEnd = formatDate(row.time_end);
+        const inspectionDate = formatDate(row.inspection_date, true); // Pass true to indicate it's inspection_date
+
         newRow.innerHTML = `
             <td>${row.id}</td>
             <td>${row.part_name}</td>
             <td>${row.quantity}</td>
-            <td>${row.time_start}</td>
-            <td>${row.time_end}</td>
+            <td>${timeStart}</td>
+            <td>${timeEnd}</td>
             <td>${row.inspected_by}</td>
             <td>${row.shift}</td>
-            <td>${row.inspection_date}</td>
+            <td>${inspectionDate}</td>
             <td>${row.total_mins}</td>
             <td>${row.outside_appearance}</td>
             <td>${row.slit_condition}</td>
@@ -523,15 +529,26 @@ function populateTable(data) {
     });
 }
 
+function formatDate(dateObject, isInspectionDate = false) {
+    if (!dateObject) return ''; 
 
+    const date = new Date(dateObject.date);
+    
+    if (isInspectionDate) {
+        return date.toLocaleDateString();
+    } else {
+        const time = date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        return `${date.toLocaleDateString()} ${time}`;
+    }
+}
 
-   
 // --------------------------------------------refresh button -----------------------------------------------------
 function refreshPage() {
         window.location.reload(); 
     }
 
 //------------------------------------------------export--------------------------------------------------------
+
 function export_accounts() {
     // Select the table
     var table = document.getElementById("sp_cotdb");
@@ -539,25 +556,24 @@ function export_accounts() {
     // Create an empty array to store the rows (including headers)
     var rows = [];
 
-    // Get the header row and extract header text
+   
     var headerRow = table.rows[0];
     var headers = [];
     for (var h = 0; h < headerRow.cells.length; h++) {
-        headers.push(" " + headerRow.cells[h].textContent.trim()); // Add space before each header
+        headers.push(" " + headerRow.cells[h].textContent.trim()); 
     }
     rows.push(headers.join(","));
 
-    // Create an array to store the rows of data
     var dataRows = [];
 
-    // Iterate through each row in the table (skip the header row)
+    
     for (var i = 1; i < table.rows.length; i++) {
         var row = [], cells = table.rows[i].cells;
 
-        // Iterate through each cell in the row
+        
         for (var j = 0; j < cells.length; j++) {
-            // Push the cell's text content into the row array
-            row.push(" " + cells[j].textContent.trim()); // Add space before each cell content
+           
+            row.push(" " + cells[j].textContent.trim()); 
         }
 
         // Push the row to the data rows array

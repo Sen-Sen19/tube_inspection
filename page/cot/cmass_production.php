@@ -134,4 +134,3 @@
  
 <?php include 'plugins/mp_footer.php'; ?>
 <?php include 'plugins/js/cot_mp_script.php'; ?>
-<?php include 'plugins/js/load_more_script.php'; ?>

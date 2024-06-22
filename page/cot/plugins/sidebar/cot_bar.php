@@ -1,9 +1,5 @@
 
-<!-- Including Bootstrap (or similar library) CSS first -->
-<link rel="stylesheet" href="path/to/bootstrap.css">
 
-<!-- Your custom styles -->
-<link rel="stylesheet" href="path/to/your-styles.css">
 <style>
 .nav-link.active {
   background-color: #1aa179 !important; /* Ensuring no other rule overrides this */

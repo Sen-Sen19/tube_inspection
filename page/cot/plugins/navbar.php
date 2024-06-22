@@ -1,21 +1,40 @@
-<?php 
-//SESSION
+<?php
+// Include your session handling script
 include '../../process/login.php';
 
+// Check if user is logged in
 if (!isset($_SESSION['username'])) {
-  header('location:../../');
-  exit;
+    header('location: ../../'); // Redirect to login page
+    exit;
 } else if ($_SESSION['type'] == 'pvc') {
-  header('location: ../../page/user/pvc.php');
-  exit;
+    header('location: ../../page/user/pvc.php'); // Redirect to specific page for PVC type
+    exit;
 }
 
+// Database connection details for MS SQL Server
+$serverName = "172.25.114.171\\SQLEXPRESS";
+$username = "sa";
+$password = "SystemGroup2018";
+$database = "tube_inspection_db"; // Replace with your actual database name
+
 try {
+    // Establish connection to MS SQL Server using PDO
+    $conn = new PDO("sqlsrv:Server=$serverName;Database=$database", $username, $password);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    // Prepare and execute SQL query
     $stmt = $conn->prepare("SELECT * FROM sp_cotdb");
     $stmt->execute();
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    // Process the fetched data as needed
+    foreach ($result as $row) {
+        // Process each row of data here
+        // Example: echo $row['column_name'];
+    }
+
 } catch (PDOException $e) {
-    echo 'Error: ' . $e->getMessage();
+    echo 'Error: ' . $e->getMessage(); // Output any errors that occur during execution
 }
 ?>
 

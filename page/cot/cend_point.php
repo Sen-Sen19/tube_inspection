@@ -140,4 +140,3 @@
 
 <?php include 'plugins/ep_footer.php'; ?>
 <?php include 'plugins/js/cot_ep_script.php'; ?>
-<?php include 'plugins/js/load_more_script.php'; ?>
