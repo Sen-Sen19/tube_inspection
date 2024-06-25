@@ -46,13 +46,15 @@ $(document).ready(function() {
                 dropdown.append($('<option></option>').attr('value', entry.part_name)
                     .data('iDiaMin', entry.i_dia_min)
                     .data('iDiaMax', entry.i_dia_max)
-                   
+                    .data('oDiaMin', entry.o_dia_min)
+                    .data('oDiaMax', entry.o_dia_max)
                     .data('wMin', entry.w_min)
                     .data('wValue', entry.w_value)
                     .data('wMax', entry.w_max)
                     .data('iDiaTolMin', entry.i_dia_tol_min)
                     .data('iDiaTolMax', entry.i_dia_tol_add)
-                 
+                    .data('oDiaTolMin', entry.o_dia_tol_min)
+                    .data('oDiaTolMax', entry.o_dia_tol_add)
                     .data('wTolMin', entry.w_tol_min)
                     .data('wTolMax', entry.w_tol_add)
                     .text(entry.part_name));
@@ -71,7 +73,8 @@ $(document).ready(function() {
         $('#tolerance-minus').val(selectedOption.data('iDiaTolMax'));
 
         // Set tolerance values for outside diameter
-       
+        $('#o-tolerance-plus').val(selectedOption.data('oDiaTolMin'));
+        $('#o-tolerance-minus').val(selectedOption.data('oDiaTolMax'));
 
         // Set tolerance values for wall thickness
         $('#w-tolerance-plus').val(selectedOption.data('wTolMin'));
@@ -84,8 +87,10 @@ $(document).ready(function() {
         $('#inside-end').data('iDiaMax', selectedOption.data('iDiaMax'));
 
         // Clear and set data attributes for outside diameter fields
-       
-     
+        $('#outside-start').val('').removeClass('is-invalid');
+        $('#outside-end').val('').removeClass('is-invalid');
+        $('#outside-start').data('oDiaMin', selectedOption.data('oDiaMin'));
+        $('#outside-end').data('oDiaMax', selectedOption.data('oDiaMax'));
 
         // Clear and set data attributes for wall thickness (Q1) fields
         $('#q1_start').val('').removeClass('is-invalid');
@@ -144,7 +149,29 @@ $(document).ready(function() {
         }
     });
 
-  
+    $('#outside-start').on('input', function() {
+        var startVal = $(this).val();
+        var oDiaMin = $(this).data('oDiaMin');
+
+        // Validate against o_dia_min
+        if (startVal !== '' && parseFloat(startVal) < parseFloat(oDiaMin)) {
+            $(this).addClass('is-invalid');
+        } else {
+            $(this).removeClass('is-invalid');
+        }
+    });
+
+    $('#outside-end').on('input', function() {
+        var endVal = $(this).val();
+        var oDiaMax = $(this).data('oDiaMax');
+
+        // Validate against o_dia_max
+        if (endVal !== '' && parseFloat(endVal) > parseFloat(oDiaMax)) {
+            $(this).addClass('is-invalid');
+        } else {
+            $(this).removeClass('is-invalid');
+        }
+    });
 
     $('#q1_start, #q2_start, #q3_start, #q4_start').on('input', function() {
         var startVal = $(this).val();
@@ -210,7 +237,6 @@ document.getElementById('inspection_date').value = formattedDate;
 
 
 
-
   document.addEventListener('DOMContentLoaded', function() {
     var startTimeInput = document.getElementById('start_time');
     var endTimeInput = document.getElementById('end_time');
@@ -227,11 +253,9 @@ document.getElementById('inspection_date').value = formattedDate;
         var endTime = new Date();
         endTimeInput.value = formatDateTime(endTime);
 
-
         var startTimestamp = new Date(startTimeInput.value);
         var endTimestamp = new Date(endTimeInput.value);
         var timeDifference = endTimestamp - startTimestamp;
-
 
         var totalMinutes = timeDifference / (1000 * 60); 
         totalMinsInput.value = totalMinutes.toFixed(2); 
@@ -342,6 +366,7 @@ function saveData() {
         return;
     }
 
+    // Adjusted fetch request to point to the correct PHP script for MS SQL Server
     fetch('../../process/mp_pvc_save.php', {
         method: 'POST',
         body: formData
@@ -381,7 +406,7 @@ function saveData() {
 }
 
 
-// ---------------------------------------------------Populate the table COT Start Point---------------------------------------------------
+// ---------------------------------------------------Populate the table PVC Start Point---------------------------------------------------
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -428,6 +453,9 @@ function loadTableData(offset, limit, search = '') {
             return response.json();
         })
         .then(data => {
+            // Sort data by 'id'
+            data.sort((a, b) => a.id - b.id);
+
             if (offset === 0) {
                 document.getElementById('mp_pvcdb_body').innerHTML = ''; // Clear table for new search results
             }
@@ -442,39 +470,52 @@ function loadTableData(offset, limit, search = '') {
         })
         .catch(error => console.error('Error fetching data:', error));
 }
-
+// -----------------------------populate table-------------------
 function populateTable(data) {
     const tbody = document.getElementById('mp_pvcdb_body');
 
     data.forEach(row => {
         const newRow = tbody.insertRow();
+
+        // Format date fields
+        const timeStart = formatDate(row.time_start, false, true); // Pass false for isInspectionDate and true for removeMilliseconds
+        const timeEnd = formatDate(row.time_end, false, true); // Pass false for isInspectionDate and true for removeMilliseconds
+        const inspectionDate = formatDate(row.inspection_date, true); // Pass true to indicate it's inspection_date
+
         newRow.innerHTML = `
             <td>${row.id}</td>
             <td>${row.part_name}</td>
             <td>${row.quantity}</td>
-            <td>${row.time_start}</td>
-            <td>${row.time_end}</td>
+            <td>${timeStart}</td>
+            <td>${timeEnd}</td>
             <td>${row.inspected_by}</td>
             <td>${row.shift}</td>
-            <td>${row.inspection_date}</td>
+            <td>${inspectionDate}</td>
             <td>${row.total_mins}</td>
             <td>${row.outside_appearance}</td>
+        
             <td>${row.inside_appearance}</td>
             <td>${row.color}</td>
             <td>${row.i_tolerance_plus}</td>
             <td>${row.i_tolerance_minus}</td>
             <td>${row.i_diameter_start}</td>
             <td>${row.i_diameter_end}</td>
+           
             <td>${row.w_tolerance_plus}</td>
             <td>${row.w_tolerance_minus}</td>
             <td>${row.q1_start}</td>
             <td>${row.q2_start}</td>
             <td>${row.q3_start}</td>
-            <td>${row.q4_start}</td> 
+            <td>${row.q4_start}</td>
+            <td>${row.q1_middle}</td>
+            <td>${row.q2_middle}</td>
+            <td>${row.q3_middle}</td>
+            <td>${row.q4_middle}</td>
             <td>${row.q1_end}</td>
             <td>${row.q2_end}</td>
             <td>${row.q3_end}</td>
             <td>${row.q4_end}</td>
+       
             <td>${row.appearance_judgement}</td>
             <td>${row.dimension_judgement}</td>
             <td>${row.ng_quantity}</td>
@@ -487,71 +528,93 @@ function populateTable(data) {
 
 
 
-   
+// ------------------------------------------------date-------------------------------------------------
+
+function formatDate(dateObject, isInspectionDate = false, removeMilliseconds = false) {
+    if (!dateObject) return ''; 
+
+    const date = new Date(dateObject.date);
+    
+    if (isInspectionDate) {
+        return date.toLocaleDateString();
+    } else {
+        let formattedDate = date.toLocaleDateString();
+        let formattedTime = date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+
+        if (removeMilliseconds) {
+            // Remove milliseconds from time part
+            formattedTime = formattedTime.replace(/\.\d+/, '');
+        }
+
+        return `${formattedDate} ${formattedTime}`;
+    }
+}
+
+
 // --------------------------------------------refresh button -----------------------------------------------------
 function refreshPage() {
         window.location.reload(); 
     }
 
 //------------------------------------------------export--------------------------------------------------------
-function export_accounts() {
-    // Select the table
-    var table = document.getElementById("sp_cotdb");
 
-    // Create an empty array to store the rows (including headers)
-    var rows = [];
+// function export_accounts() {
+//     // Select the table
+//     var table = document.getElementById("sp_cotdb");
 
-    // Get the header row and extract header text
-    var headerRow = table.rows[0];
-    var headers = [];
-    for (var h = 0; h < headerRow.cells.length; h++) {
-        headers.push(" " + headerRow.cells[h].textContent.trim()); // Add space before each header
-    }
-    rows.push(headers.join(","));
+//     // Create an empty array to store the rows (including headers)
+//     var rows = [];
 
-    // Create an array to store the rows of data
-    var dataRows = [];
+   
+//     var headerRow = table.rows[0];
+//     var headers = [];
+//     for (var h = 0; h < headerRow.cells.length; h++) {
+//         headers.push(" " + headerRow.cells[h].textContent.trim()); 
+//     }
+//     rows.push(headers.join(","));
 
-    // Iterate through each row in the table (skip the header row)
-    for (var i = 1; i < table.rows.length; i++) {
-        var row = [], cells = table.rows[i].cells;
+//     var dataRows = [];
 
-        // Iterate through each cell in the row
-        for (var j = 0; j < cells.length; j++) {
-            // Push the cell's text content into the row array
-            row.push(" " + cells[j].textContent.trim()); // Add space before each cell content
-        }
+    
+//     for (var i = 1; i < table.rows.length; i++) {
+//         var row = [], cells = table.rows[i].cells;
 
-        // Push the row to the data rows array
-        dataRows.push(row);
-    }
+        
+//         for (var j = 0; j < cells.length; j++) {
+           
+//             row.push(" " + cells[j].textContent.trim()); 
+//         }
 
-    // Sort data rows by the first column (assuming the first column is the ID)
-    dataRows.sort(function(a, b) {
-        return parseInt(a[0]) - parseInt(b[0]); // Assuming ID is a numeric value
-    });
+//         // Push the row to the data rows array
+//         dataRows.push(row);
+//     }
 
-    // Concatenate the header row and sorted data rows into the final rows array
-    rows = rows.concat(dataRows.map(row => row.join(",")));
+//     // Sort data rows by the first column (assuming the first column is the ID)
+//     dataRows.sort(function(a, b) {
+//         return parseInt(a[0]) - parseInt(b[0]); // Assuming ID is a numeric value
+//     });
 
-    // Join all rows into a CSV string with new line characters
-    var csv = rows.join("\n");
+//     // Concatenate the header row and sorted data rows into the final rows array
+//     rows = rows.concat(dataRows.map(row => row.join(",")));
 
-    // Create a Blob object for the CSV file
-    var blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+//     // Join all rows into a CSV string with new line characters
+//     var csv = rows.join("\n");
 
-    // Create a temporary anchor element and trigger a click to download the CSV file
-    var link = document.createElement("a");
-    if (link.download !== undefined) {
-        var url = URL.createObjectURL(blob);
-        link.setAttribute("href", url);
-        link.setAttribute("download", "export.csv");
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-    } else {
-        alert("Exporting CSV is not supported in this browser.");
-    }
-}
+//     // Create a Blob object for the CSV file
+//     var blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+
+//     // Create a temporary anchor element and trigger a click to download the CSV file
+//     var link = document.createElement("a");
+//     if (link.download !== undefined) {
+//         var url = URL.createObjectURL(blob);
+//         link.setAttribute("href", url);
+//         link.setAttribute("download", "export.csv");
+//         document.body.appendChild(link);
+//         link.click();
+//         document.body.removeChild(link);
+//     } else {
+//         alert("Exporting CSV is not supported in this browser.");
+//     }
+// }
 
     </script>

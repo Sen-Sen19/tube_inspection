@@ -1,5 +1,5 @@
 <?php include 'plugins/navbar.php'; ?>
-    <?php include 'plugins/sidebar/pvc_bar.php'; ?>
+    <?php include 'plugins/sidebar/cot_bar.php'; ?>
 
     <div class="content-wrapper">
         <div class="content-header">
@@ -69,7 +69,7 @@
                                 </div>
 
                                 <div id="accounts_table_res" class="table-responsive" style="height: 45vh; overflow: auto; display: inline-block; margin-top: 50px; border-top: 1px solid gray;">
-                                    <table id="ep_pvcdb" class="table table-sm table-head-fixed text-nowrap table-hover">
+                                    <table id="sp_pvcdb" class="table table-sm table-head-fixed text-nowrap table-hover">
                                         <thead style="text-align: center;">
                                             <!-- Table Headers -->
                                             <tr>
@@ -83,14 +83,17 @@
                                                 <th>Inspection Date</th>
                                                 <th>Total Minutes</th>
                                                 <th>Outside Appearance</th>
-                                            
+                                                <th>Slit Condition</th>
                                                 <th>Inside Appearance</th>
                                                 <th>Color</th>
                                                 <th>I Tolerance +</th>
                                                 <th>I Tolerance -</th>
                                                 <th>I Diameter Start</th>
                                                 <th>I Diameter End</th>
-                                              
+                                                <th>O Tolerance +</th>
+                                                <th>O Tolerance -</th>
+                                                <th>O Diameter Start</th>
+                                                <th>O Diameter End</th>
                                                 <th>W Tolerance +</th>
                                                 <th>W Tolerance -</th>
                                                 <th>Q1 Start</th>
@@ -105,7 +108,8 @@
                                                 <th>Q2 End</th>
                                                 <th>Q3 End</th>
                                                 <th>Q4 End</th>
-                                            
+                                                <th>Using Round Bar</th>
+                                                <th>Using Bare Hands</th>
                                                 <th>Appearance Judgement</th>
                                                 <th>Dimension Judgement</th>
                                                 <th>NG Quantity</th>
@@ -114,7 +118,7 @@
                                                 <th>Remarks</th>
                                             </tr>
                                         </thead>
-                                        <tbody id="ep_pvcdb_body" style="text-align: center; padding:20px;">
+                                        <tbody id="sp_pvcb_body" style="text-align: center; padding:20px;">
                                             <!-- Data will be inserted here -->
                                         </tbody>
                                     </table>
@@ -131,5 +135,6 @@
     </div>
 
   
-<?php include 'plugins/ep_footer.php'; ?>
-<?php include 'plugins/js/pvc_ep_script.php'; ?>
+
+<?php include 'plugins/sp_footer.php'; ?>
+<?php include 'plugins/js/cot_sp_script.php'; ?>

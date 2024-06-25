@@ -1,57 +1,75 @@
 <?php
 // export_data.php
 
+include 'conn3.php'; // Include the MS SQL Server connection file
+
 header('Content-Type: text/csv');
-header('Content-Disposition: attachment; filename="PVC_Mass_Production.csv"');
+header('Content-Disposition: attachment; filename="COT_Start_Point.csv"');
 header('Pragma: no-cache');
 header('Expires: 0');
-
-// Database connection (replace with your actual DB connection)
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "tube_inspection_db";
-
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
 
 $search = isset($_GET['search']) ? $_GET['search'] : '';
 
 $sql = "SELECT * FROM mp_pvcdb";
 
 if (!empty($search)) {
-    $stmt = $conn->prepare("SELECT * FROM mp_pvcdb WHERE part_name LIKE ?");
+    $sql = "SELECT * FROM mp_pvcdb WHERE part_name LIKE ?";
     $searchTerm = "%$search%";
-    $stmt->bind_param("s", $searchTerm);
+    $params = array($searchTerm);
 } else {
-    $stmt = $conn->prepare("SELECT * FROM mp_pvcdb");
+    $params = array();
 }
 
-$stmt->execute();
-$result = $stmt->get_result();
+$stmt = sqlsrv_query($conn, $sql, $params);
+
+if ($stmt === false) {
+    die(print_r(sqlsrv_errors(), true));
+}
 
 // Output the column headings
 $headers = [
     'ID', 'Part Name', 'Quantity', 'Time Start', 'Time End', 'Inspected By',
-    'Shift', 'Inspection Date', 'Total Minutes', 'Outside Appearance', 'Inside Appearance', 'Color', 'I Tolerance +',
-    'I Tolerance -', 'I Diameter Start', 'I Diameter End', 'W Tolerance +',
-    'W Tolerance -', 'Q1 Start', 'Q2 Start', 'Q3 Start', 'Q4 Start','Q1 End',
-    'Q2 End', 'Q3 End', 'Q4 End', 'Appearance Judgement', 'Dimension Judgement', 'NG Quantity',
+    'Shift', 'Inspection Date', 'Total Minutes', 'Outside Appearance',
+    'Inside Appearance', 'Color', 'I Tolerance +',
+    'I Tolerance -', 'I Diameter Start', 'I Diameter End', 
+    'W Tolerance +',
+    'W Tolerance -', 'Q1 Start', 'Q2 Start', 'Q3 Start', 'Q4 Start',
+    'Q1 End',
+    'Q2 End', 'Q3 End', 'Q4 End',
+    'Appearance Judgement', 'Dimension Judgement', 'NG Quantity',
     'Defect Type', 'Confirm By', 'Remarks'
 ];
 $output = fopen('php://output', 'w');
 fputcsv($output, $headers);
 
 // Output the data rows
-while ($row = $result->fetch_assoc()) {
-    fputcsv($output, $row);
+while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
+    // Format DateTime fields if necessary
+    $formattedRow = [];
+    foreach ($row as $key => $value) {
+        if ($value instanceof DateTime) {
+            if ($key === 'Inspection Date') {
+                $formattedRow[$key] = $value->format('Y-m-d'); // Format without time
+            } else {
+                $formattedRow[$key] = $value->format('Y-m-d H:i:s'); // Keep other DateTime fields as is
+            }
+        } elseif ($key === 'Inspection Date' && strpos($value, ' ') !== false) {
+            // Handle cases where the date might be stored as a string with time
+            $datetime = DateTime::createFromFormat('Y-m-d H:i:s', $value);
+            if ($datetime !== false) {
+                $formattedRow[$key] = $datetime->format('Y-m-d');
+            } else {
+                $formattedRow[$key] = $value; // Fallback to original value if parsing fails
+            }
+        } else {
+            $formattedRow[$key] = $value;
+        }
+    }
+    fputcsv($output, $formattedRow);
 }
 
 fclose($output);
 
-$stmt->close();
-$conn->close();
+sqlsrv_free_stmt($stmt);
+sqlsrv_close($conn);
 ?>

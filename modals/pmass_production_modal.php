@@ -279,51 +279,58 @@
                 <h5 class="modal-title" style="color:black ;margin-bottom:30px;"><strong>Tube Breaking</strong></h5>
                 <div class="container">
                     <div class="row">
-                        <div class="col-6 form-section">
-                            <div class="col-sm-6">
-                            <label>Appearance Judgment</label>
-                                <select id="appearance_judgment" class="form-control" name="appearance_judgement" style="margin-bottom:10px">
+                         <div class="col-sm-6">
+                                <label>Appearance Judgment</label>
+                                <select id="appearance_judgment" class="form-control" name="appearance_judgement" style="margin-bottom:20px">
                                     <option value="" selected disabled>Choose...</option>
                                     <option value="OK">OK</option>
                                     <option value="NG">NG</option>
                                 </select>
                             </div>
-                            <div class="col-sm-12">
-                              
-                                <div class="form-group">
-                                <label for="ng_quantity">NG Quantity</label>
-                                <input type="text" id="ng_quantity" class="form-control" name="ng_quantity" autocomplete="off">
-                            </div>
-                            </div>
-                            <div class="col-sm-12">
-                            <div class="form-group">
-                                <label for="confirm_by">Confirm By</label>
-                                <input type="text" id="confirm_by" class="form-control" name="confirm_by" autocomplete="off">
-                            </div>
-                            </div>
-                          
-                        </div>
-
-                        <div class="col-6 form-section">
                             <div class="col-sm-6">
-                                 <label>Dimension Judgment</label>
+                                <label>Dimension Judgment</label>
                                 <select id="dimension_judgment" class="form-control" name="dimension_judgement" style="margin-bottom:10px">
                                     <option value="" selected disabled>Choose...</option>
                                     <option value="OK">OK</option>
                                     <option value="NG">NG</option>
                                 </select>
                             </div>
-                            <div class="form-group">
-                                <label for="defect_type">Defect Type</label>
-                                <input type="text" id="defect_type" class="form-control" name="defect_type" autocomplete="off">
+                            <div class="col-sm-6">
+                                <label for="ng_quantity">NG Quantity</label>
+                                <input type="text" id="ng_quantity" class="form-control" name="ng_quantity" autocomplete="off">
                             </div>
-                            <div class="form-group">
+                            <div class="col-sm-6">
+                                <label>Defect type</label>
+                                <select id="defect_type" class="form-control" name="defect_type" style="margin-bottom:16px">
+                                    <option value="" selected disabled>Choose...</option>
+                                    <option value="Round crest">N/A</option>
+                                    <option value="Round crest">Hole</option>
+                                    <option value="Round crest">Scratch</option>
+                                    <option value="Damage">Deformed</option>
+                                    <option value="Molding defect">Rough surface</option>
+                                    <option value="Excess burr">Bubbles on surface</option>
+                                    <option value="Excess burr">Unstable thickness</option>
+                                    <optio value="Dent">Big Diameter</option>
+                                    <option value="Misaligned joint portion">Small Diameter</option>
+                                    <option value="Foreign material">Wrinkled on surface</option>
+                                    
+                                </select>
+                         </div>
+
+                        
+                      
+                            <div class="col-sm-6">
+                                <label for="confirm_by">Confirm By</label>
+                                <input type="text" id="confirm_by" class="form-control" name="confirm_by" autocomplete="off" style="margin-bottom:15px">
+                                
+                            </div>
+                            <div class="col-sm-6">
                                 <label for="remarks">Remarks</label>
                                 <input type="text" id="remarks" class="form-control" name="remarks" autocomplete="off">
                             </div>
-                            
                         </div>
                     </div>
+                </div>
                 </div>
                 <!-- Add this div where you want the notice to appear -->
 <div id="notice" style="display: none;"></div>

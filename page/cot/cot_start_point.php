@@ -50,9 +50,10 @@
                                         <div class="input-group">
                                             <input type="text" id="searchBox" class="form-control" placeholder="Search by Part Name">
                                             <div class="input-group-append">
-                                                <button class="btn btn-primary" id="searchReqBtn" onclick="searchAccounts()">
-                                                    <i class="fas fa-search mr-2"></i>Search
-                                                </button>
+                                            <button class="btn btn-primary" id="searchReqBtn">
+    <i class="fas fa-search mr-2"></i>Search
+</button>
+
                                             </div>
                                         </div>
                                     </div>
@@ -133,10 +134,7 @@
         </section>
     </div>
 
-    <script>
-    
-
-    </script>
+  
 
 <?php include 'plugins/sp_footer.php'; ?>
 <?php include 'plugins/js/cot_sp_script.php'; ?>

@@ -366,7 +366,7 @@
                                     <option value="NG">NG</option>
                                 </select>
                             </div>
-                            <div class="form-group">
+                            <div class="col-sm-12">
                                 <label for="ng_quantity">NG Quantity</label>
                                 <input type="text" id="ng_quantity" class="form-control" name="ng_quantity" autocomplete="off">
                             </div>
@@ -381,15 +381,33 @@
                                     <option value="NG">NG</option>
                                 </select>
                             </div>
-                            <div class="form-group">
-                                <label for="defect_type">Defect Type</label>
-                                <input type="text" id="defect_type" class="form-control" name="defect_type" autocomplete="off">
-                            </div>
-                            <div class="form-group">
+                         <div class="col-sm-12">
+                                <label>Defect type</label>
+                                <select id="defect_type" class="form-control" name="defect_type" style="margin-bottom:16px">
+                                    <option value="" selected disabled>Choose...</option>
+                                    <option value="Round crest">N/A</option>
+                                    <option value="Round crest">Round crest</option>
+                                    <option value="Damage">Damage</option>
+                                    <option value="Molding defect">Molding defect</option>
+                                    <option value="Excess burr">Excess burr</option>
+                                    <optio value="Dent">Dent</option>
+                                    <option value="Misaligned joint portion">Misaligned joint portion</option>
+                                    <option value="Foreign material">Foreign material</option>
+                                    <option value="Slit position is on joint portion">Slit position is on joint portion</option>
+                                    <option value="With gap on slit">With gap on slit</option>
+                                    <option value="Crack">Crack</option>
+                                    <option value="Overlap">Overlap</option>
+                                    <option value="Slit is uneven">Slit is uneven</option>
+                                    <option value="Slanted slit">Slanted slit</option>
+                                    <option value="Unstable thickness">Unstable thickness</option>
+                                    <option value="Tubebreaking on slit portion">Tubebreaking on slit portion</option>
+                                </select>
+                         </div>
+                            <div class="col-sm-12">
                                 <label for="confirm_by">Confirm By</label>
-                                <input type="text" id="confirm_by" class="form-control" name="confirm_by" autocomplete="off">
+                                <input type="text" id="confirm_by" class="form-control" name="confirm_by" autocomplete="off" style="margin-bottom:15px">
                             </div>
-                            <div class="form-group">
+                            <div class="col-sm-12">
                                 <label for="remarks">Remarks</label>
                                 <input type="text" id="remarks" class="form-control" name="remarks" autocomplete="off">
                             </div>

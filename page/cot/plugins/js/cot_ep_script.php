@@ -237,7 +237,6 @@ document.getElementById('inspection_date').value = formattedDate;
 
 
 
-
   document.addEventListener('DOMContentLoaded', function() {
     var startTimeInput = document.getElementById('start_time');
     var endTimeInput = document.getElementById('end_time');
@@ -254,11 +253,9 @@ document.getElementById('inspection_date').value = formattedDate;
         var endTime = new Date();
         endTimeInput.value = formatDateTime(endTime);
 
-
         var startTimestamp = new Date(startTimeInput.value);
         var endTimestamp = new Date(endTimeInput.value);
         var timeDifference = endTimestamp - startTimestamp;
-
 
         var totalMinutes = timeDifference / (1000 * 60); 
         totalMinsInput.value = totalMinutes.toFixed(2); 
@@ -369,6 +366,7 @@ function saveData() {
         return;
     }
 
+    // Adjusted fetch request to point to the correct PHP script for MS SQL Server
     fetch('../../process/ep_cot_save.php', {
         method: 'POST',
         body: formData
@@ -390,9 +388,9 @@ function saveData() {
             timer: 1500
         });
 
-        // setTimeout(function() {
-        //     window.location.reload();
-        // }, 1600);
+        setTimeout(function() {
+            window.location.reload();
+        }, 1600);
     })
     .catch(error => {
         console.error('Error:', error);
@@ -455,6 +453,9 @@ function loadTableData(offset, limit, search = '') {
             return response.json();
         })
         .then(data => {
+            // Sort data by 'id'
+            data.sort((a, b) => a.id - b.id);
+
             if (offset === 0) {
                 document.getElementById('ep_cotdb_body').innerHTML = ''; // Clear table for new search results
             }
@@ -469,21 +470,27 @@ function loadTableData(offset, limit, search = '') {
         })
         .catch(error => console.error('Error fetching data:', error));
 }
-
+// -----------------------------populate table-------------------
 function populateTable(data) {
     const tbody = document.getElementById('ep_cotdb_body');
 
     data.forEach(row => {
         const newRow = tbody.insertRow();
+
+        // Format date fields
+        const timeStart = formatDate(row.time_start, false, true); // Pass false for isInspectionDate and true for removeMilliseconds
+        const timeEnd = formatDate(row.time_end, false, true); // Pass false for isInspectionDate and true for removeMilliseconds
+        const inspectionDate = formatDate(row.inspection_date, true); // Pass true to indicate it's inspection_date
+
         newRow.innerHTML = `
             <td>${row.id}</td>
             <td>${row.part_name}</td>
             <td>${row.quantity}</td>
-            <td>${row.time_start}</td>
-            <td>${row.time_end}</td>
+            <td>${timeStart}</td>
+            <td>${timeEnd}</td>
             <td>${row.inspected_by}</td>
             <td>${row.shift}</td>
-            <td>${row.inspection_date}</td>
+            <td>${inspectionDate}</td>
             <td>${row.total_mins}</td>
             <td>${row.outside_appearance}</td>
             <td>${row.slit_condition}</td>
@@ -503,7 +510,10 @@ function populateTable(data) {
             <td>${row.q2_start}</td>
             <td>${row.q3_start}</td>
             <td>${row.q4_start}</td>
-           
+            <td>${row.q1_middle}</td>
+            <td>${row.q2_middle}</td>
+            <td>${row.q3_middle}</td>
+            <td>${row.q4_middle}</td>
             <td>${row.q1_end}</td>
             <td>${row.q2_end}</td>
             <td>${row.q3_end}</td>
@@ -522,13 +532,93 @@ function populateTable(data) {
 
 
 
-   
+// ------------------------------------------------date-------------------------------------------------
+
+function formatDate(dateObject, isInspectionDate = false, removeMilliseconds = false) {
+    if (!dateObject) return ''; 
+
+    const date = new Date(dateObject.date);
+    
+    if (isInspectionDate) {
+        return date.toLocaleDateString();
+    } else {
+        let formattedDate = date.toLocaleDateString();
+        let formattedTime = date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+
+        if (removeMilliseconds) {
+            // Remove milliseconds from time part
+            formattedTime = formattedTime.replace(/\.\d+/, '');
+        }
+
+        return `${formattedDate} ${formattedTime}`;
+    }
+}
+
+
 // --------------------------------------------refresh button -----------------------------------------------------
 function refreshPage() {
         window.location.reload(); 
     }
 
-//--------------------------------------------------------------------------------------------------------
- 
+//------------------------------------------------export--------------------------------------------------------
+
+function export_accounts() {
+    // Select the table
+    var table = document.getElementById("sp_cotdb");
+
+    // Create an empty array to store the rows (including headers)
+    var rows = [];
+
+   
+    var headerRow = table.rows[0];
+    var headers = [];
+    for (var h = 0; h < headerRow.cells.length; h++) {
+        headers.push(" " + headerRow.cells[h].textContent.trim()); 
+    }
+    rows.push(headers.join(","));
+
+    var dataRows = [];
+
+    
+    for (var i = 1; i < table.rows.length; i++) {
+        var row = [], cells = table.rows[i].cells;
+
+        
+        for (var j = 0; j < cells.length; j++) {
+           
+            row.push(" " + cells[j].textContent.trim()); 
+        }
+
+        // Push the row to the data rows array
+        dataRows.push(row);
+    }
+
+    // Sort data rows by the first column (assuming the first column is the ID)
+    dataRows.sort(function(a, b) {
+        return parseInt(a[0]) - parseInt(b[0]); // Assuming ID is a numeric value
+    });
+
+    // Concatenate the header row and sorted data rows into the final rows array
+    rows = rows.concat(dataRows.map(row => row.join(",")));
+
+    // Join all rows into a CSV string with new line characters
+    var csv = rows.join("\n");
+
+    // Create a Blob object for the CSV file
+    var blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+
+    // Create a temporary anchor element and trigger a click to download the CSV file
+    var link = document.createElement("a");
+    if (link.download !== undefined) {
+        var url = URL.createObjectURL(blob);
+        link.setAttribute("href", url);
+        link.setAttribute("download", "export.csv");
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    } else {
+        alert("Exporting CSV is not supported in this browser.");
+    }
+}
 
     </script>

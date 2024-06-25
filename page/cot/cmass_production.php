@@ -1,6 +1,7 @@
 <?php include 'plugins/navbar.php'; ?>
     <?php include 'plugins/sidebar/cot_bar.php'; ?>
 
+    
     <div class="content-wrapper">
         <div class="content-header">
             <div class="container-fluid">
@@ -9,7 +10,7 @@
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="">Home</a></li>
-                            <li class="breadcrumb-item active">Mass Production</li>
+                            <li class="breadcrumb-item active">Start Point</li>
                         </ol>
                     </div>
                 </div>
@@ -50,9 +51,10 @@
                                         <div class="input-group">
                                             <input type="text" id="searchBox" class="form-control" placeholder="Search by Part Name">
                                             <div class="input-group-append">
-                                                <button class="btn btn-primary" id="searchReqBtn" onclick="searchAccounts()">
-                                                    <i class="fas fa-search mr-2"></i>Search
-                                                </button>
+                                            <button class="btn btn-primary" id="searchReqBtn">
+    <i class="fas fa-search mr-2"></i>Search
+</button>
+
                                             </div>
                                         </div>
                                     </div>
@@ -99,7 +101,6 @@
                                                 <th>Q2 Start</th>
                                                 <th>Q3 Start</th>
                                                 <th>Q4 Start</th>
-                                               
                                                 <th>Q1 End</th>
                                                 <th>Q2 End</th>
                                                 <th>Q3 End</th>
@@ -130,7 +131,7 @@
         </section>
     </div>
 
-    
+  
  
 <?php include 'plugins/mp_footer.php'; ?>
 <?php include 'plugins/js/cot_mp_script.php'; ?>

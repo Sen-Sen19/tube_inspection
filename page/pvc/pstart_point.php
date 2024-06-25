@@ -50,9 +50,10 @@
                                         <div class="input-group">
                                             <input type="text" id="searchBox" class="form-control" placeholder="Search by Part Name">
                                             <div class="input-group-append">
-                                                <button class="btn btn-primary" id="searchReqBtn" onclick="searchAccounts()">
-                                                    <i class="fas fa-search mr-2"></i>Search
-                                                </button>
+                                            <button class="btn btn-primary" id="searchReqBtn">
+    <i class="fas fa-search mr-2"></i>Search
+</button>
+
                                             </div>
                                         </div>
                                     </div>
@@ -82,14 +83,14 @@
                                                 <th>Inspection Date</th>
                                                 <th>Total Minutes</th>
                                                 <th>Outside Appearance</th>
-                                               
+                                            
                                                 <th>Inside Appearance</th>
                                                 <th>Color</th>
                                                 <th>I Tolerance +</th>
                                                 <th>I Tolerance -</th>
                                                 <th>I Diameter Start</th>
                                                 <th>I Diameter End</th>
-                                             
+                                              
                                                 <th>W Tolerance +</th>
                                                 <th>W Tolerance -</th>
                                                 <th>Q1 Start</th>
@@ -104,7 +105,7 @@
                                                 <th>Q2 End</th>
                                                 <th>Q3 End</th>
                                                 <th>Q4 End</th>
-                                              
+                                            
                                                 <th>Appearance Judgement</th>
                                                 <th>Dimension Judgement</th>
                                                 <th>NG Quantity</th>
@@ -129,10 +130,7 @@
         </section>
     </div>
 
-    <script>
-    
-
-    </script>
+  
 
 <?php include 'plugins/sp_footer.php'; ?>
 <?php include 'plugins/js/pvc_sp_script.php'; ?>

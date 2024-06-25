@@ -389,7 +389,7 @@ function saveData() {
         });
 
         setTimeout(function() {
-            // window.location.reload();
+            window.location.reload();
         }, 1600);
     })
     .catch(error => {
@@ -453,6 +453,9 @@ function loadTableData(offset, limit, search = '') {
             return response.json();
         })
         .then(data => {
+            // Sort data by 'id'
+            data.sort((a, b) => a.id - b.id);
+
             if (offset === 0) {
                 document.getElementById('sp_cotdb_body').innerHTML = ''; // Clear table for new search results
             }
@@ -467,8 +470,6 @@ function loadTableData(offset, limit, search = '') {
         })
         .catch(error => console.error('Error fetching data:', error));
 }
-
-
 // -----------------------------populate table-------------------
 function populateTable(data) {
     const tbody = document.getElementById('sp_cotdb_body');
@@ -477,8 +478,8 @@ function populateTable(data) {
         const newRow = tbody.insertRow();
 
         // Format date fields
-        const timeStart = formatDate(row.time_start);
-        const timeEnd = formatDate(row.time_end);
+        const timeStart = formatDate(row.time_start, false, true); // Pass false for isInspectionDate and true for removeMilliseconds
+        const timeEnd = formatDate(row.time_end, false, true); // Pass false for isInspectionDate and true for removeMilliseconds
         const inspectionDate = formatDate(row.inspection_date, true); // Pass true to indicate it's inspection_date
 
         newRow.innerHTML = `
@@ -529,7 +530,11 @@ function populateTable(data) {
     });
 }
 
-function formatDate(dateObject, isInspectionDate = false) {
+
+
+// ------------------------------------------------date-------------------------------------------------
+
+function formatDate(dateObject, isInspectionDate = false, removeMilliseconds = false) {
     if (!dateObject) return ''; 
 
     const date = new Date(dateObject.date);
@@ -537,10 +542,18 @@ function formatDate(dateObject, isInspectionDate = false) {
     if (isInspectionDate) {
         return date.toLocaleDateString();
     } else {
-        const time = date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-        return `${date.toLocaleDateString()} ${time}`;
+        let formattedDate = date.toLocaleDateString();
+        let formattedTime = date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+
+        if (removeMilliseconds) {
+            // Remove milliseconds from time part
+            formattedTime = formattedTime.replace(/\.\d+/, '');
+        }
+
+        return `${formattedDate} ${formattedTime}`;
     }
 }
+
 
 // --------------------------------------------refresh button -----------------------------------------------------
 function refreshPage() {

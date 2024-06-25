@@ -1,6 +1,7 @@
 <?php include 'plugins/navbar.php'; ?>
     <?php include 'plugins/sidebar/cot_bar.php'; ?>
 
+
     <div class="content-wrapper">
         <div class="content-header">
             <div class="container-fluid">
@@ -23,7 +24,7 @@
                         <div class="card card-gray-dark card-outline">
                             <div class="card-header">
                                 <h3 class="card-title">
-                                    <i class="nav-icon fas fa-stop-circle"></i> End Point
+                                    <i class="nav-icon fas fa-play-circle"></i>End Point
                                 </h3>
                                 <div class="card-tools">
                                     <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -50,9 +51,10 @@
                                         <div class="input-group">
                                             <input type="text" id="searchBox" class="form-control" placeholder="Search by Part Name">
                                             <div class="input-group-append">
-                                                <button class="btn btn-primary" id="searchReqBtn" onclick="searchAccounts()">
-                                                    <i class="fas fa-search mr-2"></i>Search
-                                                </button>
+                                            <button class="btn btn-primary" id="searchReqBtn">
+    <i class="fas fa-search mr-2"></i>Search
+</button>
+
                                             </div>
                                         </div>
                                     </div>
@@ -133,10 +135,6 @@
         </section>
     </div>
 
-    <script>
-    
-
-    </script>
-
+  
 <?php include 'plugins/ep_footer.php'; ?>
 <?php include 'plugins/js/cot_ep_script.php'; ?>

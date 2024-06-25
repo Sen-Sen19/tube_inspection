@@ -385,24 +385,24 @@
                                 <label>Defect type</label>
                                 <select id="defect_type" class="form-control" name="defect_type" style="margin-bottom:16px">
                                     <option value="" selected disabled>Choose...</option>
+                                    <option value="Round crest">N/A</option>
                                     <option value="Round crest">Round crest</option>
-<option value="Damage">Damage</option>
-<option value="Molding defect">Molding defect</option>
-<option value="Excess burr">Excess burr</option>
-<option value="Dent">Dent</option>
-<option value="Misaligned joint portion">Misaligned joint portion</option>
-<option value="Foreign material">Foreign material</option>
-<option value="Slit position is on joint portion">Slit position is on joint portion</option>
-<option value="With gap on slit">With gap on slit</option>
-<option value="Crack">Crack</option>
-<option value="Overlap">Overlap</option>
-<option value="Slit is uneven">Slit is uneven</option>
-<option value="Slanted slit">Slanted slit</option>
-<option value="Unstable thickness">Unstable thickness</option>
-<option value="Tubebreaking on slit portion">Tubebreaking on slit portion</option>
-
+                                    <option value="Damage">Damage</option>
+                                    <option value="Molding defect">Molding defect</option>
+                                    <option value="Excess burr">Excess burr</option>
+                                    <optio value="Dent">Dent</option>
+                                    <option value="Misaligned joint portion">Misaligned joint portion</option>
+                                    <option value="Foreign material">Foreign material</option>
+                                    <option value="Slit position is on joint portion">Slit position is on joint portion</option>
+                                    <option value="With gap on slit">With gap on slit</option>
+                                    <option value="Crack">Crack</option>
+                                    <option value="Overlap">Overlap</option>
+                                    <option value="Slit is uneven">Slit is uneven</option>
+                                    <option value="Slanted slit">Slanted slit</option>
+                                    <option value="Unstable thickness">Unstable thickness</option>
+                                    <option value="Tubebreaking on slit portion">Tubebreaking on slit portion</option>
                                 </select>
-                            </div>
+                         </div>
                             <div class="col-sm-12">
                                 <label for="confirm_by">Confirm By</label>
                                 <input type="text" id="confirm_by" class="form-control" name="confirm_by" autocomplete="off" style="margin-bottom:15px">
