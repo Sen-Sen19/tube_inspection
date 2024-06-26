@@ -7,7 +7,7 @@ if (!isset($_SESSION['username'])) {
     header('location: ../../'); // Redirect to login page
     exit;
 } else if ($_SESSION['type'] == 'pvc') {
-    header('location: ../../page/user/pvc.php'); // Redirect to specific page for PVC type
+    header('location: ../../page/pvc/pstart_point.php'); 
     exit;
 }
 
@@ -15,8 +15,7 @@ if (!isset($_SESSION['username'])) {
 $serverName = "172.25.114.171\\SQLEXPRESS";
 $username = "sa";
 $password = "SystemGroup2018";
-$database = "tube_inspection_db"; // Replace with your actual database name
-
+$database = "tube_inspection_db"; 
 try {
     // Establish connection to MS SQL Server using PDO
     $conn = new PDO("sqlsrv:Server=$serverName;Database=$database", $username, $password);

@@ -6,7 +6,7 @@ if (!isset($_SESSION['username'])) {
   header('location:../../');
   exit;
 } else if ($_SESSION['type'] == 'cot') {
-  header('location: ../../page/admin/cot.php');
+  header('location: ../../page/cot/cstart_point.php');
   exit;
 }
 ?>  

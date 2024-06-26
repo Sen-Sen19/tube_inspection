@@ -9,7 +9,7 @@
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="">Home</a></li>
-                            <li class="breadcrumb-item active">Start Point</li>
+                            <li class="breadcrumb-item active">End Point</li>
                         </ol>
                     </div>
                 </div>
@@ -23,7 +23,7 @@
                         <div class="card card-gray-dark card-outline">
                             <div class="card-header">
                                 <h3 class="card-title">
-                                    <i class="nav-icon fas fa-play-circle"></i> Start Point
+                                    <i class="nav-icon fas fa-stop-circle"></i> End Point
                                 </h3>
                                 <div class="card-tools">
                                     <button type="button" class="btn btn-tool" data-card-widget="collapse">

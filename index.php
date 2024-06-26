@@ -2,10 +2,10 @@
 
 if (isset($_SESSION['username'])) {
   if ($_SESSION['type'] == 'pvc') {
-     header('location: page/pvc/pvc.php');
+     header('location: page/pvc/pstart_point.php');
      exit;
  }elseif($_SESSION['type'] == 'cot'){
-     header('location: page/cot/cot.php');
+     header('location: page/cot/cstart_point.php');
      exit;
  }
 }
@@ -49,7 +49,7 @@ if (isset($_SESSION['username'])) {
     <!-- /.login-logo -->
     <div class="card">
       <div class="card-body login-card-body">
-        <p class="login-box-msg"><b>Sign in to start your session</b></p>
+       
 
         <form action="<?=htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" id="login_form">
           <div class="form-group">

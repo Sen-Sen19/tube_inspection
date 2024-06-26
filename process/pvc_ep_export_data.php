@@ -4,7 +4,7 @@
 include 'conn3.php'; // Include the MS SQL Server connection file
 
 header('Content-Type: text/csv');
-header('Content-Disposition: attachment; filename="COT_Start_Point.csv"');
+header('Content-Disposition: attachment; filename="PVC_End_Point.csv"');
 header('Pragma: no-cache');
 header('Expires: 0');
 
