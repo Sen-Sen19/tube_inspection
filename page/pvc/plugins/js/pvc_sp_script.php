@@ -120,28 +120,29 @@ $(document).ready(function() {
     });
 
     $('#inside-start').on('input', function() {
-        var startVal = $(this).val();
-        var iDiaMin = $(this).data('iDiaMin');
+    var startVal = $(this).val();
+    var iDiaMin = $(this).data('iDiaMin');
+    var iDiaMax = $('#inside-end').data('iDiaMax'); // Get i_dia_max from end input
 
-        // Validate against i_dia_min
-        if (startVal !== '' && parseFloat(startVal) < parseFloat(iDiaMin)) {
-            $(this).addClass('is-invalid');
-        } else {
-            $(this).removeClass('is-invalid');
-        }
-    });
+    // Validate against i_dia_min and i_dia_max
+    if (startVal !== '' && (parseFloat(startVal) < parseFloat(iDiaMin) || parseFloat(startVal) > parseFloat(iDiaMax))) {
+        $(this).addClass('is-invalid');
+    } else {
+        $(this).removeClass('is-invalid');
+    }
+});
+$('#inside-end').on('input', function() {
+    var endVal = $(this).val();
+    var iDiaMin = $('#inside-start').data('iDiaMin'); // Get i_dia_min from start input
+    var iDiaMax = $(this).data('iDiaMax');
 
-    $('#inside-end').on('input', function() {
-        var endVal = $(this).val();
-        var iDiaMax = $(this).data('iDiaMax');
-
-        // Validate against i_dia_max
-        if (endVal !== '' && parseFloat(endVal) > parseFloat(iDiaMax)) {
-            $(this).addClass('is-invalid');
-        } else {
-            $(this).removeClass('is-invalid');
-        }
-    });
+    // Validate against i_dia_min and i_dia_max
+    if (endVal !== '' && (parseFloat(endVal) < parseFloat(iDiaMin) || parseFloat(endVal) > parseFloat(iDiaMax))) {
+        $(this).addClass('is-invalid');
+    } else {
+        $(this).removeClass('is-invalid');
+    }
+});
 
 
     $('#q1_start, #q2_start, #q3_start, #q4_start').on('input', function() {

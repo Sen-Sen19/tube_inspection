@@ -126,53 +126,55 @@ $(document).ready(function() {
     });
 
     $('#inside-start').on('input', function() {
-        var startVal = $(this).val();
-        var iDiaMin = $(this).data('iDiaMin');
+    var startVal = $(this).val();
+    var iDiaMin = $(this).data('iDiaMin');
+    var iDiaMax = $('#inside-end').data('iDiaMax'); // Get i_dia_max from end input
 
-        // Validate against i_dia_min
-        if (startVal !== '' && parseFloat(startVal) < parseFloat(iDiaMin)) {
-            $(this).addClass('is-invalid');
-        } else {
-            $(this).removeClass('is-invalid');
-        }
-    });
+    // Validate against i_dia_min and i_dia_max
+    if (startVal !== '' && (parseFloat(startVal) < parseFloat(iDiaMin) || parseFloat(startVal) > parseFloat(iDiaMax))) {
+        $(this).addClass('is-invalid');
+    } else {
+        $(this).removeClass('is-invalid');
+    }
+});
+$('#inside-end').on('input', function() {
+    var endVal = $(this).val();
+    var iDiaMin = $('#inside-start').data('iDiaMin'); // Get i_dia_min from start input
+    var iDiaMax = $(this).data('iDiaMax');
 
-    $('#inside-end').on('input', function() {
-        var endVal = $(this).val();
-        var iDiaMax = $(this).data('iDiaMax');
+    // Validate against i_dia_min and i_dia_max
+    if (endVal !== '' && (parseFloat(endVal) < parseFloat(iDiaMin) || parseFloat(endVal) > parseFloat(iDiaMax))) {
+        $(this).addClass('is-invalid');
+    } else {
+        $(this).removeClass('is-invalid');
+    }
+});
+$('#outside-start').on('input', function() {
+    var startVal = $(this).val();
+    var oDiaMin = $(this).data('oDiaMin');
+    var oDiaMax = $('#outside-end').data('oDiaMax'); // Get o_dia_max from end input
 
-        // Validate against i_dia_max
-        if (endVal !== '' && parseFloat(endVal) > parseFloat(iDiaMax)) {
-            $(this).addClass('is-invalid');
-        } else {
-            $(this).removeClass('is-invalid');
-        }
-    });
+    // Validate against o_dia_min and o_dia_max
+    if (startVal !== '' && (parseFloat(startVal) < parseFloat(oDiaMin) || parseFloat(startVal) > parseFloat(oDiaMax))) {
+        $(this).addClass('is-invalid');
+    } else {
+        $(this).removeClass('is-invalid');
+    }
+});
 
-    $('#outside-start').on('input', function() {
-        var startVal = $(this).val();
-        var oDiaMin = $(this).data('oDiaMin');
 
-        // Validate against o_dia_min
-        if (startVal !== '' && parseFloat(startVal) < parseFloat(oDiaMin)) {
-            $(this).addClass('is-invalid');
-        } else {
-            $(this).removeClass('is-invalid');
-        }
-    });
+ $('#outside-end').on('input', function() {
+    var endVal = $(this).val();
+    var oDiaMin = $('#outside-start').data('oDiaMin'); // Get o_dia_min from start input
+    var oDiaMax = $(this).data('oDiaMax');
 
-    $('#outside-end').on('input', function() {
-        var endVal = $(this).val();
-        var oDiaMax = $(this).data('oDiaMax');
-
-        // Validate against o_dia_max
-        if (endVal !== '' && parseFloat(endVal) > parseFloat(oDiaMax)) {
-            $(this).addClass('is-invalid');
-        } else {
-            $(this).removeClass('is-invalid');
-        }
-    });
-
+    // Validate against o_dia_min and o_dia_max
+    if (endVal !== '' && (parseFloat(endVal) < parseFloat(oDiaMin) || parseFloat(endVal) > parseFloat(oDiaMax))) {
+        $(this).addClass('is-invalid');
+    } else {
+        $(this).removeClass('is-invalid');
+    }
+});
     $('#q1_start, #q2_start, #q3_start, #q4_start').on('input', function() {
         var startVal = $(this).val();
         var wMin = $(this).data('wMin');
