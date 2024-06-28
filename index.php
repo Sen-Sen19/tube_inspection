@@ -1,13 +1,17 @@
-<?php require 'process/login.php';
+<?php 
+require 'process/login.php';
 
 if (isset($_SESSION['username'])) {
-  if ($_SESSION['type'] == 'pvc') {
-     header('location: page/pvc/pstart_point.php');
-     exit;
- }elseif($_SESSION['type'] == 'cot'){
-     header('location: page/cot/cstart_point.php');
-     exit;
- }
+    if ($_SESSION['type'] == 'pvc') {
+        header('location: page/pvc/pstart_point.php');
+        exit;
+    } elseif ($_SESSION['type'] == 'cot') {
+        header('location: page/cot/cstart_point.php');
+        exit;
+    } elseif ($_SESSION['type'] == 'admin') { 
+        header('location: page/admin/admin.php');
+        exit;
+    }
 }
 ?>
 <!DOCTYPE html>

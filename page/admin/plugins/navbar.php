@@ -6,21 +6,45 @@ include '../../process/login.php';
 if (!isset($_SESSION['username'])) {
     header('location: ../../'); // Redirect to login page
     exit;
-} else if ($_SESSION['type'] == 'cot') {
+} else if ($_SESSION['type'] == 'pvc') {
     header('location: ../../page/pvc/pstart_point.php'); 
     exit;
-} else if ($_SESSION['type'] == 'admin') {
-    header('location: ../../page/admin/admin.php');
+} else if ($_SESSION['type'] == 'cot') {
+    header('location: ../../page/cot/cot.php');
     exit;
 }
-?>  
+// Database connection details for MS SQL Server
+$serverName = "172.25.116.188";
+$username = "sa";
+$password = "SystemGroup@2022";
+$database = "tube_inspection_db"; 
+try {
+    // Establish connection to MS SQL Server using PDO
+    $conn = new PDO("sqlsrv:Server=$serverName;Database=$database", $username, $password);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    // Prepare and execute SQL query
+    $stmt = $conn->prepare("SELECT * FROM sp_cotdb");
+    $stmt->execute();
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    // Process the fetched data as needed
+    foreach ($result as $row) {
+        // Process each row of data here
+        // Example: echo $row['column_name'];
+    }
+
+} catch (PDOException $e) {
+    echo 'Error: ' . $e->getMessage(); // Output any errors that occur during execution
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Tube Inspection PVC</title>
+  <title>Tube Inspection COT</title>
 
   <link rel="icon" href="../../dist/img/tir-logo.png" type="image/x-icon" />
   <!-- Google Font: Source Sans Pro -->
@@ -112,3 +136,6 @@ if (!isset($_SESSION['username'])) {
 </script> -->
     </ul>
   </nav>
+
+
+

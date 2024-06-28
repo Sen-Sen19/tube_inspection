@@ -31,6 +31,9 @@ document.getElementById("openModalBtn").addEventListener("click", function() {
 
 
 // ------------------------------Get PartName-------------------------
+
+
+
 $(document).ready(function() {
     $.ajax({
         url: '../../process/cot_get_part_names.php',
@@ -213,6 +216,10 @@ $(document).ready(function() {
 
 
         // -----------------------Inspection Date --------------------------
+
+
+       
+        
 var today = new Date();
 var dd = String(today.getDate()).padStart(2, '0');
 var mm = String(today.getMonth() + 1).padStart(2, '0');
@@ -279,6 +286,7 @@ document.getElementById('inspection_date').value = formattedDate;
 
 
 // -------------------------Clear Button----------------------------------
+
 document.addEventListener("DOMContentLoaded", function() {
     const clearButton = document.querySelector("#addRecordModal .btn-danger");
 

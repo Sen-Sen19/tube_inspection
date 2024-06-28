@@ -9,12 +9,14 @@ if (!isset($_SESSION['username'])) {
 } else if ($_SESSION['type'] == 'pvc') {
     header('location: ../../page/pvc/pstart_point.php'); 
     exit;
+} else if ($_SESSION['type'] == 'admin') {
+    header('location: ../../page/admin/admin.php');
+    exit;
 }
-
 // Database connection details for MS SQL Server
-$serverName = "172.25.114.171\\SQLEXPRESS";
+$serverName = "172.25.116.188";
 $username = "sa";
-$password = "SystemGroup2018";
+$password = "SystemGroup@2022";
 $database = "tube_inspection_db"; 
 try {
     // Establish connection to MS SQL Server using PDO
