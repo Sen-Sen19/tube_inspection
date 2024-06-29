@@ -425,7 +425,7 @@ document.addEventListener('DOMContentLoaded', () => {
         loadTableData(offset, limit);
     });
 
-    // Infinite scroll event
+    // Infinite scroll event (if you want to keep it)
     document.getElementById('accounts_table_res').addEventListener('scroll', () => {
         const container = document.getElementById('accounts_table_res');
         if (container.scrollTop + container.clientHeight >= container.scrollHeight) {
@@ -433,18 +433,6 @@ document.addEventListener('DOMContentLoaded', () => {
             loadTableData(offset, limit, document.getElementById('searchBox').value.trim());
         }
     });
-
-    // Search button event
-    document.getElementById('searchReqBtn').addEventListener('click', () => {
-        offset = 0; // Reset offset for new search
-        loadTableData(offset, limit, document.getElementById('searchBox').value.trim());
-    });
-});
-
-document.getElementById('exportReqBtn').addEventListener('click', () => {
-    const searchTerm = document.getElementById('searchBox').value.trim();
-    const url = `../../process/cot_sp_export_data.php${searchTerm ? '?search=' + encodeURIComponent(searchTerm) : ''}`;
-    window.location.href = url;
 });
 
 function loadTableData(offset, limit, search = '') {
@@ -460,7 +448,7 @@ function loadTableData(offset, limit, search = '') {
             data.sort((a, b) => a.id - b.id);
 
             if (offset === 0) {
-                document.getElementById('sp_cotdb_body').innerHTML = ''; // Clear table for new search results
+                document.getElementById('sp_cotdb_body').innerHTML = ''; 
             }
             populateTable(data);
 
@@ -473,6 +461,7 @@ function loadTableData(offset, limit, search = '') {
         })
         .catch(error => console.error('Error fetching data:', error));
 }
+
 // -----------------------------populate table-------------------
 function populateTable(data) {
     const tbody = document.getElementById('sp_cotdb_body');
