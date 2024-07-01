@@ -89,14 +89,13 @@
     </section>
 </div>
 
+
 <!-- Edit Record Modal -->
 <div class="modal fade" id="editRecordModal" tabindex="-1" role="dialog" aria-labelledby="editRecordModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="editRecordModalLabel">Change Password</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <form id="editForm">
@@ -105,7 +104,6 @@
                         <label for="editUsername">Username</label>
                         <input type="text" class="form-control" id="editUsername" readonly>
                     </div>
-                  
                     <div class="form-group">
                         <label for="editType">Type</label>
                         <input type="text" class="form-control" id="editType" readonly>
@@ -116,13 +114,14 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                   
                     <button type="button" class="btn btn-primary" onclick="saveChanges()">Save changes</button>
                 </div>
             </form>
         </div>
     </div>
 </div>
+
 
 <!-- Bootstrap and jQuery JS -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

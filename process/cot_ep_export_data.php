@@ -1,75 +1,86 @@
 <?php
-// export_data.php
+include 'conn3.php';  // Ensure this file properly initializes $conn
 
-include 'conn3.php'; // Include the MS SQL Server connection file
-
-header('Content-Type: text/csv');
-header('Content-Disposition: attachment; filename="COT_End_Point.csv"');
-header('Pragma: no-cache');
-header('Expires: 0');
-
-$search = isset($_GET['search']) ? $_GET['search'] : '';
-
-$sql = "SELECT * FROM ep_cotdb";
-
-if (!empty($search)) {
-    $sql = "SELECT * FROM ep_cotdb WHERE part_name LIKE ?";
-    $searchTerm = "%$search%";
-    $params = array($searchTerm);
-} else {
-    $params = array();
+// Check if connection is valid
+if (!$conn) {
+    die('Database connection failed: ' . sqlsrv_errors());
 }
 
-$stmt = sqlsrv_query($conn, $sql, $params);
+$partName = $_GET['partName'] ?? '';
+$inspectedBy = $_GET['inspectedBy'] ?? '';
+$defectType = $_GET['defectType'] ?? '';
+$dateFrom = $_GET['dateFrom'] ?? '';
+$dateTo = $_GET['dateTo'] ?? '';
+
+// Build your SQL query based on the parameters
+$sql = "SELECT * FROM ep_cotdb WHERE 1=1";
+
+// Add conditions for filters
+$params = array();
+
+if (!empty($partName)) {
+    $sql .= " AND part_name = ?";
+    $params[] = $partName;
+}
+
+if (!empty($inspectedBy)) {
+    $sql .= " AND inspected_by = ?";
+    $params[] = $inspectedBy;
+}
+
+if (!empty($defectType)) {
+    $sql .= " AND defect_type = ?";
+    $params[] = $defectType;
+}
+
+if (!empty($dateFrom)) {
+    $sql .= " AND inspection_date >= ?";
+    $params[] = $dateFrom;
+}
+
+if (!empty($dateTo)) {
+    $sql .= " AND inspection_date <= ?";
+    $params[] = $dateTo;
+}
+
+// Prepare statement
+$options = array("Scrollable" => SQLSRV_CURSOR_KEYSET);
+$stmt = sqlsrv_query($conn, $sql, $params, $options);
 
 if ($stmt === false) {
-    die(print_r(sqlsrv_errors(), true));
+    die('Error executing query: ' . sqlsrv_errors());
 }
 
-// Output the column headings
-$headers = [
-    'ID', 'Part Name', 'Quantity', 'Time Start', 'Time End', 'Inspected By',
-    'Shift', 'Inspection Date', 'Total Minutes', 'Outside Appearance',
-    'Slit Condition', 'Inside Appearance', 'Color', 'I Tolerance +',
-    'I Tolerance -', 'I Diameter Start', 'I Diameter End', 'O Tolerance +',
-    'O Tolerance -', 'O Diameter Start', 'O Diameter End', 'W Tolerance +',
-    'W Tolerance -', 'Q1 Start', 'Q2 Start', 'Q3 Start', 'Q4 Start',
-    'Q1 Middle', 'Q2 Middle', 'Q3 Middle', 'Q4 Middle', 'Q1 End',
-    'Q2 End', 'Q3 End', 'Q4 End', 'Using Round Bar', 'Using Bare Hands',
-    'Appearance Judgement', 'Dimension Judgement', 'NG Quantity',
-    'Defect Type', 'Confirm By', 'Remarks'
-];
+// Create CSV content
+$filename = 'COT_End_Point.csv';
+header('Content-Type: text/csv');
+header("Content-Disposition: attachment; filename=$filename");
+
 $output = fopen('php://output', 'w');
+
+// Output CSV headers
+$fields = sqlsrv_field_metadata($stmt);
+$headers = array();
+foreach ($fields as $field) {
+    $headers[] = $field['Name'];
+}
 fputcsv($output, $headers);
 
-// Output the data rows
+// Output CSV data rows
 while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
-    // Format DateTime fields if necessary
-    $formattedRow = [];
-    foreach ($row as $key => $value) {
+    // Format DateTime fields as strings
+    $formattedRow = array_map(function($value) {
         if ($value instanceof DateTime) {
-            if ($key === 'Inspection Date') {
-                $formattedRow[$key] = $value->format('Y-m-d'); // Format without time
-            } else {
-                $formattedRow[$key] = $value->format('Y-m-d H:i:s'); // Keep other DateTime fields as is
-            }
-        } elseif ($key === 'Inspection Date' && strpos($value, ' ') !== false) {
-            // Handle cases where the date might be stored as a string with time
-            $datetime = DateTime::createFromFormat('Y-m-d H:i:s', $value);
-            if ($datetime !== false) {
-                $formattedRow[$key] = $datetime->format('Y-m-d');
-            } else {
-                $formattedRow[$key] = $value; // Fallback to original value if parsing fails
-            }
-        } else {
-            $formattedRow[$key] = $value;
+            return $value->format('Y-m-d H:i:s'); // Adjust format as per your DateTime format
         }
-    }
+        return $value;
+    }, $row);
+
     fputcsv($output, $formattedRow);
 }
 
+// Close resources
 fclose($output);
-
 sqlsrv_free_stmt($stmt);
 sqlsrv_close($conn);
 ?>

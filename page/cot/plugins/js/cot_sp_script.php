@@ -37,13 +37,14 @@ $(document).ready(function() {
         method: 'GET',
         success: function(data) {
             var parts = JSON.parse(data);
-            var dropdown = $('#part_name_dropdown');
-            dropdown.empty();
-            dropdown.append('<option selected="true" disabled>Choose Part</option>');
-            dropdown.prop('selectedIndex', 0);
-
+            var dropdown1 = $('#part_name_dropdown');
+            var dropdown2 = $('#partName'); 
+            dropdown1.empty();
+            dropdown1.append('<option selected="true" disabled>Choose Part</option>');
+            dropdown1.prop('selectedIndex', 0);
+         
             $.each(parts, function (key, entry) {
-                dropdown.append($('<option></option>').attr('value', entry.part_name)
+                dropdown1.append($('<option></option>').attr('value', entry.part_name)
                     .data('iDiaMin', entry.i_dia_min)
                     .data('iDiaMax', entry.i_dia_max)
                     .data('oDiaMin', entry.o_dia_min)
@@ -58,6 +59,8 @@ $(document).ready(function() {
                     .data('wTolMin', entry.w_tol_min)
                     .data('wTolMax', entry.w_tol_add)
                     .text(entry.part_name));
+
+                  
             });
         },
         error: function() {
@@ -409,119 +412,6 @@ function saveData() {
 }
 
 
-// ---------------------------------------------------Populate the table COT Start Point---------------------------------------------------
-
-
-document.addEventListener('DOMContentLoaded', () => {
-    let offset = 0;
-    const limit = 10;
-
-    // Load initial table data
-    loadTableData(offset, limit);
-
-    // Load more button event
-    document.getElementById('btnLoadMore').addEventListener('click', () => {
-        offset += limit;
-        loadTableData(offset, limit);
-    });
-
-    // Infinite scroll event (if you want to keep it)
-    document.getElementById('accounts_table_res').addEventListener('scroll', () => {
-        const container = document.getElementById('accounts_table_res');
-        if (container.scrollTop + container.clientHeight >= container.scrollHeight) {
-            offset += limit;
-            loadTableData(offset, limit, document.getElementById('searchBox').value.trim());
-        }
-    });
-});
-
-function loadTableData(offset, limit, search = '') {
-    fetch(`../../process/cot_sp_get_data.php?offset=${offset}&limit=${limit}&search=${encodeURIComponent(search)}`)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(data => {
-            // Sort data by 'id'
-            data.sort((a, b) => a.id - b.id);
-
-            if (offset === 0) {
-                document.getElementById('sp_cotdb_body').innerHTML = ''; 
-            }
-            populateTable(data);
-
-            // Hide 'Load more' button if all data is loaded
-            if (data.length < limit) {
-                document.getElementById('btnLoadMore').style.display = 'none';
-            } else {
-                document.getElementById('btnLoadMore').style.display = 'block';
-            }
-        })
-        .catch(error => console.error('Error fetching data:', error));
-}
-
-// -----------------------------populate table-------------------
-function populateTable(data) {
-    const tbody = document.getElementById('sp_cotdb_body');
-
-    data.forEach(row => {
-        const newRow = tbody.insertRow();
-
-        // Format date fields
-        const timeStart = formatDate(row.time_start, false, true); // Pass false for isInspectionDate and true for removeMilliseconds
-        const timeEnd = formatDate(row.time_end, false, true); // Pass false for isInspectionDate and true for removeMilliseconds
-        const inspectionDate = formatDate(row.inspection_date, true); // Pass true to indicate it's inspection_date
-
-        newRow.innerHTML = `
-            <td>${row.id}</td>
-            <td>${row.part_name}</td>
-            <td>${row.quantity}</td>
-            <td>${timeStart}</td>
-            <td>${timeEnd}</td>
-            <td>${row.inspected_by}</td>
-            <td>${row.shift}</td>
-            <td>${inspectionDate}</td>
-            <td>${row.total_mins}</td>
-            <td>${row.outside_appearance}</td>
-            <td>${row.slit_condition}</td>
-            <td>${row.inside_appearance}</td>
-            <td>${row.color}</td>
-            <td>${row.i_tolerance_plus}</td>
-            <td>${row.i_tolerance_minus}</td>
-            <td>${row.i_diameter_start}</td>
-            <td>${row.i_diameter_end}</td>
-            <td>${row.o_tolerance_plus}</td>
-            <td>${row.o_tolerance_minus}</td>
-            <td>${row.o_diameter_start}</td>
-            <td>${row.o_diameter_end}</td>
-            <td>${row.w_tolerance_plus}</td>
-            <td>${row.w_tolerance_minus}</td>
-            <td>${row.q1_start}</td>
-            <td>${row.q2_start}</td>
-            <td>${row.q3_start}</td>
-            <td>${row.q4_start}</td>
-            <td>${row.q1_middle}</td>
-            <td>${row.q2_middle}</td>
-            <td>${row.q3_middle}</td>
-            <td>${row.q4_middle}</td>
-            <td>${row.q1_end}</td>
-            <td>${row.q2_end}</td>
-            <td>${row.q3_end}</td>
-            <td>${row.q4_end}</td>
-            <td>${row.using_round_bar}</td>
-            <td>${row.using_bare_hands}</td>
-            <td>${row.appearance_judgement}</td>
-            <td>${row.dimension_judgement}</td>
-            <td>${row.ng_quantity}</td>
-            <td>${row.defect_type}</td>
-            <td>${row.confirm_by}</td>
-            <td>${row.remarks}</td>
-        `;
-    });
-}
-
 
 
 // ------------------------------------------------date-------------------------------------------------
@@ -552,65 +442,6 @@ function refreshPage() {
         window.location.reload(); 
     }
 
-//------------------------------------------------export--------------------------------------------------------
 
-function export_accounts() {
-    // Select the table
-    var table = document.getElementById("sp_cotdb");
-
-    // Create an empty array to store the rows (including headers)
-    var rows = [];
-
-   
-    var headerRow = table.rows[0];
-    var headers = [];
-    for (var h = 0; h < headerRow.cells.length; h++) {
-        headers.push(" " + headerRow.cells[h].textContent.trim()); 
-    }
-    rows.push(headers.join(","));
-
-    var dataRows = [];
-
-    
-    for (var i = 1; i < table.rows.length; i++) {
-        var row = [], cells = table.rows[i].cells;
-
-        
-        for (var j = 0; j < cells.length; j++) {
-           
-            row.push(" " + cells[j].textContent.trim()); 
-        }
-
-        // Push the row to the data rows array
-        dataRows.push(row);
-    }
-
-    // Sort data rows by the first column (assuming the first column is the ID)
-    dataRows.sort(function(a, b) {
-        return parseInt(a[0]) - parseInt(b[0]); // Assuming ID is a numeric value
-    });
-
-    // Concatenate the header row and sorted data rows into the final rows array
-    rows = rows.concat(dataRows.map(row => row.join(",")));
-
-    // Join all rows into a CSV string with new line characters
-    var csv = rows.join("\n");
-
-    // Create a Blob object for the CSV file
-    var blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
-
-    // Create a temporary anchor element and trigger a click to download the CSV file
-    var link = document.createElement("a");
-    if (link.download !== undefined) {
-        var url = URL.createObjectURL(blob);
-        link.setAttribute("href", url);
-        link.setAttribute("download", "export.csv");
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-    } else {
-        alert("Exporting CSV is not supported in this browser.");
-    }
-}
 
     </script>
