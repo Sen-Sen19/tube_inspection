@@ -52,6 +52,8 @@ try {
     // Fetch data as associative array
     $data = array();
     while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
+        // Add a new key 'Delete' with an empty value for each row
+        $row['Delete'] = ''; // This will be populated with checkboxes in the HTML
         $data[] = $row;
     }
 

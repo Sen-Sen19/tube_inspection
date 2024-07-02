@@ -163,6 +163,8 @@
                                             <th>Q2 End</th>
                                             <th>Q3 End</th>
                                             <th>Q4 End</th>
+                                            <th>Serial No.</th>
+                                            <th>Location</th>
                                             <th>Using Round Bar</th>
                                             <th>Using Bare Hands</th>
                                             <th>Appearance Judgement</th>
@@ -297,11 +299,12 @@ function populateTable(data) {
             <td>${row.q2_start}</td>
             <td>${row.q3_start}</td>
             <td>${row.q4_start}</td>
-            
             <td>${row.q1_end}</td>
             <td>${row.q2_end}</td>
             <td>${row.q3_end}</td>
             <td>${row.q4_end}</td>
+             <td>${row.serial_no}</td>
+            <td>${row.location_no}</td>
             <td>${row.using_round_bar}</td>
             <td>${row.using_bare_hands}</td>
             <td>${row.appearance_judgement}</td>

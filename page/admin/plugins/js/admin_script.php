@@ -15,7 +15,15 @@ if (isset($_SESSION['username'])) {
     echo '</script>';
 }
 ?>
+<script type="text/javascript" src="../../../plugins/sweetalert2/dist/sweetalert2.min.js"></script>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<style>
+.larger-checkbox {
+    width: 20px; /* Adjust width as needed */
+    height: 20px; /* Adjust height as needed */
+}
+</style>
 
 
 
@@ -227,23 +235,100 @@ function loadTableData(offset, limit, search = '') {
 function populateTable(data) {
     const tbody = document.getElementById('admin_body');
 
+    // Loop through each row of data
     data.forEach(row => {
+        // Create a new row in the table body
         const newRow = tbody.insertRow();
 
+        // Insert cells for each column
+        const usernameCell = newRow.insertCell();
+        const passwordCell = newRow.insertCell();
+        const typeCell = newRow.insertCell();
+        const deleteCell = newRow.insertCell(); // Cell for Delete checkbox
 
-        newRow.innerHTML = `
-          
-            <td>${row.username}</td>
-            <td>${row.password}</td>
-            <td>${row.type}</td>
-      
-        `;
+        // Populate cell contents with data from the row object
+        usernameCell.textContent = row.username;
+        passwordCell.textContent = row.password;
+        typeCell.textContent = row.type;
+
+        // Create a checkbox element for the Delete column
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.className = 'larger-checkbox'; // Add a class for styling
+        checkbox.name = 'deleteRow[]'; // Use array syntax for PHP form handling if multiple checkboxes
+        checkbox.value = row.username; // Use a unique identifier from your data (e.g., username) as the value
+
+        // Disable checkbox for 'admin' type
+        if (row.type === 'admin') {
+            checkbox.disabled = true;
+        }
+
+        // Append checkbox to the Delete cell
+        deleteCell.appendChild(checkbox);
+
+        // Add event listener to the checkbox
+        checkbox.addEventListener('click', function(event) {
+            event.stopPropagation(); // Stop propagation of the click event
+        });
     });
 }
 
+// Assuming there's a delete button in your HTML with id 'deleteBtn'
+document.getElementById('deleteBtn').addEventListener('click', function() {
+    // Get all checkboxes named 'deleteRow[]'
+    const checkboxes = document.querySelectorAll('input[name="deleteRow[]"]:checked');
 
+    // Create an array to store usernames of rows to delete
+    const usernamesToDelete = Array.from(checkboxes).map(checkbox => checkbox.value);
 
+    // Show SweetAlert confirmation dialog
+    Swal.fire({
+        title: "Are you sure?",
+        text: "Once deleted, you will not be able to recover this data!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!",
+        cancelButtonText: "Cancel"
+    })
+    .then((result) => {
+        if (result.isConfirmed) {
+            // Perform AJAX request to delete data
+            deleteData(usernamesToDelete);
+        }
+    });
+});
 
+function deleteData(usernames) {
+    // AJAX request to delete data
+    fetch('../../process/delete_data.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ usernames: usernames }),
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(data => {
+        // Handle success response if needed
+        console.log('Data deleted successfully:', data);
+        // Show success message with SweetAlert
+        Swal.fire("Success!", "Data has been deleted successfully!", "success");
+        // Reload the table or update UI as needed
+        loadTableData(0, 10); // Example function to reload table data after deletion
+    })
+    .catch(error => {
+        console.error('Error deleting data:', error);
+        // Show error message with SweetAlert
+        Swal.fire("Error!", "Failed to delete data. Please try again later.", "error");
+    });
+}
 
 // --------------------------------------------refresh button -----------------------------------------------------
 function refreshPage() {

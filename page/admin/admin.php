@@ -57,8 +57,13 @@
                                     </div>
                                 </div>
                                 <div class="col-md-8 d-flex justify-content-end align-items-center">
-                                    <button class="btn btn-danger mr-2" id="refreshPageBtn" onclick="refreshPage()" style="width: 20%;">
+                              
+
+                                    <button class="btn btn-info mr-2" id="refreshPageBtn" onclick="refreshPage()" style="width: 20%;">
                                         <i class="fas fa-sync-alt mr-2"></i>Refresh
+                                    </button>
+                                    <button class="btn btn-danger mr-2" id="deleteBtn" style="width: 20%;">
+                                       <i class="fas fa-trash mr-2"></i>Delete
                                     </button>
                                 </div>
                             </div>
@@ -71,6 +76,7 @@
                                             <th>User Name</th>
                                             <th>Password</th>
                                             <th>Type</th>
+                                            <th>Delete</th>
                                         </tr>
                                     </thead>
                                     <tbody id="admin_body" style="text-align: center; padding:20px;">

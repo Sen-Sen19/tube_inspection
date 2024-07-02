@@ -336,17 +336,17 @@
                             <div class="col-sm-6">
                                 <label>Defect type</label>
                                 <select id="defect_type" class="form-control" name="defect_type" style="margin-bottom:16px">
-                                    <option value="" selected disabled>Choose...</option>
-                                    <option value="Round crest">N/A</option>
-                                    <option value="Round crest">Hole</option>
-                                    <option value="Round crest">Scratch</option>
-                                    <option value="Damage">Deformed</option>
-                                    <option value="Molding defect">Rough surface</option>
-                                    <option value="Excess burr">Bubbles on surface</option>
-                                    <option value="Excess burr">Unstable thickness</option>
-                                    <optio value="Dent">Big Diameter</option>
-                                    <option value="Misaligned joint portion">Small Diameter</option>
-                                    <option value="Foreign material">Wrinkled on surface</option>
+                                <option value="" selected disabled>Choose...</option>
+                                    <option value="N/A">N/A</option>
+                                    <option value="Hole">Hole</option>
+                                    <option value="Scratch">Scratch</option>
+                                    <option value="Deformed">Deformed</option>
+                                    <option value="Rough surface">Rough surface</option>
+                                    <option value="Bubbles on surface">Bubbles on surface</option>
+                                    <option value="Unstable thickness">Unstable thickness</option>
+                                    <optio value="Big Diameter">Big Diameter</option>
+                                    <option value="Small Diameter">Small Diameter</option>
+                                    <option value="Wrinkled on surface">Wrinkled on surface</option>
                                     
                                 </select>
                          </div>

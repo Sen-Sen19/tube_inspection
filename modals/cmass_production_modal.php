@@ -300,6 +300,21 @@
 
 
 
+                <!-- -----------------------------------------------------------Barcode ------------------------------------------------------------>
+
+    
+
+                <div class="form-group">
+                <div class="col-sm-12">
+                <label for="inside-start">Serial No.</label>
+                <input type="text" id="serial_no" class="form-control" name="serial_no" autocomplete="off">
+                </div>
+                <div class="col-sm-12">
+                <label for="inside-end">Lot No.</label>
+                <input type="text" id="lot_no" class="form-control" name="lot_no" autocomplete="off" >
+                </div>
+
+                <div class="horizontal-rule" style="width: 100%; height: 1px; background-color: #20c997; margin: 20px 0;"></div>
 
 
                 <!-- -----------------------------------------------------------Tube Breaking ------------------------------------------------------------>

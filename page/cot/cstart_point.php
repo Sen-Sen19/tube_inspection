@@ -166,6 +166,7 @@
                                             <th>Q2 End</th>
                                             <th>Q3 End</th>
                                             <th>Q4 End</th>
+                                          
                                             <th>Using Round Bar</th>
                                             <th>Using Bare Hands</th>
                                             <th>Appearance Judgement</th>
@@ -308,6 +309,7 @@ function populateTable(data) {
             <td>${row.q2_end}</td>
             <td>${row.q3_end}</td>
             <td>${row.q4_end}</td>
+            
             <td>${row.using_round_bar}</td>
             <td>${row.using_bare_hands}</td>
             <td>${row.appearance_judgement}</td>
