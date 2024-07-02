@@ -67,6 +67,7 @@
             <option value="Slanted slit">Slanted slit</option>
             <option value="Unstable thickness">Unstable thickness</option>
             <option value="Tubebreaking on slit portion">Tubebreaking on slit portion</option>
+            <option value="Out of Tolerance">Out of Tolerance</option>
         </select>
     </div>
 </div>
@@ -158,13 +159,12 @@
                                             <th>Q2 Start</th>
                                             <th>Q3 Start</th>
                                             <th>Q4 Start</th>
-                                           
                                             <th>Q1 End</th>
                                             <th>Q2 End</th>
                                             <th>Q3 End</th>
                                             <th>Q4 End</th>
                                             <th>Serial No.</th>
-                                            <th>Location</th>
+                                            <th>Lot No.</th>
                                             <th>Using Round Bar</th>
                                             <th>Using Bare Hands</th>
                                             <th>Appearance Judgement</th>
@@ -224,7 +224,6 @@
 });
 
 function loadTableData(offset, limit, reset = false) {
-    // const partName = document.querySelector('input[placeholder="Part Name"]').value;
     const partName = document.getElementById('partName').value;
     const inspectedBy = document.querySelector('input[placeholder="Inspected By"]').value;
     const defectType = document.getElementById('defectType').value;
@@ -246,7 +245,6 @@ function loadTableData(offset, limit, reset = false) {
             }
             populateTable(data);
 
-            // Hide 'Load more' button if all data is loaded
             if (data.length < limit) {
                 document.getElementById('btnLoadMore').style.display = 'none';
             } else {
@@ -304,7 +302,7 @@ function populateTable(data) {
             <td>${row.q3_end}</td>
             <td>${row.q4_end}</td>
              <td>${row.serial_no}</td>
-            <td>${row.location_no}</td>
+            <td>${row.lot_no}</td>
             <td>${row.using_round_bar}</td>
             <td>${row.using_bare_hands}</td>
             <td>${row.appearance_judgement}</td>
@@ -386,6 +384,9 @@ function exportTable() {
             console.error('Error exporting data:', error);
         });
 }
+
+
+
 
 
 </script>

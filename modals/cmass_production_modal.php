@@ -313,6 +313,7 @@
                 <label for="inside-end">Lot No.</label>
                 <input type="text" id="lot_no" class="form-control" name="lot_no" autocomplete="off" >
                 </div>
+                </div>
 
                 <div class="horizontal-rule" style="width: 100%; height: 1px; background-color: #20c997; margin: 20px 0;"></div>
 
@@ -361,28 +362,35 @@
                                     <option value="NG">NG</option>
                                 </select>
                             </div>
-                         <div class="col-sm-12">
-                                <label>Defect type</label>
-                                <select id="defect_type" class="form-control" name="defect_type" style="margin-bottom:16px">
-                                    <option value="" selected disabled>Choose...</option>
-                                    <option value="Round crest">N/A</option>
-                                    <option value="Round crest">Round crest</option>
-                                    <option value="Damage">Damage</option>
-                                    <option value="Molding defect">Molding defect</option>
-                                    <option value="Excess burr">Excess burr</option>
-                                    <optio value="Dent">Dent</option>
-                                    <option value="Misaligned joint portion">Misaligned joint portion</option>
-                                    <option value="Foreign material">Foreign material</option>
-                                    <option value="Slit position is on joint portion">Slit position is on joint portion</option>
-                                    <option value="With gap on slit">With gap on slit</option>
-                                    <option value="Crack">Crack</option>
-                                    <option value="Overlap">Overlap</option>
-                                    <option value="Slit is uneven">Slit is uneven</option>
-                                    <option value="Slanted slit">Slanted slit</option>
-                                    <option value="Unstable thickness">Unstable thickness</option>
-                                    <option value="Tubebreaking on slit portion">Tubebreaking on slit portion</option>
-                                </select>
-                         </div>
+                            <div class="container mt-4">
+        <form id="defectForm" onsubmit="return handleFormSubmit(event)">
+            <label>Defect type</label>
+            <div id="defect-container">
+                <select id="defect_type" class="form-control" name="defect_type" style="margin-bottom:16px" onchange="handleDefectTypeChange()">
+                    <option value="" selected disabled>Choose...</option>
+                    <option value="N/A">N/A</option>
+                    <option value="Round crest">Round crest</option>
+                    <option value="Damage">Damage</option>
+                    <option value="Molding defect">Molding defect</option>
+                    <option value="Excess burr">Excess burr</option>
+                    <option value="Dent">Dent</option>
+                    <option value="Misaligned joint portion">Misaligned joint portion</option>
+                    <option value="Foreign material">Foreign material</option>
+                    <option value="Slit position is on joint portion">Slit position is on joint portion</option>
+                    <option value="With gap on slit">With gap on slit</option>
+                    <option value="Crack">Crack</option>
+                    <option value="Overlap">Overlap</option>
+                    <option value="Slit is uneven">Slit is uneven</option>
+                    <option value="Slanted slit">Slanted slit</option>
+                    <option value="Unstable thickness">Unstable thickness</option>
+                    <option value="Tubebreaking on slit portion">Tubebreaking on slit portion</option>
+                    <option value="Out of Tolerance">Out of Tolerance</option>
+                    <option value="Others">Others</option>
+                </select>
+            </div>
+        </form>
+    </div>
+
                             <div class="col-sm-12">
                                 <label for="confirm_by">Confirm By</label>
                                 <input type="text" id="confirm_by" class="form-control" name="confirm_by" autocomplete="off" style="margin-bottom:15px">
@@ -409,3 +417,41 @@
 </div>
 
 </form>
+
+
+
+<script>
+    function handleDefectTypeChange() {
+        const defectType = document.getElementById('defect_type');
+        const selectedOption = defectType.value;
+
+        if (selectedOption === 'Others') {
+            // Show SweetAlert confirmation
+            Swal.fire({
+                title: 'Are you sure?',
+                text: 'Do you want to specify another defect type?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, specify',
+                cancelButtonText: 'No, cancel'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Replace dropdown with a text input if confirmed
+                    const inputField = document.createElement('input');
+                    inputField.setAttribute('type', 'text');
+                    inputField.setAttribute('class', 'form-control');
+                    inputField.setAttribute('name', 'defect_type');
+                    inputField.setAttribute('placeholder', 'Specify other defect type');
+                    inputField.style.marginBottom = '16px';
+                    
+                    const defectContainer = document.getElementById('defect-container');
+                    defectContainer.innerHTML = ''; // Clear previous content
+                    defectContainer.appendChild(inputField);
+                } else {
+                    // Reset the dropdown to default value if cancelled
+                    defectType.value = "";
+                }
+            });
+        }
+    }
+    </script>

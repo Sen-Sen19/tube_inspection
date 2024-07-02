@@ -67,6 +67,7 @@
             <option value="Slanted slit">Slanted slit</option>
             <option value="Unstable thickness">Unstable thickness</option>
             <option value="Tubebreaking on slit portion">Tubebreaking on slit portion</option>
+            <option value="Out of Tolerance">Out of Tolerance</option>
         </select>
     </div>
 </div>

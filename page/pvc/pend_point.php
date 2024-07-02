@@ -63,6 +63,7 @@
         <option value="Big Diameter">Big Diameter</option>
         <option value="Small Diameter">Small Diameter</option>
         <option value="Wrinkled on surface">Wrinkled on surface</option>
+        <option value="Out of Tolerance">Out of Tolerance</option>
     </select>
 </div>
 </div>

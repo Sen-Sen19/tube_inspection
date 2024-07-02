@@ -67,6 +67,7 @@
             <option value="Slanted slit">Slanted slit</option>
             <option value="Unstable thickness">Unstable thickness</option>
             <option value="Tubebreaking on slit portion">Tubebreaking on slit portion</option>
+            <option value="Out of Tolerance">Out of Tolerance</option>
         </select>
     </div>
 </div>
@@ -166,7 +167,6 @@
                                             <th>Q2 End</th>
                                             <th>Q3 End</th>
                                             <th>Q4 End</th>
-                                          
                                             <th>Using Round Bar</th>
                                             <th>Using Bare Hands</th>
                                             <th>Appearance Judgement</th>
@@ -309,7 +309,6 @@ function populateTable(data) {
             <td>${row.q2_end}</td>
             <td>${row.q3_end}</td>
             <td>${row.q4_end}</td>
-            
             <td>${row.using_round_bar}</td>
             <td>${row.using_bare_hands}</td>
             <td>${row.appearance_judgement}</td>
@@ -368,23 +367,23 @@ function exportTable() {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
-            return response.blob(); // Convert response to a Blob
+            return response.blob(); 
         })
         .then(blob => {
-            // Create a URL for the Blob data
+            
             const downloadUrl = window.URL.createObjectURL(blob);
 
-            // Create an <a> element to trigger the download
+            
             const a = document.createElement('a');
             a.style.display = 'none';
             a.href = downloadUrl;
-            a.download = filename; // Set the filename for the downloaded file
+            a.download = filename; 
             document.body.appendChild(a);
 
-            // Trigger the download
+           
             a.click();
 
-            // Clean up by revoking the object URL
+            
             window.URL.revokeObjectURL(downloadUrl);
         })
         .catch(error => {
