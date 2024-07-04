@@ -339,51 +339,97 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-function exportTable() {
-    const partName = document.getElementById('partName').value;
-    const inspectedBy = document.getElementById('inspectedBy').value;
-    const defectType = document.getElementById('defectType').value;
-    const dateFrom = document.getElementById('date_from').value;
-    const dateTo = document.getElementById('date_to').value;
 
-    // Get current date in YYYY-MM-DD format
-    const currentDate = new Date().toISOString().slice(0, 10);
 
-    // Construct the filename with the current date
-    const filename = `COT_Mass_Production_${currentDate}.csv`;
+function saveData() {
+    var form = document.getElementById('myForm');
+    var formData = new FormData(form);
+    var isEmpty = false;
 
-    // Construct the URL with search parameters
-    const url = `../../process/cot_mp_export_data.php?partName=${encodeURIComponent(partName)}&inspectedBy=${encodeURIComponent(inspectedBy)}&defectType=${encodeURIComponent(defectType)}&dateFrom=${encodeURIComponent(dateFrom)}&dateTo=${encodeURIComponent(dateTo)}`;
+    // Function to reset the border on input event
+    function resetBorder(event) {
+        event.target.style.border = ''; // Reset border to default
+    }
 
-    // Fetch data from the PHP script
-    fetch(url)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.blob(); // Convert response to a Blob
-        })
-        .then(blob => {
-            // Create a URL for the Blob data
-            const downloadUrl = window.URL.createObjectURL(blob);
+    // Reset borders and remove input event listeners for text inputs
+    form.querySelectorAll('input[type="text"]').forEach(input => {
+        input.style.border = ''; // Reset border to default
+        input.removeEventListener('input', resetBorder); // Remove any previous listeners to avoid duplication
+    });
 
-            // Create an <a> element to trigger the download
-            const a = document.createElement('a');
-            a.style.display = 'none';
-            a.href = downloadUrl;
-            a.download = filename; // Set the filename for the downloaded file
-            document.body.appendChild(a);
+    // Reset borders for select elements
+    form.querySelectorAll('select').forEach(select => {
+        select.style.border = ''; // Reset border to default
+    });
 
-            // Trigger the download
-            a.click();
+    // Check text inputs for empty values
+    form.querySelectorAll('input[type="text"]').forEach(input => {
+        if (input.value.trim() === "") {
+            isEmpty = true;
+            input.style.border = '1px solid red'; // Highlight empty field
 
-            // Clean up by revoking the object URL
-            window.URL.revokeObjectURL(downloadUrl);
-        })
-        .catch(error => {
-            console.error('Error exporting data:', error);
+            // Add event listener to reset border when user starts typing
+            input.addEventListener('input', resetBorder);
+        }
+    });
+
+    // Check select elements for not being picked
+    form.querySelectorAll('select').forEach(select => {
+        if (select.value.trim() === "") {
+            isEmpty = true;
+            select.style.border = '1px solid red'; // Highlight empty field
+        }
+    });
+
+    if (isEmpty) {
+        Swal.fire({
+            position: 'center',
+            icon: 'warning',
+            title: 'Please fill out all required fields!',
+            showConfirmButton: true
         });
+        return;
+    }
+
+    // Adjusted fetch request to point to the correct PHP script for MS SQL Server
+    fetch('../../process/mp_cot_save.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.text();
+    })
+    .then(data => {
+        console.log(data);
+
+        Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Your work has been saved',
+            showConfirmButton: false,
+            timer: 1500
+        });
+
+        setTimeout(function() {
+            window.location.reload();
+        }, 1600);
+    })
+    .catch(error => {
+        console.error('Error:', error);
+
+        Swal.fire({
+            position: 'center',
+            icon: 'error',
+            title: 'Oops...',
+            text: 'There was an error saving the data.',
+            timer: 1500
+        });
+    });
 }
+
 
 
 

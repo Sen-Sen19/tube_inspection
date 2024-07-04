@@ -443,5 +443,95 @@ function refreshPage() {
     }
 
 
+//------------------------------------------------defect type--------------------------------------------------------
+
+function handleDefectTypeChange() {
+            const defectType = document.getElementById('defect_type');
+            const selectedOption = defectType.value;
+
+            if (selectedOption === 'Others') {
+                // Show SweetAlert confirmation
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: 'Do you want to specify another defect type?',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Yes, specify',
+                    cancelButtonText: 'No, cancel'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Replace dropdown with a text input if confirmed
+                        const inputField = document.createElement('input');
+                        inputField.setAttribute('type', 'text');
+                        inputField.setAttribute('class', 'form-control');
+                        inputField.setAttribute('id', 'other_defect_type'); // Add an id to the new input field
+                        inputField.setAttribute('name', 'defect_type');
+                        inputField.setAttribute('placeholder', 'Specify other defect type');
+                        inputField.style.marginBottom = '16px';
+
+                        const defectContainer = document.getElementById('defect-container');
+                        defectContainer.innerHTML = ''; // Clear previous content
+                        defectContainer.appendChild(inputField);
+                    } else {
+                        // Reset the dropdown to default value if cancelled
+                        defectType.value = "";
+                    }
+                });
+            }
+        }
+
+        function handleFormSubmit(event) {
+            event.preventDefault(); // Prevent form from submitting the traditional way
+
+            // Check if the custom input field exists and has a value
+            const otherDefectTypeInput = document.getElementById('other_defect_type');
+            if (otherDefectTypeInput) {
+                const defectType = document.getElementById('defect_type');
+                defectType.value = otherDefectTypeInput.value;
+            }
+
+            // Here you can proceed with form submission using AJAX or any other method you prefer
+            console.log('Form submitted with defect type:', document.getElementById('defect_type').value);
+            // Perform your save operation here
+            // Optionally, you can show a success message or perform any other actions needed
+        }
+
+        function clearForm() {
+            document.getElementById('defectForm').reset();
+            // Clear custom defect input if exists
+            const defectContainer = document.getElementById('defect-container');
+            defectContainer.innerHTML = ''; // Clear custom input
+            // Re-add the original dropdown
+            const selectElement = document.createElement('select');
+            selectElement.id = 'defect_type';
+            selectElement.className = 'form-control';
+            selectElement.name = 'defect_type';
+            selectElement.style.marginBottom = '16px';
+            selectElement.onchange = handleDefectTypeChange;
+            selectElement.innerHTML = `
+                <option value="" selected disabled>Choose...</option>
+                <option value="N/A">N/A</option>
+                <option value="Round crest">Round crest</option>
+                <option value="Damage">Damage</option>
+                <option value="Molding defect">Molding defect</option>
+                <option value="Excess burr">Excess burr</option>
+                <option value="Dent">Dent</option>
+                <option value="Misaligned joint portion">Misaligned joint portion</option>
+                <option value="Foreign material">Foreign material</option>
+                <option value="Slit position is on joint portion">Slit position is on joint portion</option>
+                <option value="With gap on slit">With gap on slit</option>
+                <option value="Crack">Crack</option>
+                <option value="Overlap">Overlap</option>
+                <option value="Slit is uneven">Slit is uneven</option>
+                <option value="Slanted slit">Slanted slit</option>
+                <option value="Unstable thickness">Unstable thickness</option>
+                <option value="Tubebreaking on slit portion">Tubebreaking on slit portion</option>
+                <option value="Out of Tolerance">Out of Tolerance</option>
+                <option value="Others">Others</option>
+            `;
+            defectContainer.appendChild(selectElement);
+        }
 
     </script>
+
+    

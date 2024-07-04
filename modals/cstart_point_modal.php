@@ -34,7 +34,7 @@
                     </div>
                     <div class="col-sm-3">
                         <label>Quantity(m)</label>
-                        <input type="text" id="part_name_quantity" name="quantity" class="form-control" autocomplete="off" style="margin-bottom: 30px;">
+                        <input type="number" id="part_name_quantity" name="quantity" class="form-control" autocomplete="off" style="margin-bottom: 30px;">
                         </div>
                     <div class="col-sm-3">
                         <label>Time Start</label>
@@ -156,11 +156,11 @@
             </div>
             <div class="form-group">
                 <label for="inside-start">Start</label>
-                <input type="text" id="inside-start" class="form-control" name="i_diameter_start" autocomplete="off">
+                <input type="number" id="inside-start" class="form-control" name="i_diameter_start" autocomplete="off">
             </div>
             <div class="form-group">
                 <label for="inside-end">End</label>
-                <input type="text" id="inside-end" class="form-control" name="i_diameter_end" autocomplete="off" >
+                <input type="number" id="inside-end" class="form-control" name="i_diameter_end" autocomplete="off" >
             </div>
         </div>
         
@@ -173,7 +173,7 @@
                     <label for="o-tolerance-plus" class="mr-2">+</label>
                     <input type="text" id="o-tolerance-minus" class="form-control" style="width: 70px; margin-right: 10px;" autocomplete="off" readonly name="o_tolerance_minus">
                     <label for="o-tolerance-minus" class="mr-2">-</label>
-                    <input type="text" id="o-tolerance-plus" class="form-control" style="width: 70px;" autocomplete="off" readonly name="o_tolerance_plus">
+                    <input type="number" id="o-tolerance-plus" class="form-control" style="width: 70px;" autocomplete="off" readonly name="o_tolerance_plus">
                 </div>
             </div>
             <div class="form-group">
@@ -182,7 +182,7 @@
             </div>
             <div class="form-group">
                 <label for="outside-end">End</label>
-                <input type="text" id="outside-end" class="form-control" name="o_diameter_end" autocomplete="off">
+                <input type="number" id="outside-end" class="form-control" name="o_diameter_end" autocomplete="off">
             </div>
         </div>
     </div>
@@ -225,7 +225,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text bg-light">Q1</span>
                                     </div>
-                                    <input type="text" id="q1_start" class="form-control" autocomplete="off" name="q1_start" >
+                                    <input type="number" id="q1_start" class="form-control" autocomplete="off" name="q1_start" >
                                 </div>
                             </div>
                             <div class="form-group">
@@ -233,7 +233,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text bg-light">Q2</span>
                                     </div>
-                                    <input type="text" id="q2_start" class="form-control" autocomplete="off" name="q2_start">
+                                    <input type="number" id="q2_start" class="form-control" autocomplete="off" name="q2_start">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -241,7 +241,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text bg-light">Q3</span>
                                     </div>
-                                    <input type="text" id="q3_start" class="form-control" autocomplete="off" name="q3_start" >
+                                    <input type="number" id="q3_start" class="form-control" autocomplete="off" name="q3_start" >
                                 </div>
                             </div>
                             <div class="form-group">
@@ -249,7 +249,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text bg-light">Q4</span>
                                     </div>
-                                    <input type="text" id="q4_start" class="form-control" autocomplete="off"name="q4_start">
+                                    <input type="number" id="q4_start" class="form-control" autocomplete="off"name="q4_start">
                                 </div>
                             </div>
                         </div>
@@ -261,7 +261,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text bg-light">Q1</span>
                                     </div>
-                                    <input type="text" id="q1_middle" class="form-control" autocomplete="off"name="q1_middle">
+                                    <input type="number" id="q1_middle" class="form-control" autocomplete="off"name="q1_middle">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -269,7 +269,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text bg-light">Q2</span>
                                     </div>
-                                    <input type="text" id="q2_middle" class="form-control" autocomplete="off"name="q2_middle">
+                                    <input type="number" id="q2_middle" class="form-control" autocomplete="off"name="q2_middle">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -277,7 +277,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text bg-light">Q3</span>
                                     </div>
-                                    <input type="text" id="q3_middle" class="form-control" autocomplete="off"name="q3_middle">
+                                    <input type="number" id="q3_middle" class="form-control" autocomplete="off"name="q3_middle">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -285,7 +285,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text bg-light">Q4</span>
                                     </div>
-                                    <input type="text" id="q4_middle" class="form-control" autocomplete="off"name="q4_middle">
+                                    <input type="number" id="q4_middle" class="form-control" autocomplete="off"name="q4_middle">
                                 </div>
                             </div>
                         </div>
@@ -297,7 +297,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text bg-light">Q1</span>
                                     </div>
-                                    <input type="text" id="q1_end" class="form-control" autocomplete="off"name="q1_end">
+                                    <input type="number" id="q1_end" class="form-control" autocomplete="off"name="q1_end">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -305,7 +305,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text bg-light">Q2</span>
                                     </div>
-                                    <input type="text" id="q2_end" class="form-control" autocomplete="off"name="q2_end">
+                                    <input type="number" id="q2_end" class="form-control" autocomplete="off"name="q2_end">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -313,7 +313,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text bg-light">Q3</span>
                                     </div>
-                                    <input type="text" id="q3_end" class="form-control" autocomplete="off"name="q3_end">
+                                    <input type="number" id="q3_end" class="form-control" autocomplete="off"name="q3_end">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -321,7 +321,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text bg-light">Q4</span>
                                     </div>
-                                    <input type="text" id="q4_end" class="form-control" autocomplete="off"name="q4_end">
+                                    <input type="number" id="q4_end" class="form-control" autocomplete="off"name="q4_end">
                                 </div>
                             </div>
                         </div>
@@ -368,7 +368,7 @@
                             </div>
                             <div class="col-sm-12">
                                 <label for="ng_quantity">NG Quantity</label>
-                                <input type="text" id="ng_quantity" class="form-control" name="ng_quantity" autocomplete="off">
+                                <input type="number" id="ng_quantity" class="form-control" name="ng_quantity" autocomplete="off">
                             </div>
                         </div>
 
@@ -381,29 +381,34 @@
                                     <option value="NG">NG</option>
                                 </select>
                             </div>
-                         <div class="col-sm-12">
-                                <label>Defect type</label>
-                                <select id="defect_type" class="form-control" name="defect_type" style="margin-bottom:16px">
-                                    <option value="" selected disabled>Choose...</option>
-                                    <option value="Round crest">N/A</option>
-                                    <option value="Round crest">Round crest</option>
-                                    <option value="Damage">Damage</option>
-                                    <option value="Molding defect">Molding defect</option>
-                                    <option value="Excess burr">Excess burr</option>
-                                    <optio value="Dent">Dent</option>
-                                    <option value="Misaligned joint portion">Misaligned joint portion</option>
-                                    <option value="Foreign material">Foreign material</option>
-                                    <option value="Slit position is on joint portion">Slit position is on joint portion</option>
-                                    <option value="With gap on slit">With gap on slit</option>
-                                    <option value="Crack">Crack</option>
-                                    <option value="Overlap">Overlap</option>
-                                    <option value="Slit is uneven">Slit is uneven</option>
-                                    <option value="Slanted slit">Slanted slit</option>
-                                    <option value="Unstable thickness">Unstable thickness</option>
-                                    <option value="Tubebreaking on slit portion">Tubebreaking on slit portion</option>
-                                    <option value="Out of Tolerance">Out of Tolerance</option>
-                                </select>
-                         </div>
+                            <div class="container mt-4">
+        <form id="defectForm" onsubmit="return handleFormSubmit(event)">
+            <label>Defect type</label>
+            <div id="defect-container">
+                <select id="defect_type" class="form-control" name="defect_type" style="margin-bottom:16px" onchange="handleDefectTypeChange()">
+                    <option value="" selected disabled>Choose...</option>
+                    <option value="N/A">N/A</option>
+                    <option value="Round crest">Round crest</option>
+                    <option value="Damage">Damage</option>
+                    <option value="Molding defect">Molding defect</option>
+                    <option value="Excess burr">Excess burr</option>
+                    <option value="Dent">Dent</option>
+                    <option value="Misaligned joint portion">Misaligned joint portion</option>
+                    <option value="Foreign material">Foreign material</option>
+                    <option value="Slit position is on joint portion">Slit position is on joint portion</option>
+                    <option value="With gap on slit">With gap on slit</option>
+                    <option value="Crack">Crack</option>
+                    <option value="Overlap">Overlap</option>
+                    <option value="Slit is uneven">Slit is uneven</option>
+                    <option value="Slanted slit">Slanted slit</option>
+                    <option value="Unstable thickness">Unstable thickness</option>
+                    <option value="Tubebreaking on slit portion">Tubebreaking on slit portion</option>
+                    <option value="Out of Tolerance">Out of Tolerance</option>
+                    <option value="Others">Others</option>
+                </select>
+            </div>
+        </form>
+    </div>
                             <div class="col-sm-12">
                                 <label for="confirm_by">Confirm By</label>
                                 <input type="text" id="confirm_by" class="form-control" name="confirm_by" autocomplete="off" style="margin-bottom:15px">

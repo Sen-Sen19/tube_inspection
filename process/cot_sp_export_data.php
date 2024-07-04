@@ -64,6 +64,7 @@ $headers = array();
 foreach ($fields as $field) {
     $headers[] = $field['Name'];
 }
+$headers[] = 'NG_Indicator'; // Add a new column for NG indicator
 fputcsv($output, $headers);
 
 // Output CSV data rows
@@ -75,6 +76,13 @@ while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
         }
         return $value;
     }, $row);
+
+    // Check for NG condition and add indicator
+    $ngIndicator = '';
+    if (isset($row['defect_type']) && $row['defect_type'] === 'NG') {
+        $ngIndicator = 'NG';
+    }
+    $formattedRow['NG_Indicator'] = $ngIndicator;
 
     fputcsv($output, $formattedRow);
 }

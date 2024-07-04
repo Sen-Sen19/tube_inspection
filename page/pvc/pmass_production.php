@@ -158,7 +158,8 @@
                                             <th>Q2 End</th>
                                             <th>Q3 End</th>
                                             <th>Q4 End</th>
-                                            
+                                            <th>Serial No.</th>
+                                            <th>Lot No.</th>
                                             <th>Appearance Judgement</th>
                                             <th>Dimension Judgement</th>
                                             <th>NG Quantity</th>
@@ -293,7 +294,8 @@ function populateTable(data) {
             <td>${row.q2_end}</td>
             <td>${row.q3_end}</td>
             <td>${row.q4_end}</td>
-           
+             <td>${row.serial_no}</td>
+            <td>${row.lot_no}</td>
             <td>${row.appearance_judgement}</td>
             <td>${row.dimension_judgement}</td>
             <td>${row.ng_quantity}</td>

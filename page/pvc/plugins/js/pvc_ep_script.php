@@ -418,65 +418,86 @@ function refreshPage() {
         window.location.reload(); 
     }
 
-//------------------------------------------------export--------------------------------------------------------
+//------------------------------------------------defect type--------------------------------------------------------
 
-// function export_accounts() {
-//     // Select the table
-//     var table = document.getElementById("sp_cotdb");
+function handleDefectTypeChange() {
+            const defectType = document.getElementById('defect_type');
+            const selectedOption = defectType.value;
 
-//     // Create an empty array to store the rows (including headers)
-//     var rows = [];
+            if (selectedOption === 'Others') {
+                // Show SweetAlert confirmation
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: 'Do you want to specify another defect type?',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Yes, specify',
+                    cancelButtonText: 'No, cancel'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Replace dropdown with a text input if confirmed
+                        const inputField = document.createElement('input');
+                        inputField.setAttribute('type', 'text');
+                        inputField.setAttribute('class', 'form-control');
+                        inputField.setAttribute('id', 'other_defect_type'); // Add an id to the new input field
+                        inputField.setAttribute('name', 'defect_type');
+                        inputField.setAttribute('placeholder', 'Specify other defect type');
+                        inputField.style.marginBottom = '16px';
 
-   
-//     var headerRow = table.rows[0];
-//     var headers = [];
-//     for (var h = 0; h < headerRow.cells.length; h++) {
-//         headers.push(" " + headerRow.cells[h].textContent.trim()); 
-//     }
-//     rows.push(headers.join(","));
+                        const defectContainer = document.getElementById('defect-container');
+                        defectContainer.innerHTML = ''; // Clear previous content
+                        defectContainer.appendChild(inputField);
+                    } else {
+                        // Reset the dropdown to default value if cancelled
+                        defectType.value = "";
+                    }
+                });
+            }
+        }
 
-//     var dataRows = [];
+        function handleFormSubmit(event) {
+            event.preventDefault(); // Prevent form from submitting the traditional way
 
-    
-//     for (var i = 1; i < table.rows.length; i++) {
-//         var row = [], cells = table.rows[i].cells;
+            // Check if the custom input field exists and has a value
+            const otherDefectTypeInput = document.getElementById('other_defect_type');
+            if (otherDefectTypeInput) {
+                const defectType = document.getElementById('defect_type');
+                defectType.value = otherDefectTypeInput.value;
+            }
 
-        
-//         for (var j = 0; j < cells.length; j++) {
-           
-//             row.push(" " + cells[j].textContent.trim()); 
-//         }
+            // Here you can proceed with form submission using AJAX or any other method you prefer
+            console.log('Form submitted with defect type:', document.getElementById('defect_type').value);
+            // Perform your save operation here
+            // Optionally, you can show a success message or perform any other actions needed
+        }
 
-//         // Push the row to the data rows array
-//         dataRows.push(row);
-//     }
-
-//     // Sort data rows by the first column (assuming the first column is the ID)
-//     dataRows.sort(function(a, b) {
-//         return parseInt(a[0]) - parseInt(b[0]); // Assuming ID is a numeric value
-//     });
-
-//     // Concatenate the header row and sorted data rows into the final rows array
-//     rows = rows.concat(dataRows.map(row => row.join(",")));
-
-//     // Join all rows into a CSV string with new line characters
-//     var csv = rows.join("\n");
-
-//     // Create a Blob object for the CSV file
-//     var blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
-
-//     // Create a temporary anchor element and trigger a click to download the CSV file
-//     var link = document.createElement("a");
-//     if (link.download !== undefined) {
-//         var url = URL.createObjectURL(blob);
-//         link.setAttribute("href", url);
-//         link.setAttribute("download", "export.csv");
-//         document.body.appendChild(link);
-//         link.click();
-//         document.body.removeChild(link);
-//     } else {
-//         alert("Exporting CSV is not supported in this browser.");
-//     }
-// }
-
+        function clearForm() {
+            document.getElementById('defectForm').reset();
+            // Clear custom defect input if exists
+            const defectContainer = document.getElementById('defect-container');
+            defectContainer.innerHTML = ''; // Clear custom input
+            // Re-add the original dropdown
+            const selectElement = document.createElement('select');
+            selectElement.id = 'defect_type';
+            selectElement.className = 'form-control';
+            selectElement.name = 'defect_type';
+            selectElement.style.marginBottom = '16px';
+            selectElement.onchange = handleDefectTypeChange;
+            selectElement.innerHTML = `
+                <option value="" selected disabled>Choose...</option>
+                <option value="N/A">N/A</option>
+                <option value="Hole">Hole</option>
+                <option value="Scratch">Scratch</option>
+                <option value="Deformed">Deformed</option>
+                <option value="Rough surface">Rough surface</option>
+                <option value="Bubbles on surface">Bubbles on surface</option>
+                <option value="Unstable thickness">Unstable thickness</option>
+                <option value="Big Diameter">Big Diameter</option>
+                <option value="Small Diameter">Small Diameter</option>
+                <option value="Wrinkled on surface">Wrinkled on surface</option>
+                <option value="Out of Tolerance">Out of Tolerance</option>
+                <option value="Others">Others</option>
+            `;
+            defectContainer.appendChild(selectElement);
+        }
     </script>

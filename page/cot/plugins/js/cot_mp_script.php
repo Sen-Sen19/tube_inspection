@@ -319,97 +319,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 // -------------------------------save-------------------------------
-function saveData() {
-    var form = document.getElementById('myForm');
-    var formData = new FormData(form);
-    var isEmpty = false;
-
-    // Function to reset the border on input event
-    function resetBorder(event) {
-        event.target.style.border = ''; // Reset border to default
-    }
-
-    // Reset borders and remove input event listeners for text inputs
-    form.querySelectorAll('input[type="text"]').forEach(input => {
-        input.style.border = ''; // Reset border to default
-        input.removeEventListener('input', resetBorder); // Remove any previous listeners to avoid duplication
-    });
-
-    // Reset borders for select elements
-    form.querySelectorAll('select').forEach(select => {
-        select.style.border = ''; // Reset border to default
-    });
-
-    // Check text inputs for empty values
-    form.querySelectorAll('input[type="text"]').forEach(input => {
-        if (input.value.trim() === "") {
-            isEmpty = true;
-            input.style.border = '1px solid red'; // Highlight empty field
-
-            // Add event listener to reset border when user starts typing
-            input.addEventListener('input', resetBorder);
-        }
-    });
-
-    // Check select elements for not being picked
-    form.querySelectorAll('select').forEach(select => {
-        if (select.value.trim() === "") {
-            isEmpty = true;
-            select.style.border = '1px solid red'; // Highlight empty field
-        }
-    });
-
-    if (isEmpty) {
-        Swal.fire({
-            position: 'center',
-            icon: 'warning',
-            title: 'Please fill out all required fields!',
-            showConfirmButton: true
-        });
-        return;
-    }
-
-    // Adjusted fetch request to point to the correct PHP script for MS SQL Server
-    fetch('../../process/mp_cot_save.php', {
-        method: 'POST',
-        body: formData
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return response.text();
-    })
-    .then(data => {
-        console.log(data);
-
-        Swal.fire({
-            position: 'center',
-            icon: 'success',
-            title: 'Your work has been saved',
-            showConfirmButton: false,
-            timer: 1500
-        });
-
-        setTimeout(function() {
-            window.location.reload();
-        }, 1600);
-    })
-    .catch(error => {
-        console.error('Error:', error);
-
-        Swal.fire({
-            position: 'center',
-            icon: 'error',
-            title: 'Oops...',
-            text: 'There was an error saving the data.',
-            timer: 1500
-        });
-    });
-}
-
-
-// ---------------------------------------------------Populate the table COT Start Point---------------------------------------------------
 
 
 // ------------------------------------------------date-------------------------------------------------
@@ -440,65 +349,153 @@ function refreshPage() {
         window.location.reload(); 
     }
 
-//------------------------------------------------export--------------------------------------------------------
 
-function export_accounts() {
-    // Select the table
-    var table = document.getElementById("mp_cotdb");
 
-    // Create an empty array to store the rows (including headers)
-    var rows = [];
 
-   
-    var headerRow = table.rows[0];
-    var headers = [];
-    for (var h = 0; h < headerRow.cells.length; h++) {
-        headers.push(" " + headerRow.cells[h].textContent.trim()); 
-    }
-    rows.push(headers.join(","));
 
-    var dataRows = [];
 
-    
-    for (var i = 1; i < table.rows.length; i++) {
-        var row = [], cells = table.rows[i].cells;
 
-        
-        for (var j = 0; j < cells.length; j++) {
-           
-            row.push(" " + cells[j].textContent.trim()); 
+// ---------------------------------------------------export--------------------------------------------------------------
+
+function exportTable() {
+    const partName = document.getElementById('partName').value;
+    const inspectedBy = document.getElementById('inspectedBy').value;
+    const defectType = document.getElementById('defectType').value;
+    const dateFrom = document.getElementById('date_from').value;
+    const dateTo = document.getElementById('date_to').value;
+
+    // Get current date in YYYY-MM-DD format
+    const currentDate = new Date().toISOString().slice(0, 10);
+
+    // Construct the filename with the current date
+    const filename = `COT_Mass_Production_${currentDate}.csv`;
+
+    // Construct the URL with search parameters
+    const url = `../../process/cot_mp_export_data.php?partName=${encodeURIComponent(partName)}&inspectedBy=${encodeURIComponent(inspectedBy)}&defectType=${encodeURIComponent(defectType)}&dateFrom=${encodeURIComponent(dateFrom)}&dateTo=${encodeURIComponent(dateTo)}`;
+
+    // Fetch data from the PHP script
+    fetch(url)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.blob(); // Convert response to a Blob
+        })
+        .then(blob => {
+            // Create a URL for the Blob data
+            const downloadUrl = window.URL.createObjectURL(blob);
+
+            // Create an <a> element to trigger the download
+            const a = document.createElement('a');
+            a.style.display = 'none';
+            a.href = downloadUrl;
+            a.download = filename; // Set the filename for the downloaded file
+            document.body.appendChild(a);
+
+            // Trigger the download
+            a.click();
+
+            // Clean up by revoking the object URL
+            window.URL.revokeObjectURL(downloadUrl);
+        })
+        .catch(error => {
+            console.error('Error exporting data:', error);
+        });
+}
+
+
+
+
+
+
+
+//------------------------------------------------defect type--------------------------------------------------------
+
+function handleDefectTypeChange() {
+            const defectType = document.getElementById('defect_type');
+            const selectedOption = defectType.value;
+
+            if (selectedOption === 'Others') {
+                // Show SweetAlert confirmation
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: 'Do you want to specify another defect type?',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Yes, specify',
+                    cancelButtonText: 'No, cancel'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Replace dropdown with a text input if confirmed
+                        const inputField = document.createElement('input');
+                        inputField.setAttribute('type', 'text');
+                        inputField.setAttribute('class', 'form-control');
+                        inputField.setAttribute('id', 'other_defect_type'); // Add an id to the new input field
+                        inputField.setAttribute('name', 'defect_type');
+                        inputField.setAttribute('placeholder', 'Specify other defect type');
+                        inputField.style.marginBottom = '16px';
+
+                        const defectContainer = document.getElementById('defect-container');
+                        defectContainer.innerHTML = ''; // Clear previous content
+                        defectContainer.appendChild(inputField);
+                    } else {
+                        // Reset the dropdown to default value if cancelled
+                        defectType.value = "";
+                    }
+                });
+            }
         }
 
-        // Push the row to the data rows array
-        dataRows.push(row);
-    }
+        function handleFormSubmit(event) {
+            event.preventDefault(); // Prevent form from submitting the traditional way
 
-    // Sort data rows by the first column (assuming the first column is the ID)
-    dataRows.sort(function(a, b) {
-        return parseInt(a[0]) - parseInt(b[0]); // Assuming ID is a numeric value
-    });
+            // Check if the custom input field exists and has a value
+            const otherDefectTypeInput = document.getElementById('other_defect_type');
+            if (otherDefectTypeInput) {
+                const defectType = document.getElementById('defect_type');
+                defectType.value = otherDefectTypeInput.value;
+            }
 
-    // Concatenate the header row and sorted data rows into the final rows array
-    rows = rows.concat(dataRows.map(row => row.join(",")));
+            // Here you can proceed with form submission using AJAX or any other method you prefer
+            console.log('Form submitted with defect type:', document.getElementById('defect_type').value);
+            // Perform your save operation here
+            // Optionally, you can show a success message or perform any other actions needed
+        }
 
-    // Join all rows into a CSV string with new line characters
-    var csv = rows.join("\n");
-
-    // Create a Blob object for the CSV file
-    var blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
-
-    // Create a temporary anchor element and trigger a click to download the CSV file
-    var link = document.createElement("a");
-    if (link.download !== undefined) {
-        var url = URL.createObjectURL(blob);
-        link.setAttribute("href", url);
-        link.setAttribute("download", "export.csv");
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-    } else {
-        alert("Exporting CSV is not supported in this browser.");
-    }
-}
+        function clearForm() {
+            document.getElementById('defectForm').reset();
+            // Clear custom defect input if exists
+            const defectContainer = document.getElementById('defect-container');
+            defectContainer.innerHTML = ''; // Clear custom input
+            // Re-add the original dropdown
+            const selectElement = document.createElement('select');
+            selectElement.id = 'defect_type';
+            selectElement.className = 'form-control';
+            selectElement.name = 'defect_type';
+            selectElement.style.marginBottom = '16px';
+            selectElement.onchange = handleDefectTypeChange;
+            selectElement.innerHTML = `
+                <option value="" selected disabled>Choose...</option>
+                <option value="N/A">N/A</option>
+                <option value="Round crest">Round crest</option>
+                <option value="Damage">Damage</option>
+                <option value="Molding defect">Molding defect</option>
+                <option value="Excess burr">Excess burr</option>
+                <option value="Dent">Dent</option>
+                <option value="Misaligned joint portion">Misaligned joint portion</option>
+                <option value="Foreign material">Foreign material</option>
+                <option value="Slit position is on joint portion">Slit position is on joint portion</option>
+                <option value="With gap on slit">With gap on slit</option>
+                <option value="Crack">Crack</option>
+                <option value="Overlap">Overlap</option>
+                <option value="Slit is uneven">Slit is uneven</option>
+                <option value="Slanted slit">Slanted slit</option>
+                <option value="Unstable thickness">Unstable thickness</option>
+                <option value="Tubebreaking on slit portion">Tubebreaking on slit portion</option>
+                <option value="Out of Tolerance">Out of Tolerance</option>
+                <option value="Others">Others</option>
+            `;
+            defectContainer.appendChild(selectElement);
+        }
 
     </script>
