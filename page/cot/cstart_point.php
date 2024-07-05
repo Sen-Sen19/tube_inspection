@@ -35,42 +35,44 @@
                             </div>
                         </div>
                         <div class="card-body">
-                        <div class="row mb-4">
-                        <div class="col-sm-4">
-    <label>Part Name</label>
-    <select class="form-control" id="partName">
-        <option value="">Choose...</option>
-    </select>
-</div>
+                            <div class="row mb-4">
+                                <div class="col-sm-4">
+                                    <label>Part Name</label>
+                                    <select class="form-control" id="partName">
+                                        <option value="">Choose...</option>
+                                    </select>
+                                </div>
 
 
-    <div class="col-sm-4">
-        <label>Inspected By</label>
-        <input type="text" class="form-control" placeholder="Inspected By" id="inspectedBy">
-    </div>
-    <div class="col-sm-4">
-        <label for="defectType">Defect Type</label>
-        <select id="defectType" class="form-control">
-            <option value="" selected disabled>Choose...</option>
-            <option value="Round crest">Round crest</option>
-            <option value="Damage">Damage</option>
-            <option value="Molding defect">Molding defect</option>
-            <option value="Excess burr">Excess burr</option>
-            <option value="Dent">Dent</option>
-            <option value="Misaligned joint portion">Misaligned joint portion</option>
-            <option value="Foreign material">Foreign material</option>
-            <option value="Slit position is on joint portion">Slit position is on joint portion</option>
-            <option value="With gap on slit">With gap on slit</option>
-            <option value="Crack">Crack</option>
-            <option value="Overlap">Overlap</option>
-            <option value="Slit is uneven">Slit is uneven</option>
-            <option value="Slanted slit">Slanted slit</option>
-            <option value="Unstable thickness">Unstable thickness</option>
-            <option value="Tubebreaking on slit portion">Tubebreaking on slit portion</option>
-            <option value="Out of Tolerance">Out of Tolerance</option>
-        </select>
-    </div>
-</div>
+                                <div class="col-sm-4">
+                                    <label>Inspected By</label>
+                                    <input type="text" class="form-control" placeholder="Inspected By" id="inspectedBy">
+                                </div>
+                                <div class="col-sm-4">
+                                    <label for="defectType">Defect Type</label>
+                                    <select id="defectType" class="form-control">
+                                        <option value="" selected disabled>Choose...</option>
+                                        <option value="Round crest">Round crest</option>
+                                        <option value="Damage">Damage</option>
+                                        <option value="Molding defect">Molding defect</option>
+                                        <option value="Excess burr">Excess burr</option>
+                                        <option value="Dent">Dent</option>
+                                        <option value="Misaligned joint portion">Misaligned joint portion</option>
+                                        <option value="Foreign material">Foreign material</option>
+                                        <option value="Slit position is on joint portion">Slit position is on joint
+                                            portion</option>
+                                        <option value="With gap on slit">With gap on slit</option>
+                                        <option value="Crack">Crack</option>
+                                        <option value="Overlap">Overlap</option>
+                                        <option value="Slit is uneven">Slit is uneven</option>
+                                        <option value="Slanted slit">Slanted slit</option>
+                                        <option value="Unstable thickness">Unstable thickness</option>
+                                        <option value="Tubebreaking on slit portion">Tubebreaking on slit portion
+                                        </option>
+                                        <option value="Out of Tolerance">Out of Tolerance</option>
+                                    </select>
+                                </div>
+                            </div>
 
 
 
@@ -88,8 +90,7 @@
                                     <label
                                         style="font-weight:normal;margin:0;padding:0;color:#000; font-weight:bold;">Date
                                         To</label>
-                                    <input type="date" name="date_to" class="form-control form-control-sm"
-                                        id="date_to">
+                                    <input type="date" name="date_to" class="form-control form-control-sm" id="date_to">
                                 </div>
 
                                 <div class="col-6 col-sm-4 ">
@@ -110,7 +111,8 @@
                                 </div>
                                 <div class="col-6 col-sm-4 ">
                                     <!-- Export Button -->
-                                    <button class="btn btn-warning btn-block btn-sm" id="exportReqBtn"onclick="exportTable()">
+                                    <button class="btn btn-warning btn-block btn-sm" id="exportReqBtn"
+                                        onclick="exportTable()">
                                         <i class="fas fa-file-export mr-2"></i>Export
                                     </button>
                                 </div>
@@ -198,20 +200,23 @@
 
 <!-- Modal Structure -->
 <div class="modal fade" id="dataModal" tabindex="-1" aria-labelledby="dataModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-xl modal-dialog-scrollable">
-    <div class="modal-content">
-      <div class="modal-header" style="background-color: #20c997; color: white;">
-        <h5 class="modal-title" id="dataModalLabel">Inspection Details</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body" id="modalDataContent">
-        <!-- Data will be dynamically inserted here -->
-      </div>
-      <div class="modal-footer d-flex justify-content-end">
-        <button type="button" class="btn" style="background-color: #20c997; color: white;" onclick="saveInspectionDetails()">Save</button>
-      </div>
+    <div class="modal-dialog modal-xl modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: #20c997; color: white;">
+                <h5 class="modal-title" id="dataModalLabel">Start Point</h5>
+                <button type="button" class="close" data-dismiss="modal" style="color:white" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="modalDataContent">
+                <!-- Data will be dynamically inserted here -->
+            </div>
+            <div class="modal-footer d-flex justify-content-end">
+                <button type="button" class="btn" style="background-color: #20c997; color: white;"
+                    onclick="saveInspectionDetails()">Save</button>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 
 
@@ -219,85 +224,85 @@
 
 
 <script>
-    
+
     document.addEventListener('DOMContentLoaded', () => {
-    let offset = 0;
-    const limit = 10;
+        let offset = 0;
+        const limit = 10;
 
-    // Load initial table data
-    loadTableData(offset, limit);
-
-    // Load more button event
-    document.getElementById('btnLoadMore').addEventListener('click', () => {
-        offset += limit;
+        // Load initial table data
         loadTableData(offset, limit);
-    });
 
-    // Infinite scroll event (if you want to keep it)
-    document.getElementById('accounts_table_res').addEventListener('scroll', () => {
-        const container = document.getElementById('accounts_table_res');
-        if (container.scrollTop + container.clientHeight >= container.scrollHeight) {
+        // Load more button event
+        document.getElementById('btnLoadMore').addEventListener('click', () => {
             offset += limit;
             loadTableData(offset, limit);
-        }
+        });
+
+        // Infinite scroll event (if you want to keep it)
+        document.getElementById('accounts_table_res').addEventListener('scroll', () => {
+            const container = document.getElementById('accounts_table_res');
+            if (container.scrollTop + container.clientHeight >= container.scrollHeight) {
+                offset += limit;
+                loadTableData(offset, limit);
+            }
+        });
+
+        // Search button event
+        document.getElementById('searchbtn').addEventListener('click', () => {
+            offset = 0;
+            loadTableData(offset, limit, true);
+        });
     });
 
-    // Search button event
-    document.getElementById('searchbtn').addEventListener('click', () => {
-        offset = 0;
-        loadTableData(offset, limit, true);
-    });
-});
+    function loadTableData(offset, limit, reset = false) {
+        // const partName = document.querySelector('input[placeholder="Part Name"]').value;
+        const partName = document.getElementById('partName').value;
+        const inspectedBy = document.querySelector('input[placeholder="Inspected By"]').value;
+        const defectType = document.getElementById('defectType').value;
+        const dateFrom = document.getElementById('date_from').value;
+        const dateTo = document.getElementById('date_to').value;
 
-function loadTableData(offset, limit, reset = false) {
-    // const partName = document.querySelector('input[placeholder="Part Name"]').value;
-    const partName = document.getElementById('partName').value;
-    const inspectedBy = document.querySelector('input[placeholder="Inspected By"]').value;
-    const defectType = document.getElementById('defectType').value;
-    const dateFrom = document.getElementById('date_from').value;
-    const dateTo = document.getElementById('date_to').value;
+        const url = `../../process/cot_sp_get_data.php?offset=${offset}&limit=${limit}&partName=${partName}&inspectedBy=${inspectedBy}&defectType=${defectType}&dateFrom=${dateFrom}&dateTo=${dateTo}`;
 
-    const url = `../../process/cot_sp_get_data.php?offset=${offset}&limit=${limit}&partName=${partName}&inspectedBy=${inspectedBy}&defectType=${defectType}&dateFrom=${dateFrom}&dateTo=${dateTo}`;
+        fetch(url)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (reset) {
+                    document.getElementById('sp_cotdb_body').innerHTML = '';
+                }
+                populateTable(data);
 
-    fetch(url)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(data => {
-            if (reset) {
-                document.getElementById('sp_cotdb_body').innerHTML = ''; 
-            }
-            populateTable(data);
+                // Hide 'Load more' button if all data is loaded
+                if (data.length < limit) {
+                    document.getElementById('btnLoadMore').style.display = 'none';
+                } else {
+                    document.getElementById('btnLoadMore').style.display = 'block';
+                }
+            })
+            .catch(error => console.error('Error fetching data:', error));
+    }
 
-            // Hide 'Load more' button if all data is loaded
-            if (data.length < limit) {
-                document.getElementById('btnLoadMore').style.display = 'none';
-            } else {
-                document.getElementById('btnLoadMore').style.display = 'block';
-            }
-        })
-        .catch(error => console.error('Error fetching data:', error));
-}
-
-// Rest of the populateTable function remains the same
+    // Rest of the populateTable function remains the same
 
 
-// -----------------------------populate table-------------------
-function populateTable(data) {
-    const tbody = document.getElementById('sp_cotdb_body');
+    // -----------------------------populate table-------------------
+    function populateTable(data) {
+        const tbody = document.getElementById('sp_cotdb_body');
 
-    data.forEach(row => {
-        const newRow = tbody.insertRow();
+        data.forEach(row => {
+            const newRow = tbody.insertRow();
 
-        // Format date fields
-        const timeStart = formatDate(row.time_start, false, true); // Pass false for isInspectionDate and true for removeMilliseconds
-        const timeEnd = formatDate(row.time_end, false, true); // Pass false for isInspectionDate and true for removeMilliseconds
-        const inspectionDate = formatDate(row.inspection_date, true); // Pass true to indicate it's inspection_date
+            // Format date fields
+            const timeStart = formatDate(row.time_start, false, true); // Pass false for isInspectionDate and true for removeMilliseconds
+            const timeEnd = formatDate(row.time_end, false, true); // Pass false for isInspectionDate and true for removeMilliseconds
+            const inspectionDate = formatDate(row.inspection_date, true); // Pass true to indicate it's inspection_date
 
-        newRow.innerHTML = `
+            newRow.innerHTML = `
             <td>${row.id}</td>
             <td>${row.part_name}</td>
             <td>${row.quantity}</td>
@@ -342,371 +347,328 @@ function populateTable(data) {
             <td>${row.confirm_by}</td>
             <td>${row.remarks}</td>
         `;
-        newRow.addEventListener('click', () => {
+            newRow.addEventListener('click', () => {
                 // Call function to open modal and populate with row data
                 openModalWithData(row);
             });
         });
     }
-document.addEventListener('DOMContentLoaded', () => {
-    // Fetch part names data
-    fetch('../../process/cot_get_part_names.php')
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(data => {
-            // Populate dropdown options
-            const partNameSelect = document.getElementById('partName');
-            data.forEach(part => {
-                const option = document.createElement('option');
-                option.value = part.part_name;
-                option.textContent = part.part_name;
-                partNameSelect.appendChild(option);
+    document.addEventListener('DOMContentLoaded', () => {
+        // Fetch part names data
+        fetch('../../process/cot_get_part_names.php')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                // Populate dropdown options
+                const partNameSelect = document.getElementById('partName');
+                data.forEach(part => {
+                    const option = document.createElement('option');
+                    option.value = part.part_name;
+                    option.textContent = part.part_name;
+                    partNameSelect.appendChild(option);
+                });
+            })
+            .catch(error => console.error('Error fetching part names:', error));
+    });
+
+
+
+    function exportTable() {
+        const partName = document.getElementById('partName').value;
+        const inspectedBy = document.getElementById('inspectedBy').value;
+        const defectType = document.getElementById('defectType').value;
+        const dateFrom = document.getElementById('date_from').value;
+        const dateTo = document.getElementById('date_to').value;
+
+        // Get current date in YYYY-MM-DD format
+        const currentDate = new Date().toISOString().slice(0, 10);
+
+        // Construct the filename with the current date
+        const filename = `COT_Start_Point_${currentDate}.csv`;
+
+        // Construct the URL with search parameters
+        const url = `../../process/cot_sp_export_data.php?partName=${encodeURIComponent(partName)}&inspectedBy=${encodeURIComponent(inspectedBy)}&defectType=${encodeURIComponent(defectType)}&dateFrom=${encodeURIComponent(dateFrom)}&dateTo=${encodeURIComponent(dateTo)}`;
+
+        // Fetch data from the PHP script
+        fetch(url)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.blob();
+            })
+            .then(blob => {
+
+                const downloadUrl = window.URL.createObjectURL(blob);
+
+
+                const a = document.createElement('a');
+                a.style.display = 'none';
+                a.href = downloadUrl;
+                a.download = filename;
+                document.body.appendChild(a);
+
+
+                a.click();
+
+
+                window.URL.revokeObjectURL(downloadUrl);
+            })
+            .catch(error => {
+                console.error('Error exporting data:', error);
             });
-        })
-        .catch(error => console.error('Error fetching part names:', error));
-});
+    }
+    function openModalWithData(rowData) {
+        const modalBody = document.getElementById('modalDataContent');
+        modalBody.innerHTML = ''; // Clear previous content
 
-
-
-function exportTable() {
-    const partName = document.getElementById('partName').value;
-    const inspectedBy = document.getElementById('inspectedBy').value;
-    const defectType = document.getElementById('defectType').value;
-    const dateFrom = document.getElementById('date_from').value;
-    const dateTo = document.getElementById('date_to').value;
-
-    // Get current date in YYYY-MM-DD format
-    const currentDate = new Date().toISOString().slice(0, 10);
-
-    // Construct the filename with the current date
-    const filename = `COT_Start_Point_${currentDate}.csv`;
-
-    // Construct the URL with search parameters
-    const url = `../../process/cot_sp_export_data.php?partName=${encodeURIComponent(partName)}&inspectedBy=${encodeURIComponent(inspectedBy)}&defectType=${encodeURIComponent(defectType)}&dateFrom=${encodeURIComponent(dateFrom)}&dateTo=${encodeURIComponent(dateTo)}`;
-
-    // Fetch data from the PHP script
-    fetch(url)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.blob(); 
-        })
-        .then(blob => {
-            
-            const downloadUrl = window.URL.createObjectURL(blob);
-
-            
-            const a = document.createElement('a');
-            a.style.display = 'none';
-            a.href = downloadUrl;
-            a.download = filename; 
-            document.body.appendChild(a);
-
-           
-            a.click();
-
-            
-            window.URL.revokeObjectURL(downloadUrl);
-        })
-        .catch(error => {
-            console.error('Error exporting data:', error);
-        });
-}
-function openModalWithData(rowData) {
-    const modalBody = document.getElementById('modalDataContent');
-    modalBody.innerHTML = ''; // Clear previous content
-
-    // Create HTML content with textboxes to display row data in an editable format
-    const modalContent = `
+        // Create HTML content with textboxes to display row data in an editable format
+        const modalContent = `
         <form id="inspectionForm">
             <table class="table table-bordered">
                 <tbody>
-                    <tr>
-                        <th>ID:</th>
-                        <td><input type="text" name="id" value="${rowData.id}" class="form-control" readonly></td>
-                        <th>Part Name:</th>
-                        <td><input type="text" name="part_name" value="${rowData.part_name}" class="form-control"></td>
-                    </tr>
-                    <tr>
-                        <th>Quantity:</th>
-                        <td><input type="text" name="quantity" value="${rowData.quantity}" class="form-control"></td>
-                        <th>Inspected By:</th>
-                        <td><input type="text" name="inspected_by" value="${rowData.inspected_by}" class="form-control" readonly></td>
-                    </tr>
-                    <tr>
-                        <th>Shift:</th>
-                        <td><input type="text" name="shift" value="${rowData.shift}" class="form-control"readonly></td>
-                        <th>Total Minutes:</th>
-                        <td><input type="text" name="total_mins" value="${rowData.total_mins}" class="form-control" readonly></td>
-                    </tr>
-                    <tr>
-                        <th>Outside Appearance:</th>
-                        <td>
-                            <select name="outside_appearance" class="form-control">
-                                <option value="OK" ${rowData.outside_appearance === 'OK' ? 'selected' : ''}>OK</option>
-                                <option value="NG" ${rowData.outside_appearance === 'NG' ? 'selected' : ''}>NG</option>
-                            </select>
-                        </td>
-                        <th>Slit Condition:</th>
-                        <td>
-                            <select name="slit_condition" class="form-control">
-                                <option value="OK" ${rowData.slit_condition === 'OK' ? 'selected' : ''}>OK</option>
-                                <option value="NG" ${rowData.slit_condition === 'NG' ? 'selected' : ''}>NG</option>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>Inside Appearance:</th>
-                        <td>
-                            <select name="inside_appearance" class="form-control">
-                                <option value="OK" ${rowData.inside_appearance === 'OK' ? 'selected' : ''}>OK</option>
-                                <option value="NG" ${rowData.inside_appearance === 'NG' ? 'selected' : ''}>NG</option>
-                            </select>
-                        </td>
-                        <th>Color:</th>
-                        <td>
-                            <select name="color" class="form-control">
-                                <option value="OK" ${rowData.color === 'OK' ? 'selected' : ''}>OK</option>
-                                <option value="NG" ${rowData.color === 'NG' ? 'selected' : ''}>NG</option>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>Using Round Bar:</th>
-                        <td>
-                            <select name="using_round_bar" class="form-control">
-                                <option value="OK" ${rowData.using_round_bar === 'OK' ? 'selected' : ''}>OK</option>
-                                <option value="NG" ${rowData.using_round_bar === 'NG' ? 'selected' : ''}>NG</option>
-                            </select>
-                        </td>
-                        <th>Using Bare Hands:</th>
-                        <td>
-                            <select name="using_bare_hands" class="form-control">
-                                <option value="OK" ${rowData.using_bare_hands === 'OK' ? 'selected' : ''}>OK</option>
-                                <option value="NG" ${rowData.using_bare_hands === 'NG' ? 'selected' : ''}>NG</option>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>Appearance Judgement:</th>
-                        <td>
-                            <select name="appearance_judgement" class="form-control">
-                                <option value="OK" ${rowData.appearance_judgement === 'OK' ? 'selected' : ''}>OK</option>
-                                <option value="NG" ${rowData.appearance_judgement === 'NG' ? 'selected' : ''}>NG</option>
-                            </select>
-                        </td>
-                        <th>Dimension Judgement:</th>
-                        <td>
-                            <select name="dimension_judgement" class="form-control">
-                                <option value="OK" ${rowData.dimension_judgement === 'OK' ? 'selected' : ''}>OK</option>
-                                <option value="NG" ${rowData.dimension_judgement === 'NG' ? 'selected' : ''}>NG</option>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>Inner Diameter Tolerance Plus:</th>
-                        <td><input type="text" name="i_tolerance_plus" value="${rowData.i_tolerance_plus}" class="form-control" readonly></td>
-                        <th>Inner Diameter Tolerance Minus:</th>
-                        <td><input type="text" name="i_tolerance_minus" value="${rowData.i_tolerance_minus}" class="form-control" readonly></td>
-                    </tr>
-                    <tr>
-                        <th>Inner Diameter Start:</th>
-                        <td><input type="text" name="i_diameter_start" value="${rowData.i_diameter_start}" class="form-control"></td>
-                        <th>Inner Diameter End:</th>
-                        <td><input type="text" name="i_diameter_end" value="${rowData.i_diameter_end}" class="form-control"></td>
-                    </tr>
-                    <tr>
-                        <th>Outer Diameter Tolerance Plus:</th>
-                        <td><input type="text" name="o_tolerance_plus" value="${rowData.o_tolerance_plus}" class="form-control" readonly></td>
-                        <th>Outer Diameter Tolerance Minus:</th>
-                        <td><input type="text" name="o_tolerance_minus" value="${rowData.o_tolerance_minus}" class="form-control" readonly></td>
-                    </tr>
-                    <tr>
-                        <th>Outer Diameter Start:</th>
-                        <td><input type="text" name="o_diameter_start" value="${rowData.o_diameter_start}" class="form-control"></td>
-                        <th>Outer Diameter End:</th>
-                        <td><input type="text" name="o_diameter_end" value="${rowData.o_diameter_end}" class="form-control"></td>
-                    </tr>
-                    <tr>
-                        <th>Weight Tolerance Plus:</th>
-                        <td><input type="text" name="w_tolerance_plus" value="${rowData.w_tolerance_plus}" class="form-control" readonly></td>
-                        <th>Weight Tolerance Minus:</th>
-                        <td><input type="text" name="w_tolerance_minus" value="${rowData.w_tolerance_minus}" class="form-control" readonly></td>
-                    </tr>
-                    <tr>
-                        <th>Q1 Start:</th>
-                        <td><input type="text" name="q1_start" value="${rowData.q1_start}" class="form-control" readonly></td>
-                        <th>Q2 Start:</th>
-                        <td><input type="text" name="q2_start" value="${rowData.q2_start}" class="form-control" readonly></td>
-                    </tr>
-                    <tr>
-                        <th>Q3 Start:</th>
-                        <td><input type="text" name="q3_start" value="${rowData.q3_start}" class="form-control" readonly></td>
-                        <th>Q4 Start:</th>
-                        <td><input type="text" name="q4_start" value="${rowData.q4_start}" class="form-control" readonly></td>
-                    </tr>
-                    <tr>
-                        <th>Q1 Middle:</th>
-                        <td><input type="text" name="q1_middle" value="${rowData.q1_middle}" class="form-control" readonly></td>
-                        <th>Q2 Middle:</th>
-                        <td><input type="text" name="q2_middle" value="${rowData.q2_middle}" class="form-control" readonly></td>
-                    </tr>
-                    <tr>
-                        <th>Q3 Middle:</th>
-                        <td><input type="text" name="q3_middle" value="${rowData.q3_middle}" class="form-control" readonly></td>
-                        <th>Q4 Middle:</th>
-                        <td><input type="text" name="q4_middle" value="${rowData.q4_middle}" class="form-control" readonly></td>
-                    </tr> 
-                    <tr>
-                        <th>Q1 End:</th>
-                        <td><input type="text" name="q1_end" value="${rowData.q1_end}" class="form-control" readonly></td>
-                        <th>Q2 End:</th>
-                        <td><input type="text" name="q2_end" value="${rowData.q2_end}" class="form-control" readonly></td>
-                    </tr>
-                    <tr>
-                        <th>Q3 End:</th>
-                        <td><input type="text" name="q3_end" value="${rowData.q3_end}" class="form-control" readonly></td>
-                        <th>Q4 End:</th>
-                        <td><input type="text" name="q4_end" value="${rowData.q4_end}" class="form-control" readonly></td>
-                    </tr>
-                    <tr>
-                        <th>Material Judgement:</th>
-                        <td>
-                            <select name="material_judgement" class="form-control">
-                                <option value="OK" ${rowData.material_judgement === 'OK' ? 'selected' : ''}>OK</option>
-                                <option value="NG" ${rowData.material_judgement === 'NG' ? 'selected' : ''}>NG</option>
-                            </select>
-                        </td>
-                        <th>Net Weight:</th>
-                        <td><input type="text" name="net_weight" value="${rowData.net_weight}" class="form-control"></td>
-                    </tr>
-                    <tr>
-                        <th>Gross Weight:</th>
-                        <td><input type="text" name="gross_weight" value="${rowData.gross_weight}" class="form-control"></td>
-                        <th>Machine:</th>
-                        <td><input type="text" name="machine" value="${rowData.machine}" class="form-control"></td>
-                    </tr>
-                    <tr>
-                        <th>Visual Inspection:</th>
-                        <td>
-                            <select name="visual_inspection" class="form-control">
-                                <option value="OK" ${rowData.visual_inspection === 'OK' ? 'selected' : ''}>OK</option>
-                                <option value="NG" ${rowData.visual_inspection === 'NG' ? 'selected' : ''}>NG</option>
-                            </select>
-                        </td>
-                        <th>Dimensional Inspection:</th>
-                        <td>
-                            <select name="dimensional_inspection" class="form-control">
-                                <option value="OK" ${rowData.dimensional_inspection === 'OK' ? 'selected' : ''}>OK</option>
-                                <option value="NG" ${rowData.dimensional_inspection === 'NG' ? 'selected' : ''}>NG</option>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>QC Check:</th>
-                        <td>
-                            <select name="qc_check" class="form-control">
-                                <option value="OK" ${rowData.qc_check === 'OK' ? 'selected' : ''}>OK</option>
-                                <option value="NG" ${rowData.qc_check === 'NG' ? 'selected' : ''}>NG</option>
-                            </select>
-                        </td>
-                        <th>Acceptance Judgement:</th>
-                        <td>
-                            <select name="acceptance_judgement" class="form-control">
-                                <option value="OK" ${rowData.acceptance_judgement === 'OK' ? 'selected' : ''}>OK</option>
-                                <option value="NG" ${rowData.acceptance_judgement === 'NG' ? 'selected' : ''}>NG</option>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>Confirm By:</th>
-                        <td><input type="text" name="confirm_by" value="${rowData.confirm_by}" class="form-control"></td>
-                        <th>Inspector's Remarks:</th>
-                        <td colspan="3"><textarea name="remarks" class="form-control">${rowData.remarks}</textarea></td>
-                    </tr>
+                     <tr>
+                    <th>ID:</th>
+                    <td><input type="text" name="id" value="${rowData.id}" class="form-control" readonly></td>
+                    <th>Part Name:</th>
+                    <td><input type="text" name="part_name" value="${rowData.part_name}" class="form-control" readonly></td>
+                </tr>
+                <tr>
+                    <th>Quantity:</th>
+                    <td><input type="text" name="quantity" value="${rowData.quantity}" class="form-control"></td>
+                    <th>Inspected By:</th>
+                    <td><input type="text" name="inspected_by" value="${rowData.inspected_by}" class="form-control" readonly></td>
+                </tr>
+                <tr>
+                    <th>Shift:</th>
+                    <td><input type="text" name="shift" value="${rowData.shift}" class="form-control"></td>
+                    <th>Total Minutes:</th>
+                    <td><input type="text" name="total_mins" value="${rowData.total_mins}" class="form-control" readonly></td>
+                </tr>
+                <tr>
+                    <th>Outside Appearance:</th>
+                    <td>
+                        <select name="outside_appearance" class="form-control">
+                            <option value="OK" ${rowData.outside_appearance === 'OK' ? 'selected' : ''}>OK</option>
+                            <option value="NG" ${rowData.outside_appearance === 'NG' ? 'selected' : ''}>NG</option>
+                        </select>
+                    </td>
+                    <th>Slit Condition:</th>
+                    <td>
+                        <select name="slit_condition" class="form-control">
+                            <option value="OK" ${rowData.slit_condition === 'OK' ? 'selected' : ''}>OK</option>
+                            <option value="NG" ${rowData.slit_condition === 'NG' ? 'selected' : ''}>NG</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Inside Appearance:</th>
+                    <td>
+                        <select name="inside_appearance" class="form-control">
+                            <option value="OK" ${rowData.inside_appearance === 'OK' ? 'selected' : ''}>OK</option>
+                            <option value="NG" ${rowData.inside_appearance === 'NG' ? 'selected' : ''}>NG</option>
+                        </select>
+                    </td>
+                    <th>Color:</th>
+                    <td>
+                        <select name="color" class="form-control">
+                            <option value="OK" ${rowData.color === 'OK' ? 'selected' : ''}>OK</option>
+                            <option value="NG" ${rowData.color === 'NG' ? 'selected' : ''}>NG</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Using Round Bar:</th>
+                    <td>
+                        <select name="using_round_bar" class="form-control">
+                            <option value="OK" ${rowData.using_round_bar === 'OK' ? 'selected' : ''}>OK</option>
+                            <option value="NG" ${rowData.using_round_bar === 'NG' ? 'selected' : ''}>NG</option>
+                        </select>
+                    </td>
+                    <th>Using Bare Hands:</th>
+                    <td>
+                        <select name="using_bare_hands" class="form-control">
+                            <option value="OK" ${rowData.using_bare_hands === 'OK' ? 'selected' : ''}>OK</option>
+                            <option value="NG" ${rowData.using_bare_hands === 'NG' ? 'selected' : ''}>NG</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Inner Diameter Tolerance Plus:</th>
+                    <td><input type="text" name="i_tolerance_plus" value="${rowData.i_tolerance_plus}" class="form-control" readonly></td>
+                    <th>Inner Diameter Tolerance Minus:</th>
+                    <td><input type="text" name="i_tolerance_minus" value="${rowData.i_tolerance_minus}" class="form-control" readonly></td>
+                </tr>
+                <tr>
+                    <th>Inner Diameter Start:</th>
+                    <td><input type="text" name="i_diameter_start" value="${rowData.i_diameter_start}" class="form-control"></td>
+                    <th>Inner Diameter End:</th>
+                    <td><input type="text" name="i_diameter_end" value="${rowData.i_diameter_end}" class="form-control"></td>
+                </tr>
+                <tr>
+                    <th>Outer Diameter Tolerance Plus:</th>
+                    <td><input type="text" name="o_tolerance_plus" value="${rowData.o_tolerance_plus}" class="form-control" readonly></td>
+                    <th>Outer Diameter Tolerance Minus:</th>
+                    <td><input type="text" name="o_tolerance_minus" value="${rowData.o_tolerance_minus}" class="form-control" readonly></td>
+                </tr>
+                <tr>
+                    <th>Outer Diameter Start:</th>
+                    <td><input type="text" name="o_diameter_start" value="${rowData.o_diameter_start}" class="form-control"></td>
+                    <th>Outer Diameter End:</th>
+                    <td><input type="text" name="o_diameter_end" value="${rowData.o_diameter_end}" class="form-control"></td>
+                </tr>
+                <tr>
+                    <th>W Tolerance + :</th>
+                    <td><input type="text" name="w_tolerance_plus" value="${rowData.w_tolerance_plus}" class="form-control" readonly></td>
+                    <th>W Tolerance - :</th>
+                    <td><input type="text" name="w_tolerance_minus" value="${rowData.w_tolerance_minus}" class="form-control" readonly></td>
+                </tr>
+                <tr>
+                    <th>Q1 Start:</th>
+                    <td><input type="text" name="q1_start" value="${rowData.q1_start}" class="form-control" ></td>
+                    <th>Q2 Start:</th>
+                    <td><input type="text" name="q2_start" value="${rowData.q2_start}" class="form-control" ></td>
+                </tr>
+                <tr>
+                    <th>Q3 Start:</th>
+                    <td><input type="text" name="q3_start" value="${rowData.q3_start}" class="form-control" ></td>
+                    <th>Q4 Start:</th>
+                    <td><input type="text" name="q4_start" value="${rowData.q4_start}" class="form-control" ></td>
+                </tr>
+                <tr>
+                    <th>Q1 Middle:</th>
+                    <td><input type="text" name="q1_middle" value="${rowData.q1_middle}" class="form-control" ></td>
+                    <th>Q2 Middle:</th>
+                    <td><input type="text" name="q2_middle" value="${rowData.q2_middle}" class="form-control" ></td>
+                </tr>
+                <tr>
+                    <th>Q3 Middle:</th>
+                    <td><input type="text" name="q3_middle" value="${rowData.q3_middle}" class="form-control" ></td>
+                    <th>Q4 Middle:</th>
+                    <td><input type="text" name="q4_middle" value="${rowData.q4_middle}" class="form-control" ></td>
+                </tr>
+                <tr>
+                    <th>Q1 End:</th>
+                    <td><input type="text" name="q1_end" value="${rowData.q1_end}" class="form-control" ></td>
+                    <th>Q2 End:</th>
+                    <td><input type="text" name="q2_end" value="${rowData.q2_end}" class="form-control" ></td>
+                </tr>
+                <tr>
+                    <th>Q3 End:</th>
+                    <td><input type="text" name="q3_end" value="${rowData.q3_end}" class="form-control" ></td>
+                    <th>Q4 End:</th>
+                    <td><input type="text" name="q4_end" value="${rowData.q4_end}" class="form-control" ></td>
+                </tr>
+                <tr>
+                    <th>Defect Type:</th>
+                    <td><input type="text" name="defect_type" value="${rowData.defect_type}" class="form-control"></td>
+                    <th>NG Quantity:</th>
+                    <td><input type="text" name="ng_quantity" value="${rowData.ng_quantity}" class="form-control"></td>
+                </tr>
+                <tr>
+                    <th>Appearance Judgement:</th>
+                    <td>
+                        <select name="appearance_judgement" class="form-control">
+                            <option value="OK" ${rowData.appearance_judgement === 'OK' ? 'selected' : ''}>OK</option>
+                            <option value="NG" ${rowData.appearance_judgement === 'NG' ? 'selected' : ''}>NG</option>
+                        </select>
+                    </td>
+                    <th>Dimension Judgement:</th>
+                    <td>
+                        <select name="dimension_judgement" class="form-control">
+                            <option value="OK" ${rowData.dimension_judgement === 'OK' ? 'selected' : ''}>OK</option>
+                            <option value="NG" ${rowData.dimension_judgement === 'NG' ? 'selected' : ''}>NG</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Confirm By:</th>
+                    <td><input type="text" name="confirm_by" value="${rowData.confirm_by}" class="form-control"></td>
+                    <th>Inspector's Remarks:</th>
+                    <td colspan="3"><textarea name="remarks" class="form-control">${rowData.remarks}</textarea></td>
+                </tr>
                 </tbody>
             </table>
         </form>
     `;
 
-
-    modalBody.innerHTML = modalContent;
-    const dataModal = new bootstrap.Modal(document.getElementById('dataModal'));
-    dataModal.show();
-}
-function saveInspectionDetails() {
-    // Get the form data
-    const form = document.getElementById('inspectionForm');
-    const formData = new FormData(form);
-
-    // Validate form fields (check if any required fields are empty)
-    let formIsValid = true;
-    form.querySelectorAll('.form-control').forEach(input => {
-        if (input.value.trim() === '' && !input.readOnly) { // Check for non-read only empty fields
-            formIsValid = false;
-            input.classList.add('is-invalid'); // Optionally add a visual indicator for the user
-        } else {
-            input.classList.remove('is-invalid');
-        }
-    });
-
-    if (!formIsValid) {
-        // Show a warning using SweetAlert if form is not valid
-        Swal.fire({
-            icon: 'warning',
-            title: 'Validation Error',
-            text: 'Please fill out all required fields.',
-            confirmButtonColor: '#3085d6',
-            confirmButtonText: 'OK'
-        });
-        return; // Stop further execution if form is not valid
+        modalBody.innerHTML = modalContent;
+        const dataModal = new bootstrap.Modal(document.getElementById('dataModal'));
+        dataModal.show();
     }
+    function saveInspectionDetails() {
+        // Get the form data
+        const form = document.getElementById('inspectionForm');
+        const formData = new FormData(form);
 
-    // Send data to server using fetch
-    fetch('../../process/sp_cot_update.php', {
-        method: 'POST',
-        body: formData
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return response.text();
-    })
-    .then(data => {
-        console.log(data); // Log response from server
-        // Show success message using SweetAlert
-        Swal.fire({
-            icon: 'success',
-            title: 'Success!',
-            text: 'Data saved successfully.',
-            confirmButtonColor: '#3085d6',
-            confirmButtonText: 'OK'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                window.location.reload(); // Reload page after save
+        // Validate form fields (check if any required fields are empty)
+        let formIsValid = true;
+        form.querySelectorAll('.form-control').forEach(input => {
+            if (input.value.trim() === '' && !input.readOnly) { // Check for non-read only empty fields
+                formIsValid = false;
+                input.classList.add('is-invalid'); // Optionally add a visual indicator for the user
+            } else {
+                input.classList.remove('is-invalid');
             }
         });
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        // Show error message using SweetAlert
-        Swal.fire({
-            icon: 'error',
-            title: 'Error!',
-            text: 'There was an error saving the data.',
-            confirmButtonColor: '#d33',
-            confirmButtonText: 'OK'
-        });
-    });
-}
+
+        if (!formIsValid) {
+
+            Swal.fire({
+                icon: 'warning',
+                title: 'Validation Error',
+                text: 'Please fill out all required fields.',
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'OK'
+            });
+            return;
+        }
+
+        // Send data to server using fetch
+        fetch('../../process/sp_cot_update.php', {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.text();
+            })
+            .then(data => {
+                console.log(data); // Log response from server
+                // Show success message using SweetAlert
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success!',
+                    text: 'Data saved successfully.',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'OK'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.reload(); // Reload page after save
+                    }
+                });
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                // Show error message using SweetAlert
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error!',
+                    text: 'There was an error saving the data.',
+                    confirmButtonColor: '#d33',
+                    confirmButtonText: 'OK'
+                });
+            });
+    }
 
 </script>
 
-<?php include 'plugins/sp_footer.php'; ?>
+
 <?php include 'plugins/js/cot_sp_script.php'; ?>
+<?php include 'plugins/sp_footer.php'; ?>

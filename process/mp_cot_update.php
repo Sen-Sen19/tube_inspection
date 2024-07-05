@@ -29,10 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $q2_start = $_POST['q2_start'];
     $q3_start = $_POST['q3_start'];
     $q4_start = $_POST['q4_start'];
-    $q1_middle = $_POST['q1_middle'];
-    $q2_middle = $_POST['q2_middle'];
-    $q3_middle = $_POST['q3_middle'];
-    $q4_middle = $_POST['q4_middle'];
+   
     $q1_end = $_POST['q1_end'];
     $q2_end = $_POST['q2_end'];
     $q3_end = $_POST['q3_end'];
@@ -74,10 +71,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 q2_start = ?,
                 q3_start = ?,
                 q4_start = ?,
-                q1_middle = ?,
-                q2_middle = ?,
-                q3_middle = ?,
-                q4_middle = ?,
+               
                 q1_end = ?,
                 q2_end = ?,
                 q3_end = ?,
@@ -101,7 +95,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $i_tolerance_plus, $i_tolerance_minus, $i_diameter_start, $i_diameter_end,
         $o_tolerance_plus, $o_tolerance_minus, $o_diameter_start, $o_diameter_end,
         $w_tolerance_plus, $w_tolerance_minus, $q1_start, $q2_start,
-        $q3_start, $q4_start, $q1_middle, $q2_middle, $q3_middle, $q4_middle,
+        $q3_start, $q4_start, 
         $q1_end, $q2_end, $q3_end, $q4_end,$serial_no,$lot_no,$using_round_bar, $using_bare_hands,
         $appearance_judgement, $dimension_judgement, $ng_quantity, $defect_type,
         $confirm_by, $remarks, $id

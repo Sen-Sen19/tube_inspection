@@ -48,7 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Add more fields as needed
 
     // SQL query to update data
-    $sql = "UPDATE sp_cotdb
+    $sql = "UPDATE ep_cotdb
             SET part_name = ?,
                 quantity = ?,
                 inspected_by = ?,

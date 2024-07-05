@@ -194,24 +194,25 @@
 </div>
 
 
-<!-- Modal Structure -->
 <div class="modal fade" id="dataModal" tabindex="-1" aria-labelledby="dataModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-xl modal-dialog-scrollable">
-    <div class="modal-content">
-      <div class="modal-header" style="background-color: #20c997; color: white;">
-        <h5 class="modal-title" id="dataModalLabel">Inspection Details</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body" id="modalDataContent">
-        <!-- Data will be dynamically inserted here -->
-      </div>
-      <div class="modal-footer d-flex justify-content-end">
-        <button type="button" class="btn" style="background-color: #20c997; color: white;" onclick="saveInspectionDetails()">Save</button>
-      </div>
+    <div class="modal-dialog modal-xl modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: #20c997; color: white;">
+                <h5 class="modal-title" id="dataModalLabel">End Point</h5>
+                <button type="button" class="close" data-dismiss="modal" style="color:white" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="modalDataContent">
+                
+            </div>
+            <div class="modal-footer d-flex justify-content-end">
+                <button type="button" class="btn" style="background-color: #20c997; color: white;"
+                    onclick="saveInspectionDetails()">Save</button>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
-
 
 
 <script>
@@ -338,8 +339,12 @@ function populateTable(data) {
             <td>${row.confirm_by}</td>
             <td>${row.remarks}</td>
         `;
-    });
-}
+        newRow.addEventListener('click', () => {
+                // Call function to open modal and populate with row data
+                openModalWithData(row);
+            });
+        });
+    }
 
 document.addEventListener('DOMContentLoaded', () => {
     // Fetch part names data
@@ -411,155 +416,250 @@ function exportTable() {
         });
 }
 
+function openModalWithData(rowData) {
+        const modalBody = document.getElementById('modalDataContent');
+        modalBody.innerHTML = ''; // Clear previous content
 
-
-<th>Outer Diameter Start:</th>
-                        <td><input type="text" name="o_diameter_start" value="${rowData.o_diameter_start}" class="form-control"></td>
-                        <th>Outer Diameter End:</th>
-                        <td><input type="text" name="o_diameter_end" value="${rowData.o_diameter_end}" class="form-control"></td>
-                    </tr>
-                    <tr>
-                        <th>Weight Tolerance Plus:</th>
-                        <td><input type="text" name="w_tolerance_plus" value="${rowData.w_tolerance_plus}" class="form-control"readonly></td>
-                        <th>Weight Tolerance Minus:</th>
-                        <td><input type="text" name="w_tolerance_minus" value="${rowData.w_tolerance_minus}" class="form-control"readonly></td>
-                    </tr>
-                    <tr>
-                        <th>Q1 Start:</th>
-                        <td><input type="text" name="q1_start" value="${rowData.q1_start}" class="form-control" readonly></td>
-                        <th>Q2 Start:</th>
-                        <td><input type="text" name="q2_start" value="${rowData.q2_start}" class="form-control" readonly></td>
-                    </tr>
-                    <tr>
-                        <th>Q3 Start:</th>
-                        <td><input type="text" name="q3_start" value="${rowData.q3_start}" class="form-control"readonly></td>
-                        <th>Q4 Start:</th>
-                        <td><input type="text" name="q4_start" value="${rowData.q4_start}" class="form-control"readonly></td>
-                    </tr>
-                    <tr>
-                        <th>Q1 Middle:</th>
-                        <td><input type="text" name="q1_middle" value="${rowData.q1_middle}" class="form-control"readonly></td>
-                        <th>Q2 Middle:</th>
-                        <td><input type="text" name="q2_middle" value="${rowData.q2_middle}" class="form-control"readonly></td>
-                    </tr>
-                    <tr>
-                        <th>Q3 Middle:</th>
-                        <td><input type="text" name="q3_middle" value="${rowData.q3_middle}" class="form-control" readonly></td>
-                        <th>Q4 Middle:</th>
-                        <td><input type="text" name="q4_middle" value="${rowData.q4_middle}" class="form-control" readonly></td>
-                    </tr> 
-                    <tr>
-                        <th>Q1 End:</th>
-                        <td><input type="text" name="q1_end" value="${rowData.q1_end}" class="form-control" readonly></td>
-                        <th>Q2 End:</th>
-                        <td><input type="text" name="q2_end" value="${rowData.q2_end}" class="form-control" readonly></td>
-                    </tr>
-                    <tr>
-                        <th>Q3 End:</th>
-                        <td><input type="text" name="q3_end" value="${rowData.q3_end}" class="form-control" readonly></td>
-                        <th>Q4 End:</th>
-                        <td><input type="text" name="q4_end" value="${rowData.q4_end}" class="form-control" readonly></td>
-                    </tr>
-                       <tr>
-                        <th>Defect Type:</th>
-                        <td><input type="text" name="defect_type" value="${rowData.defect_type}" class="form-control"></td>
-                         <th>NG Quantity:</th>
-                        <td><input type="text" name="ng_quantity" value="${rowData.ng_quantity}" class="form-control"></td>
-                    </tr>
-                    <tr>
-                        <th>Using Round Bar:</th>
-                        <td><input type="text" name="using_round_bar" value="${rowData.using_round_bar}" class="form-control"></td>
-                        <th>Using Bare Hands:</th>
-                        <td><input type="text" name="using_bare_hands" value="${rowData.using_bare_hands}" class="form-control"></td>
-                    </tr>
-                    <tr>
-                        <th>Appearance Judgement:</th>
-                        <td><input type="text" name="appearance_judgement" value="${rowData.appearance_judgement}" class="form-control"></td>
-                        <th>Dimension Judgement:</th>
-                        <td><input type="text" name="dimension_judgement" value="${rowData.dimension_judgement}" class="form-control"></td>
-                    </tr>
-                    <tr>
-                        <th>Confirm By:</th>
-                        <td><input type="text" name="confirm_by" value="${rowData.confirm_by}" class="form-control"></td>
-                        <th>Inspector's Remarks:</th>
-                        <td colspan="3"><textarea name="remarks" class="form-control">${rowData.remarks}</textarea></td>
-                    </tr>
-            
+        // Create HTML content with textboxes to display row data in an editable format
+        const modalContent = `
+        <form id="inspectionForm">
+            <table class="table table-bordered">
+                <tbody>
+                     <tr>
+                    <th>ID:</th>
+                    <td><input type="text" name="id" value="${rowData.id}" class="form-control" readonly></td>
+                    <th>Part Name:</th>
+                    <td><input type="text" name="part_name" value="${rowData.part_name}" class="form-control" ></td>
+                </tr>
+                <tr>
+                    <th>Quantity:</th>
+                    <td><input type="text" name="quantity" value="${rowData.quantity}" class="form-control"></td>
+                    <th>Inspected By:</th>
+                    <td><input type="text" name="inspected_by" value="${rowData.inspected_by}" class="form-control" readonly></td>
+                </tr>
+                <tr>
+                    <th>Shift:</th>
+                    <td><input type="text" name="shift" value="${rowData.shift}" class="form-control"></td>
+                    <th>Total Minutes:</th>
+                    <td><input type="text" name="total_mins" value="${rowData.total_mins}" class="form-control" readonly></td>
+                </tr>
+                <tr>
+                    <th>Outside Appearance:</th>
+                    <td>
+                        <select name="outside_appearance" class="form-control">
+                            <option value="OK" ${rowData.outside_appearance === 'OK' ? 'selected' : ''}>OK</option>
+                            <option value="NG" ${rowData.outside_appearance === 'NG' ? 'selected' : ''}>NG</option>
+                        </select>
+                    </td>
+                    <th>Slit Condition:</th>
+                    <td>
+                        <select name="slit_condition" class="form-control">
+                            <option value="OK" ${rowData.slit_condition === 'OK' ? 'selected' : ''}>OK</option>
+                            <option value="NG" ${rowData.slit_condition === 'NG' ? 'selected' : ''}>NG</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Inside Appearance:</th>
+                    <td>
+                        <select name="inside_appearance" class="form-control">
+                            <option value="OK" ${rowData.inside_appearance === 'OK' ? 'selected' : ''}>OK</option>
+                            <option value="NG" ${rowData.inside_appearance === 'NG' ? 'selected' : ''}>NG</option>
+                        </select>
+                    </td>
+                    <th>Color:</th>
+                    <td>
+                        <select name="color" class="form-control">
+                            <option value="OK" ${rowData.color === 'OK' ? 'selected' : ''}>OK</option>
+                            <option value="NG" ${rowData.color === 'NG' ? 'selected' : ''}>NG</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Using Round Bar:</th>
+                    <td>
+                        <select name="using_round_bar" class="form-control">
+                            <option value="OK" ${rowData.using_round_bar === 'OK' ? 'selected' : ''}>OK</option>
+                            <option value="NG" ${rowData.using_round_bar === 'NG' ? 'selected' : ''}>NG</option>
+                        </select>
+                    </td>
+                    <th>Using Bare Hands:</th>
+                    <td>
+                        <select name="using_bare_hands" class="form-control">
+                            <option value="OK" ${rowData.using_bare_hands === 'OK' ? 'selected' : ''}>OK</option>
+                            <option value="NG" ${rowData.using_bare_hands === 'NG' ? 'selected' : ''}>NG</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Inner Diameter Tolerance Plus:</th>
+                    <td><input type="text" name="i_tolerance_plus" value="${rowData.i_tolerance_plus}" class="form-control" readonly></td>
+                    <th>Inner Diameter Tolerance Minus:</th>
+                    <td><input type="text" name="i_tolerance_minus" value="${rowData.i_tolerance_minus}" class="form-control" readonly></td>
+                </tr>
+                <tr>
+                    <th>Inner Diameter Start:</th>
+                    <td><input type="text" name="i_diameter_start" value="${rowData.i_diameter_start}" class="form-control"></td>
+                    <th>Inner Diameter End:</th>
+                    <td><input type="text" name="i_diameter_end" value="${rowData.i_diameter_end}" class="form-control"></td>
+                </tr>
+                <tr>
+                    <th>Outer Diameter Tolerance Plus:</th>
+                    <td><input type="text" name="o_tolerance_plus" value="${rowData.o_tolerance_plus}" class="form-control" readonly></td>
+                    <th>Outer Diameter Tolerance Minus:</th>
+                    <td><input type="text" name="o_tolerance_minus" value="${rowData.o_tolerance_minus}" class="form-control" readonly></td>
+                </tr>
+                <tr>
+                    <th>Outer Diameter Start:</th>
+                    <td><input type="text" name="o_diameter_start" value="${rowData.o_diameter_start}" class="form-control"></td>
+                    <th>Outer Diameter End:</th>
+                    <td><input type="text" name="o_diameter_end" value="${rowData.o_diameter_end}" class="form-control"></td>
+                </tr>
+                <tr>
+                    <th>W Tolerance + :</th>
+                    <td><input type="text" name="w_tolerance_plus" value="${rowData.w_tolerance_plus}" class="form-control" readonly></td>
+                    <th>W Tolerance - :</th>
+                    <td><input type="text" name="w_tolerance_minus" value="${rowData.w_tolerance_minus}" class="form-control" readonly></td>
+                </tr>
+                <tr>
+                    <th>Q1 Start:</th>
+                    <td><input type="text" name="q1_start" value="${rowData.q1_start}" class="form-control" readonly></td>
+                    <th>Q2 Start:</th>
+                    <td><input type="text" name="q2_start" value="${rowData.q2_start}" class="form-control" readonly></td>
+                </tr>
+                <tr>
+                    <th>Q3 Start:</th>
+                    <td><input type="text" name="q3_start" value="${rowData.q3_start}" class="form-control" readonly></td>
+                    <th>Q4 Start:</th>
+                    <td><input type="text" name="q4_start" value="${rowData.q4_start}" class="form-control" readonly></td>
+                </tr>
+                <tr>
+                    <th>Q1 Middle:</th>
+                    <td><input type="text" name="q1_middle" value="${rowData.q1_middle}" class="form-control" readonly></td>
+                    <th>Q2 Middle:</th>
+                    <td><input type="text" name="q2_middle" value="${rowData.q2_middle}" class="form-control" readonly></td>
+                </tr>
+                <tr>
+                    <th>Q3 Middle:</th>
+                    <td><input type="text" name="q3_middle" value="${rowData.q3_middle}" class="form-control" readonly></td>
+                    <th>Q4 Middle:</th>
+                    <td><input type="text" name="q4_middle" value="${rowData.q4_middle}" class="form-control" readonly></td>
+                </tr>
+                <tr>
+                    <th>Q1 End:</th>
+                    <td><input type="text" name="q1_end" value="${rowData.q1_end}" class="form-control" readonly></td>
+                    <th>Q2 End:</th>
+                    <td><input type="text" name="q2_end" value="${rowData.q2_end}" class="form-control" readonly></td>
+                </tr>
+                <tr>
+                    <th>Q3 End:</th>
+                    <td><input type="text" name="q3_end" value="${rowData.q3_end}" class="form-control" readonly></td>
+                    <th>Q4 End:</th>
+                    <td><input type="text" name="q4_end" value="${rowData.q4_end}" class="form-control" readonly></td>
+                </tr>
+                <tr>
+                    <th>Defect Type:</th>
+                    <td><input type="text" name="defect_type" value="${rowData.defect_type}" class="form-control"></td>
+                    <th>NG Quantity:</th>
+                    <td><input type="text" name="ng_quantity" value="${rowData.ng_quantity}" class="form-control"></td>
+                </tr>
+                <tr>
+                    <th>Appearance Judgement:</th>
+                    <td>
+                        <select name="appearance_judgement" class="form-control">
+                            <option value="OK" ${rowData.appearance_judgement === 'OK' ? 'selected' : ''}>OK</option>
+                            <option value="NG" ${rowData.appearance_judgement === 'NG' ? 'selected' : ''}>NG</option>
+                        </select>
+                    </td>
+                    <th>Dimension Judgement:</th>
+                    <td>
+                        <select name="dimension_judgement" class="form-control">
+                            <option value="OK" ${rowData.dimension_judgement === 'OK' ? 'selected' : ''}>OK</option>
+                            <option value="NG" ${rowData.dimension_judgement === 'NG' ? 'selected' : ''}>NG</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Confirm By:</th>
+                    <td><input type="text" name="confirm_by" value="${rowData.confirm_by}" class="form-control"></td>
+                    <th>Inspector's Remarks:</th>
+                    <td colspan="3"><textarea name="remarks" class="form-control">${rowData.remarks}</textarea></td>
+                </tr>
                 </tbody>
             </table>
         </form>
     `;
 
-    modalBody.innerHTML = modalContent;
-    const dataModal = new bootstrap.Modal(document.getElementById('dataModal'));
-    dataModal.show();
-}
-function saveInspectionDetails() {
-    // Get the form data
-    const form = document.getElementById('inspectionForm');
-    const formData = new FormData(form);
-
-    // Validate form fields (check if any required fields are empty)
-    let formIsValid = true;
-    form.querySelectorAll('.form-control').forEach(input => {
-        if (input.value.trim() === '' && !input.readOnly) { // Check for non-read only empty fields
-            formIsValid = false;
-            input.classList.add('is-invalid'); // Optionally add a visual indicator for the user
-        } else {
-            input.classList.remove('is-invalid');
-        }
-    });
-
-    if (!formIsValid) {
-        // Show a warning using SweetAlert if form is not valid
-        Swal.fire({
-            icon: 'warning',
-            title: 'Validation Error',
-            text: 'Please fill out all required fields.',
-            confirmButtonColor: '#3085d6',
-            confirmButtonText: 'OK'
-        });
-        return; // Stop further execution if form is not valid
+        modalBody.innerHTML = modalContent;
+        const dataModal = new bootstrap.Modal(document.getElementById('dataModal'));
+        dataModal.show();
     }
+    function saveInspectionDetails() {
+        // Get the form data
+        const form = document.getElementById('inspectionForm');
+        const formData = new FormData(form);
 
-    // Send data to server using fetch
-    fetch('../../process/sp_cot_update.php', {
-        method: 'POST',
-        body: formData
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return response.text();
-    })
-    .then(data => {
-        console.log(data); // Log response from server
-        // Show success message using SweetAlert
-        Swal.fire({
-            icon: 'success',
-            title: 'Success!',
-            text: 'Data saved successfully.',
-            confirmButtonColor: '#3085d6',
-            confirmButtonText: 'OK'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                window.location.reload(); // Reload page after save
+        // Validate form fields (check if any required fields are empty)
+        let formIsValid = true;
+        form.querySelectorAll('.form-control').forEach(input => {
+            if (input.value.trim() === '' && !input.readOnly) { // Check for non-read only empty fields
+                formIsValid = false;
+                input.classList.add('is-invalid'); // Optionally add a visual indicator for the user
+            } else {
+                input.classList.remove('is-invalid');
             }
         });
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        // Show error message using SweetAlert
-        Swal.fire({
-            icon: 'error',
-            title: 'Error!',
-            text: 'There was an error saving the data.',
-            confirmButtonColor: '#d33',
-            confirmButtonText: 'OK'
-        });
-    });
-}
+
+        if (!formIsValid) {
+
+            Swal.fire({
+                icon: 'warning',
+                title: 'Validation Error',
+                text: 'Please fill out all required fields.',
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'OK'
+            });
+            return;
+        }
+
+        // Send data to server using fetch
+        fetch('../../process/ep_cot_update.php', {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.text();
+            })
+            .then(data => {
+                console.log(data); // Log response from server
+                // Show success message using SweetAlert
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success!',
+                    text: 'Data saved successfully.',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'OK'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.reload(); // Reload page after save
+                    }
+                });
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                // Show error message using SweetAlert
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error!',
+                    text: 'There was an error saving the data.',
+                    confirmButtonColor: '#d33',
+                    confirmButtonText: 'OK'
+                });
+            });
+    }
 
 
 
