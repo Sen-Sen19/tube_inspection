@@ -243,6 +243,8 @@ document.getElementById('inspection_date').value = formattedDate;
 
 
 
+
+
   document.addEventListener('DOMContentLoaded', function() {
     var startTimeInput = document.getElementById('start_time');
     var endTimeInput = document.getElementById('end_time');
@@ -277,6 +279,8 @@ document.getElementById('inspection_date').value = formattedDate;
         return year + '-' + month + '-' + day + ' ' + hours + ':' + minutes + ':' + seconds;
     }
 });
+
+
 
 
 
@@ -531,6 +535,55 @@ function handleDefectTypeChange() {
             `;
             defectContainer.appendChild(selectElement);
         }
+
+
+        // ----------------------------------export-----------------------------------
+        
+function exportTable() {
+    const partName = document.getElementById('partName').value;
+    const inspectedBy = document.getElementById('inspectedBy').value;
+    const defectType = document.getElementById('defectType').value;
+    const dateFrom = document.getElementById('date_from').value;
+    const dateTo = document.getElementById('date_to').value;
+
+    // Get current date in YYYY-MM-DD format
+    const currentDate = new Date().toISOString().slice(0, 10);
+
+    // Construct the filename with the current date
+    const filename = `COT_Start_Point_${currentDate}.csv`;
+
+    // Construct the URL with search parameters
+    const url = `../../process/cot_sp_export_data.php?partName=${encodeURIComponent(partName)}&inspectedBy=${encodeURIComponent(inspectedBy)}&defectType=${encodeURIComponent(defectType)}&dateFrom=${encodeURIComponent(dateFrom)}&dateTo=${encodeURIComponent(dateTo)}`;
+
+    // Fetch data from the PHP script
+    fetch(url)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.blob(); 
+        })
+        .then(blob => {
+            
+            const downloadUrl = window.URL.createObjectURL(blob);
+
+            
+            const a = document.createElement('a');
+            a.style.display = 'none';
+            a.href = downloadUrl;
+            a.download = filename; 
+            document.body.appendChild(a);
+
+           
+            a.click();
+
+            
+            window.URL.revokeObjectURL(downloadUrl);
+        })
+        .catch(error => {
+            console.error('Error exporting data:', error);
+        });
+}
 
     </script>
 
