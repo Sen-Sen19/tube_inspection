@@ -69,64 +69,84 @@ $(document).ready(function() {
     });
 
     $('#part_name_dropdown').change(function() {
-        var selectedOption = $(this).find(':selected');
+    var selectedOption = $(this).find(':selected');
 
-        // Set tolerance values for inside diameter
-        $('#tolerance-plus').val(selectedOption.data('iDiaTolMin'));
-        $('#tolerance-minus').val(selectedOption.data('iDiaTolMax'));
 
-        // Set tolerance values for outside diameter
-        $('#o-tolerance-plus').val(selectedOption.data('oDiaTolMin'));
-        $('#o-tolerance-minus').val(selectedOption.data('oDiaTolMax'));
 
-        // Set tolerance values for wall thickness
-        $('#w-tolerance-plus').val(selectedOption.data('wTolMin'));
-        $('#w-tolerance-minus').val(selectedOption.data('wTolMax'));
+    // Set min and max values for inside diameter
+    $('#i-diameter-min').val(selectedOption.data('iDiaMin'));
+    $('#i-diameter-max').val(selectedOption.data('iDiaMax'));
+      // Set min and max values for outside diameter
+      $('#o-diameter-min').val(selectedOption.data('oDiaMin'));
+    $('#o-diameter-max').val(selectedOption.data('oDiaMax'));
 
-        // Clear and set data attributes for inside diameter fields
-        $('#inside-start').val('').removeClass('is-invalid');
-        $('#inside-end').val('').removeClass('is-invalid');
-        $('#inside-start').data('iDiaMin', selectedOption.data('iDiaMin'));
-        $('#inside-end').data('iDiaMax', selectedOption.data('iDiaMax'));
 
-        // Clear and set data attributes for outside diameter fields
-        $('#outside-start').val('').removeClass('is-invalid');
-        $('#outside-end').val('').removeClass('is-invalid');
-        $('#outside-start').data('oDiaMin', selectedOption.data('oDiaMin'));
-        $('#outside-end').data('oDiaMax', selectedOption.data('oDiaMax'));
+    // Set tolerance values for inside diameter
+    $('#tolerance-plus').val(selectedOption.data('iDiaTolMin'));
+    $('#tolerance-minus').val(selectedOption.data('iDiaTolMax'));
 
-        // Clear and set data attributes for wall thickness (Q1) fields
-        $('#q1_start').val('').removeClass('is-invalid');
-        $('#q1_middle').val('').removeClass('is-invalid');
-        $('#q1_end').val('').removeClass('is-invalid');
-        $('#q1_start').data('wMin', selectedOption.data('wMin'));
-        $('#q1_middle').data('wValue', selectedOption.data('wValue'));
-        $('#q1_end').data('wMax', selectedOption.data('wMax'));
+    // Set tolerance values for outside diameter
+    $('#o-tolerance-plus').val(selectedOption.data('oDiaTolMin'));
+    $('#o-tolerance-minus').val(selectedOption.data('oDiaTolMax'));
 
-        // Clear and set data attributes for Q2 measurements fields
-        $('#q2_start').val('').removeClass('is-invalid');
-        $('#q2_middle').val('').removeClass('is-invalid');
-        $('#q2_end').val('').removeClass('is-invalid');
-        $('#q2_start').data('wMin', selectedOption.data('wMin'));
-        $('#q2_middle').data('wValue', selectedOption.data('wValue'));
-        $('#q2_end').data('wMax', selectedOption.data('wMax'));
+    // Set min and max values for outside diameter
+    $('#o-min').val(selectedOption.data('oDiaMin'));
+    $('#o-max').val(selectedOption.data('oDiaMax'));
 
-        // Clear and set data attributes for Q3 measurements fields
-        $('#q3_start').val('').removeClass('is-invalid');
-        $('#q3_middle').val('').removeClass('is-invalid');
-        $('#q3_end').val('').removeClass('is-invalid');
-        $('#q3_start').data('wMin', selectedOption.data('wMin'));
-        $('#q3_middle').data('wValue', selectedOption.data('wValue'));
-        $('#q3_end').data('wMax', selectedOption.data('wMax'));
+    // Set tolerance values for wall thickness
+    $('#w-tolerance-plus').val(selectedOption.data('wTolMin'));
+    $('#w-tolerance-minus').val(selectedOption.data('wTolMax'));
 
-        // Clear and set data attributes for Q4 measurements fields
-        $('#q4_start').val('').removeClass('is-invalid');
-        $('#q4_middle').val('').removeClass('is-invalid');
-        $('#q4_end').val('').removeClass('is-invalid');
-        $('#q4_start').data('wMin', selectedOption.data('wMin'));
-        $('#q4_middle').data('wValue', selectedOption.data('wValue'));
-        $('#q4_end').data('wMax', selectedOption.data('wMax'));
-    });
+    // Set min, value, and max for wall thickness
+    $('#w-min').val(selectedOption.data('wMin'));
+    $('#w-value').val(selectedOption.data('wValue'));
+    $('#w-max').val(selectedOption.data('wMax'));
+
+    // Clear and set data attributes for inside diameter fields
+    $('#inside-start').val('').removeClass('is-invalid');
+    $('#inside-end').val('').removeClass('is-invalid');
+    $('#inside-start').data('iDiaMin', selectedOption.data('iDiaMin'));
+    $('#inside-end').data('iDiaMax', selectedOption.data('iDiaMax'));
+
+    // Clear and set data attributes for outside diameter fields
+    $('#outside-start').val('').removeClass('is-invalid');
+    $('#outside-end').val('').removeClass('is-invalid');
+    $('#outside-start').data('oDiaMin', selectedOption.data('oDiaMin'));
+    $('#outside-end').data('oDiaMax', selectedOption.data('oDiaMax'));
+
+    // Clear and set data attributes for wall thickness (Q1) fields
+    $('#q1_start').val('').removeClass('is-invalid');
+    $('#q1_middle').val('').removeClass('is-invalid');
+    $('#q1_end').val('').removeClass('is-invalid');
+    $('#q1_start').data('wMin', selectedOption.data('wMin'));
+    $('#q1_middle').data('wValue', selectedOption.data('wValue'));
+    $('#q1_end').data('wMax', selectedOption.data('wMax'));
+
+    // Clear and set data attributes for Q2 measurements fields
+    $('#q2_start').val('').removeClass('is-invalid');
+    $('#q2_middle').val('').removeClass('is-invalid');
+    $('#q2_end').val('').removeClass('is-invalid');
+    $('#q2_start').data('wMin', selectedOption.data('wMin'));
+    $('#q2_middle').data('wValue', selectedOption.data('wValue'));
+    $('#q2_end').data('wMax', selectedOption.data('wMax'));
+
+    // Clear and set data attributes for Q3 measurements fields
+    $('#q3_start').val('').removeClass('is-invalid');
+    $('#q3_middle').val('').removeClass('is-invalid');
+    $('#q3_end').val('').removeClass('is-invalid');
+    $('#q3_start').data('wMin', selectedOption.data('wMin'));
+    $('#q3_middle').data('wValue', selectedOption.data('wValue'));
+    $('#q3_end').data('wMax', selectedOption.data('wMax'));
+
+    // Clear and set data attributes for Q4 measurements fields
+    $('#q4_start').val('').removeClass('is-invalid');
+    $('#q4_middle').val('').removeClass('is-invalid');
+    $('#q4_end').val('').removeClass('is-invalid');
+    $('#q4_start').data('wMin', selectedOption.data('wMin'));
+    $('#q4_middle').data('wValue', selectedOption.data('wValue'));
+    $('#q4_end').data('wMax', selectedOption.data('wMax'));
+});
+
 
     $('#inside-start').on('input', function() {
     var startVal = $(this).val();
@@ -219,21 +239,17 @@ $('#outside-start').on('input', function() {
 
 
         // -----------------------Inspection Date --------------------------
-var today = new Date();
-var dd = String(today.getDate()).padStart(2, '0');
-var mm = String(today.getMonth() + 1).padStart(2, '0');
-var yyyy = today.getFullYear();
-
-
-var formattedDate = yyyy + '-' + mm + '-' + dd;
-
-
-document.getElementById('inspection_date').value = formattedDate;
-
-
-
-
-
+        document.addEventListener('DOMContentLoaded', (event) => {
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+    var yyyy = today.getFullYear();
+    
+    var formattedDate = yyyy + '-' + mm + '-' + dd;
+    
+    // Set the value of the input field
+    document.getElementById('inspection_date').value = formattedDate;
+});
 
 
 

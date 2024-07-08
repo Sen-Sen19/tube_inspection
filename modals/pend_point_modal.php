@@ -135,18 +135,29 @@
                 <div class="container">
     <div class="row">
         <!-- Inside Diameter Section -->
-        
+       
         <div class="col-6 form-section">
             <h5 class="modal-title" style="margin-bottom:20px;"><strong>Inside Diameter</strong></h5>
             <div class="form-group">
                 <label for="tolerance">Tolerance</label>
                 <div class="d-flex align-items-center">
                     <label for="tolerance-plus" class="mr-2" >+</label>
-                    <input type="text" id="tolerance-minus" class="form-control" style="width: 70px; margin-right: 10px;" autocomplete="off" readonly name="i_tolerance_minus">
-                    <label for="tolerance-minus" class="mr-2">-</label>
+                    <input type="text" id="tolerance-minus" class="form-control" style="width: 70px; margin-right: 10px;" autocomplete="off" readonly name="i_tolerance_minus">                                 <label for="tolerance-minus" class="mr-2">-</label>
                     <input type="text" id="tolerance-plus" class="form-control" style="width: 70px;" autocomplete="off" readonly name="i_tolerance_plus">
                 </div>
             </div>
+
+  <div class="form-group">
+  <label for="tolerance">Min and Max</label>
+
+        <div class="d-flex align-items-center">
+        <label for="i-diamin" class="mr-2">&nbsp &nbsp;</label>
+        <input type="text" id="i-diameter-min" class="form-control" style="width: 70px;" autocomplete="off" readonly name="i_dia_min">
+            <label for="i-diamax" class="mr-2">&nbsp &nbsp &nbsp;</label>
+            <input type="text" id="i-diameter-max" class="form-control" style="width: 70px;" autocomplete="off" readonly name="i_dia_max">
+            </div>
+        </div>
+
             <div class="form-group">
                 <label for="inside-start">Start</label>
                 <input type="number" id="inside-start" class="form-control" name="i_diameter_start" autocomplete="off">
@@ -175,16 +186,26 @@
 
 
  <!-- ----------------------------------------- Wall Thickness Questions ----------------------------------------------->
-                <h5 class="modal-title" style="color:black; margin-bottom:30px;"><strong>Wall Thickness</strong></h5>
+ <h5 class="modal-title" style="color:black; margin-bottom:30px;"><strong>Wall Thickness</strong></h5>
                 <div class="container">
                 <div class="row mb-4">
             <div class="col-12 d-flex align-items-center">
-                <label for="w-tolerance-plus" class="mr-2">Tolerance +</label>
+                <label for="w-tolerance-plus" class="mr-2">&nbsp &nbsp &nbsp Tolerance +</label>
                 <input type="text" id="w-tolerance-minus" class="form-control" style="width: 70px; margin-right: 10px;" autocomplete="off" readonly name="w_tolerance_minus">
                 <label for="w-tolerance-minus" class="mr-2">-</label>
                 <input type="text" id="w-tolerance-plus" class="form-control" style="width: 70px;" autocomplete="off" readonly name="w_tolerance_plus">
             </div>
         </div>
+
+        <div class="col-12 d-flex align-items-center">
+                <label for="w-tolerance-plus" class="mr-2"></label>
+                <input type="text" id="w-min" class="form-control" style="width: 70px; margin-right: 10px;" autocomplete="off" readonly name="w_tolerance_minus">
+                <label for="w-tolerance-minus" class="mr-2">&nbsp</label>
+                <input type="text" id="w-value" class="form-control" style="width: 70px;" autocomplete="off" readonly name="w_tolerance_plus">
+                <label for="w-tolerance-minus" class="mr-2">&nbsp &nbsp &nbsp</label>
+                <input type="text" id="w-max" class="form-control" style="width: 70px;" autocomplete="off" readonly name="w_tolerance_plus">
+            </div>
+      
 
 
 

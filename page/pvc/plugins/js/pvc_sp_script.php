@@ -66,7 +66,18 @@ $(document).ready(function() {
 
     $('#part_name_dropdown').change(function() {
         var selectedOption = $(this).find(':selected');
-
+   
+        $('#i-diameter-min').val(selectedOption.data('iDiaMin'));
+    $('#i-diameter-max').val(selectedOption.data('iDiaMax'));
+      // Set min and max values for outside diameter
+      $('#o-diameter-min').val(selectedOption.data('oDiaMin'));
+    $('#o-diameter-max').val(selectedOption.data('oDiaMax'));
+    $('#o-min').val(selectedOption.data('oDiaMin'));
+    $('#o-max').val(selectedOption.data('oDiaMax'));
+    $('#w-min').val(selectedOption.data('wMin'));
+    $('#w-value').val(selectedOption.data('wValue'));
+    $('#w-max').val(selectedOption.data('wMax'));
+        
         // Set tolerance values for inside diameter
         $('#tolerance-plus').val(selectedOption.data('iDiaTolMin'));
         $('#tolerance-minus').val(selectedOption.data('iDiaTolMax'));

@@ -50,6 +50,13 @@
           </a>
         </li>
 
+        <li class="nav-item">
+          <a href="cot_export.php" class="nav-link <?= ($_SERVER['REQUEST_URI'] == "/tube_inspection/page/cot/cot_export.php") ? 'active' : '' ?>">
+            <i class="nav-icon fas fa-file-export"></i>
+            <p>Export</p>
+          </a>
+        </li>
+
         <?php include 'logout.php';?>
       </ul>
     </nav>
