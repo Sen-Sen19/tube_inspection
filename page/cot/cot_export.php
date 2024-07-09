@@ -1,11 +1,14 @@
 <?php include 'plugins/navbar.php'; ?>
 <?php include 'plugins/sidebar/cot_bar.php'; ?>
 
+
 <div class="content-wrapper">
     <div class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
-                <div class="col-sm-6"></div>
+                <div class="col-sm-6">
+                    <h1 class="m-0 text-dark">Start Point</h1>
+                </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="">Home</a></li>
@@ -18,6 +21,7 @@
 
     <section class="content">
     <div class="container-fluid">
+   
         <div class="row">
             <div class="col-md-2 mb-2">
                 <label for="partName">Part Name</label>
@@ -26,110 +30,95 @@
                 </select>
             </div>
             <div class="col-md-2 mb-2">
-                <label style="font-weight: normal; margin: 0; padding: 0; color: #000; font-weight: bold;">Date From</label>
+                <label style="font-weight: normal; margin-bottom:6%; padding: 0; color: #000; font-weight: bold;">Date From</label>
                 <input type="date" name="date_from" class="form-control form-control-sm" id="date_from">
             </div>
             <div class="col-md-2 mb-2">
-                <label style="font-weight: normal; margin: 0; padding: 0; color: #000; font-weight: bold;">Date To</label>
+                <label style="font-weight: normal;margin-bottom:6%; padding: 0; color: #000; font-weight: bold;">Date To</label>
                 <input type="date" name="date_to" class="form-control form-control-sm" id="date_to">
             </div>
             <div class="col-md-2 mb-2">
-            <label style="font-weight: normal; margin: 0; padding: 0; color: #000; font-weight: bold; visibility:hidden">Date To</label>
+                <label style="font-weight: normal;margin-bottom:6%; padding: 0; color: #000; font-weight: bold; visibility:hidden">Date To</label>
                 <button class="btn btn-primary btn-block btn-sm" id="searchBtn">
                     <i class="fas fa-search"></i> Search
                 </button>
             </div>
             <div class="col-md-2 mb-2">
-            <label style="font-weight: normal; margin: 0; padding: 0; color: #000; font-weight: bold; visibility:hidden">Date To</label>
+                <label style="font-weight: normal; margin-bottom:6%; padding: 0; color: #000; font-weight: bold; visibility:hidden">Date To</label>
                 <button class="btn btn-warning btn-block btn-sm" id="exportReqBtn" onclick="exportTable()">
-                    <i class="fas fa-file-export mr-2"></i> Export
+                    <i class="fas fa-file-export mr-2"></i> Export to CSV
                 </button>
             </div>
             <div class="col-md-2 mb-2">
-            <label style="font-weight: normal; margin: 0; padding: 0; color: #000; font-weight: bold; visibility:hidden">Date To</label>
-            <button class="btn btn-danger btn-block btn-sm" id="exportReqBtn" onclick="exportToPDF()">
-    <i class="fas fa-file-pdf mr-2"></i> PID PDF
-</button>
-
+                <label style="font-weight: normal; margin-bottom:6%; padding: 0; color: #000; font-weight: bold; visibility:hidden">Date To</label>
+                <button class="btn btn-danger btn-block btn-sm" id="exportReqBtn" onclick="exportToPDF()">
+                    <i class="fas fa-file-pdf mr-2"></i> Export to PDF
+                </button>
             </div>
         </div>
     </div>
-</section>
-
-
-
-                            <div id="accounts_table_res" class="table-responsive"
-                                style="height: 60vh; overflow: auto; display: inline-block; margin-top: 50px; border-top: 1px solid gray;">
-                                <table id="export_cotdb" class="table table-sm table-head-fixed text-nowrap table-hover">
-                                    <thead style="text-align: center;">
-                                        <!-- Table Headers -->
-                                        <tr>
-                                            <th>#</th>
-                                            <th>Part Name</th>
-                                            <th>Process</th>
-                                            <th>Lot No.</th>
-                                            <th>Serial No</th>
-
-                                            <th>Quantity</th>
-                                            <th>Time Start</th>
-                                            
-                                            <th>Time End</th>
-                                            <th>Inspected By</th>
-                                            <th>Shift</th>
-                                            <th>Inspection Date</th>
-                                            <th>Total Minutes</th>
-                                            <th>Outside Appearance</th>
-                                            <th>Slit Condition</th>
-                                            <th>Inside Appearance</th>
-                                            <th>Color</th>
-                                            <th>I Tolerance +</th>
-                                            <th>I Tolerance -</th>
-                                            <th>I Diameter Start</th>
-                                            <th>I Diameter End</th>
-                                            <th>O Tolerance +</th>
-                                            <th>O Tolerance -</th>
-                                            <th>O Diameter Start</th>
-                                            <th>O Diameter End</th>
-                                            <th>W Tolerance +</th>
-                                            <th>W Tolerance -</th>
-                                            <th>Q1 Start</th>
-                                            <th>Q2 Start</th>
-                                            <th>Q3 Start</th>
-                                            <th>Q4 Start</th>
-                                            <th>Q1 Middle</th>
-                                            <th>Q2 Middle</th>
-                                            <th>Q3 Middle</th>
-                                            <th>Q4 Middle</th>
-                                            <th>Q1 End</th>
-                                            <th>Q2 End</th>
-                                            <th>Q3 End</th>
-                                            <th>Q4 End</th>
-                                            <th>Using Round Bar</th>
-                                            <th>Using Bare Hands</th>
-                                            <th>Appearance Judgement</th>
-                                            <th>Dimension Judgement</th>
-                                            <th>NG Quantity</th>
-                                            <th>Defect Type</th>
-                                            <th>Confirm By</th>
-                                            <th>Remarks</th>
-                                           
-                                        </tr>
-                                    </thead>
-                                    <tbody id="export_cotdb_body" style="text-align: center; padding:20px;">
-                                        <!-- Data will be inserted here -->
-                                    </tbody>
-                                </table>
-                            </div>
-                            <!-- <div class="d-flex justify-content-sm-center mt-3">
-                                <button type="button" class="btn bg-gray-dark" id="btnLoadMore">Load more</button>
-                            </div> -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     </section>
+
+    <div id="accounts_table_res" class="table-responsive"
+        style="height: 60vh; overflow: auto; display: inline-block; margin-top: 50px; border-top: 1px solid gray;">
+        <table id="export_cotdb" class="table table-sm table-head-fixed text-nowrap table-hover">
+            <thead style="text-align: center;">
+                <tr>
+                    <th>#</th>
+                    <th>Part Name</th>
+                    <th>Process</th>
+                    <th>Lot No.</th>
+                    <th>Serial No</th>
+                    <th>Quantity</th>
+                    <th>Time Start</th>
+                    <th>Time End</th>
+                    <th>Inspected By</th>
+                    <th>Shift</th>
+                    <th>Inspection Date</th>
+                    <th>Total Minutes</th>
+                    <th>Outside Appearance</th>
+                    <th>Slit Condition</th>
+                    <th>Inside Appearance</th>
+                    <th>Color</th>
+                    <th>I Tolerance +</th>
+                    <th>I Tolerance -</th>
+                    <th>I Diameter Start</th>
+                    <th>I Diameter End</th>
+                    <th>O Tolerance +</th>
+                    <th>O Tolerance -</th>
+                    <th>O Diameter Start</th>
+                    <th>O Diameter End</th>
+                    <th>W Tolerance +</th>
+                    <th>W Tolerance -</th>
+                    <th>Q1 Start</th>
+                    <th>Q2 Start</th>
+                    <th>Q3 Start</th>
+                    <th>Q4 Start</th>
+                    <th>Q1 Middle</th>
+                    <th>Q2 Middle</th>
+                    <th>Q3 Middle</th>
+                    <th>Q4 Middle</th>
+                    <th>Q1 End</th>
+                    <th>Q2 End</th>
+                    <th>Q3 End</th>
+                    <th>Q4 End</th>
+                    <th>Using Round Bar</th>
+                    <th>Using Bare Hands</th>
+                    <th>Appearance Judgement</th>
+                    <th>Dimension Judgement</th>
+                    <th>NG Quantity</th>
+                    <th>Defect Type</th>
+                    <th>Confirm By</th>
+                    <th>Remarks</th>
+                </tr>
+            </thead>
+            <tbody id="export_cotdb_body" style="text-align: center; padding:20px;">
+                <!-- Data will be inserted here -->
+            </tbody>
+        </table>
+    </div>
 </div>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.29/jspdf.plugin.autotable.min.js"></script>
 
@@ -200,16 +189,16 @@ document.addEventListener('DOMContentLoaded', () => {
                         <td>${formatCell(row.slit_condition)}</td>
                         <td>${formatCell(row.inside_appearance)}</td>
                         <td>${formatCell(row.color)}</td>
-                        <td>${formatCell(row.i_tolerance_plus)}</td>
-                        <td>${formatCell(row.i_tolerance_minus)}</td>
+                        <td>${formatCell(row.i_tol_plus)}</td>
+                        <td>${formatCell(row.i_tol_minus)}</td>
                         <td>${formatCell(row.i_diameter_start)}</td>
                         <td>${formatCell(row.i_diameter_end)}</td>
-                        <td>${formatCell(row.o_tolerance_plus)}</td>
-                        <td>${formatCell(row.o_tolerance_minus)}</td>
+                        <td>${formatCell(row.o_tol_plus)}</td>
+                        <td>${formatCell(row.o_tol_minus)}</td>
                         <td>${formatCell(row.o_diameter_start)}</td>
                         <td>${formatCell(row.o_diameter_end)}</td>
-                        <td>${formatCell(row.w_tolerance_plus)}</td>
-                        <td>${formatCell(row.w_tolerance_minus)}</td>
+                        <td>${formatCell(row.w_tol_plus)}</td>
+                        <td>${formatCell(row.w_tol_minus)}</td>
                         <td>${formatCell(row.q1_start)}</td>
                         <td>${formatCell(row.q2_start)}</td>
                         <td>${formatCell(row.q3_start)}</td>
@@ -224,8 +213,8 @@ document.addEventListener('DOMContentLoaded', () => {
                         <td>${formatCell(row.q4_end)}</td>
                         <td>${formatCell(row.using_round_bar)}</td>
                         <td>${formatCell(row.using_bare_hands)}</td>
-                        <td>${formatCell(row.appearance_judgement)}</td>
-                        <td>${formatCell(row.dimension_judgement)}</td>
+                        <td>${formatCell(row.appearance_judgment)}</td>
+                        <td>${formatCell(row.dimension_judgment)}</td>
                         <td>${formatCell(row.ng_quantity)}</td>
                         <td>${formatCell(row.defect_type)}</td>
                         <td>${formatCell(row.confirm_by)}</td>
@@ -238,61 +227,114 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// Function to export table data to CSV
-function exportTable() {
-    const table = document.getElementById('export_cotdb');
-    const rows = table.querySelectorAll('tbody tr');
-    const csv = [];
-
-    // Construct CSV header from table headers
-    const headers = Array.from(table.querySelectorAll('thead th')).map(th => th.textContent.trim());
-    csv.push(headers.join(','));
-
-    // Construct CSV rows from table rows
-    rows.forEach(row => {
-        const csvRow = [];
-        Array.from(row.cells).forEach(cell => {
-            csvRow.push(cell.textContent.trim().replace(/,/g, ''));
-        });
-        csv.push(csvRow.join(','));
-    });
-
-    // Create CSV content and initiate download
-    const csvContent = csv.join('\n');
-    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-
-    const link = document.createElement('a');
-    const today = new Date();
-    const dateString = `${today.getFullYear()}-${(today.getMonth() + 1).toString().padStart(2, '0')}-${today.getDate().toString().padStart(2, '0')}`;
-    link.setAttribute('href', URL.createObjectURL(blob));
-    link.setAttribute('download', `COT_${dateString}.csv`);
-    link.style.visibility = 'hidden';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+// Formatting functions
+function formatDateTime(dateTimeStr) {
+    return dateTimeStr ? new Date(dateTimeStr).toLocaleString() : 'N/A';
 }
 
-// Function to format cell content
+function formatDate(dateStr) {
+    return dateStr ? new Date(dateStr).toLocaleDateString() : 'N/A';
+}
+
 function formatCell(value) {
     return value ? value : 'N/A';
 }
 
-// Function to format date/time
-function formatDateTime(dateTimeStr) {
-    if (!dateTimeStr) return 'N/A'; // Handle null or undefined values
+// Export to CSV
+function exportTable() {
+    const table = document.getElementById("export_cotdb");
+    const rows = table.querySelectorAll("tr");
 
-    const date = new Date(dateTimeStr);
-    return date.toLocaleString(); // Adjust format as needed
+    let csvContent = "";
+    rows.forEach((row) => {
+        const cells = row.querySelectorAll("td, th");
+        const rowContent = Array.from(cells)
+            .map((cell) => `"${cell.textContent}"`)
+            .join(",");
+        csvContent += rowContent + "\n";
+    });
+
+    const date = new Date();
+    const fileName = `COT_${date.toISOString().slice(0, 10)}.csv`;
+    const blob = new Blob([csvContent], { type: "text/csv" });
+
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = fileName;
+    link.click();
 }
 
-// Function to format date
-function formatDate(dateStr) {
-    if (!dateStr) return 'N/A'; // Handle null or undefined values
+// Export table to PDF
+function exportToPDF() {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF('l', 'mm', 'a4');
+    const table = document.getElementById('export_cotdb');
 
-    const date = new Date(dateStr);
-    return date.toLocaleDateString(); // Adjust format as needed
+    doc.autoTable({
+        html: table,
+        startY: 10,
+        theme: 'grid',
+        headStyles: { fillColor: [0, 0, 0] },
+        alternateRowStyles: { fillColor: [245, 245, 245] },
+        styles: {
+            fontSize: 7,
+            cellWidth: 'wrap',
+            overflow: 'linebreak'
+        },
+        columnStyles: {
+            0: { cellWidth: 10 },
+            1: { cellWidth: 20 },
+            2: { cellWidth: 15 },
+            3: { cellWidth: 15 },
+            4: { cellWidth: 15 },
+            5: { cellWidth: 15 },
+            6: { cellWidth: 20 },
+            7: { cellWidth: 20 },
+            8: { cellWidth: 20 },
+            9: { cellWidth: 10 },
+            10: { cellWidth: 20 },
+            11: { cellWidth: 20 },
+            12: { cellWidth: 25 },
+            13: { cellWidth: 20 },
+            14: { cellWidth: 20 },
+            15: { cellWidth: 20 },
+            16: { cellWidth: 20 },
+            17: { cellWidth: 20 },
+            18: { cellWidth: 20 },
+            19: { cellWidth: 20 },
+            20: { cellWidth: 20 },
+            21: { cellWidth: 20 },
+            22: { cellWidth: 20 },
+            23: { cellWidth: 20 },
+            24: { cellWidth: 20 },
+            25: { cellWidth: 20 },
+            26: { cellWidth: 20 },
+            27: { cellWidth: 20 },
+            28: { cellWidth: 20 },
+            29: { cellWidth: 20 },
+            30: { cellWidth: 20 },
+            31: { cellWidth: 20 },
+            32: { cellWidth: 20 },
+            33: { cellWidth: 20 },
+            34: { cellWidth: 20 },
+            35: { cellWidth: 20 },
+            36: { cellWidth: 20 },
+            37: { cellWidth: 20 },
+            38: { cellWidth: 20 },
+            39: { cellWidth: 20 },
+            40: { cellWidth: 20 },
+            41: { cellWidth: 20 },
+            42: { cellWidth: 20 },
+            43: { cellWidth: 20 },
+            44: { cellWidth: 20 },
+            45: { cellWidth: 20 }
+        }
+    });
+
+    doc.save('COT_' + new Date().toLocaleDateString() + '.pdf');
 }
 </script>
+
 
 
 
