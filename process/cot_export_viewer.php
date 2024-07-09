@@ -1,21 +1,33 @@
+
 <?php
 include 'conn3.php'; // Include your database connection script
 
-// Function to fetch data from a specific table
-// Function to fetch data from a specific table// Function to fetch data from a specific table
-function fetchDataFromTable($conn, $tableName, $columns) {
-    // Prepare SQL query
-    $sql = "SELECT TOP (1000) " . implode(', ', $columns) . ",
-                   CASE
-                       WHEN '$tableName' = 'sp_cotdb' THEN 'Start Point'
-                       WHEN '$tableName' = 'mp_cotdb' THEN 'Mass Production'
-                       WHEN '$tableName' = 'ep_cotdb' THEN 'End Point'
-                       ELSE 'Unknown'
-                   END AS Process
-            FROM [tube_inspection_db].[dbo].[$tableName]";
+// Function to fetch data from a specific table based on part name
+function fetchDataByPartName($conn, $tableName, $columns, $partName) {
+// Extract date parameters
+$dateFrom = $_GET['date_from'] ?? null;
+$dateTo = $_GET['date_to'] ?? null;
+
+// Prepare SQL query with part name and optional date filters
+$sql = "SELECT " . implode(', ', $columns) . ",
+               CASE
+                   WHEN '$tableName' = 'sp_cotdb' THEN 'Start Point'
+                   WHEN '$tableName' = 'mp_cotdb' THEN 'Mass Production'
+                   WHEN '$tableName' = 'ep_cotdb' THEN 'End Point'
+                   ELSE 'Unknown'
+               END AS Process
+        FROM [tube_inspection_db].[dbo].[$tableName]
+        WHERE part_name = ?";
+
+// Add date filters if provided
+if ($dateFrom && $dateTo) {
+    $sql .= " AND inspection_date BETWEEN '$dateFrom' AND '$dateTo'";
+}
     
-    // Execute SQL query
-    $stmt = sqlsrv_query($conn, $sql);
+    
+    // Prepare and execute SQL query with parameterized part name
+    $params = array($partName);
+    $stmt = sqlsrv_query($conn, $sql, $params);
     if ($stmt === false) {
         die(print_r(sqlsrv_errors(), true));
     }
@@ -48,7 +60,6 @@ function fetchDataFromTable($conn, $tableName, $columns) {
     sqlsrv_free_stmt($stmt);
     return $data;
 }
-
 
 
 // Define columns for the tables with potential missing columns
@@ -190,9 +201,12 @@ $mp_cotdb_columns = [
 ];
 
 // Fetch data from each table
-$data_sp_cotdb = fetchDataFromTable($conn, 'sp_cotdb', $sp_cotdb_columns);
-$data_mp_cotdb = fetchDataFromTable($conn, 'mp_cotdb', $mp_cotdb_columns);
-$data_ep_cotdb = fetchDataFromTable($conn, 'ep_cotdb', $ep_cotdb_columns);
+$partName = $_GET['partName'] ?? ''; // Adjust this based on how partName is passed
+
+// Fetch data based on part name from each table
+$data_sp_cotdb = fetchDataByPartName($conn, 'sp_cotdb', $sp_cotdb_columns, $partName);
+$data_mp_cotdb = fetchDataByPartName($conn, 'mp_cotdb', $mp_cotdb_columns, $partName);
+$data_ep_cotdb = fetchDataByPartName($conn, 'ep_cotdb', $ep_cotdb_columns, $partName);
 
 // Combine data from all tables
 $combinedData = array_merge($data_sp_cotdb, $data_mp_cotdb, $data_ep_cotdb);

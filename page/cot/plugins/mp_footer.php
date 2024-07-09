@@ -1,5 +1,5 @@
  <footer class="main-footer" style="background-color:#2a273c; color:#d6d9db;padding:10px;">
-    <strong>Copyright &copy; 2024. Developed by: Marc Neilsen Omabtang</strong>
+ <strong>Copyright &copy; 2024. Developed by: M.N Omabtang</strong>
     All rights reserved.
     <div class="float-right d-none d-sm-inline-block">
       <b>Version</b> 1.0.0
