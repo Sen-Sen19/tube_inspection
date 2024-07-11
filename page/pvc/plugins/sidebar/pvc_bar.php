@@ -53,6 +53,12 @@
             <p>End Point</p>
           </a>
         </li>
+        <li class="nav-item">
+          <a href="pvc_export.php" class="nav-link <?= ($_SERVER['REQUEST_URI'] == "/tube_inspection/page/pvc/pvc_export.php") ? 'active' : '' ?>">
+            <i class="nav-icon fas fa-file-export"></i>
+            <p>Export</p>
+          </a>
+        </li>
 
         <?php include 'logout.php';?>
       </ul>

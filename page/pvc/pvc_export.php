@@ -1,5 +1,5 @@
 <?php include 'plugins/navbar.php'; ?>
-<?php include 'plugins/sidebar/cot_bar.php'; ?>
+<?php include 'plugins/sidebar/pvc_bar.php'; ?>
 
 <div class="content-wrapper">
     <div class="content-header">
@@ -73,7 +73,7 @@
                             </div>
                             <div id="accounts_table_res" class="table-responsive"
                                 style="height: 60vh; overflow: auto; display: inline-block; margin-top: 50px; border-top: 1px solid gray;">
-                                <table id="export_cotdb" class="table table-sm table-head-fixed text-nowrap table-hover">
+                                <table id="export_pvcdb" class="table table-sm table-head-fixed text-nowrap table-hover">
                                     <thead style="text-align: center;">
                                         <tr>
                                             <th>#</th>
@@ -89,17 +89,14 @@
                                             <th>Inspection Date</th>
                                             <th>Total Minutes</th>
                                             <th>Outside Appearance</th>
-                                            <th>Slit Condition</th>
+                                            
                                             <th>Inside Appearance</th>
                                             <th>Color</th>
                                             <th>I Tolerance +</th>
                                             <th>I Tolerance -</th>
                                             <th>I Diameter Start</th>
                                             <th>I Diameter End</th>
-                                            <th>O Tolerance +</th>
-                                            <th>O Tolerance -</th>
-                                            <th>O Diameter Start</th>
-                                            <th>O Diameter End</th>
+                                            
                                             <th>W Tolerance +</th>
                                             <th>W Tolerance -</th>
                                             <th>Q1 Start</th>
@@ -114,8 +111,6 @@
                                             <th>Q2 End</th>
                                             <th>Q3 End</th>
                                             <th>Q4 End</th>
-                                            <th>Using Round Bar</th>
-                                            <th>Using Bare Hands</th>
                                             <th>Appearance Judgement</th>
                                             <th>Dimension Judgement</th>
                                             <th>NG Quantity</th>
@@ -124,7 +119,7 @@
                                             <th>Remarks</th>
                                         </tr>
                                     </thead>
-                                    <tbody id="export_cotdb_body" style="text-align: center; padding:20px;">
+                                    <tbody id="export_pvcdb_body" style="text-align: center; padding:20px;">
                                         <!-- Data will be inserted here -->
                                     </tbody>
                                 </table>
@@ -143,7 +138,7 @@
 <script>
 document.addEventListener('DOMContentLoaded', () => {
     // Fetch and populate part names dropdown
-    fetch('../../process/cot_get_part_names.php')
+    fetch('../../process/pvc_get_part_names.php')
         .then(response => {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
@@ -168,7 +163,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const dateFrom = document.getElementById('date_from').value;
         const dateTo = document.getElementById('date_to').value;
 
-        let url = `../../process/cot_export_viewer.php?partName=${partName}`;
+        let url = `../../process/pvc_export_viewer.php?partName=${partName}`;
 
         // Append date parameters if they are provided
         if (dateFrom && dateTo) {
@@ -184,7 +179,7 @@ document.addEventListener('DOMContentLoaded', () => {
             })
             .then(data => {
                 // Clear existing table rows if any
-                const tableBody = document.getElementById('export_cotdb_body');
+                const tableBody = document.getElementById('export_pvcdb_body');
                 tableBody.innerHTML = '';
 
                 // Populate table with fetched data
@@ -204,17 +199,14 @@ document.addEventListener('DOMContentLoaded', () => {
                         <td>${formatDate(row.inspection_date)}</td>
                         <td>${formatCell(row.total_mins)}</td>
                         <td>${formatCell(row.outside_appearance)}</td>
-                        <td>${formatCell(row.slit_condition)}</td>
+                     
                         <td>${formatCell(row.inside_appearance)}</td>
                         <td>${formatCell(row.color)}</td>
                         <td>${formatCell(row.i_tol_plus)}</td>
                         <td>${formatCell(row.i_tol_minus)}</td>
                         <td>${formatCell(row.i_diameter_start)}</td>
                         <td>${formatCell(row.i_diameter_end)}</td>
-                        <td>${formatCell(row.o_tol_plus)}</td>
-                        <td>${formatCell(row.o_tol_minus)}</td>
-                        <td>${formatCell(row.o_diameter_start)}</td>
-                        <td>${formatCell(row.o_diameter_end)}</td>
+                      
                         <td>${formatCell(row.w_tol_plus)}</td>
                         <td>${formatCell(row.w_tol_minus)}</td>
                         <td>${formatCell(row.q1_start)}</td>
@@ -229,8 +221,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         <td>${formatCell(row.q2_end)}</td>
                         <td>${formatCell(row.q3_end)}</td>
                         <td>${formatCell(row.q4_end)}</td>
-                        <td>${formatCell(row.using_round_bar)}</td>
-                        <td>${formatCell(row.using_bare_hands)}</td>
+                       
                         <td>${formatCell(row.appearance_judgment)}</td>
                         <td>${formatCell(row.dimension_judgment)}</td>
                         <td>${formatCell(row.ng_quantity)}</td>
@@ -260,7 +251,7 @@ function formatCell(value) {
 
 // Export to CSV
 function exportTable() {
-    const table = document.getElementById("export_cotdb");
+    const table = document.getElementById("export_pvcdb");
     const rows = table.querySelectorAll("tr");
 
     let csvContent = "";
@@ -273,7 +264,7 @@ function exportTable() {
     });
 
     const date = new Date();
-    const fileName = `COT_${date.toISOString().slice(0, 10)}.csv`;
+    const fileName = `PVC_${date.toISOString().slice(0, 10)}.csv`;
     const blob = new Blob([csvContent], { type: "text/csv" });
 
     const link = document.createElement("a");
