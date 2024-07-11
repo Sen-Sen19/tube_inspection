@@ -264,75 +264,236 @@ function exportTable() {
     link.click();
 }
 
-// Export table to PDF
 function exportToPDF() {
     const { jsPDF } = window.jspdf;
-    const doc = new jsPDF('l', 'mm', 'a4');
-    const table = document.getElementById('export_cotdb');
+    const doc = new jsPDF('p', 'mm', 'a4'); 
 
-    doc.autoTable({
-        html: table,
-        startY: 10,
-        theme: 'grid',
-        headStyles: { fillColor: [0, 0, 0] },
-        alternateRowStyles: { fillColor: [245, 245, 245] },
-        styles: {
-            fontSize: 7,
-            cellWidth: 'wrap',
-            overflow: 'linebreak'
-        },
-        columnStyles: {
-            0: { cellWidth: 10 },
-            1: { cellWidth: 20 },
-            2: { cellWidth: 15 },
-            3: { cellWidth: 15 },
-            4: { cellWidth: 15 },
-            5: { cellWidth: 15 },
-            6: { cellWidth: 20 },
-            7: { cellWidth: 20 },
-            8: { cellWidth: 20 },
-            9: { cellWidth: 10 },
-            10: { cellWidth: 20 },
-            11: { cellWidth: 20 },
-            12: { cellWidth: 25 },
-            13: { cellWidth: 20 },
-            14: { cellWidth: 20 },
-            15: { cellWidth: 20 },
-            16: { cellWidth: 20 },
-            17: { cellWidth: 20 },
-            18: { cellWidth: 20 },
-            19: { cellWidth: 20 },
-            20: { cellWidth: 20 },
-            21: { cellWidth: 20 },
-            22: { cellWidth: 20 },
-            23: { cellWidth: 20 },
-            24: { cellWidth: 20 },
-            25: { cellWidth: 20 },
-            26: { cellWidth: 20 },
-            27: { cellWidth: 20 },
-            28: { cellWidth: 20 },
-            29: { cellWidth: 20 },
-            30: { cellWidth: 20 },
-            31: { cellWidth: 20 },
-            32: { cellWidth: 20 },
-            33: { cellWidth: 20 },
-            34: { cellWidth: 20 },
-            35: { cellWidth: 20 },
-            36: { cellWidth: 20 },
-            37: { cellWidth: 20 },
-            38: { cellWidth: 20 },
-            39: { cellWidth: 20 },
-            40: { cellWidth: 20 },
-            41: { cellWidth: 20 },
-            42: { cellWidth: 20 },
-            43: { cellWidth: 20 },
-            44: { cellWidth: 20 },
-            45: { cellWidth: 20 }
-        }
+
+    const logo = new Image();
+    logo.src = '../../dist/img/R.jpg';
+    const logoWidth = 60; 
+    const logoHeight = 15; 
+    const logoX = 10; 
+    const logoY = 10; 
+    doc.addImage(logo, 'PNG', logoX, logoY, logoWidth, logoHeight);
+
+    // Title
+    const titleText = 'COT/PVC Tube Inspection Record';
+    const titleFontSize = 12;
+    const titleWidth = doc.getStringUnitWidth(titleText) * titleFontSize / doc.internal.scaleFactor;
+    const titleX = (doc.internal.pageSize.width - titleWidth) / 2;
+    const titleY = 23;
+
+
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(titleFontSize);
+    doc.text(titleText, titleX, titleY);
+
+   
+    doc.setFont('helvetica', 'normal');
+
+    // Page Number
+    const pageNumberText = 'Page________';
+    const pageNumberX = logoX + logoWidth - 55; 
+    const pageNumberY = logoY + logoHeight + 10; 
+    doc.setFontSize(8);
+    doc.text(pageNumberText, pageNumberX, pageNumberY);
+
+
+    
+doc.text('[  ] Normal Process       [  ] Re-Checking',76, 35); 
+
+ 
+    const allCells = [
+        { text: 'Insp Date & Shift:', width: 25, height: 6, top: 42, right: 40 },
+        { text: 'Inspected By:', width: 25, height: 6, top: 48, right: 40 },
+        { text: 'Machine No.:', width: 25, height: 6, top: 54, right: 40 },
+        { text: 'Measuring Tools', width: 25, height: 6, top: 60, right: 40 },
+        { text: 'Measuring Tools\nSerial No.', width: 25, height: 6, top: 66, right: 40 },
+        { text: '', width: 55, height: 6, top: 42, right: 95 },
+        { text: '', width: 55, height: 6, top: 48, right: 95 },
+        { text: '', width: 55, height: 6, top: 54, right: 95 },
+        { text: '', width: 18.3333333, height: 6, top: 60, right: 58.5 },
+        { text: '', width: 18.3333333, height: 6, top: 60, right: 76.8 },
+        { text: '', width: 18.3333333, height: 6, top: 60, right: 95 },
+        { text: '', width: 18.3333333, height: 6, top: 66, right: 58.5 },
+        { text: '', width: 18.3333333, height: 6, top: 66, right: 76.8 },
+        { text: '', width: 18.3333333, height: 6, top: 66, right: 95 },
+        { text: 'Total QTY:', width: 25, height: 6, top: 42, right: 120 },
+        { text: 'Total insp QTY:', width: 25, height: 6, top: 48, right: 120 },
+        { text: 'Total NG QTY:', width: 25, height: 6, top: 54, right: 120 },
+        { text: 'NG%:', width: 25, height: 6, top: 60, right: 120 },
+        { text: 'Total insp Time:', width: 25, height: 6, top: 66, right: 120 },
+        { text: '', width: 30, height: 6, top: 42, right: 150 },
+        { text: '', width: 30, height: 6, top: 48, right: 150 },
+        { text: '', width: 30, height: 6, top: 54, right: 150 },
+        { text: '', width: 30, height: 6, top: 60, right: 150 },
+        { text: '', width: 30, height: 6, top: 66, right: 150 },
+        { text: 'Approved By:', width: 20, height: 6, top: 42, right: 170 },
+        { text: '', width: 20, height: 24, top: 48, right: 170 },
+        { text: 'Checked By:', width: 20, height: 6, top: 42, right: 190 },
+        { text: '', width: 20, height: 24, top: 48, right: 190 },
+
+
+        
+
+        { text: 'Appearance:', width: 77.5, height: 6, top: 75, right: 92.5 },
+        { text: 'Dimension:', width: 77.5, height: 6, top: 75, right: 170 },
+        { text: 'Judgement', width: 20, height: 18, top: 75, right: 190 },
+        { text:'', width: 20, height: 12, top: 93, right: 190 },
+        { text:'', width: 20, height: 12, top: 105, right: 190 },
+        { text: '', width: 5, height: 12, top: 81, right: 20 },
+        { text: 'S', width: 5, height: 12, top: 93, right: 20 },
+        { text: 'E', width: 5, height: 12, top: 105, right: 20 },
+        
+        { text: 'PartName', width: 15, height: 12, top: 81, right: 35 },
+        { id: 'Partsname', width: 15, height: 12, top: 93, right: 35 },
+        { text: '', width: 15, height: 12, top: 105, right: 35 },
+        { text: 'Inpection Time', width: 22, height: 6, top: 81, right: 57 },
+        { text: 'Start', width: 11, height: 6, top: 87, right: 46 },
+        { text: 'End', width: 11, height: 6, top: 87, right: 57 },
+        { text:'QTY(m)', width: 12, height: 12, top: 81, right: 69 },
+        { text:'Visual', width: 15.6, height: 6, top: 81, right: 84.6 },
+        { text:'Color', width: 7.8, height: 12, top: 81, right: 92.5 },
+        { text: 'Start', width: 7.8, height: 6, top: 87, right: 76.8 },
+        { text: 'End', width: 7.8, height: 6, top: 87, right: 84.6 },
+        { text: '', width: 11, height: 12, top: 93, right: 46 },
+        { text: '', width: 11, height: 12, top: 93, right: 57 },
+        { text: '', width: 11, height: 12, top: 105, right: 46 },
+        { text: '', width: 11, height: 12, top: 105, right: 57 },
+        { text:'', width: 12, height: 12, top: 93, right: 69 },
+        { text:'', width: 12, height: 12, top: 105, right: 69 },
+        { text: '', width: 7.8, height: 12, top:93, right: 76.8 },
+        { text: '', width: 7.8, height: 12, top: 93, right: 84.6 },
+        { text: '', width: 7.8, height: 12, top: 105, right: 76.8 },
+        { text: '', width: 7.8, height: 12, top: 105, right: 84.6 },
+        { text:'', width: 7.8, height: 12, top: 93, right: 92.5 },
+        { text:'', width: 7.8, height: 12, top: 105, right: 92.5 },
+
+{ text:'Inside MM', width: 12.5, height: 12, top: 81, right: 105 },
+{ text:'', width: 12.5, height: 12, top: 93, right: 105 },
+{ text:'', width: 12.5, height: 12, top: 105, right: 105 },
+{ text:'Outside MM', width: 12.5, height: 12, top: 81, right: 117.5 },
+{ text:'', width: 12.5, height: 12, top: 93, right: 117.5 },
+{ text:'', width: 12.5, height: 12, top: 105, right: 117.5 },
+{ text:'\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0Wall Thickness (mm)\n\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0Specs: [                                   ]', width: 52.5, height: 12, top: 81, right: 170 },
+{ text: 'Start Point pt.1', width: 17.5, height: 4, top: 93, right: 135 },
+{ text: '', width: 4.3, height: 4, top: 97, right: 121.8 },
+{ text: '', width: 4.3, height:4, top: 97, right: 126.1 },
+{ text: '', width: 4.3, height: 4, top: 97, right: 130.4 },
+{ text: '', width: 4.5, height: 4, top: 97, right: 135 },
+{ text: '', width: 4.3, height: 4, top: 101, right: 121.8 },
+{ text: '', width: 4.3, height:4, top: 101, right: 126.1 },
+{ text: '', width: 4.3, height: 4, top: 101, right: 130.4 },
+{ text: '', width: 4.5, height: 4, top: 101, right: 135 },        
+{ text: 'Middle Point pt.2', width: 17.5, height: 4, top: 93, right: 152.5 },
+{ text: '', width: 4.3, height: 4, top: 97, right: 139.3 },
+{ text: '', width: 4.3, height: 4, top: 97, right: 143.6 },
+{ text: '', width: 4.3, height: 4, top: 97, right: 147.9 },
+{ text: '', width: 4.5, height: 4, top: 97, right: 152.5 },
+{ text: '', width: 4.3, height: 4, top: 101, right: 139.3 },
+{ text: '', width: 4.3, height: 4, top: 101, right: 143.6 },
+{ text: '', width: 4.3, height: 4, top: 101, right: 147.9 },
+{ text: '', width: 4.5, height: 4, top: 101, right: 152.5 },
+{ text: 'End Point pt.3', width: 17.5, height: 4, top: 93, right: 170 },
+{ text: '', width: 4.3, height: 4, top: 97, right: 156.8},
+{ text: '', width: 4.3, height: 4, top: 97, right: 161.1 },
+{ text: '', width: 4.3, height: 4 ,top: 97, right: 165.4 },
+{ text: '', width: 4.5, height: 4, top: 97, right: 169.9 },
+{ text: '', width: 4.3, height: 4, top: 101, right: 156.8},
+{ text: '', width: 4.3, height: 4, top: 101, right: 161.1 },
+{ text: '', width: 4.3, height: 4 ,top: 101, right: 165.4 },
+{ text: '', width: 4.5, height: 4, top: 101, right: 169.9 },
+{ text: 'Start Point pt.1', width: 26.25, height: 4, top: 105, right: 143.7 },
+{ text: '', width: 6.5, height: 4, top: 109, right: 124},
+{ text: '', width: 6.5, height: 4, top: 109, right: 130.5 },
+{ text: '', width: 6.5, height: 4 ,top: 109, right: 137 },
+{ text: '', width: 6.7, height: 4, top: 109, right: 143.7 },
+{ text: '', width: 6.5, height: 4, top: 113, right: 124},
+{ text: '', width: 6.5, height: 4, top: 113, right: 130.5 },
+{ text: '', width: 6.5, height: 4 ,top: 113, right: 137 },
+{ text: '', width: 6.7, height: 4, top: 113, right: 143.7 },
+{ text: 'End Point pt.2', width: 26.25, height: 4, top: 105, right: 169.95},
+{ text: '', width: 6.5, height: 4, top: 109, right: 150.2},
+{ text: '', width: 6.5, height: 4, top: 109, right: 156.7 },
+{ text: '', width: 6.5, height: 4 ,top: 109, right: 163.2},
+{ text: '', width: 6.7, height: 4, top: 109, right: 169.9 },
+{ text: '', width: 6.5, height: 4, top: 113, right: 150.2},
+{ text: '', width: 6.5, height: 4, top: 113, right: 156.7 },
+{ text: '', width: 6.5, height: 4 ,top: 113, right: 163.2 },
+{ text: '', width: 6.7, height: 4, top: 113, right: 169.9},
+
+
+
+{ text: 'Appearance', width: 175, height: 6, top: 120, right:  190},
+{ text: 'RN', width: 5, height: 12, top: 126, right: 20 },
+{ text: 'PartName', width: 15, height: 12, top: 126, right: 35 },
+{ text: 'Inspection\nTime', width: 14, height: 6, top: 126, right: 49 },
+
+{ text: 'Start', width: 7, height: 6, top: 132, right: 42 },
+{ text: 'End', width: 7, height: 6, top: 132, right: 49 },
+
+{ text: 'Lot No.', width: 15, height: 12, top: 126, right: 64 },
+{ text: 'Serial\nNo.', width: 8, height: 12, top: 126, right: 72 },
+{ text: 'Quantity (m)', width: 14, height: 12, top: 126, right: 86 },
+{ text: 'NG QTY(m)', width: 14, height: 12, top: 126, right: 100 },
+{ text: 'Visual', width: 15, height: 6, top: 126, right: 115 },
+
+
+{ text: 'Start', width: 7.5, height: 6, top: 132, right: 107.5 },
+{ text: 'End', width: 7.5, height: 6, top: 132, right: 115 },
+
+{ text: 'Color', width: 15, height: 12, top: 126, right: 130 },
+{ text: 'Tube Breaking', width: 15, height: 12, top: 126, right: 145 },
+{ text: 'Judgement', width: 15, height: 12, top: 126, right: 160 },
+{ text: 'Type of Defect', width: 15, height: 12, top: 126, right: 175 },
+{ text: 'Defect\nConfirmed by', width: 15, height: 12, top: 126, right: 190 },
+
+
+
+{ text: '1', width: 5, height: 6, top: 138, right: 20 },
+{ text: '', width: 15, height: 6, top: 138, right: 35 },
+
+
+{ text: '', width: 7, height: 6, top: 138, right: 42 },
+{ text: '', width: 7, height: 6, top: 138, right: 49 },
+
+{ text: '', width: 15, height: 6, top: 138, right: 64 },
+{ text: '', width: 8, height: 6, top: 138, right: 72 },
+{ text: '', width: 14, height: 6, top: 138, right: 86 },
+{ text: '', width: 14, height: 6, top: 138, right: 100 },
+{ text: '', width: 15, height: 6, top: 138, right: 115 },
+
+
+{ text: '', width: 7.5, height: 6, top: 138, right: 107.5 },
+{ text: '', width: 7.5, height: 6, top: 138, right: 115 },
+
+{ text: '', width: 15, height: 6, top: 138, right: 130 },
+{ text: '', width: 15, height: 6, top: 138, right: 145 },
+{ text: '', width: 15, height: 6, top: 138, right: 160 },
+{ text: '', width: 15, height: 6, top: 138, right: 175 },
+{ text: '', width: 15, height: 6, top: 138, right: 190 },
+    ];
+
+    // Iterate through allCells array
+    allCells.forEach((cell) => {
+        // Draw cell outline
+        doc.rect(cell.right - cell.width, cell.top, cell.width, cell.height);
+
+        // Set font size for text inside the cell
+        doc.setFontSize(5); // Adjust as needed
+
+        // Add text inside the cell
+        const textX = cell.right - cell.width + 2; // X coordinate for the text (leave a small margin)
+        const textY = cell.top + cell.height / 2; // Y coordinate for vertically centering the text
+        doc.text(cell.text, textX, textY);
     });
 
-    doc.save('COT_' + new Date().toLocaleDateString() + '.pdf');
+    // Save the PDF
+    doc.save('Custom_Cells_' + new Date().toLocaleDateString() + '.pdf');
 }
+
+
 </script>
 
 
