@@ -53,7 +53,7 @@
                                     <input type="date" name="date_to" class="form-control form-control-sm" id="date_to">
                                 </div>
                                 <div class="col-md-2 mb-2">
-                                    <label style="font-weight: normal;margin-bottom:6%; padding: 0; color: #000; font-weight: bold; visibility:hidden">Date To</label>
+                                    <label style="font-weight: normal;margin-bottom:6%; padding: 0; color: #000; font-weight: bold; visibility:hidden">Search</label>
                                     <button class="btn btn-primary btn-block btn-sm" id="searchBtn">
                                         <i class="fas fa-search"></i> Search
                                     </button>

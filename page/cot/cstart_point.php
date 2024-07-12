@@ -59,8 +59,7 @@
                                         <option value="Dent">Dent</option>
                                         <option value="Misaligned joint portion">Misaligned joint portion</option>
                                         <option value="Foreign material">Foreign material</option>
-                                        <option value="Slit position is on joint portion">Slit position is on joint
-                                            portion</option>
+                                        <option value="Slit position is on joint portion">Slit position is on joint portion</option>
                                         <option value="With gap on slit">With gap on slit</option>
                                         <option value="Crack">Crack</option>
                                         <option value="Overlap">Overlap</option>

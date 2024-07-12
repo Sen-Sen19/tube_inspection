@@ -121,7 +121,7 @@
                 </div>
                 <div class="modal-footer">
                    
-                    <button type="button" class="btn btn-primary" onclick="saveChanges()">Save changes</button>
+                    <button type="button" class="btn btn-primary" style="background-color: #20c997; border-color: #20c997; color:white;" onclick="saveChanges()">Save changes</button>
                 </div>
             </form>
         </div>
@@ -129,19 +129,28 @@
 </div>
 
 
-<!-- Bootstrap and jQuery JS -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+
 
 <!-- Custom JavaScript -->
 <script>
-    $(document).ready(function() {
-        $('#openModalBtn').click(function() {
-          s
-        });
+$(document).ready(function() {
+    $('#openModalBtn').click(function() {
+        $('#addRecordModal').modal('show');
     });
 
-    function saveChanges() {
+    $('#editRecordModal').on('show.bs.modal', function(event) {
+        var button = $(event.relatedTarget);
+        var username = button.data('username');
+        var type = button.data('type');
+
+        var modal = $(this);
+        modal.find('.modal-title').text('Change Password for ' + username);
+        modal.find('#editUsername').val(username);
+        modal.find('#editType').val(type);
+    });
+});
+
+function saveChanges() {
     var username = $('#editUsername').val();
     var newPassword = $('#editPassword').val();
 
@@ -151,7 +160,7 @@
         method: 'POST',
         data: { username: username, newPassword: newPassword },
         success: function(response) {
-            // Check the response for success or error messages
+            // Handle success
             if (response.startsWith('Error')) {
                 Swal.fire({
                     icon: 'error',
@@ -165,8 +174,8 @@
                     showConfirmButton: false,
                     timer: 1500
                 }).then(function() {
-                    $('#editRecordModal').modal('hide'); // Close modal after successful update
-                    location.reload(); // Reload the page
+                    $('#editRecordModal').modal('hide');
+                    location.reload(); // Optional: Reload page after successful save
                 });
             }
         },
@@ -181,10 +190,9 @@
     });
 }
 
-    function refreshPage() {
-       
-        location.reload();
-    }
+function refreshPage() {
+    location.reload();
+}
 </script>
 
 <?php include 'plugins/admin_footer.php'; ?>
