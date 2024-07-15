@@ -59,8 +59,8 @@
                                 <div class="col-md-8 d-flex justify-content-end align-items-center">
                               
 
-                                    <button class="btn btn-info mr-2" id="refreshPageBtn" onclick="refreshPage()" style="width: 20%;">
-                                        <i class="fas fa-sync-alt mr-2"></i>Refresh
+                                <button class="btn btn-info mr-2" id="refreshPageBtn" onclick="refreshPage()" style="width: 20%;background-color:#f8f100; border-color:#cbc500; color:black;">          
+                                                                <i class="fas fa-sync-alt mr-2"></i>Refresh
                                     </button>
                                     <button class="btn btn-danger mr-2" id="deleteBtn" style="width: 20%;">
                                        <i class="fas fa-trash mr-2"></i>Delete
@@ -129,28 +129,19 @@
 </div>
 
 
-
+<!-- Bootstrap and jQuery JS -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 
 <!-- Custom JavaScript -->
 <script>
-$(document).ready(function() {
-    $('#openModalBtn').click(function() {
-        $('#addRecordModal').modal('show');
+    $(document).ready(function() {
+        $('#openModalBtn').click(function() {
+          s
+        });
     });
 
-    $('#editRecordModal').on('show.bs.modal', function(event) {
-        var button = $(event.relatedTarget);
-        var username = button.data('username');
-        var type = button.data('type');
-
-        var modal = $(this);
-        modal.find('.modal-title').text('Change Password for ' + username);
-        modal.find('#editUsername').val(username);
-        modal.find('#editType').val(type);
-    });
-});
-
-function saveChanges() {
+    function saveChanges() {
     var username = $('#editUsername').val();
     var newPassword = $('#editPassword').val();
 
@@ -160,7 +151,7 @@ function saveChanges() {
         method: 'POST',
         data: { username: username, newPassword: newPassword },
         success: function(response) {
-            // Handle success
+            // Check the response for success or error messages
             if (response.startsWith('Error')) {
                 Swal.fire({
                     icon: 'error',
@@ -174,8 +165,8 @@ function saveChanges() {
                     showConfirmButton: false,
                     timer: 1500
                 }).then(function() {
-                    $('#editRecordModal').modal('hide');
-                    location.reload(); // Optional: Reload page after successful save
+                    $('#editRecordModal').modal('hide'); // Close modal after successful update
+                    location.reload(); // Reload the page
                 });
             }
         },
@@ -190,9 +181,10 @@ function saveChanges() {
     });
 }
 
-function refreshPage() {
-    location.reload();
-}
+    function refreshPage() {
+       
+        location.reload();
+    }
 </script>
 
 <?php include 'plugins/admin_footer.php'; ?>

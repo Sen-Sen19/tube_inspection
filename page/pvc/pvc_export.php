@@ -58,15 +58,15 @@
                                         <i class="fas fa-search"></i> Search
                                     </button>
                                 </div>
-                                <div class="col-md-2 mb-2">
+                                <div class="col-6 col-sm-2 ">
                                     <label style="font-weight: normal; margin-bottom:6%; padding: 0; color: #000; font-weight: bold; visibility:hidden">CSV</label>
-                                    <button class="btn btn-warning btn-block btn-sm" id="exportReqBtn" onclick="exportTable()">
+                                    <button class="btn btn-warning btn-block btn-sm" id="exportReqBtn" onclick="exportTable()"      style="background-color:#888484; border-color:#888484; color:white;">
                                         <i class="fas fa-file-export mr-2"></i> Export to CSV
                                     </button>
                                 </div>
-                                <div class="col-md-2 mb-2">
-    <label style="font-weight: normal; margin-bottom:6%; padding: 0; color: #000; font-weight: bold; visibility:hidden">PIDS</label>
-    <button class="btn btn-info btn-block btn-sm" id="refreshPageBtn" onclick="refreshPage()">
+                                <div class="col-6 col-sm-2 ">
+    <label style="font-weight: normal; margin-bottom:6%; padding: 0; color: #000; font-weight: bold; visibility:hidden">Refresh</label>
+    <button class="btn btn-info btn-block btn-sm" id="refreshPageBtn" onclick="refreshPage()"      style="background-color:#f8f100; border-color:#cbc500; color:black;">
         <i class="fas fa-sync-alt mr-2"></i> Refresh Page
     </button>
 </div>

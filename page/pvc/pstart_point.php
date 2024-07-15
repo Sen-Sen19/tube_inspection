@@ -37,20 +37,20 @@
                             </div>
                         </div>
                         <div class="card-body">
-                        <div class="row mb-4">
-                        <div class="col-sm-4">
-    <label>Part Name</label>
-    <select class="form-control" id="partName">
-        <option value="">Choose...</option>
-    </select>
-</div>
+    <div class="row mb-4">
+        <div class="col-sm-3">
+            <label>Part Name</label>
+            <select class="form-control" id="partName" style="height: 33px; font-size: 14px;">
+                <option value="">Choose...</option>
+            </select>
+        </div>
 
 
-    <div class="col-sm-4">
-        <label>Inspected By</label>
-        <input type="text" class="form-control" placeholder="Inspected By" id="inspectedBy">
-    </div>
-    <div class="col-sm-4">
+                                <div class="col-sm-3">
+                                    <label>Inspected By</label>
+                                    <input type="text" class="form-control" placeholder="Inspected By" id="inspectedBy"style="height: 33px; font-size: 14px;" >
+                                </div>
+                                <div class="col-sm-3">
     <label for="defectType">Defect Type</label>
     <select id="defectType" class="form-control">
         <option value="" selected disabled>Choose...</option>
@@ -68,52 +68,52 @@
     </select>
 </div>
 
-</div>
 
 
+
+
+<div class="col-6 col-sm-3 ">
+                                    <!-- Refresh Button -->
+                                    <label
+                                    style="font-weight:normal;margin-bottom:9px;padding:0; visibility: hidden !important;">Refresh</label>
+                                    <button class="btn btn-info btn-block btn-sm" id="refreshPageBtn"
+                                    style="background-color:#f8f100; border-color:#cbc500; color:black;"
+                                        onclick="refreshPage()">
+                                        <i class="fas fa-sync-alt mr-2"></i>Refresh
+                                    </button>
+                                </div>
+                                </div>
 
                             <div class="row mt-4">
-                                <div class="col-6 col-sm-4">
-                                    <!-- Date From -->
+                                <div class="col-6 col-sm-3">
+                                    
                                     <label
                                         style="font-weight:normal;margin:0;padding:0;color:#000; font-weight:bold;">Date
                                         From</label>
                                     <input type="date" name="date_from" class="form-control form-control-sm"
                                         id="date_from">
                                 </div>
-                                <div class="col-6 col-sm-4">
-                                    <!-- Date To -->
+                                <div class="col-6 col-sm-3">
+                                 
                                     <label
                                         style="font-weight:normal;margin:0;padding:0;color:#000; font-weight:bold;">Date
                                         To</label>
-                                    <input type="date" name="date_to" class="form-control form-control-sm"
-                                        id="date_to">
+                                    <input type="date" name="date_to" class="form-control form-control-sm" id="date_to">
                                 </div>
 
-                                <div class="col-6 col-sm-4 ">
+                                <div class="col-6 col-sm-3 ">
                                     <label
-                                        style="font-weight:normal;margin:0;padding:0;color:#000; visibility: hidden !important;">Search</label>
-                                    <button class="btn btn-primary btn-block btn-sm" id="searchbtn"
-                                        style="margin-bottom:30px">
+                                        style="font-weight:normal;margin:0;padding:0; visibility: hidden !important;">Search</label>
+                                    <button class="btn btn-primary btn-block btn-sm" id="searchbtn">
                                         <i class="fas fa-search mr-2"></i>Search
                                     </button>
                                 </div>
 
-                                <div class="col-6 col-sm-4 ">
-                                    <!-- Refresh Button -->
-                                    <button class="btn btn-info btn-block btn-sm" id="refreshPageBtn"
-                                        onclick="refreshPage()">
-                                        <i class="fas fa-sync-alt mr-2"></i>Refresh
-                                    </button>
-                                </div>
-                                <div class="col-6 col-sm-4 ">
-                                    <!-- Export Button -->
-                                    <button class="btn btn-warning btn-block btn-sm" id="exportReqBtn"onclick="exportTable()">
-                                        <i class="fas fa-file-export mr-2"></i>Export
-                                    </button>
-                                </div>
-                                <div class="col-6 col-sm-4 ">
-                                    <!-- Add Record Button -->
+                                
+                             
+                                <div class="col-6 col-sm-3 ">
+                                <label
+                                style="font-weight:normal;margin-bottom:0px;padding:0; visibility: hidden !important;">Add Record</label>
                                     <button class="btn btn-success btn-block btn-sm"
                                         style="background-color: #20c997; border-color: #20c997; color:white;"
                                         id="openModalBtn" data-toggle="modal" data-target="#addRecordModal">
@@ -121,6 +121,7 @@
                                     </button>
                                 </div>
                             </div>
+
 
 
 

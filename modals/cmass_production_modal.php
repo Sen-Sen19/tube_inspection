@@ -174,7 +174,7 @@
             </div>
         </div>
         
-      <!-- Outside Diameter Section -->
+     
       <div class="col-6 form-section">
             <h5 class="modal-title" style="margin-bottom:35px;"><strong>Outside Diameter</strong></h5>
             <div class="form-group">
