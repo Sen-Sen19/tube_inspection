@@ -208,7 +208,6 @@ document.addEventListener('DOMContentLoaded', () => {
             })
             .catch(error => console.error('Error fetching data:', error));
     });
-});
 
 // Formatting functions
 function formatDateTime(dateTimeStr) {
@@ -223,33 +222,61 @@ function formatCell(value) {
     return value ? value : 'N/A';
 }
 
-// Export to CSV
-function exportTable() {
-    const table = document.getElementById("export_pvcdb");
-    const rows = table.querySelectorAll("tr");
-
-    let csvContent = "";
-    rows.forEach((row) => {
-        const cells = row.querySelectorAll("td, th");
-        const rowContent = Array.from(cells)
-            .map((cell) => `"${cell.textContent}"`)
-            .join(",");
-        csvContent += rowContent + "\n";
+ 
+    // Event listener for Export button
+    const exportBtn = document.getElementById('exportReqBtn');
+    exportBtn.addEventListener('click', () => {
+        // Call the exportTable function
+        exportTable();
     });
 
-    const date = new Date();
-    const fileName = `PVC_${date.toISOString().slice(0, 10)}.csv`;
-    const blob = new Blob([csvContent], { type: "text/csv" });
+    // Function to export table data to CSV
+    function exportTable() {
+        const table = document.getElementById('export_pvcdb');
+        const rows = Array.from(table.rows);
 
-    const link = document.createElement("a");
-    link.href = URL.createObjectURL(blob);
-    link.download = fileName;
-    link.click();
-}
+        // Extract headers
+        const headers = rows[0].cells;
+        const headerRow = [];
+        for (let header of headers) {
+            headerRow.push(header.textContent);
+        }
 
-function refreshPage() {
+        // Extract rows
+        const csvContent = [];
+        csvContent.push(headerRow.join(','));
+
+        for (let i = 1; i < rows.length; i++) {
+            const cells = rows[i].cells;
+            const row = [];
+            for (let cell of cells) {
+                row.push(cell.textContent);
+            }
+            csvContent.push(row.join(','));
+        }
+
+        const csvBlob = new Blob([csvContent.join('\n')], { type: 'text/csv' });
+        const csvUrl = URL.createObjectURL(csvBlob);
+
+        const a = document.createElement('a');
+        a.href = csvUrl;
+        a.download = `PVC_${new Date().toISOString().split('T')[0]}.csv`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+    }
+
+    // Function to refresh the page
+    const refreshBtn = document.getElementById('refreshPageBtn');
+    refreshBtn.addEventListener('click', () => {
+        refreshPage();
+    });
+
+    // Function to refresh the page
+    function refreshPage() {
         location.reload();
     }
+});
 </script>
 
 

@@ -200,18 +200,19 @@ $('#q1_start,#q2_start,#q3_start,#q4_start').on('input', function() {
     }
 });
 
-    $('#q1_middle, #q2_middle, #q3_middle, #q4_middle').on('input', function() {
-        var middleVal = $(this).val();
-        var wValue = $(this).data('wValue');
 
-        // Validate if w_value is exactly equal to the input
-        if (middleVal !== '' && parseFloat(middleVal) !== parseFloat(wValue)) {
-            $(this).addClass('is-invalid');
-        } else {
-            $(this).removeClass('is-invalid');
-        }
-    });
+$('#q1_middle, #q2_middle, #q3_middle, #q4_middle').on('input', function() {
+    var endVal = $(this).val();
+    var wMax = $('#q1_end,#q2_end,#q3_end,#q4_end').data('wMax'); // Get o_dia_min from start input
+    var wMin = $('#q1_start,#q2_start,#q3_start,#q4_start').data('wMin');
 
+    // Validate against o_dia_min and o_dia_max
+    if (endVal !== '' && (parseFloat(endVal) < parseFloat(wMin) || parseFloat(endVal) > parseFloat(wMax))) {
+        $(this).addClass('is-invalid');
+    } else {
+        $(this).removeClass('is-invalid');
+    }
+});
     $('#q1_end,#q2_end,#q3_end,#q4_end').on('input', function() {
     var endVal = $(this).val();
     var wMin = $('#q1_start,#q2_start,#q3_start,#q4_start').data('wMin'); // Get o_dia_min from start input

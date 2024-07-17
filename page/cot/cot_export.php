@@ -38,28 +38,37 @@
                         </div>
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-6 col-sm-3 ">
+                                <div class="col-6 col-sm-2 ">
                                     <label style="font-weight: normal; margin-bottom:6%; padding: 0; color: #000; font-weight: bold;">Date From</label>
                                     <input type="date" name="date_from" class="form-control form-control-sm" id="date_from">
                                 </div>
-                                <div class="col-6 col-sm-3 ">
+                                <div class="col-6 col-sm-2 ">
                                     <label style="font-weight: normal;margin-bottom:6%; padding: 0; color: #000; font-weight: bold;">Date To</label>
                                     <input type="date" name="date_to" class="form-control form-control-sm" id="date_to">
                                 </div>
                                 <div class="col-6 col-sm-2 ">
-                                    <label style="font-weight: normal;margin-bottom:9%; padding: 0; color: #000; font-weight: bold; visibility:hidden">Search</label>
+                                    <label style="font-weight: normal;margin-bottom:6%; padding: 0; color: #000; font-weight: bold; visibility:hidden">Search</label>
                                     <button class="btn btn-primary btn-block btn-sm" id="searchBtn">
                                         <i class="fas fa-search"></i> Search
                                     </button>
                                 </div>
                                 <div class="col-6 col-sm-2 ">
-                                    <label style="font-weight: normal; margin-bottom:9%; padding: 0; color: #000; font-weight: bold; visibility:hidden">CSV</label>
+                                    <label style="font-weight: normal; margin-bottom:6%; padding: 0; color: #000; font-weight: bold; visibility:hidden">CSV</label>
                                     <button class="btn btn-warning btn-block btn-sm" id="exportReqBtn" onclick="exportTable()" style="background-color:#888484; border-color:#888484; color:white;">
                                         <i class="fas fa-file-export mr-2"></i> Export to CSV
                                     </button>
                                 </div>
+
                                 <div class="col-6 col-sm-2 ">
-                                    <label style="font-weight: normal; margin-bottom:9%; padding: 0; color: #000; font-weight: bold; visibility:hidden">Refresh</label>
+                                    <label style="font-weight: normal; margin-bottom:6%; padding: 0; color: #000; font-weight: bold; visibility:hidden">PIDS</label>
+                                    <button class="btn btn-warning btn-block btn-sm" id="pidsBtn" onclick="exportTable()" style="background-color:#716d6d; border-color:#888484; color:white;">
+                                    <i class="fas fa-file-download"></i> PIDS
+                                    </button>
+                                </div>
+
+
+                                <div class="col-6 col-sm-2 ">
+                                    <label style="font-weight: normal; margin-bottom:6%; padding: 0; color: #000; font-weight: bold; visibility:hidden">Refresh</label>
                                     <button class="btn btn-info btn-block btn-sm" id="refreshPageBtn" onclick="refreshPage()" style="background-color:#f8f100; border-color:#cbc500; color:black;">
                                         <i class="fas fa-sync-alt mr-2"></i> Refresh Page
                                     </button>
@@ -224,62 +233,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
   
 
-    // Event listener for Export button
-    const exportBtn = document.getElementById('exportReqBtn');
-    exportBtn.addEventListener('click', () => {
-        // Call the exportTable function
-        exportTable();
-    });
+    
 
-    // Function to export table data to CSV
-    function exportTable() {
-        const table = document.getElementById('export_cotdb');
-        const rows = Array.from(table.rows);
-
-        // Extract headers
-        const headers = rows[0].cells;
-        const headerRow = [];
-        for (let header of headers) {
-            headerRow.push(header.textContent);
-        }
-
-        // Extract rows
-        const csvContent = [];
-        csvContent.push(headerRow.join(','));
-
-        for (let i = 1; i < rows.length; i++) {
-            const cells = rows[i].cells;
-            const row = [];
-            for (let cell of cells) {
-                row.push(cell.textContent);
-            }
-            csvContent.push(row.join(','));
-        }
-
-        const csvBlob = new Blob([csvContent.join('\n')], { type: 'text/csv' });
-        const csvUrl = URL.createObjectURL(csvBlob);
-
-        const a = document.createElement('a');
-        a.href = csvUrl;
-        a.download = `COT_${new Date().toISOString().split('T')[0]}.csv`;
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-    }
-
-    // Function to refresh the page
-    const refreshBtn = document.getElementById('refreshPageBtn');
-    refreshBtn.addEventListener('click', () => {
-        refreshPage();
-    });
-
-    // Function to refresh the page
-    function refreshPage() {
-        location.reload();
-    }
 });
 </script>
 
 
 
 <?php include 'plugins/sp_footer.php'; ?>
+<?php include 'plugins/js/cot_export_script.php'; ?>
