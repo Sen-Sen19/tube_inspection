@@ -38,41 +38,35 @@
                         </div>
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-md-2 mb-2">
-                                    <label for="partName">Part Name</label>
-                                    <select class="form-control" id="partName">
-                                        <option value="">Choose...</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-2 mb-2">
+                              
+                            <div class="col-6 col-sm-3 ">
                                     <label style="font-weight: normal; margin-bottom:6%; padding: 0; color: #000; font-weight: bold;">Date From</label>
                                     <input type="date" name="date_from" class="form-control form-control-sm" id="date_from">
                                 </div>
-                                <div class="col-md-2 mb-2">
+                                <div class="col-6 col-sm-3 ">
                                     <label style="font-weight: normal;margin-bottom:6%; padding: 0; color: #000; font-weight: bold;">Date To</label>
                                     <input type="date" name="date_to" class="form-control form-control-sm" id="date_to">
                                 </div>
-                                <div class="col-md-2 mb-2">
-                                    <label style="font-weight: normal;margin-bottom:6%; padding: 0; color: #000; font-weight: bold; visibility:hidden">Search</label>
+                                <div class="col-6 col-sm-2 ">
+                                    <label style="font-weight: normal;margin-bottom:9%; padding: 0; color: #000; font-weight: bold; visibility:hidden">Search</label>
                                     <button class="btn btn-primary btn-block btn-sm" id="searchBtn">
                                         <i class="fas fa-search"></i> Search
                                     </button>
                                 </div>
                                 <div class="col-6 col-sm-2 ">
-                                    <label style="font-weight: normal; margin-bottom:6%; padding: 0; color: #000; font-weight: bold; visibility:hidden">CSV</label>
-                                    <button class="btn btn-warning btn-block btn-sm" id="exportReqBtn" onclick="exportTable()"      style="background-color:#888484; border-color:#888484; color:white;">
+                                    <label style="font-weight: normal; margin-bottom:9%; padding: 0; color: #000; font-weight: bold; visibility:hidden">CSV</label>
+                                    <button class="btn btn-warning btn-block btn-sm" id="exportReqBtn" onclick="exportTable()" style="background-color:#888484; border-color:#888484; color:white;">
                                         <i class="fas fa-file-export mr-2"></i> Export to CSV
                                     </button>
                                 </div>
                                 <div class="col-6 col-sm-2 ">
-    <label style="font-weight: normal; margin-bottom:6%; padding: 0; color: #000; font-weight: bold; visibility:hidden">Refresh</label>
-    <button class="btn btn-info btn-block btn-sm" id="refreshPageBtn" onclick="refreshPage()"      style="background-color:#f8f100; border-color:#cbc500; color:black;">
-        <i class="fas fa-sync-alt mr-2"></i> Refresh Page
-    </button>
-</div>
+                                    <label style="font-weight: normal; margin-bottom:9%; padding: 0; color: #000; font-weight: bold; visibility:hidden">Refresh</label>
+                                    <button class="btn btn-info btn-block btn-sm" id="refreshPageBtn" onclick="refreshPage()" style="background-color:#f8f100; border-color:#cbc500; color:black;">
+                                        <i class="fas fa-sync-alt mr-2"></i> Refresh Page
+                                    </button>
+                                </div>
                             </div>
-                            <div id="accounts_table_res" class="table-responsive"
-                                style="height: 60vh; overflow: auto; display: inline-block; margin-top: 50px; border-top: 1px solid gray;">
+                            <div id="accounts_table_res" class="table-responsive" style="height: 60vh; overflow: auto; display: inline-block; margin-top: 50px; border-top: 1px solid gray;">
                                 <table id="export_pvcdb" class="table table-sm table-head-fixed text-nowrap table-hover">
                                     <thead style="text-align: center;">
                                         <tr>
@@ -137,38 +131,18 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-    // Fetch and populate part names dropdown
-    fetch('../../process/pvc_get_part_names.php')
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(data => {
-            const partNameSelect = document.getElementById('partName');
-            data.forEach(part => {
-                const option = document.createElement('option');
-                option.value = part.part_name;
-                option.textContent = part.part_name;
-                partNameSelect.appendChild(option);
-            });
-        })
-        .catch(error => console.error('Error fetching part names:', error));
+    // Set default date values to today's date
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById('date_from').value = today;
+    document.getElementById('date_to').value = today;
 
     // Event listener for Search button
     const searchBtn = document.getElementById('searchBtn');
     searchBtn.addEventListener('click', () => {
-        const partName = document.getElementById('partName').value;
         const dateFrom = document.getElementById('date_from').value;
         const dateTo = document.getElementById('date_to').value;
 
-        let url = `../../process/pvc_export_viewer.php?partName=${partName}`;
-
-        // Append date parameters if they are provided
-        if (dateFrom && dateTo) {
-            url += `&date_from=${dateFrom}&date_to=${dateTo}`;
-        }
+        let url = `../../process/pvc_export_viewer.php?date_from=${dateFrom}&date_to=${dateTo}`;
 
         fetch(url)
             .then(response => {
@@ -192,23 +166,23 @@ document.addEventListener('DOMContentLoaded', () => {
                         <td>${formatCell(row.lot_no)}</td>
                         <td>${formatCell(row.serial_no)}</td>
                         <td>${formatCell(row.quantity)}</td>
-                        <td>${formatDateTime(row.time_start)}</td>
-                        <td>${formatDateTime(row.time_end)}</td>
+                        <td>${formatCell(row.time_start)}</td>
+                        <td>${formatCell(row.time_end)}</td>
                         <td>${formatCell(row.inspected_by)}</td>
                         <td>${formatCell(row.shift)}</td>
-                        <td>${formatDate(row.inspection_date)}</td>
+                        <td>${formatCell(row.inspection_date)}</td>
                         <td>${formatCell(row.total_mins)}</td>
                         <td>${formatCell(row.outside_appearance)}</td>
                      
                         <td>${formatCell(row.inside_appearance)}</td>
                         <td>${formatCell(row.color)}</td>
-                        <td>${formatCell(row.i_tol_plus)}</td>
-                        <td>${formatCell(row.i_tol_minus)}</td>
+                         <td>${formatCell(row.i_tolerance_plus)}</td>
+                        <td>${formatCell(row.i_tolerance_minus)}</td>
                         <td>${formatCell(row.i_diameter_start)}</td>
                         <td>${formatCell(row.i_diameter_end)}</td>
                       
-                        <td>${formatCell(row.w_tol_plus)}</td>
-                        <td>${formatCell(row.w_tol_minus)}</td>
+                        <td>${formatCell(row.w_tolerance_plus)}</td>
+                        <td>${formatCell(row.w_tolerance_minus)}</td>
                         <td>${formatCell(row.q1_start)}</td>
                         <td>${formatCell(row.q2_start)}</td>
                         <td>${formatCell(row.q3_start)}</td>
@@ -221,9 +195,9 @@ document.addEventListener('DOMContentLoaded', () => {
                         <td>${formatCell(row.q2_end)}</td>
                         <td>${formatCell(row.q3_end)}</td>
                         <td>${formatCell(row.q4_end)}</td>
-                       
-                        <td>${formatCell(row.appearance_judgment)}</td>
-                        <td>${formatCell(row.dimension_judgment)}</td>
+                     
+                        <td>${formatCell(row.appearance_judgement)}</td>
+                        <td>${formatCell(row.dimension_judgement)}</td>
                         <td>${formatCell(row.ng_quantity)}</td>
                         <td>${formatCell(row.defect_type)}</td>
                         <td>${formatCell(row.confirm_by)}</td>

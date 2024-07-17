@@ -1,15 +1,14 @@
-
 <?php
 include 'conn3.php'; // Include your database connection script
 
-// Function to fetch data from a specific table based on part name
-function fetchDataByPartName($conn, $tableName, $columns, $partName) {
-// Extract date parameters
-$dateFrom = $_GET['date_from'] ?? null;
-$dateTo = $_GET['date_to'] ?? null;
+// Function to fetch data from a specific table based on date range
+function fetchDataByDateRange($conn, $tableName, $columns, $dateFrom, $dateTo) {
+    // Convert date format to match the database (if necessary)
+    $dateFrom = date('Y-m-d', strtotime($dateFrom));
+    $dateTo = date('Y-m-d', strtotime($dateTo));
 
-// Prepare SQL query with part name and optional date filters
-$sql = "SELECT " . implode(', ', $columns) . ",
+    // Prepare SQL query with date filters
+    $sql = "SELECT " . implode(', ', $columns) . ",
                CASE
                    WHEN '$tableName' = 'sp_pvcdb' THEN 'Start Point'
                    WHEN '$tableName' = 'mp_pvcdb' THEN 'Mass Production'
@@ -17,16 +16,10 @@ $sql = "SELECT " . implode(', ', $columns) . ",
                    ELSE 'Unknown'
                END AS Process
         FROM [tube_inspection_db].[dbo].[$tableName]
-        WHERE part_name = ?";
-
-// Add date filters if provided
-if ($dateFrom && $dateTo) {
-    $sql .= " AND inspection_date BETWEEN '$dateFrom' AND '$dateTo'";
-}
+        WHERE CAST(inspection_date AS DATE) BETWEEN ? AND ?";
     
-    
-    // Prepare and execute SQL query with parameterized part name
-    $params = array($partName);
+    // Prepare and execute SQL query with parameterized date range
+    $params = array($dateFrom, $dateTo);
     $stmt = sqlsrv_query($conn, $sql, $params);
     if ($stmt === false) {
         die(print_r(sqlsrv_errors(), true));
@@ -63,6 +56,7 @@ if ($dateFrom && $dateTo) {
 
 
 // Define columns for the tables with potential missing columns
+
 $sp_pvcdb_columns = [
     'id',
     'part_name',
@@ -189,12 +183,12 @@ $mp_pvcdb_columns = [
 ];
 
 // Fetch data from each table
-$partName = $_GET['partName'] ?? ''; // Adjust this based on how partName is passed
-
+$dateFrom = $_GET['date_from'] ?? null;
+$dateTo = $_GET['date_to'] ?? null;
 // Fetch data based on part name from each table
-$data_sp_pvcdb = fetchDataByPartName($conn, 'sp_pvcdb', $sp_pvcdb_columns, $partName);
-$data_mp_pvcdb = fetchDataByPartName($conn, 'mp_pvcdb', $mp_pvcdb_columns, $partName);
-$data_ep_pvcdb = fetchDataByPartName($conn, 'ep_pvcdb', $ep_pvcdb_columns, $partName);
+$data_sp_pvcdb = fetchDataByDateRange($conn, 'sp_pvcdb', $sp_pvcdb_columns, $dateFrom, $dateTo);
+$data_mp_pvcdb = fetchDataByDateRange($conn, 'mp_pvcdb', $mp_pvcdb_columns, $dateFrom, $dateTo);
+$data_ep_pvcdb = fetchDataByDateRange($conn, 'ep_pvcdb', $ep_pvcdb_columns, $dateFrom, $dateTo);
 
 // Combine data from all tables
 $combinedData = array_merge($data_sp_pvcdb, $data_mp_pvcdb, $data_ep_pvcdb);

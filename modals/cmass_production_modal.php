@@ -237,14 +237,13 @@
         </div>
 
         <div class="col-12 d-flex align-items-center">
-                <label for="w-tolerance-plus" class="mr-2"></label>
+                <label for="w-tolerance-plus" class="mr-2">&nbsp &nbsp &nbsp&nbsp &nbsp &nbsp&nbsp &nbsp &nbsp&nbsp &nbsp &nbsp&nbsp &nbsp &nbsp&nbsp &nbsp</label>
                 <input type="text" id="w-min" class="form-control" style="width: 70px; margin-right: 10px;" autocomplete="off" readonly name="w_tolerance_minus">
-                <label for="w-tolerance-minus" class="mr-2">&nbsp</label>
-                <input type="text" id="w-value" class="form-control" style="width: 70px;" autocomplete="off" readonly name="w_tolerance_plus">
-                <label for="w-tolerance-minus" class="mr-2">&nbsp &nbsp &nbsp</label>
+              
+                <label for="w-tolerance-minus" class="mr-2">&nbsp &nbsp </label>
                 <input type="text" id="w-max" class="form-control" style="width: 70px;" autocomplete="off" readonly name="w_tolerance_plus">
             </div>
-        </div>
+      
 
 
 
