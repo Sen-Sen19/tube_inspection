@@ -1,14 +1,16 @@
 <script>
      
-     
-     // Event listener for Export button
+  
+
+    // Event listener for Export button
     const exportBtn = document.getElementById('exportReqBtn');
     exportBtn.addEventListener('click', () => {
         // Call the exportTable function
         exportTable();
     });
-     // Function to export table data to CSV
-     function exportTable() {
+
+    // Function to export table data to CSV
+    function exportTable() {
         const table = document.getElementById('export_cotdb');
         const rows = Array.from(table.rows);
 
@@ -38,7 +40,7 @@
         const a = document.createElement('a');
         a.href = csvUrl;
         a.download = `COT_${new Date().toISOString().split('T')[0]}.csv`;
-        document.body.appendChild(a);
+        document.body.appendChild(a);       
         a.click();
         document.body.removeChild(a);
     }
@@ -53,5 +55,6 @@
     function refreshPage() {
         location.reload();
     }
-});
+
+
 </script>

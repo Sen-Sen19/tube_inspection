@@ -55,15 +55,16 @@
                                 <div class="col-6 col-sm-2 ">
                                     <label style="font-weight: normal; margin-bottom:6%; padding: 0; color: #000; font-weight: bold; visibility:hidden">CSV</label>
                                     <button class="btn btn-warning btn-block btn-sm" id="exportReqBtn" onclick="exportTable()" style="background-color:#888484; border-color:#888484; color:white;">
-                                        <i class="fas fa-file-export mr-2"></i> Export to CSV
+                                        <i class="fas fa-file-export mr-2"></i> Export
                                     </button>
                                 </div>
 
                                 <div class="col-6 col-sm-2 ">
-                                    <label style="font-weight: normal; margin-bottom:6%; padding: 0; color: #000; font-weight: bold; visibility:hidden">PIDS</label>
-                                    <button class="btn btn-warning btn-block btn-sm" id="pidsBtn" onclick="exportTable()" style="background-color:#716d6d; border-color:#888484; color:white;">
-                                    <i class="fas fa-file-download"></i> PIDS
-                                    </button>
+                                    <label style="font-weight: normal; margin-bottom:6%; padding: 0; color:  #000; font-weight: bold; visibility:hidden">PIDS</label>
+                                    <button class="btn btn-danger btn-block btn-sm" id="pidsBtn" onclick="exportCSV()" >
+    <i class="fas fa-file-download"></i> PIDS
+</button>
+
                                 </div>
 
 
@@ -137,10 +138,8 @@
             </div>
         </div>
     </section>
-</div>
+</div>2
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.29/jspdf.plugin.autotable.min.js"></script>
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
@@ -189,7 +188,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         <td>${formatCell(row.slit_condition)}</td>
                         <td>${formatCell(row.inside_appearance)}</td>
                         <td>${formatCell(row.color)}</td>
-                         <td>${formatCell(row.i_tolerance_plus)}</td>
+                        <td>${formatCell(row.i_tolerance_plus)}</td>
                         <td>${formatCell(row.i_tolerance_minus)}</td>
                         <td>${formatCell(row.i_diameter_start)}</td>
                         <td>${formatCell(row.i_diameter_end)}</td>
@@ -223,21 +222,103 @@ document.addEventListener('DOMContentLoaded', () => {
                     tableBody.appendChild(tr);
                 });
             })
-            .catch(error => console.error('Error fetching export data:', error));
+            .catch(error => {
+                console.error('Error fetching data:', error);
+            });
     });
 
+
+
+  function exportCSV() {
+    const dateFrom = document.getElementById('date_from').value;
+    const dateTo = document.getElementById('date_to').value;
+
+    let url = `../../process/cot_export_viewer.php?date_from=${dateFrom}&date_to=${dateTo}`;
+
+    fetch(url)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            // Map to aggregate NG Quantity, calculate total minutes, and count part occurrences for each part_name
+            const aggregatedData = {};
+            const partCounts = {};
+
+            data.forEach(row => {
+                const partName = row.part_name;
+                const Process = row.Process; // Assuming the process field is named 'process'
+                const ngQuantity = parseInt(row.ng_quantity) || 0;
+                const totalMins = parseFloat(row.total_mins) || 0; // Parse total_mins as a float to include milliseconds
+                const remark = row.remarks;
+
+                // Aggregate only for "Mass Production" process
+                if (Process === 'Mass Production') {
+                    if (partCounts[partName]) {
+                        partCounts[partName]++;
+                    } else {
+                        partCounts[partName] = 1;
+                    }
+                }
+
+                // Aggregate data for all rows
+                if (aggregatedData[partName]) {
+                    aggregatedData[partName].totalNG += ngQuantity; // Sum NG Quantity
+                    aggregatedData[partName].totalMins += totalMins; // Sum total minutes including milliseconds
+                } else {
+                    aggregatedData[partName] = {
+                        totalNG: ngQuantity, // Initialize NG Quantity
+                        totalMins: totalMins, // Initialize total minutes including milliseconds
+                        remark: remark // Store first remark
+                    };
+                }
+            });
+
+            // Prepare CSV data
+            let csvContent = "data:text/csv;charset=utf-8,";
+
+            // CSV Header
+            csvContent += "Item No,Part Name,Total Box/Roll,Total Part Qty,Total Inspected Qty,Total NG Detected, Ng %, Total Inspection Time,Frequency of Remark\n";
+
+            let itemNo = 1;
+
+            for (const partName in aggregatedData) {
+                const { totalNG, totalMins, remark } = aggregatedData[partName];
+                
+                // Format totalMins to two decimal places
+                const formattedTime = totalMins.toFixed(2);
+
+                // Get the total part quantity for "Mass Production" process
+                const totalBox = partCounts[partName] || 0;
+
+                const rowContent = `${itemNo},${partName},${totalBox},,,${totalNG},,${formattedTime},${remark}\n`; 
+                csvContent += rowContent;
+                itemNo++; 
+            }
+
+            const encodedUri = encodeURI(csvContent);
+            const link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", `PIDS_${new Date().toISOString().split('T')[0]}.csv`);
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        })
+        .catch(error => console.error('Error fetching export data:', error));
+}
+
+
     function formatCell(value) {
-        return value === null || value === undefined || value === '' ? 'N/A' : value;
+        return value === null || value === undefined || value === '' ? 'N/A' : value.toString().replace(/"/g, '""'); 
     }
 
-
-  
-
     
-
+    const pidsBtn = document.getElementById('pidsBtn');
+    pidsBtn.addEventListener('click', exportCSV);
 });
 </script>
-
 
 
 <?php include 'plugins/sp_footer.php'; ?>
