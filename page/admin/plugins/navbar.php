@@ -104,7 +104,6 @@ try {
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
 
-  <!-- Preloader -->
   <div class="preloader flex-column justify-content-center align-items-center">
     <img class="animation__shake" src="../../dist/img/tir-logo.png" alt="logo" height="60" width="60">
     <noscript>
@@ -129,11 +128,7 @@ try {
         </a>
       </li>
       
-      <!-- <input type="" name="ip" id="ip" style="color:white; background-color:#20c997; border:1px;" value="<?= $_SERVER['REMOTE_ADDR']; ?>">
-<script>
-    const ip = $('#ip').val();
-
-</script> -->
+      
     </ul>
   </nav>
 

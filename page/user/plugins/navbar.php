@@ -1,5 +1,5 @@
 <?php
-//SESSION
+
 include '../../process/login.php';
 
 if (!isset($_SESSION['username'])) {
@@ -10,29 +10,27 @@ if (!isset($_SESSION['username'])) {
   exit;
 }
 
-// Database connection details for MS SQL Server
+
 $serverName = "172.25.116.188";
 $username = "sa";
 $password = "SystemGroup@2022";
 $database = "tube_inspection_db";
 try {
-  // Establish connection to MS SQL Server using PDO
+
   $conn = new PDO("sqlsrv:Server=$serverName;Database=$database", $username, $password);
   $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-  // Prepare and execute SQL query
+ 
   $stmt = $conn->prepare("SELECT * FROM sp_cotdb");
   $stmt->execute();
   $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-  // Process the fetched data as needed
   foreach ($result as $row) {
-    // Process each row of data here
-    // Example: echo $row['column_name'];
+ 
   }
 
 } catch (PDOException $e) {
-  echo 'Error: ' . $e->getMessage(); // Output any errors that occur during execution
+  echo 'Error: ' . $e->getMessage(); 
 }
 ?>
 
@@ -45,20 +43,17 @@ try {
   <title>Tube Inspection COT</title>
 
   <link rel="icon" href="../../dist/img/tir-logo.png" type="image/x-icon" />
-  <!-- Google Font: Source Sans Pro -->
+  
   <link rel="stylesheet" href="../../dist/css/font.min.css">
-  <!-- Font Awesome -->
+
   <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
-  <!-- Theme style -->
+  
   <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
-  <!-- overlayScrollbars -->
+  
   <link rel="stylesheet" href="../../plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
-  <!-- Sweet Alert -->
+
   <link rel="stylesheet" href="../../plugins/sweetalert2/dist/sweetalert2.min.css">
   <style>
-    /* body {
-      overflow: hidden;
-    } */
 
     .loader {
       border: 16px solid #f3f3f3;
@@ -142,10 +137,6 @@ try {
           </a>
         </li>
 
-        <!-- <input type="" name="ip" id="ip" style="color:white; background-color:#20c997; border:1px;" value="<?= $_SERVER['REMOTE_ADDR']; ?>">
-        <script>
-            const ip = $('#ip').val();
-
-        </script> -->
+      
       </ul>
     </nav>

@@ -24,7 +24,7 @@ if (isset($_POST['Login'])) {
                 header('location: page/user/dashboard.php');
                 exit;
           
-            } elseif ($type == 'admin') { // Add this block for admin redirection
+            } elseif ($type == 'admin') { 
                 header('location: page/admin/admin.php');
                 exit;
             }

@@ -1,23 +1,22 @@
 <?php
-// Include the connection file
+
 require_once 'conn3.php';
 
-// Check if form data is submitted
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
-    // Retrieve and sanitize form data (sanitize as needed)
-    // Example of basic sanitation, adjust as per your application's needs|
+    
     $lot_no = filter_var($_POST['lot_no'], FILTER_SANITIZE_STRING);
     $serial_no = filter_var($_POST['serial_no'], FILTER_SANITIZE_STRING);
     $partName = filter_var($_POST['part_name'], FILTER_SANITIZE_STRING);
-    $quantity = intval($_POST['quantity']); // Assuming quantity is an integer
-    $timeStart = $_POST['time_start']; // Assuming time fields are properly formatted
+    $quantity = intval($_POST['quantity']); 
+    $timeStart = $_POST['time_start']; 
     $timeEnd = $_POST['time_end'];
     $inspectedBy = filter_var($_POST['inspected_by'], FILTER_SANITIZE_STRING);
-    $shift = $_POST['shift']; // Assuming shift is a string
-    $inspectionDate = $_POST['inspection_date']; // Assuming date is properly formatted
-    $totalMins = floatval($_POST['total_mins']); // Assuming total_mins is a float
-    $outsideAppearance = $_POST['outside_appearance']; // Assuming appearance fields are strings
+    $shift = $_POST['shift'];
+    $inspectionDate = $_POST['inspection_date']; 
+    $totalMins = floatval($_POST['total_mins']); 
+    $outsideAppearance = $_POST['outside_appearance']; 
     $slitCondition = $_POST['slit_condition'];
     $insideAppearance = $_POST['inside_appearance'];
     $color = $_POST['color'];
@@ -47,13 +46,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $usingBareHands = $_POST['using_bare_hands'];
     $appearanceJudgement = $_POST['appearance_judgement'];
     $dimensionJudgement = $_POST['dimension_judgement'];
-    $ngQuantity = intval($_POST['ng_quantity']); // Assuming ng_quantity is an integer
+    $ngQuantity = intval($_POST['ng_quantity']); 
     $defectType = $_POST['defect_type'];
     $confirmBy = $_POST['confirm_by'];
     $remarks = $_POST['remarks'];
     $process = isset($_POST['process']) ? filter_var($_POST['process'], FILTER_SANITIZE_STRING) : '';
 
-    // Prepare SQL statement
+   
     $sql = "INSERT INTO tb_data (
     part_name, quantity, time_start, time_end, inspected_by, shift, inspection_date, total_mins,
     outside_appearance, slit_condition, inside_appearance, color,
@@ -80,7 +79,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 )";
     
     
-    // Prepare the parameters array
+
     $params = array(
         $partName, $quantity, $timeStart, $timeEnd, $inspectedBy, $shift, $inspectionDate, $totalMins,
         $outsideAppearance, $slitCondition, $insideAppearance, $color,
@@ -96,19 +95,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     );
     
 
-    // Prepare and execute the SQL statement
+  
     $stmt = sqlsrv_prepare($conn, $sql, $params);
 
     if ($stmt === false) {
-        // Error handling if prepare fails
+       
         echo "Statement preparation error: " . print_r(sqlsrv_errors(), true);
     } else {
-        // Execute the query
+   
         if (sqlsrv_execute($stmt) === false) {
-            // Error handling if execute fails
+           
             echo "Execution error: " . print_r(sqlsrv_errors(), true);
         } else {
-            // Success message
+        
             echo "Data saved successfully.";
         }
     }

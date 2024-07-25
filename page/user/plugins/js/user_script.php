@@ -72,7 +72,7 @@ $(document).ready(function() {
 
 
 
-    // Set min and max values for inside diameter
+   
     $('#i-diameter-min').val(selectedOption.data('iDiaMin'));
     $('#i-diameter-max').val(selectedOption.data('iDiaMax'));
       // Set min and max values for outside diameter
@@ -80,40 +80,40 @@ $(document).ready(function() {
     $('#o-diameter-max').val(selectedOption.data('oDiaMax'));
 
 
-    // Set tolerance values for inside diameter
+
     $('#tolerance-plus').val(selectedOption.data('iDiaTolMin'));
     $('#tolerance-minus').val(selectedOption.data('iDiaTolMax'));
 
-    // Set tolerance values for outside diameter
+   
     $('#o-tolerance-plus').val(selectedOption.data('oDiaTolMin'));
     $('#o-tolerance-minus').val(selectedOption.data('oDiaTolMax'));
 
-    // Set min and max values for outside diameter
+    
     $('#o-min').val(selectedOption.data('oDiaMin'));
     $('#o-max').val(selectedOption.data('oDiaMax'));
 
-    // Set tolerance values for wall thickness
+
     $('#w-tolerance-plus').val(selectedOption.data('wTolMin'));
     $('#w-tolerance-minus').val(selectedOption.data('wTolMax'));
 
-    // Set min, value, and max for wall thickness
+
     $('#w-min').val(selectedOption.data('wMin'));
     $('#w-value').val(selectedOption.data('wValue'));
     $('#w-max').val(selectedOption.data('wMax'));
 
-    // Clear and set data attributes for inside diameter fields
+
     $('#inside-start').val('').removeClass('is-invalid');
     $('#inside-end').val('').removeClass('is-invalid');
     $('#inside-start').data('iDiaMin', selectedOption.data('iDiaMin'));
     $('#inside-end').data('iDiaMax', selectedOption.data('iDiaMax'));
 
-    // Clear and set data attributes for outside diameter fields
+    
     $('#outside-start').val('').removeClass('is-invalid');
     $('#outside-end').val('').removeClass('is-invalid');
     $('#outside-start').data('oDiaMin', selectedOption.data('oDiaMin'));
     $('#outside-end').data('oDiaMax', selectedOption.data('oDiaMax'));
 
-    // Clear and set data attributes for wall thickness (Q1) fields
+   
     $('#q1_start').val('').removeClass('is-invalid');
     $('#q1_middle').val('').removeClass('is-invalid');
     $('#q1_end').val('').removeClass('is-invalid');
@@ -121,7 +121,7 @@ $(document).ready(function() {
     $('#q1_middle').data('wValue', selectedOption.data('wValue'));
     $('#q1_end').data('wMax', selectedOption.data('wMax'));
 
-    // Clear and set data attributes for Q2 measurements fields
+   
     $('#q2_start').val('').removeClass('is-invalid');
     $('#q2_middle').val('').removeClass('is-invalid');
     $('#q2_end').val('').removeClass('is-invalid');
@@ -129,7 +129,7 @@ $(document).ready(function() {
     $('#q2_middle').data('wValue', selectedOption.data('wValue'));
     $('#q2_end').data('wMax', selectedOption.data('wMax'));
 
-    // Clear and set data attributes for Q3 measurements fields
+    
     $('#q3_start').val('').removeClass('is-invalid');
     $('#q3_middle').val('').removeClass('is-invalid');
     $('#q3_end').val('').removeClass('is-invalid');
@@ -137,7 +137,7 @@ $(document).ready(function() {
     $('#q3_middle').data('wValue', selectedOption.data('wValue'));
     $('#q3_end').data('wMax', selectedOption.data('wMax'));
 
-    // Clear and set data attributes for Q4 measurements fields
+
     $('#q4_start').val('').removeClass('is-invalid');
     $('#q4_middle').val('').removeClass('is-invalid');
     $('#q4_end').val('').removeClass('is-invalid');
@@ -150,9 +150,9 @@ $(document).ready(function() {
     $('#inside-start').on('input', function() {
     var startVal = $(this).val();
     var iDiaMin = $(this).data('iDiaMin');
-    var iDiaMax = $('#inside-end').data('iDiaMax'); // Get i_dia_max from end input
+    var iDiaMax = $('#inside-end').data('iDiaMax'); 
 
-    // Validate against i_dia_min and i_dia_max
+  
     if (startVal !== '' && (parseFloat(startVal) < parseFloat(iDiaMin) || parseFloat(startVal) > parseFloat(iDiaMax))) {
         $(this).addClass('is-invalid');
     } else {
@@ -161,10 +161,10 @@ $(document).ready(function() {
 });
 $('#inside-end').on('input', function() {
     var endVal = $(this).val();
-    var iDiaMin = $('#inside-start').data('iDiaMin'); // Get i_dia_min from start input
+    var iDiaMin = $('#inside-start').data('iDiaMin'); 
     var iDiaMax = $(this).data('iDiaMax');
 
-    // Validate against i_dia_min and i_dia_max
+  
     if (endVal !== '' && (parseFloat(endVal) < parseFloat(iDiaMin) || parseFloat(endVal) > parseFloat(iDiaMax))) {
         $(this).addClass('is-invalid');
     } else {
@@ -174,9 +174,9 @@ $('#inside-end').on('input', function() {
 $('#outside-start').on('input', function() {
     var startVal = $(this).val();
     var oDiaMin = $(this).data('oDiaMin');
-    var oDiaMax = $('#outside-end').data('oDiaMax'); // Get o_dia_max from end input
+    var oDiaMax = $('#outside-end').data('oDiaMax'); 
 
-    // Validate against o_dia_min and o_dia_max
+    
     if (startVal !== '' && (parseFloat(startVal) < parseFloat(oDiaMin) || parseFloat(startVal) > parseFloat(oDiaMax))) {
         $(this).addClass('is-invalid');
     } else {
@@ -187,10 +187,10 @@ $('#outside-start').on('input', function() {
 
  $('#outside-end').on('input', function() {
     var endVal = $(this).val();
-    var oDiaMin = $('#outside-start').data('oDiaMin'); // Get o_dia_min from start input
+    var oDiaMin = $('#outside-start').data('oDiaMin'); 
     var oDiaMax = $(this).data('oDiaMax');
 
-    // Validate against o_dia_min and o_dia_max
+
     if (endVal !== '' && (parseFloat(endVal) < parseFloat(oDiaMin) || parseFloat(endVal) > parseFloat(oDiaMax))) {
         $(this).addClass('is-invalid');
     } else {
@@ -200,10 +200,10 @@ $('#outside-start').on('input', function() {
 
 $('#q1_start,#q2_start,#q3_start,#q4_start').on('input', function() {
     var endVal = $(this).val();
-    var wMax = $('#q1_end,#q2_end,#q3_end,#q4_end').data('wMax'); // Get o_dia_min from start input
+    var wMax = $('#q1_end,#q2_end,#q3_end,#q4_end').data('wMax'); 
     var wMin = $(this).data('wMin');
 
-    // Validate against o_dia_min and o_dia_max
+
     if (endVal !== '' && (parseFloat(endVal) < parseFloat(wMin) || parseFloat(endVal) > parseFloat(wMax))) {
         $(this).addClass('is-invalid');
     } else {
@@ -216,10 +216,10 @@ $('#q1_start,#q2_start,#q3_start,#q4_start').on('input', function() {
 
     $('#q1_middle, #q2_middle, #q3_middle, #q4_middle').on('input', function() {
     var endVal = $(this).val();
-    var wMax = $('#q1_end,#q2_end,#q3_end,#q4_end').data('wMax'); // Get o_dia_min from start input
+    var wMax = $('#q1_end,#q2_end,#q3_end,#q4_end').data('wMax'); 
     var wMin = $('#q1_start,#q2_start,#q3_start,#q4_start').data('wMin');
 
-    // Validate against o_dia_min and o_dia_max
+  
     if (endVal !== '' && (parseFloat(endVal) < parseFloat(wMin) || parseFloat(endVal) > parseFloat(wMax))) {
         $(this).addClass('is-invalid');
     } else {
@@ -230,10 +230,10 @@ $('#q1_start,#q2_start,#q3_start,#q4_start').on('input', function() {
 
     $('#q1_end,#q2_end,#q3_end,#q4_end').on('input', function() {
     var endVal = $(this).val();
-    var wMin = $('#q1_start,#q2_start,#q3_start,#q4_start').data('wMin'); // Get o_dia_min from start input
+    var wMin = $('#q1_start,#q2_start,#q3_start,#q4_start').data('wMin'); 
     var wMax = $(this).data('wMax');
 
-    // Validate against o_dia_min and o_dia_max
+   
     if (endVal !== '' && (parseFloat(endVal) < parseFloat(wMin) || parseFloat(endVal) > parseFloat(wMax))) {
         $(this).addClass('is-invalid');
     } else {
@@ -248,12 +248,12 @@ $('#q1_start,#q2_start,#q3_start,#q4_start').on('input', function() {
         document.addEventListener('DOMContentLoaded', (event) => {
     var today = new Date();
     var dd = String(today.getDate()).padStart(2, '0');
-    var mm = String(today.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); 
     var yyyy = today.getFullYear();
     
     var formattedDate = yyyy + '-' + mm + '-' + dd;
     
-    // Set the value of the input field
+
     document.getElementById('inspection_date').value = formattedDate;
 });
 
@@ -307,7 +307,7 @@ $('#q1_start,#q2_start,#q3_start,#q4_start').on('input', function() {
         var hours = startTime.getHours();
         if (hours >= 6 && hours < 18) {
             shiftInput.value = "Dayshift";
-        } else { // Otherwise, Night shift
+        } else { 
             shiftInput.value = "Night shift";
         }
     }
@@ -363,42 +363,42 @@ function saveData() {
     var formData = new FormData(form);
     var isEmpty = false;
 
-    // Function to reset the border on input event
+    
     function resetBorder(event) {
-        event.target.style.border = ''; // Reset border to default
+        event.target.style.border = ''; 
     }
 
-    // Reset borders and remove input event listeners for text inputs
+
     form.querySelectorAll('input[type="text"]').forEach(input => {
-        input.style.border = ''; // Reset border to default
-        input.removeEventListener('input', resetBorder); // Remove any previous listeners to avoid duplication
+        input.style.border = ''; 
+        input.removeEventListener('input', resetBorder); 
     });
 
-    // Reset borders for select elements
+
     form.querySelectorAll('select').forEach(select => {
-        select.style.border = ''; // Reset border to default
+        select.style.border = '';
     });
 
-    // Check text inputs for empty values
+   
     form.querySelectorAll('input[type="text"]').forEach(input => {
         if (input.value.trim() === "") {
             isEmpty = true;
-            input.style.border = '1px solid red'; // Highlight empty field
+            input.style.border = '1px solid red';
 
-            // Add event listener to reset border when user starts typing
+           
             input.addEventListener('input', resetBorder);
         }
     });
 
-    // Check select elements for not being picked
+    
     form.querySelectorAll('select').forEach(select => {
         if (select.value.trim() === "") {
             isEmpty = true;
-            select.style.border = '1px solid red'; // Highlight empty field
+            select.style.border = '1px solid red';
         }
     });
 
-    // Check radio buttons (SP, MP, EP) for selection and set the process value accordingly
+  
     var processValue = '';
     var spChecked = document.getElementById('sp').checked;
     var mpChecked = document.getElementById('mp').checked;
@@ -421,7 +421,7 @@ function saveData() {
         } else if (epChecked) {
             processValue = 'End Point';
         }
-        formData.append('process', processValue); // Append process value to form data
+        formData.append('process', processValue); 
     }
 
     if (isEmpty) {
@@ -434,12 +434,12 @@ function saveData() {
         return;
     }
 
-    // Disable form elements to prevent multiple submissions
+  
     form.querySelectorAll('input, select, button').forEach(element => {
         element.disabled = true;
     });
 
-    // Adjusted fetch request to point to the correct PHP script for MS SQL Server
+    
     fetch('../../process/cot_save.php', {
         method: 'POST',
         body: formData
@@ -477,7 +477,7 @@ function saveData() {
         });
     })
     .finally(() => {
-        // Re-enable form elements after processing
+      
         form.querySelectorAll('input, select, button').forEach(element => {
             element.disabled = false;
         });
@@ -502,7 +502,7 @@ function formatDate(dateObject, isInspectionDate = false, removeMilliseconds = f
         let formattedTime = date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
 
         if (removeMilliseconds) {
-            // Remove milliseconds from time part
+      
             formattedTime = formattedTime.replace(/\.\d+/, '');
         }
 
@@ -524,7 +524,7 @@ function handleDefectTypeChange() {
             const selectedOption = defectType.value;
 
             if (selectedOption === 'Others') {
-                // Show SweetAlert confirmation
+              
                 Swal.fire({
                     title: 'Are you sure?',
                     text: 'Do you want to specify another defect type?',
@@ -534,20 +534,20 @@ function handleDefectTypeChange() {
                     cancelButtonText: 'No, cancel'
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        // Replace dropdown with a text input if confirmed
+                  
                         const inputField = document.createElement('input');
                         inputField.setAttribute('type', 'text');
                         inputField.setAttribute('class', 'form-control');
-                        inputField.setAttribute('id', 'other_defect_type'); // Add an id to the new input field
+                        inputField.setAttribute('id', 'other_defect_type'); 
                         inputField.setAttribute('name', 'defect_type');
                         inputField.setAttribute('placeholder', 'Specify other defect type');
                         inputField.style.marginBottom = '16px';
 
                         const defectContainer = document.getElementById('defect-container');
-                        defectContainer.innerHTML = ''; // Clear previous content
+                        defectContainer.innerHTML = ''; 
                         defectContainer.appendChild(inputField);
                     } else {
-                        // Reset the dropdown to default value if cancelled
+                       
                         defectType.value = "";
                     }
                 });
@@ -555,27 +555,26 @@ function handleDefectTypeChange() {
         }
 
         function handleFormSubmit(event) {
-            event.preventDefault(); // Prevent form from submitting the traditional way
+            event.preventDefault(); 
 
-            // Check if the custom input field exists and has a value
+       
             const otherDefectTypeInput = document.getElementById('other_defect_type');
             if (otherDefectTypeInput) {
                 const defectType = document.getElementById('defect_type');
                 defectType.value = otherDefectTypeInput.value;
             }
 
-            // Here you can proceed with form submission using AJAX or any other method you prefer
+            
             console.log('Form submitted with defect type:', document.getElementById('defect_type').value);
-            // Perform your save operation here
-            // Optionally, you can show a success message or perform any other actions needed
+           
         }
 
         function clearForm() {
             document.getElementById('defectForm').reset();
-            // Clear custom defect input if exists
+           
             const defectContainer = document.getElementById('defect-container');
-            defectContainer.innerHTML = ''; // Clear custom input
-            // Re-add the original dropdown
+            defectContainer.innerHTML = ''; 
+            
             const selectElement = document.createElement('select');
             selectElement.id = 'defect_type';
             selectElement.className = 'form-control';
@@ -616,16 +615,16 @@ function exportTable() {
     const dateFrom = document.getElementById('date_from').value;
     const dateTo = document.getElementById('date_to').value;
 
-    // Get current date in YYYY-MM-DD format
+  
     const currentDate = new Date().toISOString().slice(0, 10);
 
-    // Construct the filename with the current date
+
     const filename = `COT_Start_Point_${currentDate}.csv`;
 
-    // Construct the URL with search parameters
+
     const url = `../../process/cot_sp_export_data.php?partName=${encodeURIComponent(partName)}&inspectedBy=${encodeURIComponent(inspectedBy)}&defectType=${encodeURIComponent(defectType)}&dateFrom=${encodeURIComponent(dateFrom)}&dateTo=${encodeURIComponent(dateTo)}`;
 
-    // Fetch data from the PHP script
+
     fetch(url)
         .then(response => {
             if (!response.ok) {
@@ -654,6 +653,458 @@ function exportTable() {
             console.error('Error exporting data:', error);
         });
 }
+document.addEventListener('DOMContentLoaded', () => {
+        let offset = 0;
+        const limit = 10;
+
+      
+        loadTableData(offset, limit);
+
+   
+        document.getElementById('btnLoadMore').addEventListener('click', () => {
+            offset += limit;
+            loadTableData(offset, limit);
+        });
+
+       
+        document.getElementById('accounts_table_res').addEventListener('scroll', () => {
+            const container = document.getElementById('accounts_table_res');
+            if (container.scrollTop + container.clientHeight >= container.scrollHeight) {
+                offset += limit;
+                loadTableData(offset, limit);
+            }
+        });
+
+        
+        document.getElementById('searchbtn').addEventListener('click', () => {
+            offset = 0;
+            loadTableData(offset, limit, true);
+        });
+    });
+
+    function loadTableData(offset, limit, reset = false) {
+     
+        const partName = document.getElementById('partName').value;
+        const inspectedBy = document.querySelector('input[placeholder="Inspected By"]').value;
+        const defectType = document.getElementById('defectType').value;
+        const dateFrom = document.getElementById('date_from').value;
+        const dateTo = document.getElementById('date_to').value;
+
+        const url = `../../process/cot_get_data.php?offset=${offset}&limit=${limit}&partName=${partName}&inspectedBy=${inspectedBy}&defectType=${defectType}&dateFrom=${dateFrom}&dateTo=${dateTo}`;
+
+        fetch(url)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (reset) {
+                    document.getElementById('sp_cotdb_body').innerHTML = '';
+                }
+                populateTable(data);
+
+          
+                if (data.length < limit) {
+                    document.getElementById('btnLoadMore').style.display = 'none';
+                } else {
+                    document.getElementById('btnLoadMore').style.display = 'block';
+                }
+            })
+            .catch(error => console.error('Error fetching data:', error));
+    }
+
+  
+
+
+    // -----------------------------populate table-------------------
+    function populateTable(data) {
+        const tbody = document.getElementById('sp_cotdb_body');
+
+        data.forEach(row => {
+            const newRow = tbody.insertRow();
+
+            // Format date fields
+            const timeStart = formatDate(row.time_start, false, true); 
+            const timeEnd = formatDate(row.time_end, false, true);
+            const inspectionDate = formatDate(row.inspection_date, true);
+
+            newRow.innerHTML = `
+            <td>${row.id}</td>
+            <td>${row.part_name}</td>
+            <td>${row.process}</td>
+             <td>${row.serial_no}</td>
+              <td>${row.lot_no}</td>
+            <td>${row.quantity}</td>
+            <td>${timeStart}</td>
+            <td>${timeEnd}</td>
+            <td>${row.inspected_by}</td>
+            <td>${row.shift}</td>
+            <td>${inspectionDate}</td>
+            <td>${row.total_mins}</td>
+            <td>${row.outside_appearance}</td>
+            <td>${row.slit_condition}</td>
+            <td>${row.inside_appearance}</td>
+            <td>${row.color}</td>
+            <td>${row.i_tolerance_plus}</td>
+            <td>${row.i_tolerance_minus}</td>
+            <td>${row.i_diameter_start}</td>
+            <td>${row.i_diameter_end}</td>
+            <td>${row.o_tolerance_plus}</td>
+            <td>${row.o_tolerance_minus}</td>
+            <td>${row.o_diameter_start}</td>
+            <td>${row.o_diameter_end}</td>
+            <td>${row.w_tolerance_plus}</td>
+            <td>${row.w_tolerance_minus}</td>
+            <td>${row.q1_start}</td>
+            <td>${row.q2_start}</td>
+            <td>${row.q3_start}</td>
+            <td>${row.q4_start}</td>
+            <td>${row.q1_middle}</td>
+            <td>${row.q2_middle}</td>
+            <td>${row.q3_middle}</td>
+            <td>${row.q4_middle}</td>
+            <td>${row.q1_end}</td>
+            <td>${row.q2_end}</td>
+            <td>${row.q3_end}</td>
+            <td>${row.q4_end}</td>
+            <td>${row.using_round_bar}</td>
+            <td>${row.using_bare_hands}</td>
+            <td>${row.appearance_judgement}</td>
+            <td>${row.dimension_judgement}</td>
+            <td>${row.ng_quantity}</td>
+            <td>${row.defect_type}</td>
+            <td>${row.confirm_by}</td>
+            <td>${row.remarks}</td>
+        `;
+            newRow.addEventListener('click', () => {
+                
+                openModalWithData(row);
+            });
+        });
+    }
+    document.addEventListener('DOMContentLoaded', () => {
+     
+        fetch('../../process/get_partname.php')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+              
+                const partNameSelect = document.getElementById('partName');
+                data.forEach(part => {
+                    const option = document.createElement('option');
+                    option.value = part.part_name;
+                    option.textContent = part.part_name;
+                    partNameSelect.appendChild(option);
+                });
+            })
+            .catch(error => console.error('Error fetching part names:', error));
+    });
+
+
+
+    function exportTable() {
+        const partName = document.getElementById('partName').value;
+        const inspectedBy = document.getElementById('inspectedBy').value;
+        const defectType = document.getElementById('defectType').value;
+        const dateFrom = document.getElementById('date_from').value;
+        const dateTo = document.getElementById('date_to').value;
+
+       
+        const currentDate = new Date().toISOString().slice(0, 10);
+
+       
+        const filename = `COT_Start_Point_${currentDate}.csv`;
+
+
+        const url = `../../process/cot_sp_export_data.php?partName=${encodeURIComponent(partName)}&inspectedBy=${encodeURIComponent(inspectedBy)}&defectType=${encodeURIComponent(defectType)}&dateFrom=${encodeURIComponent(dateFrom)}&dateTo=${encodeURIComponent(dateTo)}`;
+
+     
+        fetch(url)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.blob();
+            })
+            .then(blob => {
+
+                const downloadUrl = window.URL.createObjectURL(blob);
+
+
+                const a = document.createElement('a');
+                a.style.display = 'none';
+                a.href = downloadUrl;
+                a.download = filename;
+                document.body.appendChild(a);
+
+
+                a.click();
+
+
+                window.URL.revokeObjectURL(downloadUrl);
+            })
+            .catch(error => {
+                console.error('Error exporting data:', error);
+            });
+    }
+
+
+    // ---------------------------------------------------------- Edit Modal----------------------------------------------------------------------
+    function openModalWithData(rowData) {
+        const modalBody = document.getElementById('modalDataContent');
+        modalBody.innerHTML = ''; 
+
+       
+        const modalContent = `
+        <form id="inspectionForm">
+            <table class="table table-bordered">
+                <tbody>
+                     <tr>
+                    <th>ID:</th>
+                    <td><input type="text" name="id" value="${rowData.id}" class="form-control" readonly></td>
+                    <th>Part Name:</th>
+                    <td><input type="text" name="part_name" value="${rowData.part_name}" class="form-control" readonly></td>
+                </tr>
+                <tr>
+                    <th>Quantity:</th>
+                    <td><input type="text" name="quantity" value="${rowData.quantity}" class="form-control"></td>
+                    <th>Inspected By:</th>
+                    <td><input type="text" name="inspected_by" value="${rowData.inspected_by}" class="form-control" readonly></td>
+                </tr>
+                <tr>
+                    <th>Shift:</th>
+                    <td><input type="text" name="shift" value="${rowData.shift}" class="form-control"></td>
+                    <th>Total Minutes:</th>
+                    <td><input type="text" name="total_mins" value="${rowData.total_mins}" class="form-control" readonly></td>
+                </tr>
+                <tr>
+                    <th>Outside Appearance:</th>
+                    <td>
+                        <select name="outside_appearance" class="form-control">
+                            <option value="OK" ${rowData.outside_appearance === 'OK' ? 'selected' : ''}>OK</option>
+                            <option value="NG" ${rowData.outside_appearance === 'NG' ? 'selected' : ''}>NG</option>
+                        </select>
+                    </td>
+                    <th>Slit Condition:</th>
+                    <td>
+                        <select name="slit_condition" class="form-control">
+                            <option value="OK" ${rowData.slit_condition === 'OK' ? 'selected' : ''}>OK</option>
+                            <option value="NG" ${rowData.slit_condition === 'NG' ? 'selected' : ''}>NG</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Inside Appearance:</th>
+                    <td>
+                        <select name="inside_appearance" class="form-control">
+                            <option value="OK" ${rowData.inside_appearance === 'OK' ? 'selected' : ''}>OK</option>
+                            <option value="NG" ${rowData.inside_appearance === 'NG' ? 'selected' : ''}>NG</option>
+                        </select>
+                    </td>
+                    <th>Color:</th>
+                    <td>
+                        <select name="color" class="form-control">
+                            <option value="OK" ${rowData.color === 'OK' ? 'selected' : ''}>OK</option>
+                            <option value="NG" ${rowData.color === 'NG' ? 'selected' : ''}>NG</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Using Round Bar:</th>
+                    <td>
+                        <select name="using_round_bar" class="form-control">
+                            <option value="OK" ${rowData.using_round_bar === 'OK' ? 'selected' : ''}>OK</option>
+                            <option value="NG" ${rowData.using_round_bar === 'NG' ? 'selected' : ''}>NG</option>
+                        </select>
+                    </td>
+                    <th>Using Bare Hands:</th>
+                    <td>
+                        <select name="using_bare_hands" class="form-control">
+                            <option value="OK" ${rowData.using_bare_hands === 'OK' ? 'selected' : ''}>OK</option>
+                            <option value="NG" ${rowData.using_bare_hands === 'NG' ? 'selected' : ''}>NG</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Inner Diameter Tolerance Plus:</th>
+                    <td><input type="text" name="i_tolerance_plus" value="${rowData.i_tolerance_plus}" class="form-control" readonly></td>
+                    <th>Inner Diameter Tolerance Minus:</th>
+                    <td><input type="text" name="i_tolerance_minus" value="${rowData.i_tolerance_minus}" class="form-control" readonly></td>
+                </tr>
+                <tr>
+                    <th>Inner Diameter Start:</th>
+                    <td><input type="text" name="i_diameter_start" value="${rowData.i_diameter_start}" class="form-control"></td>
+                    <th>Inner Diameter End:</th>
+                    <td><input type="text" name="i_diameter_end" value="${rowData.i_diameter_end}" class="form-control"></td>
+                </tr>
+                <tr>
+                    <th>Outer Diameter Tolerance Plus:</th>
+                    <td><input type="text" name="o_tolerance_plus" value="${rowData.o_tolerance_plus}" class="form-control" readonly></td>
+                    <th>Outer Diameter Tolerance Minus:</th>
+                    <td><input type="text" name="o_tolerance_minus" value="${rowData.o_tolerance_minus}" class="form-control" readonly></td>
+                </tr>
+                <tr>
+                    <th>Outer Diameter Start:</th>
+                    <td><input type="text" name="o_diameter_start" value="${rowData.o_diameter_start}" class="form-control"></td>
+                    <th>Outer Diameter End:</th>
+                    <td><input type="text" name="o_diameter_end" value="${rowData.o_diameter_end}" class="form-control"></td>
+                </tr>
+                <tr>
+                    <th>W Tolerance + :</th>
+                    <td><input type="text" name="w_tolerance_plus" value="${rowData.w_tolerance_plus}" class="form-control" readonly></td>
+                    <th>W Tolerance - :</th>
+                    <td><input type="text" name="w_tolerance_minus" value="${rowData.w_tolerance_minus}" class="form-control" readonly></td>
+                </tr>
+                <tr>
+                    <th>Q1 Start:</th>
+                    <td><input type="text" name="q1_start" value="${rowData.q1_start}" class="form-control" ></td>
+                    <th>Q2 Start:</th>
+                    <td><input type="text" name="q2_start" value="${rowData.q2_start}" class="form-control" ></td>
+                </tr>
+                <tr>
+                    <th>Q3 Start:</th>
+                    <td><input type="text" name="q3_start" value="${rowData.q3_start}" class="form-control" ></td>
+                    <th>Q4 Start:</th>
+                    <td><input type="text" name="q4_start" value="${rowData.q4_start}" class="form-control" ></td>
+                </tr>
+                <tr>
+                    <th>Q1 Middle:</th>
+                    <td><input type="text" name="q1_middle" value="${rowData.q1_middle}" class="form-control" ></td>
+                    <th>Q2 Middle:</th>
+                    <td><input type="text" name="q2_middle" value="${rowData.q2_middle}" class="form-control" ></td>
+                </tr>
+                <tr>
+                    <th>Q3 Middle:</th>
+                    <td><input type="text" name="q3_middle" value="${rowData.q3_middle}" class="form-control" ></td>
+                    <th>Q4 Middle:</th>
+                    <td><input type="text" name="q4_middle" value="${rowData.q4_middle}" class="form-control" ></td>
+                </tr>
+                <tr>
+                    <th>Q1 End:</th>
+                    <td><input type="text" name="q1_end" value="${rowData.q1_end}" class="form-control" ></td>
+                    <th>Q2 End:</th>
+                    <td><input type="text" name="q2_end" value="${rowData.q2_end}" class="form-control" ></td>
+                </tr>
+                <tr>
+                    <th>Q3 End:</th>
+                    <td><input type="text" name="q3_end" value="${rowData.q3_end}" class="form-control" ></td>
+                    <th>Q4 End:</th>
+                    <td><input type="text" name="q4_end" value="${rowData.q4_end}" class="form-control" ></td>
+                </tr>
+                <tr>
+                    <th>Defect Type:</th>
+                    <td><input type="text" name="defect_type" value="${rowData.defect_type}" class="form-control"></td>
+                    <th>NG Quantity:</th>
+                    <td><input type="text" name="ng_quantity" value="${rowData.ng_quantity}" class="form-control"></td>
+                </tr>
+                <tr>
+                    <th>Appearance Judgement:</th>
+                    <td>
+                        <select name="appearance_judgement" class="form-control">
+                            <option value="OK" ${rowData.appearance_judgement === 'OK' ? 'selected' : ''}>OK</option>
+                            <option value="NG" ${rowData.appearance_judgement === 'NG' ? 'selected' : ''}>NG</option>
+                        </select>
+                    </td>
+                    <th>Dimension Judgement:</th>
+                    <td>
+                        <select name="dimension_judgement" class="form-control">
+                            <option value="OK" ${rowData.dimension_judgement === 'OK' ? 'selected' : ''}>OK</option>
+                            <option value="NG" ${rowData.dimension_judgement === 'NG' ? 'selected' : ''}>NG</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Confirm By:</th>
+                    <td><input type="text" name="confirm_by" value="${rowData.confirm_by}" class="form-control"></td>
+                    <th>Inspector's Remarks:</th>
+                    <td colspan="3"><textarea name="remarks" class="form-control">${rowData.remarks}</textarea></td>
+                </tr>
+                </tbody>
+            </table>
+        </form>
+    `;
+
+        modalBody.innerHTML = modalContent;
+        const dataModal = new bootstrap.Modal(document.getElementById('dataModal'));
+        dataModal.show();
+    }
+
+
+
+    // -----------------------------------------save------------------------------------------------------
+    function saveInspectionDetails() {
+       
+        const form = document.getElementById('inspectionForm');
+        const formData = new FormData(form);
+
+    
+        let formIsValid = true;
+        form.querySelectorAll('.form-control').forEach(input => {
+            if (input.value.trim() === '' && !input.readOnly) { 
+                formIsValid = false;
+                input.classList.add('is-invalid'); 
+            } else {
+                input.classList.remove('is-invalid');
+            }
+        });
+
+        if (!formIsValid) {
+
+            Swal.fire({
+                icon: 'warning',
+                title: 'Validation Error',
+                text: 'Please fill out all required fields.',
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'OK'
+            });
+            return;
+        }
+
+       
+        fetch('../../process/data_update.php', {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.text();
+            })
+            .then(data => {
+                console.log(data);
+
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success!',
+                    text: 'Data saved successfully.',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'OK'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.reload(); 
+                    }
+                });
+            })
+            .catch(error => {
+                console.error('Error:', error);
+       
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error!',
+                    text: 'There was an error saving the data.',
+                    confirmButtonColor: '#d33',
+                    confirmButtonText: 'OK'
+                });
+            });
+    }
+
 
     </script>
 

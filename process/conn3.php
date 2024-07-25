@@ -6,7 +6,7 @@ $connectionOptions = array(
     "PWD" => "SystemGroup@2022"
 );
 
-// Establishes the connection
+ 
 $conn = sqlsrv_connect($serverName, $connectionOptions);
 
 if ($conn === false) {

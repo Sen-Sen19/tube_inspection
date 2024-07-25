@@ -72,7 +72,7 @@
                             <div id="accounts_table_res" class="table-responsive" style="height: 45vh; overflow: auto; display: inline-block; margin-top: 50px; border-top: 1px solid gray;">
                                 <table id="account" class="table table-sm table-head-fixed text-nowrap table-hover">
                                     <thead style="text-align: center;">
-                                        <!-- Table Headers -->
+                                   
                                         <tr>
                                             <th>User Name</th>
                                             <th>Password</th>
@@ -81,7 +81,7 @@
                                         </tr>
                                     </thead>
                                     <tbody id="admin_body" style="text-align: center; padding:20px;">
-                                        <!-- Data will be inserted here -->
+                                      
                                     </tbody>
                                 </table>
                             </div>
@@ -97,7 +97,6 @@
 </div>
 
 
-<!-- Edit Record Modal -->
 <div class="modal fade" id="editRecordModal" tabindex="-1" role="dialog" aria-labelledby="editRecordModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -130,11 +129,10 @@
 </div>
 
 
-<!-- Bootstrap and jQuery JS -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 
-<!-- Custom JavaScript -->
+
 <script>
     $(document).ready(function() {
         $('#openModalBtn').click(function() {
@@ -146,13 +144,13 @@
     var username = $('#editUsername').val();
     var newPassword = $('#editPassword').val();
 
-    // AJAX request to update password
+   
     $.ajax({
         url: '../../process/update_password.php',
         method: 'POST',
         data: { username: username, newPassword: newPassword },
         success: function(response) {
-            // Check the response for success or error messages
+          
             if (response.startsWith('Error')) {
                 Swal.fire({
                     icon: 'error',
@@ -166,8 +164,8 @@
                     showConfirmButton: false,
                     timer: 1500
                 }).then(function() {
-                    $('#editRecordModal').modal('hide'); // Close modal after successful update
-                    location.reload(); // Reload the page
+                    $('#editRecordModal').modal('hide'); 
+                    location.reload(); 
                 });
             }
         },

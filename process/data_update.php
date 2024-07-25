@@ -1,10 +1,10 @@
 <?php
-// Include connection file
+
 include 'conn3.php';
 
-// Check if POST data is received
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Retrieve data from POST
+
     $id = $_POST['id'];
     $part_name = $_POST['part_name'];
     $quantity = $_POST['quantity'];
@@ -45,9 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $defect_type = isset($_POST['defect_type']) ? $_POST['defect_type'] : '';
     $confirm_by = isset($_POST['confirm_by']) ? $_POST['confirm_by'] : '';
     $remarks = isset($_POST['remarks']) ? $_POST['remarks'] : '';
-    // Add more fields as needed
 
-    // SQL query to update data
     $sql = "UPDATE tb_data
             SET part_name = ?,
                 quantity = ?,
@@ -90,7 +88,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 remarks = ?
             WHERE id = ?";
 
-    // Prepare and execute the statement
+    
     $params = array(
         $part_name, $quantity, $inspected_by, $shift, $total_mins,
         $outside_appearance, $slit_condition, $inside_appearance, $color,
@@ -106,20 +104,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt = sqlsrv_query($conn, $sql, $params);
 
     if ($stmt === false) {
-        // Handle error if the query fails
+
         die(print_r(sqlsrv_errors(), true));
     } else {
-        // Query succeeded
+
         echo "Data updated successfully!";
     }
 
-    // Clean up statement
+  
     sqlsrv_free_stmt($stmt);
 } else {
-    // Handle if no POST data received
+   
     echo "No data received for update.";
 }
 
-// Close connection
+
 sqlsrv_close($conn);
 ?>

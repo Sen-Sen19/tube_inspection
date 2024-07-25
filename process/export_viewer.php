@@ -1,23 +1,23 @@
 <?php
-include 'conn3.php'; // Include your database connection script
+include 'conn3.php'; 
 
-// Function to fetch data from a specific table based on date range and shift
+
 function fetchDataByDateRange($conn, $tableName, $columns, $dateFrom, $dateTo, $shift = null) {
-    // Convert date format to match the database (if necessary)
+
     $dateFrom = date('Y-m-d', strtotime($dateFrom));
     $dateTo = date('Y-m-d', strtotime($dateTo));
 
-    // Prepare SQL query with date filters and optional shift filter
+   
     $sql = "SELECT " . implode(', ', $columns) . "
         FROM [tube_inspection_db].[dbo].[$tableName]
         WHERE CAST(inspection_date AS DATE) BETWEEN ? AND ?";
 
-    // Append shift filter if provided
+  
     if ($shift) {
         $sql .= " AND shift = ?";
     }
 
-    // Prepare and execute SQL query with parameterized date range and optional shift filter
+   
     $params = array($dateFrom, $dateTo);
     if ($shift) {
         $params[] = $shift;
@@ -28,22 +28,22 @@ function fetchDataByDateRange($conn, $tableName, $columns, $dateFrom, $dateTo, $
         die(print_r(sqlsrv_errors(), true));
     }
 
-    // Fetch data into an array
+    
     $data = array();
     while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
-        // Ensure all columns are present in each row
+        
         foreach ($columns as $column) {
             if (!array_key_exists($column, $row)) {
-                // Set missing columns to null
+              
                 $row[$column] = null;
             } else {
-                // Convert date/time objects to string
+               
                 if ($row[$column] instanceof DateTime) {
                     if ($column === 'inspection_date') {
-                        // Format inspection_date to exclude time
+                      
                         $row[$column] = $row[$column]->format('Y-m-d');
                     } else {
-                        // Format other DateTime fields as needed
+                     
                         $row[$column] = $row[$column]->format('Y-m-d H:i:s');
                     }
                 }
@@ -52,12 +52,12 @@ function fetchDataByDateRange($conn, $tableName, $columns, $dateFrom, $dateTo, $
         $data[] = $row;
     }
 
-    // Free the statement and return data
+    
     sqlsrv_free_stmt($stmt);
     return $data;
 }
 
-// Define columns for the tb_data table
+
 $tb_data_columns = [
     'id',
     'part_name',
@@ -113,6 +113,6 @@ $dateTo = $_GET['date_to'] ?? null;
 $shift = $_GET['shift'] ?? null; 
 $data_tb_data = fetchDataByDateRange($conn, 'tb_data', $tb_data_columns, $dateFrom, $dateTo, $shift);
 
-// Output data as JSON
+
 echo json_encode($data_tb_data);
 ?>
