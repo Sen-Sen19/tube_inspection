@@ -388,7 +388,7 @@ function exportCSV() {
 
             let itemNo = 1;
             for (const partName in aggregatedData) {
-                const { totalNG, totalMins, count, remark } = aggregat edData[partName];
+                const { totalNG, totalMins, count, remark } = aggregatedData[partName];
                 const totalQuantity = totalQuantities[partName] || 0; 
                 const ngPercentage = totalQuantity > 0 ? (totalNG / totalQuantity) * 100 : 0; 
                 const formattedTime = totalMins.toFixed(2);
