@@ -107,10 +107,10 @@ $tb_data_columns = [
     'q4_middle'
 ];
 
-// Fetch data from the tb_data table
+
 $dateFrom = $_GET['date_from'] ?? null;
 $dateTo = $_GET['date_to'] ?? null;
-$shift = $_GET['shift'] ?? null; // Retrieve shift parameter
+$shift = $_GET['shift'] ?? null; 
 $data_tb_data = fetchDataByDateRange($conn, 'tb_data', $tb_data_columns, $dateFrom, $dateTo, $shift);
 
 // Output data as JSON
