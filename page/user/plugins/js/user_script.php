@@ -879,7 +879,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 </tr>
                 <tr>
                     <th>Shift:</th>
-                    <td><input type="text" name="shift" value="${rowData.shift}" class="form-control"></td>
+                    <td><input type="text" name="shift" value="${rowData.shift}" class="form-control"readonly></td>
                     <th>Total Minutes:</th>
                     <td><input type="text" name="total_mins" value="${rowData.total_mins}" class="form-control" readonly></td>
                 </tr>
@@ -1038,6 +1038,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     // -----------------------------------------save------------------------------------------------------
+
     function saveInspectionDetails() {
        
         const form = document.getElementById('inspectionForm');
