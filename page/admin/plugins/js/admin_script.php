@@ -15,7 +15,7 @@ if (isset($_SESSION['username'])) {
     echo '</script>';
 }
 ?>
-<script type="text/javascript" src="../../../plugins/sweetalert2/dist/sweetalert2.min.js"></script>
+
 
 
 <style>

@@ -1089,7 +1089,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     confirmButtonText: 'OK'
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        window.location.reload(); 
+                        window.location.reload( ); 
                     }
                 });
             })

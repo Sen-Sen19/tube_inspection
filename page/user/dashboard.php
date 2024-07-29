@@ -37,7 +37,7 @@
                             <div class="row mb-4">
                                 <div class="col-sm-3">
                                     <label>Part Name</label>
-                                    <select class="form-control" id="partName" style="height: 33px; font-size: 14px;">
+                                    <select class="form-control" id="partName" style="height: 31px; font-size: 14px;">
                                         <option value="">Choose...</option>
                                     </select>
                                 </div>
@@ -46,11 +46,11 @@
                                 <div class="col-sm-3">
                                     <label>Inspected By</label>
                                     <input type="text" class="form-control" placeholder="Inspected By" id="inspectedBy"
-                                        style="height: 33px; font-size: 14px;">
+                                        style="height: 31px; font-size: 14px;">
                                 </div>
                                 <div class="col-sm-3">
                                     <label for="defectType">Defect Type</label>
-                                    <select id="defectType" class="form-control" style="height: 33px;font-size: 14px;">
+                                    <select id="defectType" class="form-control" style="height: 31px;font-size: 14px;">
                                         <option value="" selected disabled>Choose...</option>
                                         <option value="Round crest">Round crest</option>
                                         <option value="Damage">Damage</option>

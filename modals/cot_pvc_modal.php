@@ -134,13 +134,13 @@
           </div>
           <!-- ------------------------------------------------------------Inside and Outside Diameter---------------------------------------------------------------------------- -->
           <div class="horizontal-rule" style="width: 100%; height: 1px; background-color: #20c997;"></div>
-          <!-- Inside and Outside Diameter -->
+
           <div class="container">
             <h5 class="modal-title" style="margin-top: 15px;margin-bottom:15px;"><strong>Inside
                 Diameter</strong>
             </h5>
             <div class="row">
-              <!-- Inside Diameter Section -->
+
               <div class="col-3 form-section">
                 <div class="form-group">
                   <label for="tolerance">Tolerance</label>
@@ -187,9 +187,6 @@
             </h5>
             <div class="row mb-2">
               <!-- Outside Diameter Section -->
-
-
-              
               <div class="col-3 form-section">
                 <div class="form-group">
                   <label for="tolerance">Tolerance</label>
@@ -204,10 +201,6 @@
                   </div>
                 </div>
               </div>
-
-
-
-
               <div class="col-3">
                 <div class="form-group">
                   <label for="tolerance">Min and Max</label>
@@ -240,30 +233,33 @@
             <h5 class="modal-title" style="color:black; margin-bottom:15px;margin-top:15px;"><strong>Wall
                 Thickness</strong>
             </h5>
-            <label><strong>Tolerance</strong></label>
             <div class="row mb-4">
-              <div class="col-3 d-flex align-items-left">
-                <label for="w-tolerance-plus" class="mr-2">+</label>
-                <input type="text" id="w-tolerance-minus" class="form-control" style="min-width: 80px;autocomplete="
-                  off" readonly name="w_tolerance_minus">
+              <div class="col-6 form-section">
+                <div class="form-group">
+                  <label for="tolerance">Tolerance</label>
+                  <div class="d-flex align-items-center">
+                    <label for="tolerance-plus" class="mr-2">+</label>
+                    <input type="number" id="o-tolerance-minus" class="form-control"
+                      style="min-width: 105px; margin-right: 10px;" autocomplete="off" readonly
+                      name="o_tolerance_minus"> <label for="tolerance-minus" class="mr-2">-</label>
+
+                    <input type="number" id="o-tolerance-plus" class="form-control" style="min-width: 105px;"
+                      autocomplete="off" readonly name="o_tolerance_plus">
+                  </div>
+                </div>
               </div>
-              <div class="col-3 d-flex align-items-left">
-                <label for="w-tolerance-minus" class="mr-2">-</label>
-                <input type="text" id="w-tolerance-plus" class="form-control" style="min-width: 80px;"
-                  autocomplete="off" readonly name="w_tolerance_plus">
-              </div>
-              <div class="col-2 d-flex align-items-left">
-                <label for="w-tolerance-plus"></label>
+              <div class="col-2">
+                <label for="w-tolerance-plus">Min</label>
                 <input type="text" id="w-min" class="form-control" style="min-width: 70px; autocomplete=" off" readonly
                   name="w_tolerance_minus">
               </div>
-              <div class="col-2 d-flex align-items-left">
-                <label for="w-tolerance-minus"></label>
+              <div class="col-2">
+                <label for="w-tolerance-minus">Avg</label>
                 <input type="text" id="w-value" class="form-control" style="min-width: 70px;" autocomplete="off"
                   readonly name="w_tolerance_plus">
               </div>
-              <div class="col-2 d-flex align-items-left">
-                <label for="w-tolerance-minus"></label>
+              <div class="col-2">
+                <label for="w-tolerance-minus">Max</label>
                 <input type="text" id="w-max" class="form-control" style="min-width: 70px;" autocomplete="off" readonly
                   name="w_tolerance_plus">
               </div>
@@ -444,19 +440,16 @@
                     <option value="Molding defect">Molding defect</option>
                     <option value="Excess burr">Excess burr</option>
                     <option value="Dent">Dent</option>
-                    <option value="Misaligned joint portion">Misaligned joint portion
-                    </option>
+                    <option value="Misaligned joint portion">Misaligned joint portion</option>
                     <option value="Foreign material">Foreign material</option>
-                    <option value="Slit position is on joint portion">Slit position is on
-                      joint portion</option>
+                    <option value="Slit position is on joint portion">Slit position is on joint portion</option>
                     <option value="With gap on slit">With gap on slit</option>
                     <option value="Crack">Crack</option>
                     <option value="Overlap">Overlap</option>
                     <option value="Slit is uneven">Slit is uneven</option>
                     <option value="Slanted slit">Slanted slit</option>
                     <option value="Unstable thickness">Unstable thickness</option>
-                    <option value="Tubebreaking on slit portion">Tubebreaking on slit
-                      portion</option>
+                    <option value="Tubebreaking on slit portion">Tubebreaking on slit portion</option>
                     <option value="Hole">Hole</option>
                     <option value="Scratch">Scratch</option>
                     <option value="Deformed">Deformed</option>
@@ -485,9 +478,7 @@
               <input type="text" id="remarks" class="form-control" name="remarks" autocomplete="off">
             </div>
           </div>
-          <!-- Add this div where you want the notice to appear -->
           <div id="notice" style="display: none;"></div>
-          <!-- Footer Buttons -->
           <div class="modal-footer">
             <button type="button" class="btn btn-danger float-right">Clear</button>
             <button type="button" id="saveButton" class="btn btn-success float-right"
@@ -500,7 +491,6 @@
 </div>
 
 </form>
-
 <script>
   document.getElementById('part_name_dropdown').addEventListener('change', function () {
     const partName = this.value;
@@ -521,7 +511,7 @@
     const oDiameterMax = document.getElementById('o-diameter-max');
 
     if (disabledValues.includes(partName)) {
-      // Disable fields and set value to N/A
+
       slitCondition.disabled = true;
       usingRoundBar.disabled = true;
       usingBareHands.disabled = true;
@@ -529,7 +519,7 @@
       usingRoundBar.value = 'N/A';
       usingBareHands.value = 'N/A';
 
-      // Set readonly and N/A values for diameter
+
       oDiameterStart.readOnly = true;
       oDiameterEnd.readOnly = true;
       oDiameterStart.value = 'N/A';
@@ -537,7 +527,7 @@
       oDiameterMin.value = 'N/A';
       oDiameterMax.value = 'N/A';
     } else {
-      // Enable fields
+
       slitCondition.disabled = false;
       usingRoundBar.disabled = false;
       usingBareHands.disabled = false;
@@ -563,26 +553,54 @@
     const q3Middle = document.getElementById('q3_middle');
     const q4Middle = document.getElementById('q4_middle');
 
-    if (spRadio.checked || epRadio.checked) {
-      // For SP and EP
+    if (spRadio.checked) {
+
       serialNoInput.value = 'N/A';
       lotNoInput.value = 'N/A';
       serialNoInput.readOnly = true;
       lotNoInput.readOnly = true;
 
-      // Enable Q1-Q4 fields
+
       q1Middle.disabled = false;
       q2Middle.disabled = false;
       q3Middle.disabled = false;
       q4Middle.disabled = false;
-    } else if (mpRadio.checked) {
+    }
+
+    else if (epRadio.checked) {
+
+      serialNoInput.value = 'N/A';
+      lotNoInput.value = 'N/A';
+      serialNoInput.readOnly = true;
+      lotNoInput.readOnly = true;
+
+
+
+      q1Middle.value = 'N/A';
+      q2Middle.value = 'N/A';
+      q3Middle.value = 'N/A';
+      q4Middle.value = 'N/A';
+      q1Middle.disabled = true;
+      q2Middle.disabled = true;
+      q3Middle.disabled = true;
+      q4Middle.disabled = true;
+    }
+
+
+
+
+
+
+
+
+    else if (mpRadio.checked) {
       // For MP
       serialNoInput.value = '';
       lotNoInput.value = '';
       serialNoInput.readOnly = false;
       lotNoInput.readOnly = false;
 
-      // Disable Q1-Q4 fields and set to N/A
+
       q1Middle.value = 'N/A';
       q2Middle.value = 'N/A';
       q3Middle.value = 'N/A';
@@ -592,13 +610,13 @@
       q3Middle.disabled = true;
       q4Middle.disabled = true;
     } else {
-      // No radio button selected
+
       serialNoInput.value = '';
       lotNoInput.value = '';
       serialNoInput.readOnly = false;
       lotNoInput.readOnly = false;
 
-      // Enable Q1-Q4 fields
+
       q1Middle.value = '';
       q2Middle.value = '';
       q3Middle.value = '';
@@ -613,4 +631,5 @@
   document.getElementById('sp').addEventListener('change', handleRadioChange);
   document.getElementById('mp').addEventListener('change', handleRadioChange);
   document.getElementById('ep').addEventListener('change', handleRadioChange);
+  
 </script>

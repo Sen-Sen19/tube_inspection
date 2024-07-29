@@ -44,7 +44,7 @@ try {
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Tube Inspection COT</title>
+  <title>Tube Inspection</title>
 
   <link rel="icon" href="../../dist/img/tir-logo.png" type="image/x-icon" />
   <!-- Google Font: Source Sans Pro -->
