@@ -11,7 +11,7 @@
 
   <a href="dashboard.php" class="brand-link">
     <img src="../../dist/img/tir-logo.png" alt="Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-    <span class="brand-text font-weight-light">&ensp;TUBE | INSPECTION</span>
+    <span class="brand-text font-weight-light">&ensp;TUBE INSPECTION</span>
   </a>
 
  
@@ -31,7 +31,7 @@
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
         <li class="nav-item">
           <a href=" dashboard.php" class="nav-link <?= ($_SERVER['REQUEST_URI'] == "/tube_inspection/page/user/dashboard.php") ? 'active' : '' ?>">
-          <i class="fas fa-box"></i>
+          <i class="nav-icon fas fa-box"></i>
             <p>Dashboard</p>
           </a>
         </li>

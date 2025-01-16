@@ -68,7 +68,7 @@
 </div>
 
 </form>
-<script>
+<!-- <script>
     document.getElementById('part_name_dropdown').addEventListener('change', function () {
     const partName = this.value;
     const disabledValues = [
@@ -180,4 +180,4 @@
   document.getElementById('sp').addEventListener('change', handleRadioChange);
   document.getElementById('mp').addEventListener('change', handleRadioChange);
   document.getElementById('ep').addEventListener('change', handleRadioChange);
-</script>
+</script> -->

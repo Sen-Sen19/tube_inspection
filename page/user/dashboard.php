@@ -87,7 +87,7 @@
                                     <label
                                         style="font-weight:normal;margin-bottom:9px;padding:0; visibility: hidden !important;">Refresh</label>
                                     <button class="btn btn-info btn-block btn-sm" id="refreshPageBtn"
-                                        style="background-color:#f8f100; border-color:#cbc500; color:black;"
+                                        style="background-color:#7e8180; border-color:#7e8180; color:white;"
                                         onclick="refreshPage()">
                                         <i class="fas fa-sync-alt mr-2"></i>Refresh
                                     </button>
@@ -194,7 +194,11 @@
                                  
                                     </tbody>
                                 </table>
+
                             </div>
+                             <div id="totalCount" style="text-align: left; margin-top: 10px; padding-left: 15px;">
+        Total Count: <span id="countValue">0</span>
+    </div>
                             <div class="d-flex justify-content-sm-center mt-3">
                                 <button type="button" class="btn bg-gray-dark" id="btnLoadMore">Load more</button>
                             </div>
@@ -206,8 +210,7 @@
 </div>
 
 
-<?php include 'plugins/footer.php'; ?>
-<?php include 'plugins/js/user_script.php'; ?>
+
 
 
 <!-- Modal Structure -->
@@ -232,10 +235,47 @@
 
 
 
-
-
+<?php include 'plugins/footer.php'; ?>
+<?php include 'plugins/js/user_script.php'; ?>
 <script>
+    $(document).ready(function() {
+        // Function to get the total count from the database
+        function getTotalCount() {
+            $.ajax({
+                url: '../../process/get_count.php', // The path to the PHP file
+                type: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    $('#countValue').text(data.count+1); // Update the total count in the HTML
+                },
+                error: function(xhr, status, error) {
+                    console.error("Error fetching count:", error);
+                }
+            });
+        }
 
- 
+        // Call the function on page load
+        getTotalCount();
+    });
+
+
+    $(document).ready(function() {
+    // Function to get the user's IP address
+    function getUserIP() {
+        $.ajax({
+            url: '../../process/get_ip.php', // Path to your PHP script
+            type: 'GET',
+            dataType: 'json',
+            success: function(data) {
+                console.log("User IP Address: " + data.ip); // Log the IP address to the console
+            },
+            error: function(xhr, status, error) {
+                console.error("Error fetching IP address:", error);
+            }
+        });
+    }
+
+    // Call the function to log the IP address on page load
+    getUserIP();
+});
 </script>
-

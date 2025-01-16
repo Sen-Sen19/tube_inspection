@@ -76,6 +76,7 @@ if (isset($_SESSION['username'])) {
           <div class="row mb-2">
           <div class="col">
           <button type="submit" class="btn btn-block" name="Login" value="login" style="background-color: #20c997; border-color: #20c997; color: white;">Login</button>
+          <button type="submit" class="btn btn-block" name="Login" value="login" style="background-color:rgb(100, 100, 100); border-color:rgb(100, 100, 100); color: white;">Work Instruction</button>
           </div>
 
           </div>
