@@ -22,15 +22,15 @@ searchBtn.addEventListener('click', () => {
        
         adjustedDateFrom = dateFrom + 'T06:00:00';
         adjustedDateTo = dateTo + 'T17:59:59';
-    } else if (shift === "Nightshift") {
+    } else if (shift === "Night shift") {
       
         adjustedDateFrom = dateFrom + 'T18:00:00';
         adjustedDateTo = new Date(new Date(dateTo).getTime() + 24 * 60 * 60 * 1000).toISOString().split('T')[0] + 'T05:59:59';
     }
 
     let url = `../../process/export_viewer.php?date_from=${adjustedDateFrom}&date_to=${adjustedDateTo}&shift=${shift}`;
-
     fetch(url)
+    
         .then(response => {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
@@ -54,11 +54,8 @@ searchBtn.addEventListener('click', () => {
                         <td>${formatCell(row.quantity)}</td>
                         <td>${formatCell(row.time_start)}</td>
                         <td>${formatCell(row.time_end)}</td>
-                            <td>${formatCell(row.total_mins)}</td>
-                        
-                       
+                        <td>${formatCell(row.total_mins)}</td>
                         <td>${formatCell(row.inspection_date)}</td>
-                    
                         <td>${formatCell(row.outside_appearance)}</td>
                         <td>${formatCell(row.slit_condition)}</td>
                         <td>${formatCell(row.inside_appearance)}</td>
@@ -94,7 +91,7 @@ searchBtn.addEventListener('click', () => {
                         <td>${formatCell(row.confirm_by)}</td>
                         <td>${formatCell(row.remarks)}</td>
                         <td>${formatCell(row.inspected_by)}</td>
-                          <td>${formatCell(row.shift)}</td>
+                        <td>${formatCell(row.shift)}</td>
                         
                     `;
                     tableBody.appendChild(tr);
@@ -105,20 +102,14 @@ searchBtn.addEventListener('click', () => {
             console.error('Error fetching data:', error);
         });
 });
-
-
 const exportBtn = document.getElementById('exportReqBtn');
 if (exportBtn) {
     exportBtn.addEventListener('click', exportTable);
 }
-
-
 const pidsBtn = document.getElementById('pidsBtn');
 if (pidsBtn) {
     pidsBtn.addEventListener('click', exportCSV);
 }
-
-
 function exportTable() {
 const table = document.getElementById('export_cotdb_body');
 
@@ -126,14 +117,11 @@ if (!table) {
     console.error('Table not found!');
     return;
 }
-
 const rows = table.rows;
 if (!rows || rows.length === 0) {
     console.error('No rows found in the table!');
     return;
 }
-
-
 const headers = [
     'No', 'Part Name', 'Process', 'Lot No', 'Serial No', 'Quantity', 'Time Start', 'Time End',
     'Total Mins', 'Inspection Date', 'Outside Appearance', 'Slit Condition', 'Inside Appearance',
@@ -144,31 +132,23 @@ const headers = [
     'Using Round Bar', 'Using Bare Hands', 'Appearance Judgement', 'Dimension Judgement',
     'NG Quantity', 'Defect Type', 'Confirm By', 'Remarks', 'Inspected By','Shift'
 ];
-
 let csvContent = headers.join(",") + "\n"; 
-
 for (let i = 0; i < rows.length; i++) {
     const row = rows[i];
     const cells = row.cells;
-
     if (!cells) {
         console.error('Cells not found in row ' + i);
         continue;
     }
-
     let rowContent = [];
     for (let j = 0; j < cells.length; j++) {
         const cell = cells[j];
         rowContent.push(cell.textContent.replace(/(\r\n|\n|\r)/gm, "").trim());
     }
-
     csvContent += rowContent.join(",") + "\n";
 }
-
-
 const today = new Date();
 const dateStr = today.toISOString().split('T')[0]; 
-
 const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
 const link = document.createElement("a");
 if (link.download !== undefined) {
@@ -181,15 +161,10 @@ if (link.download !== undefined) {
     document.body.removeChild(link);
 }
 }
-
-
-
 function exportCSV() {
 const dateFrom = document.getElementById('date_from').value;
 const dateTo = document.getElementById('date_to').value;
-
 let url = `../../process/export_viewer.php?date_from=${dateFrom}&date_to=${dateTo}`;
-
 fetch(url)
     .then(response => {
         if (!response.ok) {
@@ -237,7 +212,6 @@ fetch(url)
             const ngPercentage = totalQuantity > 0 ? (totalNG / totalQuantity) * 100 : 0; 
             const formattedTime = totalMins.toFixed(2);
             const formattedBoxRoll = count;
-
             const rowContent = `${itemNo},${partName},${formattedBoxRoll},${totalQuantity},${totalQuantity},${totalNG},${ngPercentage.toFixed(2)}%,${formattedTime},${remark}`;
             csvContent += rowContent + "\n";
 

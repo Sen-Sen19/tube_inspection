@@ -1,6 +1,5 @@
 <?php include 'plugins/navbar.php'; ?>
 <?php include 'plugins/sidebar/user_bar.php'; ?>
-
 <div class="content-wrapper">
     <div class="content-header">
         <div class="container-fluid">
@@ -17,7 +16,6 @@
             </div>
         </div>
     </div>
-
     <section class="content">
         <div class="container-fluid">
             <div class="row">
@@ -39,55 +37,56 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-6 col-sm-2 ">
-                                    <label style="font-weight: normal; margin-bottom:6%; padding: 0; color: #000; font-weight: bold;">Date From</label>
-                                    <input type="date" name="date_from" class="form-control form-control-sm" id="date_from">
+                                    <label
+                                        style="font-weight: normal; margin-bottom:6%; padding: 0; color: #000; font-weight: bold;">Date
+                                        From</label>
+                                    <input type="date" name="date_from" class="form-control form-control-sm"
+                                        id="date_from">
                                 </div>
                                 <div class="col-6 col-sm-2 ">
-                                    <label style="font-weight: normal;margin-bottom:6%; padding: 0; color: #000; font-weight: bold;">Date To</label>
+                                    <label
+                                        style="font-weight: normal;margin-bottom:6%; padding: 0; color: #000; font-weight: bold;">Date
+                                        To</label>
                                     <input type="date" name="date_to" class="form-control form-control-sm" id="date_to">
                                 </div>
-
-
                                 <div class="col-6 col-sm-2 ">
-                                <label style="font-weight: normal; margin-bottom:6%; padding: 0; color: #000; font-weight: bold;">Shift</label>
-                                <select id="shift_select" class="form-control" name="shift" style="height: 31px; font-size: 14px;">
-  <option value="" selected disabled>Choose...</option>
-  <option value="Dayshift">Dayshift</option>
-  <option value="Nightshift">Nightshift</option>
-</select>
-
-
-            </div>
-
-
-
-
+                                    <label
+                                        style="font-weight: normal; margin-bottom:6%; padding: 0; color: #000; font-weight: bold;">Shift</label>
+                                    <select id="shift_select" class="form-control" name="shift"
+                                        style="height: 31px; font-size: 14px;">
+                                        <option value="" selected disabled>Choose...</option>
+                                        <option >Dayshift</option>
+                                        <option >Night shift</option>
+                                    </select>
+                                </div>
                                 <div class="col-6 col-sm-2 ">
-                                    <label style="font-weight: normal;margin-bottom:6%; padding: 0; color: #000; font-weight: bold; visibility:hidden">Search</label>
+                                    <label
+                                        style="font-weight: normal;margin-bottom:6%; padding: 0; color: #000; font-weight: bold; visibility:hidden">Search</label>
                                     <button class="btn btn-primary btn-block btn-sm" id="searchBtn">
                                         <i class="fas fa-search"></i> Search
                                     </button>
                                 </div>
                                 <div class="col-6 col-sm-2 ">
-                                    <label style="font-weight: normal; margin-bottom:6%; padding: 0; color: #000; font-weight: bold; visibility:hidden">CSV</label>
-                                    <button class="btn btn-warning btn-block btn-sm" id="exportReqBtn" onclick="exportTable()" style="background-color:#888484; border-color:#888484; color:white;">
+                                    <label
+                                        style="font-weight: normal; margin-bottom:6%; padding: 0; color: #000; font-weight: bold; visibility:hidden">CSV</label>
+                                    <button class="btn btn-warning btn-block btn-sm" id="exportReqBtn"
+                                        onclick="exportTable()"
+                                        style="background-color:#888484; border-color:#888484; color:white;">
                                         <i class="fas fa-file-export mr-2"></i> Export
                                     </button>
                                 </div>
-
                                 <div class="col-6 col-sm-2 ">
-                                    <label style="font-weight: normal; margin-bottom:6%; padding: 0; color:  #000; font-weight: bold; visibility:hidden">PIDS</label>
-                                    <button class="btn btn-danger btn-block btn-sm" id="pidsBtn" onclick="exportCSV()" >
-    <i class="fas fa-file-download"></i> PIDS
-</button>
-
+                                    <label
+                                        style="font-weight: normal; margin-bottom:6%; padding: 0; color:  #000; font-weight: bold; visibility:hidden">PIDS</label>
+                                    <button class="btn btn-danger btn-block btn-sm" id="pidsBtn" onclick="exportCSV()">
+                                        <i class="fas fa-file-download"></i> PIDS
+                                    </button>
                                 </div>
-
-
-                               
                             </div>
-                            <div id="accounts_table_res" class="table-responsive" style="height: 60vh; overflow: auto; display: inline-block; margin-top: 50px; border-top: 1px solid gray;">
-                                <table id="export_cotdb" class="table table-sm table-head-fixed text-nowrap table-hover">
+                            <div id="accounts_table_res" class="table-responsive"
+                                style="height: 60vh; overflow: auto; display: inline-block; margin-top: 50px; border-top: 1px solid gray;">
+                                <table id="export_cotdb"
+                                    class="table table-sm table-head-fixed text-nowrap table-hover">
                                     <thead style="text-align: center;">
                                         <tr>
                                             <th>#</th>
@@ -99,10 +98,7 @@
                                             <th>Time Start</th>
                                             <th>Time End</th>
                                             <th>Total Minutes</th>
-                                           
-                                            
                                             <th>Inspection Date</th>
-                                           
                                             <th>Outside Appearance</th>
                                             <th>Slit Condition</th>
                                             <th>Inside Appearance</th>
@@ -142,7 +138,6 @@
                                         </tr>
                                     </thead>
                                     <tbody id="export_cotdb_body" style="text-align: center; padding:20px;">
-                                      
                                     </tbody>
                                 </table>
                             </div>
@@ -153,8 +148,5 @@
         </div>
     </section>
 </div>
-
-
-
 <?php include 'plugins/footer.php'; ?>
 <?php include 'plugins/js/export_script.php'; ?>
