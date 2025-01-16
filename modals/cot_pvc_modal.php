@@ -239,12 +239,11 @@
                   <label for="tolerance">Tolerance</label>
                   <div class="d-flex align-items-center">
                     <label for="tolerance-plus" class="mr-2">+</label>
-                    <input type="number" id="o-tolerance-minus" class="form-control"
+                    <input type="number" id="w-tolerance-plus" class="form-control"
                       style="min-width: 105px; margin-right: 10px;" autocomplete="off" readonly
                       name="o_tolerance_minus"> <label for="tolerance-minus" class="mr-2">-</label>
-
-                    <input type="number" id="o-tolerance-plus" class="form-control" style="min-width: 105px;"
-                      autocomplete="off" readonly name="o_tolerance_plus">
+                    <input type="number" id="w-tolerance-minus" class="form-control" style="min-width: 105px;"
+                      autocomplete="off" readonly>
                   </div>
                 </div>
               </div>
@@ -510,6 +509,7 @@
     const oDiameterMin = document.getElementById('o-diameter-min');
     const oDiameterMax = document.getElementById('o-diameter-max');
 
+
     if (disabledValues.includes(partName)) {
 
       slitCondition.disabled = true;
@@ -631,5 +631,5 @@
   document.getElementById('sp').addEventListener('change', handleRadioChange);
   document.getElementById('mp').addEventListener('change', handleRadioChange);
   document.getElementById('ep').addEventListener('change', handleRadioChange);
-  
+
 </script>
