@@ -1,4 +1,4 @@
-
+<!-- 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -102,6 +102,9 @@ searchBtn.addEventListener('click', () => {
             console.error('Error fetching data:', error);
         });
 });
+
+
+
 const exportBtn = document.getElementById('exportReqBtn');
 if (exportBtn) {
     exportBtn.addEventListener('click', exportTable);
@@ -161,6 +164,9 @@ if (link.download !== undefined) {
     document.body.removeChild(link);
 }
 }
+ 
+
+
 function exportCSV() {
 const dateFrom = document.getElementById('date_from').value;
 const dateTo = document.getElementById('date_to').value;
@@ -269,4 +275,4 @@ function formatCell(content) {
 
 // ---------------------------------------------modal script-------------------------------------------
 
-</script>
+</script> -->
