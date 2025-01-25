@@ -258,6 +258,10 @@
         link.download = `Export_${today}.csv`;
         link.click();
     }
+
+
+
+    
     function exportCSV() {
         const dateFrom = document.getElementById('date_from').value;
         const dateTo = document.getElementById('date_to').value;
@@ -333,6 +337,9 @@
     ;
 
 
+
+
+
     
 const exportBtn = document.getElementById('exportReqBtn');
 if (exportBtn) {
@@ -375,7 +382,6 @@ for (let i = 0; i < rows.length; i++) {
     let rowContent = [];
     for (let j = 0; j < cells.length; j++) {
         const cell = cells[j];
-        // Replace newline characters with explicit formatting or add quotes around multiline content
         rowContent.push(
             '"' + cell.textContent.replace(/(\r\n|\n|\r)/gm, "\n").trim() + '"'
         );
